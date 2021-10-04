@@ -78,68 +78,37 @@ public class SnowGuardian extends BaseIceMob {
 	}
 
 	private Item makeItemForSlot(EquipmentSlot slot, int type) {
-		switch (slot) {
-			case MAINHAND:
-			default:
-				switch (type) {
-					case 0:
-					default:
-						return TFItems.ironwood_sword;
-					case 1:
-						return TFItems.steeleaf_sword;
-					case 2:
-					case 3:
-						return TFItems.knightmetal_sword;
-				}
-			case FEET:
-				switch (type) {
-					case 0:
-					default:
-						return TFItems.ironwood_boots;
-					case 1:
-						return TFItems.steeleaf_boots;
-					case 2:
-						return TFItems.knightmetal_boots;
-					case 3:
-						return TFItems.arctic_boots;
-				}
-			case LEGS:
-				switch (type) {
-					case 0:
-					default:
-						return TFItems.ironwood_leggings;
-					case 1:
-						return TFItems.steeleaf_leggings;
-					case 2:
-						return TFItems.knightmetal_leggings;
-					case 3:
-						return TFItems.arctic_leggings;
-				}
-			case CHEST:
-				switch (type) {
-					case 0:
-					default:
-						return TFItems.ironwood_chestplate;
-					case 1:
-						return TFItems.steeleaf_chestplate;
-					case 2:
-						return TFItems.knightmetal_chestplate;
-					case 3:
-						return TFItems.arctic_chestplate;
-				}
-			case HEAD:
-				switch (type) {
-					case 0:
-					default:
-						return TFItems.ironwood_helmet;
-					case 1:
-						return TFItems.steeleaf_helmet;
-					case 2:
-						return TFItems.knightmetal_helmet;
-					case 3:
-						return TFItems.arctic_helmet;
-				}
-		}
+		return switch (slot) {
+			default -> switch (type) {
+				default -> TFItems.IRONWOOD_SWORD;
+				case 1 -> TFItems.STEELEAF_SWORD;
+				case 2, 3 -> TFItems.KNIGHTMETAL_SWORD;
+			};
+			case FEET -> switch (type) {
+				default -> TFItems.IRONWOOD_BOOTS;
+				case 1 -> TFItems.STEELEAF_BOOTS;
+				case 2 -> TFItems.KNIGHTMETAL_BOOTS;
+				case 3 -> TFItems.ARCTIC_BOOTS;
+			};
+			case LEGS -> switch (type) {
+				default -> TFItems.IRONWOOD_LEGGINGS;
+				case 1 -> TFItems.STEELEAF_LEGGINGS;
+				case 2 -> TFItems.KNIGHTMETAL_LEGGINGS;
+				case 3 -> TFItems.ARCTIC_LEGGINGS;
+			};
+			case CHEST -> switch (type) {
+				default -> TFItems.IRONWOOD_CHESTPLATE;
+				case 1 -> TFItems.STEELEAF_CHESTPLATE;
+				case 2 -> TFItems.KNIGHTMETAL_CHESTPLATE;
+				case 3 -> TFItems.ARCTIC_CHESTPLATE;
+			};
+			case HEAD -> switch (type) {
+				default -> TFItems.IRONWOOD_HELMET;
+				case 1 -> TFItems.STEELEAF_HELMET;
+				case 2 -> TFItems.KNIGHTMETAL_HELMET;
+				case 3 -> TFItems.ARCTIC_HELMET;
+			};
+		};
 	}
 
 	@Nullable

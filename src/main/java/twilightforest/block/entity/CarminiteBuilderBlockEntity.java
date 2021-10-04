@@ -29,7 +29,7 @@ public class CarminiteBuilderBlockEntity extends BlockEntity {
 
     private Player trackedPlayer;
 
-	private BlockState blockBuiltState = TFBlocks.built_block.defaultBlockState().setValue(TranslucentBuiltBlock.ACTIVE, false);
+	private BlockState blockBuiltState = TFBlocks.BUILT_BLOCK.defaultBlockState().setValue(TranslucentBuiltBlock.ACTIVE, false);
 
 	public CarminiteBuilderBlockEntity(BlockPos pos, BlockState state) {
 		super(TFBlockEntities.TOWER_BUILDER, pos, state);

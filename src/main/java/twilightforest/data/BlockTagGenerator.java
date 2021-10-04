@@ -60,13 +60,13 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> CARMINITE_REACTOR_IMMUNE = TagFactory.BLOCK.create(TFConstants.prefix("carminite_reactor_immune"));
     public static final Tag.Named<Block> STRUCTURE_BANNED_INTERACTIONS = TagFactory.BLOCK.create(TFConstants.prefix("structure_banned_interactions"));
 
-    public static final Tag.Named<Block> ORE_MAGNET_SAFE_REPLACE_BLOCK = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/ore_safe_replace_block"));
-    public static final Tag.Named<Block> ORE_MAGNET_BLOCK_REPLACE_ORE = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/block_replace_ore"));
-    public static final Tag.Named<Block> ORE_MAGNET_STONE = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/minecraft/stone"));
-    public static final Tag.Named<Block> ORE_MAGNET_NETHERRACK = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/minecraft/netherrack"));
-    public static final Tag.Named<Block> ORE_MAGNET_END_STONE = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/minecraft/end_stone"));
-    public static final Tag.Named<Block> ORE_MAGNET_ROOT = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/" + TFConstants.ID + "/" + Registry.BLOCK.getKey(TFBlocks.root).getPath()));
-    public static final Tag.Named<Block> ORE_MAGNET_DEEPSLATE = TagFactory.BLOCK.create(TFConstants.prefix("ore_magnet/minecraft/deepslate"));
+    public static final Tag.Named<Block> ORE_MAGNET_SAFE_REPLACE_BLOCK = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/ore_safe_replace_block").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_BLOCK_REPLACE_ORE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/block_replace_ore").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_STONE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/stone").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_NETHERRACK = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/netherrack").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_END_STONE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/end_stone").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_ROOT = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/" + TwilightForestMod.ID + "/root").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_DEEPSLATE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/deepslate").toString());
 
     public BlockTagGenerator(DataGenerator generator) {
         super(generator);
@@ -76,21 +76,21 @@ public class BlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(TWILIGHT_OAK_LOGS)
-                .add(TFBlocks.oak_log, TFBlocks.stripped_oak_log, TFBlocks.oak_wood, TFBlocks.stripped_oak_wood);
+                .add(TFBlocks.TWILIGHT_OAK_LOG, TFBlocks.STRIPPED_TWILIGHT_OAK_LOG, TFBlocks.TWILIGHT_OAK_WOOD, TFBlocks.STRIPPED_TWILIGHT_OAK_WOOD);
         tag(CANOPY_LOGS)
-                .add(TFBlocks.canopy_log, TFBlocks.stripped_canopy_log, TFBlocks.canopy_wood, TFBlocks.stripped_canopy_wood);
+                .add(TFBlocks.CANOPY_LOG, TFBlocks.STRIPPED_CANOPY_LOG, TFBlocks.CANOPY_WOOD, TFBlocks.STRIPPED_CANOPY_WOOD);
         tag(MANGROVE_LOGS)
-                .add(TFBlocks.mangrove_log, TFBlocks.stripped_mangrove_log, TFBlocks.mangrove_wood, TFBlocks.stripped_mangrove_wood);
+                .add(TFBlocks.MANGROVE_LOG, TFBlocks.STRIPPED_MANGROVE_LOG, TFBlocks.MANGROVE_WOOD, TFBlocks.STRIPPED_MANGROVE_WOOD);
         tag(DARKWOOD_LOGS)
-                .add(TFBlocks.dark_log, TFBlocks.stripped_dark_log, TFBlocks.dark_wood, TFBlocks.stripped_dark_wood);
+                .add(TFBlocks.DARK_LOG, TFBlocks.STRIPPED_DARK_LOG, TFBlocks.DARK_WOOD, TFBlocks.STRIPPED_DARK_WOOD);
         tag(TIME_LOGS)
-                .add(TFBlocks.time_log, TFBlocks.stripped_time_log, TFBlocks.time_wood, TFBlocks.stripped_time_wood);
+                .add(TFBlocks.TIME_LOG, TFBlocks.STRIPPED_TIME_LOG, TFBlocks.TIME_WOOD, TFBlocks.STRIPPED_TIME_WOOD);
         tag(TRANSFORMATION_LOGS)
-                .add(TFBlocks.transformation_log, TFBlocks.stripped_transformation_log, TFBlocks.transformation_wood, TFBlocks.stripped_transformation_wood);
+                .add(TFBlocks.TRANSFORMATION_LOG, TFBlocks.STRIPPED_TRANSFORMATION_LOG, TFBlocks.TRANSFORMATION_WOOD, TFBlocks.STRIPPED_TRANSFORMATION_WOOD);
         tag(MINING_LOGS)
-                .add(TFBlocks.mining_log, TFBlocks.stripped_mining_log, TFBlocks.mining_wood, TFBlocks.stripped_mining_wood);
+                .add(TFBlocks.MINING_LOG, TFBlocks.STRIPPED_MINING_LOG, TFBlocks.MINING_WOOD, TFBlocks.STRIPPED_MINING_WOOD);
         tag(SORTING_LOGS)
-                .add(TFBlocks.sorting_log, TFBlocks.stripped_sorting_log, TFBlocks.sorting_wood, TFBlocks.stripped_sorting_wood);
+                .add(TFBlocks.SORTING_LOG, TFBlocks.STRIPPED_SORTING_LOG, TFBlocks.SORTING_WOOD, TFBlocks.STRIPPED_SORTING_WOOD);
 
         tag(TF_LOGS)
                 .addTag(TWILIGHT_OAK_LOGS).addTag(CANOPY_LOGS).addTag(MANGROVE_LOGS).addTag(DARKWOOD_LOGS).addTag(TIME_LOGS).addTag(TRANSFORMATION_LOGS).addTag(MINING_LOGS).addTag(SORTING_LOGS);
@@ -101,115 +101,115 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 .addTag(TWILIGHT_OAK_LOGS).addTag(CANOPY_LOGS).addTag(MANGROVE_LOGS).addTag(DARKWOOD_LOGS).addTag(TIME_LOGS).addTag(TRANSFORMATION_LOGS).addTag(MINING_LOGS).addTag(SORTING_LOGS);
 
         tag(BlockTags.SAPLINGS)
-                .add(TFBlocks.oak_sapling, TFBlocks.canopy_sapling, TFBlocks.mangrove_sapling, TFBlocks.darkwood_sapling)
-                .add(TFBlocks.time_sapling, TFBlocks.transformation_sapling, TFBlocks.mining_sapling, TFBlocks.sorting_sapling)
-                .add(TFBlocks.hollow_oak_sapling, TFBlocks.rainboak_sapling);
+                .add(TFBlocks.TWILIGHT_OAK_SAPLING, TFBlocks.CANOPY_SAPLING, TFBlocks.MANGROVE_SAPLING, TFBlocks.DARKWOOD_SAPLING)
+                .add(TFBlocks.TIME_SAPLING, TFBlocks.TRANSFORMATION_SAPLING, TFBlocks.MINING_SAPLING, TFBlocks.SORTING_SAPLING)
+                .add(TFBlocks.HOLLOW_OAK_SAPLING, TFBlocks.RAINBOW_OAK_SAPLING);
         tag(BlockTags.LEAVES)
-                .add(TFBlocks.rainboak_leaves, TFBlocks.oak_leaves, TFBlocks.canopy_leaves, TFBlocks.mangrove_leaves, TFBlocks.dark_leaves)
-                .add(TFBlocks.time_leaves, TFBlocks.transformation_leaves, TFBlocks.mining_leaves, TFBlocks.sorting_leaves)
-                .add(TFBlocks.thorn_leaves, TFBlocks.beanstalk_leaves/*, TFBlocks.giant_leaves*/);
+                .add(TFBlocks.RAINBOW_OAK_LEAVES, TFBlocks.TWILIGHT_OAK_LEAVES, TFBlocks.CANOPY_LEAVES, TFBlocks.MANGROVE_LEAVES, TFBlocks.DARK_LEAVES)
+                .add(TFBlocks.TIME_LEAVES, TFBlocks.TRANSFORMATION_LEAVES, TFBlocks.MINING_LEAVES, TFBlocks.SORTING_LEAVES)
+                .add(TFBlocks.THORN_LEAVES, TFBlocks.BEANSTALK_LEAVES);
 
         tag(BlockTags.PLANKS)
-                .add(TFBlocks.twilight_oak_planks, TFBlocks.canopy_planks, TFBlocks.mangrove_planks, TFBlocks.dark_planks)
-                .add(TFBlocks.time_planks, TFBlocks.trans_planks, TFBlocks.mine_planks, TFBlocks.sort_planks)
-                .add(TFBlocks.tower_wood, TFBlocks.tower_wood_encased, TFBlocks.tower_wood_cracked, TFBlocks.tower_wood_mossy, TFBlocks.tower_wood_infested);
+                .add(TFBlocks.TWILIGHT_OAK_PLANKS, TFBlocks.CANOPY_PLANKS, TFBlocks.MANGROVE_PLANKS, TFBlocks.DARK_PLANKS)
+                .add(TFBlocks.TIME_PLANKS, TFBlocks.TRANSFORMATION_PLANKS, TFBlocks.MINING_PLANKS, TFBlocks.SORTING_PLANKS)
+                .add(TFBlocks.TOWERWOOD, TFBlocks.ENCASED_TOWERWOOD, TFBlocks.CRACKED_TOWERWOOD, TFBlocks.MOSSY_TOWERWOOD, TFBlocks.INFESTED_TOWERWOOD);
 
         tag(TF_FENCES)
-                .add(TFBlocks.twilight_oak_fence, TFBlocks.canopy_fence, TFBlocks.mangrove_fence, TFBlocks.dark_fence)
-                .add(TFBlocks.time_fence, TFBlocks.trans_fence, TFBlocks.mine_fence, TFBlocks.sort_fence);
+                .add(TFBlocks.TWILIGHT_OAK_FENCE, TFBlocks.CANOPY_FENCE, TFBlocks.MANGROVE_FENCE, TFBlocks.DARK_FENCE)
+                .add(TFBlocks.TIME_FENCE, TFBlocks.TRANSFORMATION_FENCE, TFBlocks.MINING_FENCE, TFBlocks.SORTING_FENCE);
         tag(TF_FENCE_GATES)
-                .add(TFBlocks.twilight_oak_gate, TFBlocks.canopy_gate, TFBlocks.mangrove_gate, TFBlocks.dark_gate)
-                .add(TFBlocks.time_gate, TFBlocks.trans_gate, TFBlocks.mine_gate, TFBlocks.sort_gate);
+                .add(TFBlocks.TWILIGHT_OAK_GATE, TFBlocks.CANOPY_GATE, TFBlocks.MANGROVE_GATE, TFBlocks.DARK_GATE)
+                .add(TFBlocks.TIME_GATE, TFBlocks.TRANSFORMATION_GATE, TFBlocks.MINING_GATE, TFBlocks.SORTING_GATE);
         tag(BlockTags.WOODEN_FENCES)
-                .add(TFBlocks.twilight_oak_fence, TFBlocks.canopy_fence, TFBlocks.mangrove_fence, TFBlocks.dark_fence)
-                .add(TFBlocks.time_fence, TFBlocks.trans_fence, TFBlocks.mine_fence, TFBlocks.sort_fence);
+                .add(TFBlocks.TWILIGHT_OAK_FENCE, TFBlocks.CANOPY_FENCE, TFBlocks.MANGROVE_FENCE, TFBlocks.DARK_FENCE)
+                .add(TFBlocks.TIME_FENCE, TFBlocks.TRANSFORMATION_FENCE, TFBlocks.MINING_FENCE, TFBlocks.SORTING_FENCE);
         tag(BlockTags.FENCE_GATES)
-                .add(TFBlocks.twilight_oak_gate, TFBlocks.canopy_gate, TFBlocks.mangrove_gate, TFBlocks.dark_gate)
-                .add(TFBlocks.time_gate, TFBlocks.trans_gate, TFBlocks.mine_gate, TFBlocks.sort_gate);
+                .add(TFBlocks.TWILIGHT_OAK_GATE, TFBlocks.CANOPY_GATE, TFBlocks.MANGROVE_GATE, TFBlocks.DARK_GATE)
+                .add(TFBlocks.TIME_GATE, TFBlocks.TRANSFORMATION_GATE, TFBlocks.MINING_GATE, TFBlocks.SORTING_GATE);
 //        tag(Tags.Blocks.FENCES)
-//                .add(TFBlocks.twilight_oak_fence, TFBlocks.canopy_fence, TFBlocks.mangrove_fence, TFBlocks.dark_fence)
-//                .add(TFBlocks.time_fence, TFBlocks.trans_fence, TFBlocks.mine_fence, TFBlocks.sort_fence);
+//                .add(TFBlocks.TWILIGHT_OAK_FENCE, TFBlocks.CANOPY_FENCE, TFBlocks.MANGROVE_FENCE, TFBlocks.DARK_FENCE)
+//                .add(TFBlocks.TIME_FENCE, TFBlocks.TRANSFORMATION_FENCE, TFBlocks.MINING_FENCE, TFBlocks.SORTING_FENCE);
 //        tag(Tags.Blocks.FENCE_GATES)
-//                .add(TFBlocks.twilight_oak_gate, TFBlocks.canopy_gate, TFBlocks.mangrove_gate, TFBlocks.dark_gate)
-//                .add(TFBlocks.time_gate, TFBlocks.trans_gate, TFBlocks.mine_gate, TFBlocks.sort_gate);
+//                .add(TFBlocks.TWILIGHT_OAK_GATE, TFBlocks.CANOPY_GATE, TFBlocks.MANGROVE_GATE, TFBlocks.DARK_GATE)
+//                .add(TFBlocks.TIME_GATE, TFBlocks.TRANSFORMATION_GATE, TFBlocks.MINING_GATE, TFBlocks.SORTING_GATE);
 //        tag(Tags.Blocks.FENCES_WOODEN)
-//                .add(TFBlocks.twilight_oak_fence, TFBlocks.canopy_fence, TFBlocks.mangrove_fence, TFBlocks.dark_fence)
-//                .add(TFBlocks.time_fence, TFBlocks.trans_fence, TFBlocks.mine_fence, TFBlocks.sort_fence);
+//                .add(TFBlocks.TWILIGHT_OAK_FENCE, TFBlocks.CANOPY_FENCE, TFBlocks.MANGROVE_FENCE, TFBlocks.DARK_FENCE)
+//                .add(TFBlocks.TIME_FENCE, TFBlocks.TRANSFORMATION_FENCE, TFBlocks.MINING_FENCE, TFBlocks.SORTING_FENCE);
 //        tag(Tags.Blocks.FENCE_GATES_WOODEN)
-//                .add(TFBlocks.twilight_oak_gate, TFBlocks.canopy_gate, TFBlocks.mangrove_gate, TFBlocks.dark_gate)
-//                .add(TFBlocks.time_gate, TFBlocks.trans_gate, TFBlocks.mine_gate, TFBlocks.sort_gate);
+//                .add(TFBlocks.TWILIGHT_OAK_GATE, TFBlocks.CANOPY_GATE, TFBlocks.MANGROVE_GATE, TFBlocks.DARK_GATE)
+//                .add(TFBlocks.TIME_GATE, TFBlocks.TRANSFORMATION_GATE, TFBlocks.MINING_GATE, TFBlocks.SORTING_GATE);
 
         tag(BlockTags.WOODEN_SLABS)
-                .add(TFBlocks.twilight_oak_slab, TFBlocks.canopy_slab, TFBlocks.mangrove_slab, TFBlocks.dark_slab)
-                .add(TFBlocks.time_slab, TFBlocks.trans_slab, TFBlocks.mine_slab, TFBlocks.sort_slab);
+                .add(TFBlocks.TWILIGHT_OAK_SLAB, TFBlocks.CANOPY_SLAB, TFBlocks.MANGROVE_SLAB, TFBlocks.DARK_SLAB)
+                .add(TFBlocks.TIME_SLAB, TFBlocks.TRANSFORMATION_SLAB, TFBlocks.MINING_SLAB, TFBlocks.SORTING_SLAB);
         tag(BlockTags.SLABS)
-                .add(TFBlocks.aurora_slab);
+                .add(TFBlocks.AURORA_SLAB);
         tag(BlockTags.WOODEN_STAIRS)
-                .add(TFBlocks.twilight_oak_stairs, TFBlocks.canopy_stairs, TFBlocks.mangrove_stairs, TFBlocks.dark_stairs)
-                .add(TFBlocks.time_stairs, TFBlocks.trans_stairs, TFBlocks.mine_stairs, TFBlocks.sort_stairs);
+                .add(TFBlocks.TWILIGHT_OAK_STAIRS, TFBlocks.CANOPY_STAIRS, TFBlocks.MANGROVE_STAIRS, TFBlocks.DARK_STAIRS)
+                .add(TFBlocks.TIME_STAIRS, TFBlocks.TRANSFORMATION_STAIRS, TFBlocks.MINING_STAIRS, TFBlocks.SORTING_STAIRS);
         tag(BlockTags.STAIRS)
-                .add(TFBlocks.castle_stairs_brick, TFBlocks.castle_stairs_worn, TFBlocks.castle_stairs_cracked, TFBlocks.castle_stairs_mossy, TFBlocks.castle_stairs_encased, TFBlocks.castle_stairs_bold)
-                .add(TFBlocks.nagastone_stairs_left, TFBlocks.nagastone_stairs_right, TFBlocks.nagastone_stairs_mossy_left, TFBlocks.nagastone_stairs_mossy_right, TFBlocks.nagastone_stairs_weathered_left, TFBlocks.nagastone_stairs_weathered_right);
+                .add(TFBlocks.CASTLE_BRICK_STAIRS, TFBlocks.WORN_CASTLE_BRICK_STAIRS, TFBlocks.CRACKED_CASTLE_BRICK_STAIRS, TFBlocks.MOSSY_CASTLE_BRICK_STAIRS, TFBlocks.ENCASED_CASTLE_BRICK_STAIRS, TFBlocks.BOLD_CASTLE_BRICK_STAIRS)
+                .add(TFBlocks.NAGASTONE_STAIRS_LEFT, TFBlocks.NAGASTONE_STAIRS_RIGHT, TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT, TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT, TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT, TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT);
 
         tag(BlockTags.WOODEN_BUTTONS)
-                .add(TFBlocks.twilight_oak_button, TFBlocks.canopy_button, TFBlocks.mangrove_button, TFBlocks.dark_button)
-                .add(TFBlocks.time_button, TFBlocks.trans_button, TFBlocks.mine_button, TFBlocks.sort_button);
+                .add(TFBlocks.TWILIGHT_OAK_BUTTON, TFBlocks.CANOPY_BUTTON, TFBlocks.MANGROVE_BUTTON, TFBlocks.DARK_BUTTON)
+                .add(TFBlocks.TIME_BUTTON, TFBlocks.TRANSFORMATION_BUTTON, TFBlocks.MINING_BUTTON, TFBlocks.SORTING_BUTTON);
         tag(BlockTags.WOODEN_PRESSURE_PLATES)
-                .add(TFBlocks.twilight_oak_plate, TFBlocks.canopy_plate, TFBlocks.mangrove_plate, TFBlocks.dark_plate)
-                .add(TFBlocks.time_plate, TFBlocks.trans_plate, TFBlocks.mine_plate, TFBlocks.sort_plate);
+                .add(TFBlocks.TWILIGHT_OAK_PLATE, TFBlocks.CANOPY_PLATE, TFBlocks.MANGROVE_PLATE, TFBlocks.DARK_PLATE)
+                .add(TFBlocks.TIME_PLATE, TFBlocks.TRANSFORMATION_PLATE, TFBlocks.MINING_PLATE, TFBlocks.SORTING_PLATE);
 
         tag(BlockTags.WOODEN_TRAPDOORS)
-                .add(TFBlocks.twilight_oak_trapdoor, TFBlocks.canopy_trapdoor, TFBlocks.mangrove_trapdoor, TFBlocks.dark_trapdoor)
-                .add(TFBlocks.time_trapdoor, TFBlocks.trans_trapdoor, TFBlocks.mine_trapdoor, TFBlocks.sort_trapdoor);
+                .add(TFBlocks.TWILIGHT_OAK_TRAPDOOR, TFBlocks.CANOPY_TRAPDOOR, TFBlocks.MANGROVE_TRAPDOOR, TFBlocks.DARK_TRAPDOOR)
+                .add(TFBlocks.TIME_TRAPDOOR, TFBlocks.TRANSFORMATION_TRAPDOOR, TFBlocks.MINING_TRAPDOOR, TFBlocks.SORTING_TRAPDOOR);
         tag(BlockTags.WOODEN_DOORS)
-                .add(TFBlocks.twilight_oak_door, TFBlocks.canopy_door, TFBlocks.mangrove_door, TFBlocks.dark_door)
-                .add(TFBlocks.time_door, TFBlocks.trans_door, TFBlocks.mine_door, TFBlocks.sort_door);
+                .add(TFBlocks.TWILIGHT_OAK_DOOR, TFBlocks.CANOPY_DOOR, TFBlocks.MANGROVE_DOOR, TFBlocks.DARK_DOOR)
+                .add(TFBlocks.TIME_DOOR, TFBlocks.TRANSFORMATION_DOOR, TFBlocks.MINING_DOOR, TFBlocks.SORTING_DOOR);
         tag(BlockTags.FLOWER_POTS)
-                .add(TFBlocks.potted_twilight_oak_sapling, TFBlocks.potted_canopy_sapling, TFBlocks.potted_mangrove_sapling, TFBlocks.potted_darkwood_sapling, TFBlocks.potted_rainboak_sapling)
-                .add(TFBlocks.potted_hollow_oak_sapling, TFBlocks.potted_time_sapling, TFBlocks.potted_trans_sapling, TFBlocks.potted_mine_sapling, TFBlocks.potted_sort_sapling)
-                .add(TFBlocks.potted_mayapple, TFBlocks.potted_fiddlehead, TFBlocks.potted_mushgloom, TFBlocks.potted_thorn, TFBlocks.potted_green_thorn, TFBlocks.potted_dead_thorn);
+                .add(TFBlocks.POTTED_TWILIGHT_OAK_SAPLING, TFBlocks.POTTED_CANOPY_SAPLING, TFBlocks.POTTED_MANGROVE_SAPLING, TFBlocks.POTTED_DARKWOOD_SAPLING, TFBlocks.POTTED_RAINBOW_OAK_SAPLING)
+                .add(TFBlocks.POTTED_HOLLOW_OAK_SAPLING, TFBlocks.POTTED_TIME_SAPLING, TFBlocks.POTTED_TRANSFORMATION_SAPLING, TFBlocks.POTTED_MINING_SAPLING, TFBlocks.POTTED_SORTING_SAPLING)
+                .add(TFBlocks.POTTED_MAYAPPLE, TFBlocks.POTTED_FIDDLEHEAD, TFBlocks.POTTED_MUSHGLOOM, TFBlocks.POTTED_THORN, TFBlocks.POTTED_GREEN_THORN, TFBlocks.POTTED_DEAD_THORN);
 
         tag(BANISTERS).add(
-                TFBlocks.oak_banister,
-                TFBlocks.spruce_banister,
-                TFBlocks.birch_banister,
-                TFBlocks.jungle_banister,
-                TFBlocks.acacia_banister,
-                TFBlocks.dark_oak_banister,
-                TFBlocks.crimson_banister,
-                TFBlocks.warped_banister,
-                TFBlocks.twilight_oak_banister,
-                TFBlocks.canopy_banister,
-                TFBlocks.mangrove_banister,
-                TFBlocks.darkwood_banister,
-                TFBlocks.time_banister,
-                TFBlocks.trans_banister,
-                TFBlocks.mine_banister,
-                TFBlocks.sort_banister
+                TFBlocks.OAK_BANISTER,
+                TFBlocks.SPRUCE_BANISTER,
+                TFBlocks.BIRCH_BANISTER,
+                TFBlocks.JUNGLE_BANISTER,
+                TFBlocks.ACACIA_BANISTER,
+                TFBlocks.DARK_OAK_BANISTER,
+                TFBlocks.CRIMSON_BANISTER,
+                TFBlocks.WARPED_BANISTER,
+                TFBlocks.TWILIGHT_OAK_BANISTER,
+                TFBlocks.CANOPY_BANISTER,
+                TFBlocks.MANGROVE_BANISTER,
+                TFBlocks.DARKWOOD_BANISTER,
+                TFBlocks.TIME_BANISTER,
+                TFBlocks.TRANSFORMATION_BANISTER,
+                TFBlocks.MINING_BANISTER,
+                TFBlocks.SORTING_BANISTER
         );
 
-        tag(BlockTags.STRIDER_WARM_BLOCKS).add(TFBlocks.fiery_block);
-        tag(BlockTags.PORTALS).add(TFBlocks.twilight_portal);
-        tag(BlockTags.CLIMBABLE).add(TFBlocks.iron_ladder, TFBlocks.root_strand);
+        tag(BlockTags.STRIDER_WARM_BLOCKS).add(TFBlocks.FIERY_BLOCK);
+        tag(BlockTags.PORTALS).add(TFBlocks.TWILIGHT_PORTAL);
+        tag(BlockTags.CLIMBABLE).add(TFBlocks.IRON_LADDER, TFBlocks.ROOT_STRAND);
 
-        tag(BlockTags.STANDING_SIGNS).add(TFBlocks.twilight_oak_sign, TFBlocks.canopy_sign,
-                TFBlocks.mangrove_sign, TFBlocks.darkwood_sign,
-                TFBlocks.time_sign, TFBlocks.trans_sign,
-                TFBlocks.mine_sign, TFBlocks.sort_sign);
+        tag(BlockTags.STANDING_SIGNS).add(TFBlocks.TWILIGHT_OAK_SIGN, TFBlocks.CANOPY_SIGN,
+                TFBlocks.MANGROVE_SIGN, TFBlocks.DARKWOOD_SIGN,
+                TFBlocks.TIME_SIGN, TFBlocks.TRANSFORMATION_SIGN,
+                TFBlocks.MINING_SIGN, TFBlocks.SORTING_SIGN);
 
-        tag(BlockTags.WALL_SIGNS).add(TFBlocks.twilight_wall_sign, TFBlocks.canopy_wall_sign,
-                TFBlocks.mangrove_wall_sign, TFBlocks.darkwood_wall_sign,
-                TFBlocks.time_wall_sign, TFBlocks.trans_wall_sign,
-                TFBlocks.mine_wall_sign, TFBlocks.sort_wall_sign);
+        tag(BlockTags.WALL_SIGNS).add(TFBlocks.TWILIGHT_WALL_SIGN, TFBlocks.CANOPY_WALL_SIGN,
+                TFBlocks.MANGROVE_WALL_SIGN, TFBlocks.DARKWOOD_WALL_SIGN,
+                TFBlocks.TIME_WALL_SIGN, TFBlocks.TRANSFORMATION_WALL_SIGN,
+                TFBlocks.MINING_WALL_SIGN, TFBlocks.SORTING_WALL_SIGN);
 
-        tag(TOWERWOOD).add(TFBlocks.tower_wood, TFBlocks.tower_wood_mossy, TFBlocks.tower_wood_cracked, TFBlocks.tower_wood_infested);
+        tag(TOWERWOOD).add(TFBlocks.TOWERWOOD, TFBlocks.MOSSY_TOWERWOOD, TFBlocks.CRACKED_TOWERWOOD, TFBlocks.INFESTED_TOWERWOOD);
 
-        tag(STORAGE_BLOCKS_ARCTIC_FUR).add(TFBlocks.arctic_fur_block);
-        tag(STORAGE_BLOCKS_CARMINITE).add(TFBlocks.carminite_block);
-        tag(STORAGE_BLOCKS_FIERY).add(TFBlocks.fiery_block);
-        tag(STORAGE_BLOCKS_IRONWOOD).add(TFBlocks.ironwood_block);
-        tag(STORAGE_BLOCKS_KNIGHTMETAL).add(TFBlocks.knightmetal_block);
-        tag(STORAGE_BLOCKS_STEELEAF).add(TFBlocks.steeleaf_block);
+        tag(STORAGE_BLOCKS_ARCTIC_FUR).add(TFBlocks.ARCTIC_FUR_BLOCK);
+        tag(STORAGE_BLOCKS_CARMINITE).add(TFBlocks.CARMINITE_BLOCK);
+        tag(STORAGE_BLOCKS_FIERY).add(TFBlocks.FIERY_BLOCK);
+        tag(STORAGE_BLOCKS_IRONWOOD).add(TFBlocks.IRONWOOD_BLOCK);
+        tag(STORAGE_BLOCKS_KNIGHTMETAL).add(TFBlocks.KNIGHTMETAL_BLOCK);
+        tag(STORAGE_BLOCKS_STEELEAF).add(TFBlocks.STEELEAF_BLOCK);
 
         tag(BlockTags.BEACON_BASE_BLOCKS)
                 .addTag(STORAGE_BLOCKS_ARCTIC_FUR)
@@ -225,8 +225,8 @@ public class BlockTagGenerator extends BlockTagsProvider {
         tag(ORES_IRONWOOD); // Intentionally blank
         tag(ORES_KNIGHTMETAL); // Intentionally blank
 
-        tag(BlockTags.DIRT).add(TFBlocks.uberous_soil);
-        tag(PORTAL_EDGE).addTag(BlockTags.DIRT);
+        tag(BlockTags.DIRT).add(TFBlocks.UBEROUS_SOIL);
+        tag(PORTAL_EDGE).addTags(BlockTags.DIRT);
         // So yes, we could do fluid tags for the portal pool but the problem is that we're -replacing- the block, effectively replacing what would be waterlogged, with the portal block
         // In the future if we can "portal log" blocks then we can re-explore doing it as a fluid
         tag(PORTAL_POOL).add(Blocks.WATER);
@@ -240,42 +240,42 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 .add(getAllMinecraftOrTwilightBlocks(b -> (b.material == Material.PLANT || b.material == Material.REPLACEABLE_PLANT || b.material == Material.LEAVES) && !plants.contains(b)));
 
         tag(SPECIAL_POTS)
-                .add(TFBlocks.potted_thorn, TFBlocks.potted_green_thorn, TFBlocks.potted_dead_thorn)
-                .add(TFBlocks.potted_hollow_oak_sapling, TFBlocks.potted_time_sapling, TFBlocks.potted_trans_sapling)
-                .add(TFBlocks.potted_mine_sapling, TFBlocks.potted_sort_sapling);
+                .add(TFBlocks.POTTED_THORN, TFBlocks.POTTED_GREEN_THORN, TFBlocks.POTTED_DEAD_THORN)
+                .add(TFBlocks.POTTED_HOLLOW_OAK_SAPLING, TFBlocks.POTTED_TIME_SAPLING, TFBlocks.POTTED_TRANSFORMATION_SAPLING)
+                .add(TFBlocks.POTTED_MINING_SAPLING, TFBlocks.POTTED_SORTING_SAPLING);
 
         tag(TROPHIES)
-                .add(TFBlocks.naga_trophy, TFBlocks.naga_wall_trophy)
-                .add(TFBlocks.lich_trophy, TFBlocks.lich_wall_trophy)
-                .add(TFBlocks.minoshroom_trophy, TFBlocks.minoshroom_wall_trophy)
-                .add(TFBlocks.hydra_trophy, TFBlocks.hydra_wall_trophy)
-                .add(TFBlocks.knight_phantom_trophy, TFBlocks.knight_phantom_wall_trophy)
-                .add(TFBlocks.ur_ghast_trophy, TFBlocks.ur_ghast_wall_trophy)
-                .add(TFBlocks.yeti_trophy, TFBlocks.yeti_wall_trophy)
-                .add(TFBlocks.snow_queen_trophy, TFBlocks.snow_queen_wall_trophy)
-                .add(TFBlocks.quest_ram_trophy, TFBlocks.quest_ram_wall_trophy);
+                .add(TFBlocks.NAGA_TROPHY, TFBlocks.NAGA_WALL_TROPHY)
+                .add(TFBlocks.LICH_TROPHY, TFBlocks.LICH_WALL_TROPHY)
+                .add(TFBlocks.MINOSHROOM_TROPHY, TFBlocks.MINOSHROOM_WALL_TROPHY)
+                .add(TFBlocks.HYDRA_TROPHY, TFBlocks.HYDRA_WALL_TROPHY)
+                .add(TFBlocks.KNIGHT_PHANTOM_TROPHY, TFBlocks.KNIGHT_PHANTOM_WALL_TROPHY)
+                .add(TFBlocks.UR_GHAST_TROPHY, TFBlocks.UR_GHAST_WALL_TROPHY)
+                .add(TFBlocks.ALPHA_YETI_TROPHY, TFBlocks.ALPHA_YETI_WALL_TROPHY)
+                .add(TFBlocks.SNOW_QUEEN_TROPHY, TFBlocks.SNOW_QUEEN_WALL_TROPHY)
+                .add(TFBlocks.QUEST_RAM_TROPHY, TFBlocks.QUEST_RAM_WALL_TROPHY);
 
         tag(FIRE_JET_FUEL).add(Blocks.LAVA);
 
         tag(COMMON_PROTECTIONS).add( // For any blocks that absolutely should not be meddled with
-                TFBlocks.boss_spawner_naga,
-                TFBlocks.boss_spawner_lich,
-                TFBlocks.boss_spawner_minoshroom,
-                TFBlocks.boss_spawner_hydra,
-                TFBlocks.boss_spawner_knight_phantom,
-                TFBlocks.boss_spawner_ur_ghast,
-                TFBlocks.boss_spawner_alpha_yeti,
-                TFBlocks.boss_spawner_snow_queen,
-                TFBlocks.boss_spawner_final_boss,
-                TFBlocks.stronghold_shield,
-                TFBlocks.vanishing_block,
-                TFBlocks.locked_vanishing_block,
-                TFBlocks.force_field_pink,
-                TFBlocks.force_field_orange,
-                TFBlocks.force_field_green,
-                TFBlocks.force_field_blue,
-                TFBlocks.force_field_purple,
-                TFBlocks.keepsake_casket
+                TFBlocks.NAGA_BOSS_SPAWNER,
+                TFBlocks.LICH_BOSS_SPAWNER,
+                TFBlocks.MINOSHROOM_BOSS_SPAWNER,
+                TFBlocks.HYDRA_BOSS_SPAWNER,
+                TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER,
+                TFBlocks.UR_GHAST_BOSS_SPAWNER,
+                TFBlocks.ALPHA_YETI_BOSS_SPAWNER,
+                TFBlocks.SNOW_QUEEN_BOSS_SPAWNER,
+                TFBlocks.FINAL_BOSS_BOSS_SPAWNER,
+                TFBlocks.STRONGHOLD_SHIELD,
+                TFBlocks.VANISHING_BLOCK,
+                TFBlocks.LOCKED_VANISHING_BLOCK,
+                TFBlocks.PINK_FORCE_FIELD,
+                TFBlocks.ORANGE_FORCE_FIELD,
+                TFBlocks.GREEN_FORCE_FIELD,
+                TFBlocks.BLUE_FORCE_FIELD,
+                TFBlocks.VIOLET_FORCE_FIELD,
+                TFBlocks.KEEPSAKE_CASKET
         ).add( // [VanillaCopy] WITHER_IMMUNE - Do NOT include that tag in this tag
                 Blocks.BARRIER,
                 Blocks.BEDROCK,
@@ -291,44 +291,44 @@ public class BlockTagGenerator extends BlockTagsProvider {
         );
 
         // TODO Test behavior with giant blocks for immunity stuffs
-        tag(BlockTags.DRAGON_IMMUNE).addTag(COMMON_PROTECTIONS).add(TFBlocks.giant_obsidian, TFBlocks.fake_diamond,  TFBlocks.fake_gold);
+        tag(BlockTags.DRAGON_IMMUNE).addTag(COMMON_PROTECTIONS).add(TFBlocks.GIANT_OBSIDIAN, TFBlocks.FAKE_DIAMOND,  TFBlocks.FAKE_GOLD);
 
-        tag(BlockTags.WITHER_IMMUNE).addTag(COMMON_PROTECTIONS).add(TFBlocks.fake_diamond, TFBlocks.fake_gold);
+        tag(BlockTags.WITHER_IMMUNE).addTag(COMMON_PROTECTIONS).add(TFBlocks.FAKE_DIAMOND, TFBlocks.FAKE_GOLD);
 
         tag(CARMINITE_REACTOR_IMMUNE).addTag(COMMON_PROTECTIONS);
 
         tag(ANNIHILATION_INCLUSIONS) // This is NOT a blacklist! This is a whitelist
-                .add(TFBlocks.deadrock, TFBlocks.deadrock_cracked, TFBlocks.deadrock_weathered)
-                .add(TFBlocks.castle_brick, TFBlocks.castle_brick_cracked, TFBlocks.castle_brick_frame, TFBlocks.castle_brick_mossy, TFBlocks.castle_brick_roof, TFBlocks.castle_brick_worn)
-                .add(TFBlocks.castle_rune_brick_blue, TFBlocks.castle_rune_brick_purple, TFBlocks.castle_rune_brick_yellow, TFBlocks.castle_rune_brick_pink)
-                .add(TFBlocks.force_field_pink, TFBlocks.force_field_orange, TFBlocks.force_field_green, TFBlocks.force_field_blue, TFBlocks.force_field_purple)
-                .add(TFBlocks.brown_thorns, TFBlocks.green_thorns);
+                .add(TFBlocks.DEADROCK, TFBlocks.CRACKED_DEADROCK, TFBlocks.WEATHERED_DEADROCK)
+                .add(TFBlocks.CASTLE_BRICK, TFBlocks.CRACKED_DEADROCK, TFBlocks.THICK_CASTLE_BRICK, TFBlocks.MOSSY_CASTLE_BRICK, TFBlocks.CASTLE_ROOF_TILE, TFBlocks.WORN_CASTLE_BRICK)
+                .add(TFBlocks.BLUE_CASTLE_RUNE_BRICK, TFBlocks.VIOLET_CASTLE_RUNE_BRICK, TFBlocks.YELLOW_CASTLE_RUNE_BRICK, TFBlocks.PINK_CASTLE_RUNE_BRICK)
+                .add(TFBlocks.PINK_FORCE_FIELD, TFBlocks.ORANGE_FORCE_FIELD, TFBlocks.GREEN_FORCE_FIELD, TFBlocks.BLUE_FORCE_FIELD, TFBlocks.VIOLET_FORCE_FIELD)
+                .add(TFBlocks.BROWN_THORNS, TFBlocks.GREEN_THORNS);
 
         tag(ANTIBUILDER_IGNORES).addTag(COMMON_PROTECTIONS).addOptional(new ResourceLocation("gravestone:gravestone")).add(
                 Blocks.REDSTONE_LAMP,
                 Blocks.TNT,
                 Blocks.WATER,
-                TFBlocks.antibuilder,
-                TFBlocks.carminite_builder,
-                TFBlocks.built_block,
-                TFBlocks.reactor_debris,
-                TFBlocks.carminite_reactor,
-                TFBlocks.reappearing_block,
-                TFBlocks.ghast_trap,
-                TFBlocks.fake_diamond,
-                TFBlocks.fake_gold
+                TFBlocks.ANTIBUILDER,
+                TFBlocks.CARMINITE_BUILDER,
+                TFBlocks.BUILT_BLOCK,
+                TFBlocks.REACTOR_DEBRIS,
+                TFBlocks.CARMINITE_REACTOR,
+                TFBlocks.REAPPEARING_BLOCK,
+                TFBlocks.GHAST_TRAP,
+                TFBlocks.FAKE_DIAMOND,
+                TFBlocks.FAKE_GOLD
         );
 
         tag(BlockTags.BUTTONS);
         tag(STRUCTURE_BANNED_INTERACTIONS)
-                .addTag(BlockTags.BUTTONS).add(Blocks.CHEST).add(Blocks.TRAPPED_CHEST).add(Blocks.ENDER_CHEST).add(Blocks.LEVER)
-                .add(TFBlocks.antibuilder);
+                .addTags(BlockTags.BUTTONS, Tags.Blocks.CHESTS).add(Blocks.LEVER)
+                .add(TFBlocks.ANTIBUILDER);
 
         tag(ORE_MAGNET_SAFE_REPLACE_BLOCK)
                 .addTag(ORE_MAGNET_BLOCK_REPLACE_ORE).add(Blocks.DIRT).add(Blocks.GRAVEL).add(Blocks.SAND).add(Blocks.RED_SAND);
 
         tag(ORE_MAGNET_BLOCK_REPLACE_ORE)
-                .add(Blocks.STONE, Blocks.NETHERRACK, Blocks.END_STONE, TFBlocks.root, Blocks.DEEPSLATE);
+                .add(Blocks.STONE, Blocks.NETHERRACK, Blocks.END_STONE, TFBlocks.ROOT_BLOCK, Blocks.DEEPSLATE);
 
         // Don't add general ore taglists here, since those will include non-stone ores
         tag(ORE_MAGNET_STONE).add(
@@ -358,155 +358,155 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 Blocks.DEEPSLATE_COPPER_ORE
         );
 
-        tag(ORE_MAGNET_ROOT).add(TFBlocks.liveroot_block);
+        tag(ORE_MAGNET_ROOT).add(TFBlocks.LIVEROOT_BLOCK);
 
         tag(BlockTags.MINEABLE_WITH_AXE).addTag(BANISTERS).add(
-                TFBlocks.hedge,
-                TFBlocks.root,
-                TFBlocks.liveroot_block,
-                TFBlocks.uncrafting_table,
-                TFBlocks.encased_smoker,
-                TFBlocks.encased_fire_jet,
-                TFBlocks.time_log_core,
-                TFBlocks.transformation_log_core,
-                TFBlocks.mining_log_core,
-                TFBlocks.sorting_log_core,
-                TFBlocks.tower_wood,
-                TFBlocks.tower_wood_mossy,
-                TFBlocks.tower_wood_cracked,
-                TFBlocks.tower_wood_infested,
-                TFBlocks.tower_wood_encased,
-                TFBlocks.reappearing_block,
-                TFBlocks.antibuilder,
-                TFBlocks.carminite_reactor,
-                TFBlocks.carminite_builder,
-                TFBlocks.ghast_trap,
-                TFBlocks.huge_stalk,
-                TFBlocks.huge_mushgloom,
-                TFBlocks.huge_mushgloom_stem,
-                TFBlocks.cinder_log,
-                TFBlocks.cinder_wood,
-                TFBlocks.ironwood_block,
-                TFBlocks.tome_spawner,
-                TFBlocks.empty_bookshelf,
-                TFBlocks.canopy_bookshelf
+                TFBlocks.HEDGE,
+                TFBlocks.ROOT_BLOCK,
+                TFBlocks.LIVEROOT_BLOCK,
+                TFBlocks.UNCRAFTING_TABLE,
+                TFBlocks.ENCASED_SMOKER,
+                TFBlocks.ENCASED_FIRE_JET,
+                TFBlocks.TIME_LOG_CORE,
+                TFBlocks.TRANSFORMATION_LOG_CORE,
+                TFBlocks.MINING_LOG_CORE,
+                TFBlocks.SORTING_LOG_CORE,
+                TFBlocks.TOWERWOOD,
+                TFBlocks.MOSSY_TOWERWOOD,
+                TFBlocks.CRACKED_TOWERWOOD,
+                TFBlocks.INFESTED_TOWERWOOD,
+                TFBlocks.ENCASED_TOWERWOOD,
+                TFBlocks.REAPPEARING_BLOCK,
+                TFBlocks.ANTIBUILDER,
+                TFBlocks.CARMINITE_REACTOR,
+                TFBlocks.CARMINITE_BUILDER,
+                TFBlocks.GHAST_TRAP,
+                TFBlocks.HUGE_STALK,
+                TFBlocks.HUGE_MUSHGLOOM,
+                TFBlocks.HUGE_MUSHGLOOM_STEM,
+                TFBlocks.CINDER_LOG,
+                TFBlocks.CINDER_WOOD,
+                TFBlocks.IRONWOOD_BLOCK,
+                TFBlocks.DEATH_TOME_SPAWNER,
+                TFBlocks.EMPTY_CANOPY_BOOKSHELF,
+                TFBlocks.CANOPY_BOOKSHELF
         );
 
         tag(BlockTags.MINEABLE_WITH_HOE).add(
                 //vanilla doesnt use the leaves tag
-                TFBlocks.oak_leaves,
-                TFBlocks.canopy_leaves,
-                TFBlocks.mangrove_leaves,
-                TFBlocks.dark_leaves,
-                TFBlocks.rainboak_leaves,
-                TFBlocks.time_leaves,
-                TFBlocks.transformation_leaves,
-                TFBlocks.mining_leaves,
-                TFBlocks.sorting_leaves,
-                TFBlocks.thorn_leaves,
-                TFBlocks.thorn_rose,
-                TFBlocks.beanstalk_leaves,
-                TFBlocks.steeleaf_block,
-                TFBlocks.arctic_fur_block
+                TFBlocks.TWILIGHT_OAK_LEAVES,
+                TFBlocks.CANOPY_LEAVES,
+                TFBlocks.MANGROVE_LEAVES,
+                TFBlocks.DARK_LEAVES,
+                TFBlocks.RAINBOW_OAK_LEAVES,
+                TFBlocks.TIME_LEAVES,
+                TFBlocks.TRANSFORMATION_LEAVES,
+                TFBlocks.MINING_LEAVES,
+                TFBlocks.SORTING_LEAVES,
+                TFBlocks.THORN_LEAVES,
+                TFBlocks.THORN_ROSE,
+                TFBlocks.BEANSTALK_LEAVES,
+                TFBlocks.STEELEAF_BLOCK,
+                TFBlocks.ARCTIC_FUR_BLOCK
         );
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                TFBlocks.maze_stone,
-                TFBlocks.maze_stone_border,
-                TFBlocks.maze_stone_brick,
-                TFBlocks.maze_stone_chiseled,
-                TFBlocks.maze_stone_cracked,
-                TFBlocks.maze_stone_decorative,
-                TFBlocks.maze_stone_mosaic,
-                TFBlocks.maze_stone_mossy,
-                TFBlocks.naga_stone,
-                TFBlocks.naga_stone_head,
-                TFBlocks.stronghold_shield,
-                TFBlocks.trophy_pedestal,
-                TFBlocks.aurora_pillar,
-                TFBlocks.aurora_slab,
-                TFBlocks.underbrick,
-                TFBlocks.underbrick_mossy,
-                TFBlocks.underbrick_cracked,
-                TFBlocks.underbrick_floor,
-                TFBlocks.deadrock,
-                TFBlocks.deadrock_cracked,
-                TFBlocks.deadrock_weathered,
-                TFBlocks.trollsteinn,
-                TFBlocks.giant_leaves,
-                TFBlocks.giant_obsidian,
-                TFBlocks.giant_cobblestone,
-                TFBlocks.giant_log,
-                TFBlocks.castle_brick,
-                TFBlocks.castle_brick_worn,
-                TFBlocks.castle_brick_cracked,
-                TFBlocks.castle_brick_roof,
-                TFBlocks.castle_brick_mossy,
-                TFBlocks.castle_brick_frame,
-                TFBlocks.castle_pillar_encased,
-                TFBlocks.castle_pillar_encased_tile,
-                TFBlocks.castle_pillar_bold,
-                TFBlocks.castle_pillar_bold_tile,
-                TFBlocks.castle_stairs_brick,
-                TFBlocks.castle_stairs_worn,
-                TFBlocks.castle_stairs_cracked,
-                TFBlocks.castle_stairs_mossy,
-                TFBlocks.castle_stairs_encased,
-                TFBlocks.castle_stairs_bold,
-                TFBlocks.castle_rune_brick_pink,
-                TFBlocks.castle_rune_brick_yellow,
-                TFBlocks.castle_rune_brick_blue,
-                TFBlocks.castle_rune_brick_purple,
-                TFBlocks.castle_door_pink,
-                TFBlocks.castle_door_yellow,
-                TFBlocks.castle_door_blue,
-                TFBlocks.castle_door_purple,
-                TFBlocks.cinder_furnace,
-                TFBlocks.twilight_portal_miniature_structure,
-                //TFBlocks.hedge_maze_miniature_structure,
-                //TFBlocks.hollow_hill_miniature_structure,
-                //TFBlocks.quest_grove_miniature_structure,
-                //TFBlocks.mushroom_tower_miniature_structure,
-                TFBlocks.naga_courtyard_miniature_structure,
-                TFBlocks.lich_tower_miniature_structure,
-                //TFBlocks.minotaur_labyrinth_miniature_structure,
-                //TFBlocks.hydra_lair_miniature_structure,
-                //TFBlocks.goblin_stronghold_miniature_structure,
-                //TFBlocks.dark_tower_miniature_structure,
-                //TFBlocks.yeti_cave_miniature_structure,
-                //TFBlocks.aurora_palace_miniature_structure,
-                //TFBlocks.troll_cave_cottage_miniature_structure,
-                //TFBlocks.final_castle_miniature_structure,
-                TFBlocks.knightmetal_block,
-                TFBlocks.ironwood_block,
-                TFBlocks.fiery_block,
-                TFBlocks.spiral_bricks,
-                TFBlocks.etched_nagastone,
-                TFBlocks.nagastone_pillar,
-                TFBlocks.nagastone_stairs_left,
-                TFBlocks.nagastone_stairs_right,
-                TFBlocks.etched_nagastone_mossy,
-                TFBlocks.nagastone_pillar_mossy,
-                TFBlocks.nagastone_stairs_mossy_left,
-                TFBlocks.nagastone_stairs_mossy_right,
-                TFBlocks.etched_nagastone_weathered,
-                TFBlocks.nagastone_pillar_weathered,
-                TFBlocks.nagastone_stairs_weathered_left,
-                TFBlocks.nagastone_stairs_weathered_right,
-                TFBlocks.iron_ladder,
-                //TFBlocks.terrorcotta_circle,
-                //TFBlocks.terrorcotta_diagonal,
-                TFBlocks.stone_twist,
-                TFBlocks.stone_twist_thin,
-                //TFBlocks.lapis_block,
-                TFBlocks.keepsake_casket,
-                TFBlocks.stone_bold
+                TFBlocks.MAZESTONE,
+                TFBlocks.MAZESTONE_BORDER,
+                TFBlocks.MAZESTONE_BRICK,
+                TFBlocks.CUT_MAZESTONE,
+                TFBlocks.CRACKED_MAZESTONE,
+                TFBlocks.DECORATIVE_MAZESTONE,
+                TFBlocks.MAZESTONE_MOSAIC,
+                TFBlocks.MOSSY_MAZESTONE,
+                TFBlocks.NAGASTONE,
+                TFBlocks.NAGASTONE_HEAD,
+                TFBlocks.STRONGHOLD_SHIELD,
+                TFBlocks.TROPHY_PEDESTAL,
+                TFBlocks.AURORA_PILLAR,
+                TFBlocks.AURORA_SLAB,
+                TFBlocks.UNDERBRICK,
+                TFBlocks.MOSSY_UNDERBRICK,
+                TFBlocks.CRACKED_UNDERBRICK,
+                TFBlocks.UNDERBRICK_FLOOR,
+                TFBlocks.DEADROCK,
+                TFBlocks.CRACKED_DEADROCK,
+                TFBlocks.WEATHERED_DEADROCK,
+                TFBlocks.TROLLSTEINN,
+                TFBlocks.GIANT_LEAVES,
+                TFBlocks.GIANT_OBSIDIAN,
+                TFBlocks.GIANT_COBBLESTONE,
+                TFBlocks.GIANT_LOG,
+                TFBlocks.CASTLE_BRICK,
+                TFBlocks.WORN_CASTLE_BRICK,
+                TFBlocks.CRACKED_CASTLE_BRICK,
+                TFBlocks.CASTLE_ROOF_TILE,
+                TFBlocks.MOSSY_CASTLE_BRICK,
+                TFBlocks.THICK_CASTLE_BRICK,
+                TFBlocks.ENCASED_CASTLE_BRICK_PILLAR,
+                TFBlocks.ENCASED_CASTLE_BRICK_TILE,
+                TFBlocks.BOLD_CASTLE_BRICK_PILLAR,
+                TFBlocks.BOLD_CASTLE_BRICK_TILE,
+                TFBlocks.CASTLE_BRICK_STAIRS,
+                TFBlocks.WORN_CASTLE_BRICK_STAIRS,
+                TFBlocks.CRACKED_CASTLE_BRICK_STAIRS,
+                TFBlocks.MOSSY_CASTLE_BRICK_STAIRS,
+                TFBlocks.ENCASED_CASTLE_BRICK_STAIRS,
+                TFBlocks.BOLD_CASTLE_BRICK_STAIRS,
+                TFBlocks.PINK_CASTLE_RUNE_BRICK,
+                TFBlocks.YELLOW_CASTLE_RUNE_BRICK,
+                TFBlocks.BLUE_CASTLE_RUNE_BRICK,
+                TFBlocks.VIOLET_CASTLE_RUNE_BRICK,
+                TFBlocks.PINK_CASTLE_DOOR,
+                TFBlocks.YELLOW_CASTLE_DOOR,
+                TFBlocks.BLUE_CASTLE_DOOR,
+                TFBlocks.VIOLET_CASTLE_DOOR,
+                TFBlocks.CINDER_FURNACE,
+                TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE,
+                //TFBlocks.HEDGE_MAZE_MINIATURE_STRUCTURE,
+                //TFBlocks.HOLLOW_HILL_MINIATURE_STRUCTURE,
+                //TFBlocks.QUEST_GROVE_MINIATURE_STRUCTURE,
+                //TFBlocks.MUSHROOM_TOWER_MINIATURE_STRUCTURE,
+                TFBlocks.NAGA_COURTYARD_MINIATURE_STRUCTURE,
+                TFBlocks.LICH_TOWER_MINIATURE_STRUCTURE,
+                //TFBlocks.MINOTAUR_LABYRINTH_MINIATURE_STRUCTURE,
+                //TFBlocks.HYDRA_LAIR_MINIATURE_STRUCTURE,
+                //TFBlocks.GOBLIN_STRONGHOLD_MINIATURE_STRUCTURE,
+                //TFBlocks.DARK_TOWER_MINIATURE_STRUCTURE,
+                //TFBlocks.YETI_CAVE_MINIATURE_STRUCTURE,
+                //TFBlocks.AURORA_PALACE_MINIATURE_STRUCTURE,
+                //TFBlocks.TROLL_CAVE_COTTAGE_MINIATURE_STRUCTURE,
+                //TFBlocks.FINAL_CASTLE_MINIATURE_STRUCTURE,
+                TFBlocks.KNIGHTMETAL_BLOCK,
+                TFBlocks.IRONWOOD_BLOCK,
+                TFBlocks.FIERY_BLOCK,
+                TFBlocks.SPIRAL_BRICKS,
+                TFBlocks.ETCHED_NAGASTONE,
+                TFBlocks.NAGASTONE_PILLAR,
+                TFBlocks.NAGASTONE_STAIRS_LEFT,
+                TFBlocks.NAGASTONE_STAIRS_RIGHT,
+                TFBlocks.MOSSY_ETCHED_NAGASTONE,
+                TFBlocks.MOSSY_NAGASTONE_PILLAR,
+                TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT,
+                TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT,
+                TFBlocks.CRACKED_ETCHED_NAGASTONE,
+                TFBlocks.CRACKED_NAGASTONE_PILLAR,
+                TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT,
+                TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT,
+                TFBlocks.IRON_LADDER,
+                //TFBlocks.TERRORCOTTA_CIRCLE,
+                //TFBlocks.TERRORCOTTA_DIAGONAL,
+                TFBlocks.TWISTED_STONE,
+                TFBlocks.TWISTED_STONE_PILLAR,
+                //TFBlocks.LAPIS_BLOCK,
+                TFBlocks.KEEPSAKE_CASKET,
+                TFBlocks.BOLD_STONE_PILLAR
         );
 
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
-                TFBlocks.smoker,
-                TFBlocks.fire_jet,
-                TFBlocks.uberous_soil
+                TFBlocks.SMOKER,
+                TFBlocks.FIRE_JET,
+                TFBlocks.UBEROUS_SOIL
         );
     }
 
@@ -526,27 +526,27 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 Blocks.OAK_SAPLING, Blocks.SPRUCE_SAPLING, Blocks.BIRCH_SAPLING, Blocks.JUNGLE_SAPLING, Blocks.ACACIA_SAPLING, Blocks.DARK_OAK_SAPLING, Blocks.AZALEA, Blocks.FLOWERING_AZALEA, // BlockTags.SAPLINGS
                 Blocks.BEETROOTS, Blocks.CARROTS, Blocks.POTATOES, Blocks.WHEAT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM // BlockTags.CROPS
         ).add( // TF addons of above taglists
-                TFBlocks.oak_sapling,
-                TFBlocks.canopy_sapling,
-                TFBlocks.mangrove_sapling,
-                TFBlocks.darkwood_sapling,
-                TFBlocks.time_sapling,
-                TFBlocks.transformation_sapling,
-                TFBlocks.mining_sapling,
-                TFBlocks.sorting_sapling,
-                TFBlocks.hollow_oak_sapling,
-                TFBlocks.rainboak_sapling,
-                TFBlocks.rainboak_leaves,
-                TFBlocks.oak_leaves,
-                TFBlocks.canopy_leaves,
-                TFBlocks.mangrove_leaves,
-                TFBlocks.dark_leaves,
-                TFBlocks.time_leaves,
-                TFBlocks.transformation_leaves,
-                TFBlocks.mining_leaves,
-                TFBlocks.sorting_leaves,
-                TFBlocks.thorn_leaves,
-                TFBlocks.beanstalk_leaves
+                TFBlocks.TWILIGHT_OAK_SAPLING,
+                TFBlocks.CANOPY_SAPLING,
+                TFBlocks.MANGROVE_SAPLING,
+                TFBlocks.DARKWOOD_SAPLING,
+                TFBlocks.TIME_SAPLING,
+                TFBlocks.TRANSFORMATION_SAPLING,
+                TFBlocks.MINING_SAPLING,
+                TFBlocks.SORTING_SAPLING,
+                TFBlocks.HOLLOW_OAK_SAPLING,
+                TFBlocks.RAINBOW_OAK_SAPLING,
+                TFBlocks.RAINBOW_OAK_LEAVES,
+                TFBlocks.TWILIGHT_OAK_LEAVES,
+                TFBlocks.CANOPY_LEAVES,
+                TFBlocks.MANGROVE_LEAVES,
+                TFBlocks.DARK_LEAVES,
+                TFBlocks.TIME_LEAVES,
+                TFBlocks.TRANSFORMATION_LEAVES,
+                TFBlocks.MINING_LEAVES,
+                TFBlocks.SORTING_LEAVES,
+                TFBlocks.THORN_LEAVES,
+                TFBlocks.BEANSTALK_LEAVES
         ).build();
     }
 }

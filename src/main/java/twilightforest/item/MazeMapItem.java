@@ -47,7 +47,7 @@ public class MazeMapItem extends MapItem implements IMapItemEx {
 
 	// [VanillaCopy] super with own item and methods, plus y and mapOres
 	public static ItemStack setupNewMap(Level world, int worldX, int worldZ, byte scale, boolean trackingPosition, boolean unlimitedTracking, int worldY, boolean mapOres) {
-		ItemStack itemstack = new ItemStack(mapOres ? TFItems.ore_map : TFItems.maze_map);
+		ItemStack itemstack = new ItemStack(mapOres ? TFItems.FILLED_ORE_MAP : TFItems.FILLED_MAZE_MAP);
 		createMapData(itemstack, world, worldX, worldZ, scale, trackingPosition, unlimitedTracking, world.dimension(), worldY);
 		return itemstack;
 	}

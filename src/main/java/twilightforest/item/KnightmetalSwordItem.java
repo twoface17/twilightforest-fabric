@@ -35,13 +35,21 @@ public class KnightmetalSwordItem extends SwordItem {
 		if (!target.level.isClientSide && source.getDirectEntity() instanceof LivingEntity) {
 			ItemStack weapon = ((LivingEntity) source.getDirectEntity()).getMainHandItem();
 
-			if (!weapon.isEmpty() && ((target.getArmorValue() > 0 && (weapon.getItem() == TFItems.knightmetal_pickaxe || weapon.getItem() == TFItems.knightmetal_sword)) || (target.getArmorValue() == 0 && weapon.getItem() == TFItems.knightmetal_axe))) {
-				// TODO scale bonus dmg with the amount of armor?
-				target.hurt(DamageSource.MAGIC, BONUS_DAMAGE);
-				// don't prevent main damage from applying
-				target.invulnerableTime = 0;
-				// enchantment attack sparkles
-				((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
+			if (!weapon.isEmpty()) {
+				if (target.getArmorValue() > 0 && (weapon.is(TFItems.KNIGHTMETAL_PICKAXE) || weapon.is(TFItems.KNIGHTMETAL_SWORD))) {
+					if(target.getArmorCoverPercentage() > 0) {
+						int moreBonus = (int) (BONUS_DAMAGE * target.getArmorCoverPercentage());
+						evt.setAmount(evt.getAmount() + moreBonus);
+					} else {
+						evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
+					}
+					// enchantment attack sparkles
+					((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
+				} else if(target.getArmorValue() == 0 && weapon.is(TFItems.KNIGHTMETAL_AXE)) {
+					evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
+					// enchantment attack sparkles
+					((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
+				}
 			}
 		}
 	}

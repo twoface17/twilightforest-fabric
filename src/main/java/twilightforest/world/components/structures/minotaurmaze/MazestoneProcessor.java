@@ -13,15 +13,15 @@ public class MazestoneProcessor extends StructurePiece.BlockSelector {
 		if (!wall) {
 			this.next = Blocks.AIR.defaultBlockState();
 		} else {
-			this.next = TFBlocks.maze_stone.defaultBlockState();
+			this.next = TFBlocks.MAZESTONE.defaultBlockState();
 			float rf = random.nextFloat();
 
 			if (rf < 0.2F) {
-				this.next = TFBlocks.maze_stone_mossy.defaultBlockState();
+				this.next = TFBlocks.MOSSY_MAZESTONE.defaultBlockState();
 			} else if (rf < 0.5F) {
-				this.next = TFBlocks.maze_stone_cracked.defaultBlockState();
+				this.next = TFBlocks.CRACKED_MAZESTONE.defaultBlockState();
 			} else {
-				this.next = TFBlocks.maze_stone_brick.defaultBlockState();
+				this.next = TFBlocks.MAZESTONE_BRICK.defaultBlockState();
 			}
 		}
 	}

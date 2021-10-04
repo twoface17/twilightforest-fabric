@@ -53,7 +53,7 @@ public class PlateauBoss extends Monster {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (!hasRestriction()) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.boss_spawner_final_boss.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.FINAL_BOSS_BOSS_SPAWNER.defaultBlockState());
 			}
 			discard();
 		} else {

@@ -28,6 +28,7 @@ import twilightforest.world.registration.TFFeature;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,22 +39,25 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 	public static final Codec<ChunkGeneratorTwilight> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			ChunkGenerator.CODEC.fieldOf("wrapped_generator").forGetter(o -> o.delegate),
 			Codec.BOOL.fieldOf("generate_dark_forest_canopy").forGetter(o -> o.genDarkForestCanopy),
-			Codec.BOOL.fieldOf("monster_spawns_below_sealevel").forGetter(o -> o.monsterSpawnsBelowSeaLevel)
+			Codec.BOOL.fieldOf("monster_spawns_below_sealevel").forGetter(o -> o.monsterSpawnsBelowSeaLevel),
+			Codec.INT.optionalFieldOf("dark_forest_canopy_height").forGetter(o -> o.darkForestCanopyHeight)
 	).apply(instance, instance.stable(ChunkGeneratorTwilight::new)));
 
 	private final boolean genDarkForestCanopy;
 	private final boolean monsterSpawnsBelowSeaLevel;
+	private final Optional<Integer> darkForestCanopyHeight;
 
 	private final BlockState defaultBlock;
 	private final SurfaceNoise surfaceNoiseGetter;
 
 	public final ConcurrentHashMap<ChunkPos, TFFeature> featureCache = new ConcurrentHashMap<>();
 
-	public ChunkGeneratorTwilight(ChunkGenerator delegate, boolean genDarkForestCanopy, boolean monsterSpawnsBelowSeaLevel) {
+	public ChunkGeneratorTwilight(ChunkGenerator delegate, boolean genDarkForestCanopy, boolean monsterSpawnsBelowSeaLevel, Optional<Integer> darkForestCanopyHeight) {
 		//super(delegate.getBiomeSource(), delegate.getBiomeSource(), delegate.getSettings(), delegate instanceof NoiseBasedChunkGenerator noiseGen ? noiseGen.seed : delegate.strongholdSeed);
 		super(delegate);
 		this.genDarkForestCanopy = genDarkForestCanopy;
 		this.monsterSpawnsBelowSeaLevel = monsterSpawnsBelowSeaLevel;
+		this.darkForestCanopyHeight = darkForestCanopyHeight;
 
 		if (delegate instanceof NoiseBasedChunkGenerator noiseGen) {
 			this.defaultBlock = noiseGen.defaultBlock;
@@ -71,7 +75,7 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 
 	@Override
 	public ChunkGenerator withSeed(long newSeed) {
-		return new ChunkGeneratorTwilight(this.delegate.withSeed(newSeed), this.genDarkForestCanopy, this.monsterSpawnsBelowSeaLevel);
+		return new ChunkGeneratorTwilight(this.delegate.withSeed(newSeed), this.genDarkForestCanopy, this.monsterSpawnsBelowSeaLevel, this.darkForestCanopyHeight);
 	}
 
 	@Override
@@ -80,7 +84,8 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 
 		super.buildSurfaceAndBedrock(world, chunk);
 
-		this.addDarkForestCanopy(world, chunk);
+		if (this.darkForestCanopyHeight.isPresent())
+			this.addDarkForestCanopy(world, chunk, this.darkForestCanopyHeight.get());
 	}
 
 	// TODO Is there a way we can make a beard instead of making hard terrain shapes?
@@ -108,15 +113,6 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 					float dist = (int) Mth.sqrt(featureDX * featureDX + featureDZ * featureDZ);
 					float hheight = (int) (Mth.cos(dist / hdiam * Mth.PI) * (hdiam / 3F));
 					this.raiseHills(primer, chunk, nearFeature, hdiam, xInChunk, zInChunk, featureDX, featureDZ, hheight);
-				}
-			}
-		} else if (nearFeature == TFFeature.HEDGE_MAZE) {
-			for (int xInChunk = 0; xInChunk < 16; xInChunk++) {
-				for (int zInChunk = 0; zInChunk < 16; zInChunk++) {
-					int featureDX = xInChunk - relativeFeatureX;
-					int featureDZ = zInChunk - relativeFeatureZ;
-
-					this.flattenTerrainForFeature(primer, nearFeature, xInChunk, zInChunk, featureDX, featureDZ);
 				}
 			}
 		} else if (nearFeature == TFFeature.YETI_CAVE) {
@@ -200,14 +196,14 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 						final int oceanFloor = primer.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, movingPos.getX(), movingPos.getZ());
 
 						if (dist < 7 || cv < 0.05F) {
-							primer.setBlock(movingPos.setY(y), TFBlocks.wispy_cloud.defaultBlockState(), 3);
+							primer.setBlock(movingPos.setY(y), TFBlocks.WISPY_CLOUD.defaultBlockState(), 3);
 							for (int d = 1; d < depth; d++) {
-								primer.setBlock(movingPos.setY(y - d), TFBlocks.fluffy_cloud.defaultBlockState(), 3);
+								primer.setBlock(movingPos.setY(y - d), TFBlocks.FLUFFY_CLOUD.defaultBlockState(), 3);
 							}
-							primer.setBlock(movingPos.setY(y - depth), TFBlocks.wispy_cloud.defaultBlockState(), 3);
+							primer.setBlock(movingPos.setY(y - depth), TFBlocks.WISPY_CLOUD.defaultBlockState(), 3);
 						} else if (dist < 8 || cv < 1F) {
 							for (int d = 1; d < depth; d++) {
-								primer.setBlock(movingPos.setY(y - d), TFBlocks.fluffy_cloud.defaultBlockState(), 3);
+								primer.setBlock(movingPos.setY(y - d), TFBlocks.FLUFFY_CLOUD.defaultBlockState(), 3);
 							}
 						}
 
@@ -256,46 +252,6 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 
 		for (int y = hollowFloor + 1; y < hollowFloor + hollow; y++) {
 			world.setBlock(movingPos.setY(y), Blocks.AIR.defaultBlockState(), 3);
-		}
-	}
-
-	private void flattenTerrainForFeature(WorldGenRegion primer, TFFeature nearFeature, int xInChunk, int zInChunk, int featureDX, int featureDZ) {
-		float squishFactor = 0f;
-		int featureHeight = this.getSeaLevel() + 1;
-		final int FEATURE_BOUNDARY = (nearFeature.size * 2 + 1) * 8 - 8;
-
-		if (featureDX <= -FEATURE_BOUNDARY) {
-			squishFactor = (-featureDX - FEATURE_BOUNDARY) / 8.0f;
-		} else if (featureDX >= FEATURE_BOUNDARY) {
-			squishFactor = (featureDX - FEATURE_BOUNDARY) / 8.0f;
-		}
-
-		if (featureDZ <= -FEATURE_BOUNDARY) {
-			squishFactor = Math.max(squishFactor, (-featureDZ - FEATURE_BOUNDARY) / 8.0f);
-		} else if (featureDZ >= FEATURE_BOUNDARY) {
-			squishFactor = Math.max(squishFactor, (featureDZ - FEATURE_BOUNDARY) / 8.0f);
-		}
-
-		BlockPos.MutableBlockPos movingPos = primer.getCenter().getWorldPosition().offset(xInChunk, 0, zInChunk).mutable();
-
-		if (squishFactor > 0f) {
-			// blend the old terrain height to arena height
-
-			featureHeight += (primer.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, movingPos.getX(), movingPos.getZ()) - featureHeight) * squishFactor;
-		}
-
-		// sets the ground level to the maze height
-		for (int y = primer.getMinBuildHeight(); y < featureHeight; y++) {
-			Block b = primer.getBlockState(movingPos.setY(y)).getBlock();
-			if (b == Blocks.AIR || b == Blocks.WATER) {
-				primer.setBlock(movingPos.setY(y), this.defaultBlock, 3);
-			}
-		}
-		for (int y = featureHeight; y <= primer.getMaxBuildHeight(); y++) {
-			Block b = primer.getBlockState(movingPos.setY(y)).getBlock();
-			if (b != Blocks.AIR && b != Blocks.WATER) {
-				primer.setBlock(movingPos.setY(y), Blocks.AIR.defaultBlockState(), 3);
-			}
 		}
 	}
 
@@ -377,7 +333,7 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 	 * Adds dark forest canopy.  This version uses the "unzoomed" array of biomes used in land generation to determine how many of the nearby blocks are dark forest
 	 */
 	// Currently this is too sophisicated to be made into a SurfaceBuilder, it looks like
-	private void addDarkForestCanopy(WorldGenRegion primer, ChunkAccess chunk) {
+	private void addDarkForestCanopy(WorldGenRegion primer, ChunkAccess chunk, int height) {
 		BlockPos blockpos = primer.getCenter().getWorldPosition();
 		int[] thicks = new int[5 * 5];
 		boolean biomeFound = false;
@@ -449,12 +405,12 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 					int noise = Math.min(3, (int) (this.surfaceNoiseGetter.getSurfaceNoiseValue((blockpos.getX() + dX) * 0.0625D, (blockpos.getZ() + dZ) * 0.0625D, 0.0625D, dX * 0.0625D) * 15F / 1.25F));
 
 					// manipulate top and bottom
-					int treeBottom = pos.getY() + 12 - (int) (thickness * 0.5F);
+					int treeBottom = pos.getY() + height - (int) (thickness * 0.5F);
 					int treeTop = treeBottom + (int) (thickness * 1.5F);
 
 					treeBottom -= noise;
 
-					BlockState darkLeaves = TFBlocks.hardened_dark_leaves.defaultBlockState();
+					BlockState darkLeaves = TFBlocks.HARDENED_DARK_LEAVES.defaultBlockState();
 
 					for (int y = treeBottom; y < treeTop; y++) {
 						primer.setBlock(pos.atY(y), darkLeaves, 3);

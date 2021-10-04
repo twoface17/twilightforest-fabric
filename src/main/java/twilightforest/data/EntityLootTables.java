@@ -55,25 +55,25 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 	}
 
 	protected void addTables() {
-		add(TFEntities.adherent, emptyLootTable());
-		add(TFEntities.harbinger_cube, emptyLootTable());
-		add(TFEntities.mosquito_swarm, emptyLootTable());
-		add(TFEntities.pinch_beetle, emptyLootTable());
-		add(TFEntities.quest_ram, emptyLootTable());
-		add(TFEntities.roving_cube, emptyLootTable());
-		add(TFEntities.squirrel, emptyLootTable());
-		add(TFEntities.bunny, fromEntityLootTable(EntityType.RABBIT));
-		add(TFEntities.hedge_spider, fromEntityLootTable(EntityType.SPIDER));
-		add(TFEntities.fire_beetle, fromEntityLootTable(EntityType.CREEPER));
-		add(TFEntities.hostile_wolf, fromEntityLootTable(EntityType.WOLF));
-		add(TFEntities.king_spider, fromEntityLootTable(EntityType.SPIDER));
-		add(TFEntities.mist_wolf, fromEntityLootTable(EntityType.WOLF));
-		add(TFEntities.redcap_sapper, fromEntityLootTable(TFEntities.redcap));
-		add(TFEntities.slime_beetle, fromEntityLootTable(EntityType.SLIME));
-		add(TFEntities.swarm_spider, fromEntityLootTable(EntityType.SPIDER));
-		add(TFEntities.tower_broodling, fromEntityLootTable(EntityType.SPIDER));
-		add(TFEntities.tower_ghast, fromEntityLootTable(EntityType.GHAST));
-		add(TFEntities.bighorn_sheep, fromEntityLootTable(EntityType.SHEEP));
+		add(TFEntities.ADHERENT, emptyLootTable());
+		add(TFEntities.HARBINGER_CUBE, emptyLootTable());
+		add(TFEntities.MOSQUITO_SWARM, emptyLootTable());
+		add(TFEntities.PINCH_BEETLE, emptyLootTable());
+		add(TFEntities.QUEST_RAM, emptyLootTable());
+		add(TFEntities.ROVING_CUBE, emptyLootTable());
+		add(TFEntities.SQUIRREL, emptyLootTable());
+		add(TFEntities.DWARF_RABBIT, fromEntityLootTable(EntityType.RABBIT));
+		add(TFEntities.HEDGE_SPIDER, fromEntityLootTable(EntityType.SPIDER));
+		add(TFEntities.FIRE_BEETLE, fromEntityLootTable(EntityType.CREEPER));
+		add(TFEntities.HOSTILE_WOLF, fromEntityLootTable(EntityType.WOLF));
+		add(TFEntities.KING_SPIDER, fromEntityLootTable(EntityType.SPIDER));
+		add(TFEntities.MIST_WOLF, fromEntityLootTable(EntityType.WOLF));
+		add(TFEntities.REDCAP_SAPPER, fromEntityLootTable(TFEntities.REDCAP));
+		add(TFEntities.SLIME_BEETLE, fromEntityLootTable(EntityType.SLIME));
+		add(TFEntities.SWARM_SPIDER, fromEntityLootTable(EntityType.SPIDER));
+		add(TFEntities.CARMINITE_BROODLING, fromEntityLootTable(EntityType.SPIDER));
+		add(TFEntities.CARMINITE_GHASTGUARD, fromEntityLootTable(EntityType.GHAST));
+		add(TFEntities.BIGHORN_SHEEP, fromEntityLootTable(EntityType.SHEEP));
 		add(TFTreasure.BIGHORN_SHEEP_BLACK, sheepLootTableBuilderWithDrop(Blocks.BLACK_WOOL));
 		add(TFTreasure.BIGHORN_SHEEP_BLUE, sheepLootTableBuilderWithDrop(Blocks.BLUE_WOOL));
 		add(TFTreasure.BIGHORN_SHEEP_BROWN, sheepLootTableBuilderWithDrop(Blocks.BROWN_WOOL));
@@ -91,40 +91,40 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 		add(TFTreasure.BIGHORN_SHEEP_WHITE, sheepLootTableBuilderWithDrop(Blocks.WHITE_WOOL));
 		add(TFTreasure.BIGHORN_SHEEP_YELLOW, sheepLootTableBuilderWithDrop(Blocks.YELLOW_WOOL));
 
-		add(TFEntities.armored_giant,
+		add(TFEntities.ARMORED_GIANT,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.giant_sword))
+								.add(LootItem.lootTableItem(TFItems.GIANT_SWORD))
 								.when(LootItemKilledByPlayerCondition.killedByPlayer())));
 
-		add(TFEntities.giant_miner,
+		add(TFEntities.GIANT_MINER,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.giant_pickaxe))
+								.add(LootItem.lootTableItem(TFItems.GIANT_PICKAXE))
 								.when(LootItemKilledByPlayerCondition.killedByPlayer())));
 
-		add(TFEntities.blockchain_goblin,
+		add(TFEntities.BLOCKCHAIN_GOBLIN,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.armor_shard)
+								.add(LootItem.lootTableItem(TFItems.ARMOR_SHARD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.mini_ghast,
+		add(TFEntities.CARMINITE_GHASTLING,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
 								.add(LootTableReference.lootTableReference(EntityType.GHAST.getDefaultLootTable()))
 								.when(IsMinion.builder(true))));
 
-		/*registerLootTable(TFEntities.boggard,
+		/*registerLootTable(TFEntities.BOGGARD,
 				LootTable.builder()
 						.addLootPool(LootPool.builder()
 								.rolls(ConstantRange.of(1))
-								.addEntry(ItemLootEntry.builder(TFItems.maze_map_focus)
+								.addEntry(ItemLootEntry.builder(TFItems.MAZE_MAP_FOCUS)
 										.acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F))))
 								.acceptCondition(RandomChance.builder(0.2F)))
 						.addLootPool(LootPool.builder()
@@ -138,7 +138,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F))))
 								.acceptCondition(RandomChance.builder(0.1111F))));*/
 
-		add(TFEntities.wild_boar,
+		add(TFEntities.BOAR,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -148,37 +148,39 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 												.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.helmet_crab,
+		add(TFEntities.HELMET_CRAB,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.armor_shard)
+								.add(LootItem.lootTableItem(TFItems.ARMOR_SHARD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
 								.add(LootItem.lootTableItem(Items.COD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 1.0F)))
+										.apply(SmeltItemFunction.smelted()
+												.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
 								.when(LootItemRandomChanceCondition.randomChance(0.5F))));
 
-		add(TFEntities.goblin_knight_upper,
+		add(TFEntities.UPPER_GOBLIN_KNIGHT,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.armor_shard)
+								.add(LootItem.lootTableItem(TFItems.ARMOR_SHARD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.goblin_knight_lower,
+		add(TFEntities.LOWER_GOBLIN_KNIGHT,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.armor_shard)
+								.add(LootItem.lootTableItem(TFItems.ARMOR_SHARD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.wraith,
+		add(TFEntities.WRAITH,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -186,7 +188,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.redcap,
+		add(TFEntities.REDCAP,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -194,31 +196,23 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.yeti,
+		add(TFEntities.YETI,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.arctic_fur)
+								.add(LootItem.lootTableItem(TFItems.ARCTIC_FUR)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.winter_wolf,
+		add(TFEntities.WINTER_WOLF,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.arctic_fur)
+								.add(LootItem.lootTableItem(TFItems.ARCTIC_FUR)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.tiny_bird,
-				LootTable.lootTable()
-						.withPool(LootPool.lootPool()
-								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(Items.FEATHER)
-										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
-										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-
-		add(TFEntities.penguin,
+		add(TFEntities.TINY_BIRD,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -226,7 +220,15 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.ice_crystal,
+		add(TFEntities.PENGUIN,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantValue.exactly(1))
+								.add(LootItem.lootTableItem(Items.FEATHER)
+										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
+
+		add(TFEntities.ICE_CRYSTAL,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -234,7 +236,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.unstable_ice_core,
+		add(TFEntities.UNSTABLE_ICE_CORE,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -242,7 +244,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.stable_ice_core,
+		add(TFEntities.STABLE_ICE_CORE,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -250,7 +252,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.snow_guardian,
+		add(TFEntities.SNOW_GUARDIAN,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -258,23 +260,23 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.raven,
+		add(TFEntities.RAVEN,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.raven_feather)
+								.add(LootItem.lootTableItem(TFItems.RAVEN_FEATHER)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.tower_termite,
+		add(TFEntities.TOWERWOOD_BORER,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.borer_essence)
+								.add(LootItem.lootTableItem(TFItems.BORER_ESSENCE)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.skeleton_druid,
+		add(TFEntities.SKELETON_DRUID,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -283,11 +285,11 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))))
 								.withPool(LootPool.lootPool()
 										.setRolls(ConstantValue.exactly(1))
-										.add(LootItem.lootTableItem(TFItems.torchberries)
+										.add(LootItem.lootTableItem(TFItems.TORCHBERRIES)
 												.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 												.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.deer,
+		add(TFEntities.DEER,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -296,13 +298,13 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.raw_venison)
+								.add(LootItem.lootTableItem(TFItems.RAW_VENISON)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
 										.apply(SmeltItemFunction.smelted()
 												.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 
-		add(TFEntities.kobold,
+		add(TFEntities.KOBOLD,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -316,7 +318,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
 								.when(LootItemKilledByPlayerCondition.killedByPlayer())));
 
-		add(TFEntities.maze_slime,
+		add(TFEntities.MAZE_SLIME,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -324,23 +326,23 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.charm_of_keeping_1))
+								.add(LootItem.lootTableItem(TFItems.CHARM_OF_KEEPING_1))
 								.when(LootItemRandomChanceCondition.randomChance(0.025F))));
 
-		add(TFEntities.minotaur,
+		add(TFEntities.MINOTAUR,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.raw_meef)
+								.add(LootItem.lootTableItem(TFItems.RAW_MEEF)
 										.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
 										.apply(SmeltItemFunction.smelted()
 												.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.maze_map_focus))
+								.add(LootItem.lootTableItem(TFItems.MAZE_MAP_FOCUS))
 								.when(LootItemRandomChanceCondition.randomChance(0.025F))));
 
-		add(TFEntities.tower_golem,
+		add(TFEntities.CARMINITE_GOLEM,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -349,18 +351,18 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.tower_wood))
+								.add(LootItem.lootTableItem(TFBlocks.TOWERWOOD))
 									.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
 									.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))));
 
-		add(TFEntities.troll,
+		add(TFEntities.TROLL,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.magic_beans))
+								.add(LootItem.lootTableItem(TFItems.MAGIC_BEANS))
 								.when(LootItemRandomChanceCondition.randomChance(0.025F))));
 
-		add(TFEntities.death_tome,
+		add(TFEntities.DEATH_TOME,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
@@ -374,7 +376,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
 								.when(LootItemKilledByPlayerCondition.killedByPlayer())
 								.when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025F, 0.005F))
-								.add(LootItem.lootTableItem(TFItems.magic_map_focus))));
+								.add(LootItem.lootTableItem(TFItems.MAGIC_MAP_FOCUS))));
 
 		add(TFTreasure.DEATH_TOME_HURT,
 				LootTable.lootTable()
@@ -396,35 +398,35 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 								.add(LootItem.lootTableItem(Items.BOOK).setWeight(1)
 										.apply(EnchantWithLevelsFunction.enchantWithLevels(UniformGenerator.between(31, 40))))));
 
-		add(TFEntities.naga,
+		add(TFEntities.NAGA,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.naga_scale)
+								.add(LootItem.lootTableItem(TFItems.NAGA_SCALE)
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(6, 11)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.naga_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.NAGA_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.naga_scale)
+								.add(LootItem.lootTableItem(TFItems.NAGA_SCALE)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader")), TFItems.naga_scale))
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")), TFItems.NAGA_SCALE))
 										.apply(SetNbtFunction.setTag(Util.make(new CompoundTag(), (nbt) -> nbt.putString("shader_name", "twilightforest:naga"))))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.naga_scale)
+								.add(LootItem.lootTableItem(TFItems.NAGA_SCALE)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), TFItems.naga_scale)))));
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_twilight")), TFItems.NAGA_SCALE)))));
 
-		add(TFEntities.lich,
+		add(TFEntities.LICH,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.twilight_scepter))
-								.add(LootItem.lootTableItem(TFItems.lifedrain_scepter))
-								.add(LootItem.lootTableItem(TFItems.zombie_scepter))
-								.add(LootItem.lootTableItem(TFItems.shield_scepter)))
+								.add(LootItem.lootTableItem(TFItems.TWILIGHT_SCEPTER))
+								.add(LootItem.lootTableItem(TFItems.LIFEDRAIN_SCEPTER))
+								.add(LootItem.lootTableItem(TFItems.ZOMBIE_SCEPTER))
+								.add(LootItem.lootTableItem(TFItems.FORTIFICATION_SCEPTER)))
 						.withPool(LootPool.lootPool()
 								.setRolls(UniformGenerator.between(2, 4))
 								.add(LootItem.lootTableItem(Items.GOLDEN_SWORD)
@@ -449,7 +451,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.lich_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.LICH_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
 								.add(LootItem.lootTableItem(Items.GOLD_NUGGET)
@@ -462,88 +464,88 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.when(ModExists.builder("immersiveengineering"))
 										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), Items.GOLD_NUGGET)))));
 
-		add(TFEntities.minoshroom,
+		add(TFEntities.MINOSHROOM,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.meef_stroganoff)
+								.add(LootItem.lootTableItem(TFItems.MEEF_STROGANOFF)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.minoshroom_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.MINOSHROOM_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.meef_stroganoff)
+								.add(LootItem.lootTableItem(TFItems.MEEF_STROGANOFF)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader")), TFItems.meef_stroganoff))
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")), TFItems.MEEF_STROGANOFF))
 										.apply(SetNbtFunction.setTag(Util.make(new CompoundTag(), (nbt) -> nbt.putString("shader_name", "twilightforest:minoshroom"))))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.meef_stroganoff)
+								.add(LootItem.lootTableItem(TFItems.MEEF_STROGANOFF)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), TFItems.meef_stroganoff)))));
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_twilight")), TFItems.MEEF_STROGANOFF)))));
 
-		add(TFEntities.hydra,
+		add(TFEntities.HYDRA,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.hydra_chop)
+								.add(LootItem.lootTableItem(TFItems.HYDRA_CHOP)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 35)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 2)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.fiery_blood)
+								.add(LootItem.lootTableItem(TFItems.FIERY_BLOOD)
 										.apply(SetItemCountFunction.setCount(UniformGenerator.between(7, 10)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.hydra_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.HYDRA_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.fiery_blood)
+								.add(LootItem.lootTableItem(TFItems.FIERY_BLOOD)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader")), TFItems.fiery_blood))
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")), TFItems.FIERY_BLOOD))
 										.apply(SetNbtFunction.setTag(Util.make(new CompoundTag(), (nbt) -> nbt.putString("shader_name", "twilightforest:hydra"))))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.fiery_blood)
+								.add(LootItem.lootTableItem(TFItems.FIERY_BLOOD)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), TFItems.fiery_blood)))));
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_twilight")), TFItems.FIERY_BLOOD)))));
 
-		add(TFEntities.yeti_alpha,
+		add(TFEntities.ALPHA_YETI,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.alpha_fur)
+								.add(LootItem.lootTableItem(TFItems.ALPHA_YETI_FUR)
 										.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.ice_bomb)
+								.add(LootItem.lootTableItem(TFItems.ICE_BOMB)
 										.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6)))
 										.apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0, 1)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.yeti_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.ALPHA_YETI_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.ice_bomb)
+								.add(LootItem.lootTableItem(TFItems.ICE_BOMB)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader")), TFItems.ice_bomb))
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")), TFItems.ICE_BOMB))
 										.apply(SetNbtFunction.setTag(Util.make(new CompoundTag(), (nbt) -> nbt.putString("shader_name", "twilightforest:alpha_yeti"))))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.ice_bomb)
+								.add(LootItem.lootTableItem(TFItems.ICE_BOMB)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), TFItems.ice_bomb)))));
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_twilight")), TFItems.ICE_BOMB)))));
 
-		add(TFEntities.snow_queen,
+		add(TFEntities.SNOW_QUEEN,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.triple_bow))
-								.add(LootItem.lootTableItem(TFItems.seeker_bow)))
+								.add(LootItem.lootTableItem(TFItems.TRIPLE_BOW))
+								.add(LootItem.lootTableItem(TFItems.SEEKER_BOW)))
 						.withPool(LootPool.lootPool()
 								.setRolls(UniformGenerator.between(1, 4))
 								.add(LootItem.lootTableItem(Blocks.PACKED_ICE.asItem())
@@ -555,24 +557,24 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 										.apply(SetItemCountFunction.setCount(ConstantValue.exactly(16)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFBlocks.snow_queen_trophy.asItem())))
+								.add(LootItem.lootTableItem(TFBlocks.SNOW_QUEEN_TROPHY.asItem())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.ice_bomb)
+								.add(LootItem.lootTableItem(TFItems.ICE_BOMB)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader")), TFItems.ice_bomb))
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")), TFItems.ICE_BOMB))
 										.apply(SetNbtFunction.setTag(Util.make(new CompoundTag(), (nbt) -> nbt.putString("shader_name", "twilightforest:snow_queen"))))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.ice_bomb)
+								.add(LootItem.lootTableItem(TFItems.ICE_BOMB)
 										.when(ModExists.builder("immersiveengineering"))
-										.apply(ModItemSwap.builder().apply("immersiveengineering", Registry.ITEM.get(TFConstants.prefix("shader_bag_twilight")), TFItems.ice_bomb)))));
+										.apply(ModItemSwap.builder().apply("immersiveengineering", ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_twilight")), TFItems.ICE_BOMB)))));
 
 		add(TFTreasure.QUESTING_RAM_REWARDS,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
-								.add(LootItem.lootTableItem(TFItems.crumble_horn)))
+								.add(LootItem.lootTableItem(TFItems.CRUMBLE_HORN)))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantValue.exactly(1))
 								.add(LootItem.lootTableItem(Items.BUNDLE)
@@ -580,14 +582,14 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 											ListTag items = new ListTag();
 
 											// Do NOT overstuff the bag.
-											items.add(serializeNBT(new ItemStack(TFBlocks.quest_ram_trophy)));
-											items.add(serializeNBT(new ItemStack(Blocks.COAL_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.IRON_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.COPPER_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.LAPIS_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.GOLD_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.DIAMOND_BLOCK)));
-											items.add(serializeNBT(new ItemStack(Blocks.EMERALD_BLOCK)));
+											items.add(new ItemStack(TFBlocks.QUEST_RAM_TROPHY).serializeNBT());
+											items.add(new ItemStack(Blocks.COAL_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.IRON_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.COPPER_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.LAPIS_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.GOLD_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.DIAMOND_BLOCK).serializeNBT());
+											items.add(new ItemStack(Blocks.EMERALD_BLOCK).serializeNBT());
 
 											nbt.put("Items", items);
 										})))))

@@ -43,8 +43,8 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 	@Override
 	public boolean canConnectTo(BlockState state, boolean solidSide) {
 		return (state.getBlock() instanceof ThornsBlock
-						|| state.getBlock() == TFBlocks.thorn_rose
-						|| state.getBlock() == TFBlocks.thorn_leaves
+						|| state.getBlock() == TFBlocks.THORN_ROSE.get()
+						|| state.getBlock() == TFBlocks.THORN_LEAVES.get()
 						|| state.getMaterial() == Material.PLANT
 						|| state.getMaterial() == Material.DIRT);
 	}
@@ -128,7 +128,7 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 			BlockPos dPos = pos.relative(dir, i);
 
 			if (world.isEmptyBlock(dPos)) {
-				world.setBlock(dPos, TFBlocks.green_thorns.defaultBlockState().setValue(AXIS, dir.getAxis()), 2);
+				world.setBlock(dPos, TFBlocks.GREEN_THORNS.defaultBlockState().setValue(AXIS, dir.getAxis()), 2);
 			} else {
 				break;
 			}

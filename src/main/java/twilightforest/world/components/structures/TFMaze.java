@@ -73,8 +73,8 @@ public class TFMaze {
 		tall = 3;
 		head = 0;
 		roots = 0;
-		wallBlockState = TFBlocks.maze_stone_chiseled.defaultBlockState();
-		rootBlockState = TFBlocks.maze_stone.defaultBlockState();
+		wallBlockState = TFBlocks.CUT_MAZESTONE.defaultBlockState();
+		rootBlockState = TFBlocks.MAZESTONE.defaultBlockState();
 		torchBlockState = Blocks.TORCH.defaultBlockState();
 		pillarBlockState = null;
 

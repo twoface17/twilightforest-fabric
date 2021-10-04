@@ -29,7 +29,7 @@ public class GiantSwordItem extends SwordItem implements DynamicAttributeTool {
 
 	@Override
 	public boolean isValidRepairItem(ItemStack stack, ItemStack material) {
-		return material.getItem() == TFItems.ironwood_ingot || super.isValidRepairItem(stack, material);
+		return material.getItem() == TFItems.IRONWOOD_INGOT || super.isValidRepairItem(stack, material);
 	}
 
 	//TODO: Get this working by creating a mixin within the ServerPlayerGameMode and anywhere else forge dose it to add reach modifier

@@ -11,8 +11,11 @@
                   "type": "twilightforest:grove_ruins"
                 },
                 "decorator": {
-                  "config": {},
-                  "type": "twilightforest:nostructure"
+                  "config": {
+                    "occupies_surface": true,
+                    "occupies_underground": false
+                  },
+                  "type": "twilightforest:no_structure"
                 }
               },
               "type": "minecraft:decorated"
@@ -28,7 +31,7 @@
         },
         "decorator": {
           "config": {
-            "chance": 95
+            "chance": 105
           },
           "type": "minecraft:chance"
         }

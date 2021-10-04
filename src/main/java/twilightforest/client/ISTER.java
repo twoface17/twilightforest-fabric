@@ -92,7 +92,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer {
 					TrophyTileEntityRenderer.render(null, 180.0F, trophy, variant, 0.0F, ms, buffers, light, camera);
 				}
 			} else if (block instanceof KeepsakeCasketBlock) {
-				Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(new KeepsakeCasketBlockEntity(BlockPos.ZERO, TFBlocks.keepsake_casket.defaultBlockState()), ms, buffers, light, overlay);
+				Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(new KeepsakeCasketBlockEntity(BlockPos.ZERO, TFBlocks.KEEPSAKE_CASKET.defaultBlockState()), ms, buffers, light, overlay);
 			} else if (block instanceof AbstractSkullCandleBlock){
 				SkullBlock.Type type = ((AbstractSkullCandleBlock)block).getType();
 				SkullModelBase base = SkullCandleTileEntityRenderer.createSkullRenderers(Minecraft.getInstance().getEntityModels()).get(type);

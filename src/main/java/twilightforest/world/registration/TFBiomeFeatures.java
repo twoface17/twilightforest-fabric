@@ -8,6 +8,7 @@ import twilightforest.TFConstants;
 import twilightforest.world.components.feature.*;
 import twilightforest.world.components.feature.config.SpikeConfig;
 import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
+import twilightforest.world.components.feature.config.ThornsConfig;
 import twilightforest.world.components.feature.templates.*;
 import twilightforest.world.components.feature.trees.*;
 import twilightforest.world.components.feature.trees.growers.SnowTreePlacer;
@@ -65,8 +66,8 @@ public class TFBiomeFeatures {
 			new UndergroundPlantFeature(BlockStateConfiguration.CODEC, true));
 	public static final Feature<NoneFeatureConfiguration> STONE_CIRCLE = Registry.register(Registry.FEATURE, TFConstants.ID+ ":stone_circle",
 			new StoneCircleFeature(NoneFeatureConfiguration.CODEC));
-	public static final Feature<NoneFeatureConfiguration> THORNS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":thorns",
-			new TFGenThorns(NoneFeatureConfiguration.CODEC));
+	public static final Feature<ThornsConfig> THORNS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":thorns",
+			new TwilightThorns(ThornsConfig.CODEC));
 	public static final Feature<TFTreeFeatureConfig> TREE_OF_TIME = Registry.register(Registry.FEATURE, TFConstants.ID+ ":tree_of_time",
 			new TFGenTreeOfTime(TFTreeFeatureConfig.codecTFTreeConfig));
 	public static final Feature<NoneFeatureConfiguration> WEBS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":webs",

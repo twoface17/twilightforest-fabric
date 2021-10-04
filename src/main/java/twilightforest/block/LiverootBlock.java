@@ -23,10 +23,9 @@ public class LiverootBlock extends Block {
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		//TODO: PORT
-		//if(((IItem)player.getItemInHand(hand).getItem()).canPerformAction(player.getItemInHand(hand), ToolActions.AXE_STRIP)) {
-			level.setBlockAndUpdate(pos, TFBlocks.root.defaultBlockState());
-			ItemEntity liveroot = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(TFItems.liveroot));
+//		if(player.getItemInHand(hand).getItem().canPerformAction(player.getItemInHand(hand), ToolActions.AXE_STRIP)) {
+			level.setBlockAndUpdate(pos, TFBlocks.ROOT_BLOCK.get().defaultBlockState());
+			ItemEntity liveroot = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(TFItems.LIVEROOT.get()));
 			level.addFreshEntity(liveroot);
 			level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 			player.getItemInHand(hand).hurtAndBreak(1, player, evt -> evt.broadcastBreakEvent(hand));

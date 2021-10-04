@@ -14,14 +14,14 @@ public class RedcapSapper extends Redcap {
 
 	public RedcapSapper(EntityType<? extends RedcapSapper> type, Level world) {
 		super(type, world);
-		this.heldPick = new ItemStack(TFItems.ironwood_pickaxe);
+		this.heldPick = new ItemStack(TFItems.IRONWOOD_PICKAXE);
 		this.heldTNT.setCount(3);
 	}
 
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
 		super.populateDefaultEquipmentSlots(difficulty);
-		this.setItemSlot(EquipmentSlot.FEET, new ItemStack(TFItems.ironwood_boots));
+		this.setItemSlot(EquipmentSlot.FEET, new ItemStack(TFItems.IRONWOOD_BOOTS));
 	}
 
 	@Override

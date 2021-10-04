@@ -27,7 +27,7 @@ public class LichShadowsGoal extends Goal {
 
 	@Override
 	public void start() {
-		lich.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.twilight_scepter));
+		lich.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.TWILIGHT_SCEPTER));
 	}
 
 	@Override

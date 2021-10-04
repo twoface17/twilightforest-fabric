@@ -10,7 +10,7 @@ import twilightforest.block.entity.TFBlockEntities;
 public class AlphaYetiSpawnerBlockEntity extends BossSpawnerBlockEntity<AlphaYeti> {
 
 	public AlphaYetiSpawnerBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.ALPHA_YETI_SPAWNER, TFEntities.yeti_alpha, pos, state);
+		super(TFBlockEntities.ALPHA_YETI_SPAWNER, TFEntities.ALPHA_YETI, pos, state);
 	}
 
 	@Override

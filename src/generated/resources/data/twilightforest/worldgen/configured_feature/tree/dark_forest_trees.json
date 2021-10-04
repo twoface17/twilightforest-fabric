@@ -4,16 +4,12 @@
       "config": {
         "features": [
           {
-            "feature": "twilightforest:tree/base/bush_dark_forest",
-            "chance": 0.1
-          },
-          {
             "feature": "twilightforest:tree/base/birch_dark_forest",
-            "chance": 0.15
+            "chance": 0.35
           },
           {
             "feature": "twilightforest:tree/base/oak_dark_forest",
-            "chance": 0.15
+            "chance": 0.35
           }
         ],
         "default": "twilightforest:tree/base/darkwood_tree"
@@ -24,7 +20,7 @@
       "config": {
         "outer": {
           "config": {
-            "count": 10,
+            "count": 5,
             "extra_chance": 0.1,
             "extra_count": 1
           },
@@ -59,8 +55,11 @@
               "type": "minecraft:decorated"
             },
             "inner": {
-              "config": {},
-              "type": "twilightforest:nostructure"
+              "config": {
+                "occupies_surface": true,
+                "occupies_underground": false
+              },
+              "type": "twilightforest:no_structure"
             }
           },
           "type": "minecraft:decorated"

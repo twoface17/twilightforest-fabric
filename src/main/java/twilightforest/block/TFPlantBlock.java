@@ -69,9 +69,9 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 	@Deprecated
 	public VoxelShape getShape(BlockState state, BlockGetter access, BlockPos pos, CollisionContext context) {
 		switch(plantVariant) {
-			case MOSSPATCH -> { return createCTMShape(TFBlocks.moss_patch, access, pos); }
+			case MOSSPATCH -> { return createCTMShape(TFBlocks.MOSS_PATCH, access, pos); }
 			case MAYAPPLE -> { return MAYAPPLE_SHAPE; }
-			case CLOVERPATCH -> { return createCTMShape(TFBlocks.clover_patch, access, pos); }
+			case CLOVERPATCH -> { return createCTMShape(TFBlocks.CLOVER_PATCH, access, pos); }
 			case FIDDLEHEAD -> { return FIDDLEHEAD_SHAPE; }
 			case MUSHGLOOM -> { return MUSHGLOOM_SHAPE; }
 			case TORCHBERRY -> { return TORCHBERRY_SHAPE; }
@@ -105,9 +105,9 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 			// can always hang below dirt blocks
 			return true;
 		} else {
-			return (state.getBlock() == TFBlocks.root_strand
-					|| state.is(TFBlocks.root)
-					|| state.is(TFBlocks.liveroot_block));
+			return (state.getBlock() == TFBlocks.ROOT_STRAND
+					|| state.is(TFBlocks.ROOT_BLOCK)
+					|| state.is(TFBlocks.LIVEROOT_BLOCK));
 		}
 	}
 
@@ -128,9 +128,9 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		super.animateTick(state, world, pos, random);
 
-		if (state.getBlock() == TFBlocks.moss_patch && random.nextInt(10) == 0) {
+		if (state.getBlock() == TFBlocks.MOSS_PATCH && random.nextInt(10) == 0) {
 			world.addParticle(ParticleTypes.MYCELIUM, pos.getX() + random.nextFloat(), pos.getY() + 0.1F, pos.getZ() + random.nextFloat(), 0.0D, 0.0D, 0.0D);
-		} else if (state.getBlock() == TFBlocks.fallen_leaves && random.nextInt(50) == 0) {
+		} else if (state.getBlock() == TFBlocks.FALLEN_LEAVES && random.nextInt(50) == 0) {
 			float dist = 10F;
 			if (!world.canSeeSkyFromBelowWater(pos)) {
 				for (int y = 0; y <= dist; y++)
@@ -154,7 +154,7 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 	@Deprecated
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entityIn) {
 		super.entityInside(state, world, pos, entityIn);
-		if (state.getBlock() == TFBlocks.fallen_leaves && entityIn instanceof LivingEntity && (entityIn.getDeltaMovement().x() != 0 || entityIn.getDeltaMovement().z() != 0) && RANDOM.nextBoolean()) {
+		if (state.getBlock() == TFBlocks.FALLEN_LEAVES && entityIn instanceof LivingEntity && (entityIn.getDeltaMovement().x() != 0 || entityIn.getDeltaMovement().z() != 0) && RANDOM.nextBoolean()) {
 			if(world.isClientSide) {
 				int color = Minecraft.getInstance().getBlockColors().getColor(Blocks.OAK_LEAVES.defaultBlockState(), world, pos, 0);
 				int r = Mth.clamp(((color >> 16) & 0xFF) + RANDOM.nextInt(0x22) - 0x11, 0x00, 0xFF);
@@ -177,23 +177,23 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
-		return state.getBlock() == TFBlocks.root_strand && isBottomOpen(level, pos);
+		return state.getBlock() == TFBlocks.ROOT_STRAND && isBottomOpen(level, pos);
 	}
 
 	@Override
 	public boolean isBonemealSuccess(Level level, Random random, BlockPos pos, BlockState state) {
-		return state.getBlock() == TFBlocks.root_strand && isBottomOpen(level, pos);
+		return state.getBlock() == TFBlocks.ROOT_STRAND && isBottomOpen(level, pos);
 	}
 
 	@Override
 	public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
-		if(state.getBlock() == TFBlocks.root_strand) {
+		if(state.getBlock() == TFBlocks.ROOT_STRAND) {
 			BlockPos.MutableBlockPos mutable = pos.mutable();
 			do {
 				mutable.move(Direction.DOWN);
-			} while(level.getBlockState(mutable).is(TFBlocks.root_strand));
+			} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND));
 			if(level.getBlockState(mutable).isAir() || level.getBlockState(mutable).getMaterial().isReplaceable()) {
-				level.setBlockAndUpdate(mutable, TFBlocks.root_strand.defaultBlockState());
+				level.setBlockAndUpdate(mutable, TFBlocks.ROOT_STRAND.defaultBlockState());
 			}
 		}
 	}
@@ -202,7 +202,7 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 		BlockPos.MutableBlockPos mutable = pos.mutable();
 		do {
 			mutable.move(Direction.DOWN);
-		} while(level.getBlockState(mutable).is(TFBlocks.root_strand));
+		} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND));
 
 		return level.getBlockState(mutable).isAir() || level.getBlockState(mutable).getMaterial().isReplaceable();
 	}

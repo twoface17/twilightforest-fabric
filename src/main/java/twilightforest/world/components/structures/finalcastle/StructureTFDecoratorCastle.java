@@ -7,12 +7,12 @@ import twilightforest.world.components.structures.TFStructureDecorator;
 public class StructureTFDecoratorCastle extends TFStructureDecorator {
 
 	public StructureTFDecoratorCastle() {
-		this.blockState = TFBlocks.castle_brick.defaultBlockState();
+		this.blockState = TFBlocks.CASTLE_BRICK.defaultBlockState();
 		this.accentState = Blocks.CHISELED_QUARTZ_BLOCK.defaultBlockState();
-		this.roofState = TFBlocks.castle_brick_roof.defaultBlockState();
-		this.pillarState = TFBlocks.castle_pillar_bold.defaultBlockState();
+		this.roofState = TFBlocks.CASTLE_ROOF_TILE.defaultBlockState();
+		this.pillarState = TFBlocks.BOLD_CASTLE_BRICK_PILLAR.defaultBlockState();
 		this.fenceState = Blocks.OAK_FENCE.defaultBlockState();
-		this.stairState = TFBlocks.castle_stairs_brick.defaultBlockState();
+		this.stairState = TFBlocks.CASTLE_BRICK_STAIRS.defaultBlockState();
 		this.randomBlocks = new CastleBlockProcessor();
 	}
 

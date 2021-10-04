@@ -3,64 +3,56 @@ package twilightforest.client.model.entity;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import twilightforest.entity.monster.Troll;
 
 public class TrollModel extends HumanoidModel<Troll> {
-
-	public ModelPart nose;
 
 	public TrollModel(ModelPart root) {
 		super(root);
 	}
 
 	public static LayerDefinition create() {
-		MeshDefinition mesh = new MeshDefinition();
+		MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition partRoot = mesh.getRoot();
 
-		var head = partRoot.addOrReplaceChild("head", CubeListBuilder.create()
-						.texOffs(0, 0)
-						.addBox(-5.0F, -8.0F, -3.0F, 10.0F, 10.0F, 10.0F),
-				PartPose.offset(0.0F, -9.0F, -6.0F));
+		partRoot.addOrReplaceChild("head", CubeListBuilder.create()
+						.texOffs(52, 31)
+						.addBox(-5.0F, -8.0F, -8.0F, 10.0F, 10.0F, 10.0F)
+						.texOffs(36, 41)
+						.addBox(-2.0F, -4.0F, -11.0F, 4.0F, 8.0F, 4.0F),
+				PartPose.offset(0.0F, -11.0F, -1.0F));
 
 		partRoot.addOrReplaceChild("hat", CubeListBuilder.create(),
 				PartPose.ZERO);
 
-		head.addOrReplaceChild("nose", CubeListBuilder.create()
-						.texOffs(0, 21)
-						.addBox(-2.0F, -2.0F, -2.0F, 4.0F, 8.0F, 4.0F),
-				PartPose.offset(0.0F, -2.0F, -4.0F));
-
 		partRoot.addOrReplaceChild("body", CubeListBuilder.create()
-						.texOffs(40, 0)
-						.addBox(-8.0F, 0.0F, -5.0F, 16.0F, 26.0F, 10.0F),
-				PartPose.offset(0.0F, -14.0F, 0.0F));
+						.texOffs(0, 0)
+						.addBox(-8.0F, -37.0F, -6.0F, 16.0F, 26.0F, 15.0F),
+				PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		partRoot.addOrReplaceChild("right_arm", CubeListBuilder.create()
-						.texOffs(32, 36)
-						.addBox(-5.0F, -2.0F, -3.0F, 6.0F, 22.0F, 6.0F),
-				PartPose.offset(-9.0F, -9.0F, 0.0F));
+						.texOffs(0, 41)
+						.addBox(-6.0F, -1.0F, -4.0F, 6.0F, 25.0F, 8.0F),
+				PartPose.offset(-8.0F, -9.0F, 0.0F));
 
 		partRoot.addOrReplaceChild("left_arm", CubeListBuilder.create().mirror()
-						.texOffs(32, 36)
-						.addBox(-1.0F, -2.0F, -3.0F, 6.0F, 22.0F, 6.0F),
-				PartPose.offset(9.0F, -9.0F, 0.0F));
+						.texOffs(0, 41)
+						.addBox(0.0F, -1.0F, -4.0F, 6.0F, 25.0F, 8.0F),
+				PartPose.offset(8.0F, -9.0F, 0.0F));
 
 		partRoot.addOrReplaceChild("right_leg", CubeListBuilder.create()
-						.texOffs(0, 44)
-						.addBox(-3.0F, 0.0F, -4.0F, 6.0F, 12.0F, 8.0F),
-				PartPose.offset(-5.0F, 12.0F, 0.0F));
+						.texOffs(28, 54)
+						.addBox(-3.0F, -1.0F, -4.0F, 6.0F, 12.0F, 8.0F),
+				PartPose.offset(-4.0F, 13.0F, 0.0F));
 
 		partRoot.addOrReplaceChild("left_leg", CubeListBuilder.create().mirror()
-						.texOffs(0, 44)
-						.addBox(-3.0F, 0.0F, -4.0F, 6.0F, 12.0F, 8.0F),
-				PartPose.offset(5.0F, 12.0F, 0.0F));
+						.texOffs(28, 54)
+						.addBox(-3.0F, -1.0F, -4.0F, 6.0F, 12.0F, 8.0F),
+				PartPose.offset(4.0F, 13.0F, 0.0F));
 
-		return LayerDefinition.create(mesh, 128, 64);
+		return LayerDefinition.create(mesh, 128, 128);
 	}
 
 	@Override
@@ -82,7 +74,6 @@ public class TrollModel extends HumanoidModel<Troll> {
 			// arms up!
 			this.rightArm.xRot += Math.PI;
 			this.leftArm.xRot += Math.PI;
-
 		}
 
 		if (this.leftArmPose != ArmPose.EMPTY) {

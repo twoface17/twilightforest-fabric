@@ -34,7 +34,7 @@ public class CompressedBlock extends Block implements IBlockMethods {
 	@Override
 	@Deprecated
 	public float getShadeBrightness(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		if (this == TFBlocks.fiery_block) {
+		if (this == TFBlocks.FIERY_BLOCK) {
 			return 1.0F;
 		}
 		return super.getShadeBrightness(state, worldIn, pos);
@@ -44,7 +44,7 @@ public class CompressedBlock extends Block implements IBlockMethods {
 	@Deprecated
 	public float getDestroyProgress(BlockState state, Player player, BlockGetter worldIn, BlockPos pos) {
 		// ItemShears#getDestroySpeed is really dumb and doesn't check IShearable so we have to do it this way to try to match the wool break speed with shears
-		return state.getBlock() == TFBlocks.arctic_fur_block && player.getMainHandItem().getItem() instanceof ShearsItem ? 0.2F : super.getDestroyProgress(state, player, worldIn, pos);
+		return state.getBlock() == TFBlocks.ARCTIC_FUR_BLOCK && player.getMainHandItem().getItem() instanceof ShearsItem ? 0.2F : super.getDestroyProgress(state, player, worldIn, pos);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class CompressedBlock extends Block implements IBlockMethods {
 		if ((!entityIn.fireImmune())
 				&& entityIn instanceof LivingEntity
 				&& (!EnchantmentHelper.hasFrostWalker((LivingEntity) entityIn))
-				&& this == TFBlocks.fiery_block) {
+				&& this == TFBlocks.FIERY_BLOCK) {
 			entityIn.hurt(TFDamageSources.FIERY, 1.0F);
 		}
 
@@ -61,28 +61,28 @@ public class CompressedBlock extends Block implements IBlockMethods {
 
 	@Override
 	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-		if (this == TFBlocks.steeleaf_block) {
+		if (this == TFBlocks.STEELEAF_BLOCK) {
 			entityIn.causeFallDamage(fallDistance, 0.75F, DamageSource.FALL);
-		} else if (this == TFBlocks.arctic_fur_block) {
+		} else if (this == TFBlocks.ARCTIC_FUR_BLOCK) {
 			entityIn.causeFallDamage(fallDistance, 0.1F, DamageSource.FALL);
 		}
 	}
 
 	@Override
 	public boolean isFireSource(BlockState state, LevelReader world, BlockPos pos, Direction side) {
-		return this == TFBlocks.fiery_block;
+		return this == TFBlocks.FIERY_BLOCK;
 	}
 
 	@Override
 	public boolean isStickyBlock(BlockState state) {
-		return this == TFBlocks.carminite_block;
+		return this == TFBlocks.CARMINITE_BLOCK;
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		if (this == TFBlocks.steeleaf_block) {
+		if (this == TFBlocks.STEELEAF_BLOCK) {
 			tooltip.add(new TranslatableComponent("block.steeleaf.tooltip").withStyle(ChatFormatting.GRAY));
-		} else if (this == TFBlocks.arctic_fur_block) {
+		} else if (this == TFBlocks.ARCTIC_FUR_BLOCK) {
 			tooltip.add(new TranslatableComponent("block.arctic.tooltip").withStyle(ChatFormatting.GRAY));
 		}
 	}

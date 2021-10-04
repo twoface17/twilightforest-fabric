@@ -22,13 +22,14 @@ import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public final class ColorHandler {
-	
+
 	public static void registerBlockColors(BlockColors blockColors) {
-		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : Color.HSBtoRGB(worldIn == null ? 0.45F : AuroraBrickBlock.rippleFractialNoise(2, 128.0f, pos != null ? pos.above(128) : new BlockPos(0, 0, 0), 0.37f, 0.67f, 1.5f), 1.0f, 1.0f), TFBlocks.aurora_block);
+
+		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : Color.HSBtoRGB(worldIn == null ? 0.45F : AuroraBrickBlock.rippleFractialNoise(2, 128.0f, pos != null ? pos.above(128) : new BlockPos(0, 0, 0), 0.37f, 0.67f, 1.5f), 1.0f, 1.0f), TFBlocks.AURORA_BLOCK.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
-			int normalColor = blockColors.getColor(TFBlocks.aurora_block.defaultBlockState(), worldIn, pos, tintIndex);
+			int normalColor = blockColors.getColor(TFBlocks.AURORA_BLOCK.defaultBlockState(), worldIn, pos, tintIndex);
 
 			int red = (normalColor >> 16) & 255;
 			int blue = normalColor & 255;
@@ -37,7 +38,7 @@ public final class ColorHandler {
 			float[] hsb = Color.RGBtoHSB(red, blue, green, null);
 
 			return Color.HSBtoRGB(hsb[0], hsb[1] * 0.5F, Math.min(hsb[2] + 0.4F, 0.9F));
-		}, TFBlocks.aurora_pillar, TFBlocks.aurora_slab, TFBlocks.auroralized_glass);
+		}, TFBlocks.AURORA_PILLAR.get(), TFBlocks.AURORA_SLAB.get(), TFBlocks.AURORALIZED_GLASS.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -60,9 +61,9 @@ public final class ColorHandler {
 			}
 
 			return (red / 9 & 255) << 16 | (grn / 9 & 255) << 8 | blu / 9 & 255;
-		}, TFBlocks.dark_leaves, TFBlocks.hardened_dark_leaves, TFBlocks.giant_leaves);
-		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : blockColors.getColor(Blocks.GRASS.defaultBlockState(), worldIn, pos, tintIndex), TFBlocks.smoker, TFBlocks.fire_jet);
-		blockColors.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? 2129968 : 7455580, TFBlocks.huge_lilypad);
+		}, TFBlocks.DARK_LEAVES.get(), TFBlocks.HARDENED_DARK_LEAVES.get(), TFBlocks.GIANT_LEAVES.get());
+		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : blockColors.getColor(Blocks.GRASS.defaultBlockState(), worldIn, pos, tintIndex), TFBlocks.SMOKER.get(), TFBlocks.FIRE_JET.get());
+		blockColors.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? 2129968 : 7455580, TFBlocks.HUGE_LILY_PAD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -86,7 +87,7 @@ public final class ColorHandler {
 
 				return red << 16 | green << 8 | blue;
 			}
-		}, TFBlocks.time_leaves);
+		}, TFBlocks.TIME_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -110,7 +111,7 @@ public final class ColorHandler {
 
 				return red << 16 | green << 8 | blue;
 			}
-		}, TFBlocks.transformation_leaves);
+		}, TFBlocks.TRANSFORMATION_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -134,7 +135,7 @@ public final class ColorHandler {
 
 				return red << 16 | green << 8 | blue;
 			}
-		}, TFBlocks.mining_leaves);
+		}, TFBlocks.MINING_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -158,7 +159,7 @@ public final class ColorHandler {
 
 				return red << 16 | green << 8 | blue;
 			}
-		}, TFBlocks.sorting_leaves);
+		}, TFBlocks.SORTING_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -168,7 +169,7 @@ public final class ColorHandler {
 				float f = AuroraBrickBlock.rippleFractialNoise(2, 32.0f, pos, 0.4f, 1.0f, 2f);
 				return Color.HSBtoRGB(0.1f, 1f - f, (f + 2f) / 3f);
 			}
-		}, TFBlocks.tower_wood, TFBlocks.tower_wood_cracked, TFBlocks.tower_wood_infested, TFBlocks.tower_wood_mossy);
+		}, TFBlocks.TOWERWOOD.get(), TFBlocks.CRACKED_TOWERWOOD.get(), TFBlocks.INFESTED_TOWERWOOD.get(), TFBlocks.MOSSY_TOWERWOOD.get());
 		blockColors.register((state, world, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -191,7 +192,7 @@ public final class ColorHandler {
 
 				return (red / 9 & 0xFF) << 16 | (green / 9 & 0xFF) << 8 | blue / 9 & 0xFF;
 			}
-		}, TFBlocks.oak_leaves);
+		}, TFBlocks.TWILIGHT_OAK_LEAVES.get());
 		blockColors.register((state, world, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -217,7 +218,7 @@ public final class ColorHandler {
 				return ((normalColor & 0xFEFEFE) + 0x469A66) / 2;
 				//return ((normalColor & 0xFEFEFE) + 0x009822) / 2;
 			}
-		}, TFBlocks.canopy_leaves);
+		}, TFBlocks.CANOPY_LEAVES.get());
 		blockColors.register((state, world, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -242,7 +243,7 @@ public final class ColorHandler {
 				// mangrove colors
 				return ((normalColor & 0xFEFEFE) + 0xC0E694) / 2;
 			}
-		}, TFBlocks.mangrove_leaves);
+		}, TFBlocks.MANGROVE_LEAVES.get());
 		blockColors.register((state, world, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 
@@ -285,8 +286,8 @@ public final class ColorHandler {
 
 				return red << 16 | blue << 8 | green;
 			}
-		}, TFBlocks.rainboak_leaves);
-		blockColors.register((state, worldIn, pos, tintIndex) -> FoliageColor.getEvergreenColor(), TFBlocks.beanstalk_leaves, TFBlocks.thorn_leaves);
+		}, TFBlocks.RAINBOW_OAK_LEAVES.get());
+		blockColors.register((state, worldIn, pos, tintIndex) -> FoliageColor.getEvergreenColor(), TFBlocks.BEANSTALK_LEAVES.get(), TFBlocks.THORN_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex != 0) {
 				return 0xFFFFFF;
@@ -297,7 +298,7 @@ public final class ColorHandler {
 					return FoliageColor.getDefaultColor();
 				}
 			}
-		}, TFBlocks.fallen_leaves);
+		}, TFBlocks.FALLEN_LEAVES.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex != 0) {
 				return 0xFFFFFF;
@@ -308,66 +309,66 @@ public final class ColorHandler {
 					return GrassColor.get(0.5D, 1.0D);
 				}
 			}
-		}, TFBlocks.fiddlehead, TFBlocks.potted_fiddlehead);
+		}, TFBlocks.FIDDLEHEAD.get(), TFBlocks.POTTED_FIDDLEHEAD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> GrassColor.get(0.5D, 1.0D),
-				TFBlocks.twilight_portal_miniature_structure, /*TFBlocks.hedge_maze_miniature_structure, TFBlocks.hollow_hill_miniature_structure, TFBlocks.quest_grove_miniature_structure, TFBlocks.mushroom_tower_miniature_structure,*/ TFBlocks.naga_courtyard_miniature_structure, TFBlocks.lich_tower_miniature_structure //TFBlocks.minotaur_labyrinth_miniature_structure,
-				/*TFBlocks.hydra_lair_miniature_structure, TFBlocks.goblin_stronghold_miniature_structure, TFBlocks.dark_tower_miniature_structure, TFBlocks.yeti_cave_miniature_structure, TFBlocks.aurora_palace_miniature_structure, TFBlocks.troll_cave_cottage_miniature_structure, TFBlocks.final_castle_miniature_structure*/);
+				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get(), /*TFBlocks.HEDGE_MAZE_MINIATURE_STRUCTURE.get(), TFBlocks.HOLLOW_HILL_MINIATURE_STRUCTURE.get(), TFBlocks.QUEST_GROVE_MINIATURE_STRUCTURE.get(), TFBlocks.MUSHROOM_TOWER_MINIATURE_STRUCTURE.get(),*/ TFBlocks.NAGA_COURTYARD_MINIATURE_STRUCTURE.get(), TFBlocks.LICH_TOWER_MINIATURE_STRUCTURE.get() //TFBlocks.MINOTAUR_LABYRINTH_MINIATURE_STRUCTURE.get(),
+				/*TFBlocks.HYDRA_LAIR_MINIATURE_STRUCTURE.get(), TFBlocks.GOBLIN_STRONGHOLD_MINIATURE_STRUCTURE.get(), TFBlocks.DARK_TOWER_MINIATURE_STRUCTURE.get(), TFBlocks.YETI_CAVE_MINIATURE_STRUCTURE.get(), TFBlocks.AURORA_PALACE_MINIATURE_STRUCTURE.get(), TFBlocks.TROLL_CAVE_COTTAGE_MINIATURE_STRUCTURE.get(), TFBlocks.FINAL_CASTLE_MINIATURE_STRUCTURE.get()*/);
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0xFF00FF;
-		}, TFBlocks.castle_rune_brick_pink, TFBlocks.castle_door_pink);
+		}, TFBlocks.PINK_CASTLE_RUNE_BRICK.get(), TFBlocks.PINK_CASTLE_DOOR.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0x00FFFF;
-		}, TFBlocks.castle_rune_brick_blue, TFBlocks.castle_door_blue);
+		}, TFBlocks.BLUE_CASTLE_RUNE_BRICK.get(), TFBlocks.BLUE_CASTLE_DOOR.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0xFFFF00;
-		}, TFBlocks.castle_rune_brick_yellow, TFBlocks.castle_door_yellow);
+		}, TFBlocks.YELLOW_CASTLE_RUNE_BRICK.get(), TFBlocks.YELLOW_CASTLE_DOOR.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0x4B0082;
-		}, TFBlocks.castle_rune_brick_purple, TFBlocks.castle_door_purple);
+		}, TFBlocks.VIOLET_CASTLE_RUNE_BRICK.get(), TFBlocks.VIOLET_CASTLE_DOOR.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0x5C1074;
-		}, TFBlocks.force_field_purple);
+		}, TFBlocks.VIOLET_FORCE_FIELD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0xFA057E;
-		}, TFBlocks.force_field_pink);
+		}, TFBlocks.PINK_FORCE_FIELD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0xFF5B02;
-		}, TFBlocks.force_field_orange);
+		}, TFBlocks.ORANGE_FORCE_FIELD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0x89E701;
-		}, TFBlocks.force_field_green);
+		}, TFBlocks.GREEN_FORCE_FIELD.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
 			return 0x0DDEFF;
-		}, TFBlocks.force_field_blue);
+		}, TFBlocks.BLUE_FORCE_FIELD.get());
 	}
 
 	public static void registerItemColors(ItemColors itemColors, BlockColors blockColors) {
 		itemColors.register((stack, tintIndex) -> blockColors.getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
-				TFBlocks.aurora_block, TFBlocks.aurora_pillar, TFBlocks.aurora_slab, TFBlocks.auroralized_glass, TFBlocks.dark_leaves, TFBlocks.giant_leaves, TFBlocks.smoker, TFBlocks.fire_jet,
-				TFBlocks.time_leaves, TFBlocks.transformation_leaves, TFBlocks.mining_leaves, TFBlocks.sorting_leaves, TFBlocks.oak_leaves, TFBlocks.canopy_leaves, TFBlocks.mangrove_leaves, TFBlocks.rainboak_leaves, TFBlocks.thorn_leaves, TFBlocks.beanstalk_leaves,
-				TFBlocks.fallen_leaves, TFBlocks.fiddlehead, TFBlocks.potted_fiddlehead, TFBlocks.castle_rune_brick_pink, TFBlocks.castle_rune_brick_blue, TFBlocks.castle_rune_brick_yellow, TFBlocks.castle_rune_brick_purple,
-				TFBlocks.castle_door_yellow, TFBlocks.castle_door_blue, TFBlocks.castle_door_pink, TFBlocks.castle_door_purple, TFBlocks.force_field_pink, TFBlocks.force_field_blue, TFBlocks.force_field_green, TFBlocks.force_field_orange, TFBlocks.force_field_purple, TFBlocks.huge_lilypad,
-				TFBlocks.twilight_portal_miniature_structure, /*TFBlocks.hedge_maze_miniature_structure, TFBlocks.hollow_hill_miniature_structure, TFBlocks.quest_grove_miniature_structure, TFBlocks.mushroom_tower_miniature_structure,*/ TFBlocks.naga_courtyard_miniature_structure, TFBlocks.lich_tower_miniature_structure//, TFBlocks.minotaur_labyrinth_miniature_structure,
-				/*TFBlocks.hydra_lair_miniature_structure, TFBlocks.goblin_stronghold_miniature_structure, TFBlocks.dark_tower_miniature_structure, TFBlocks.yeti_cave_miniature_structure, TFBlocks.aurora_palace_miniature_structure, TFBlocks.troll_cave_cottage_miniature_structure, TFBlocks.final_castle_miniature_structure*/);
+				TFBlocks.AURORA_BLOCK.get(), TFBlocks.AURORA_PILLAR.get(), TFBlocks.AURORA_SLAB.get(), TFBlocks.AURORALIZED_GLASS.get(), TFBlocks.DARK_LEAVES.get(), TFBlocks.GIANT_LEAVES.get(), TFBlocks.SMOKER.get(), TFBlocks.FIRE_JET.get(),
+				TFBlocks.TIME_LEAVES.get(), TFBlocks.TRANSFORMATION_LEAVES.get(), TFBlocks.MINING_LEAVES.get(), TFBlocks.SORTING_LEAVES.get(), TFBlocks.TWILIGHT_OAK_LEAVES.get(), TFBlocks.CANOPY_LEAVES.get(), TFBlocks.MANGROVE_LEAVES.get(), TFBlocks.RAINBOW_OAK_LEAVES.get(), TFBlocks.THORN_LEAVES.get(), TFBlocks.BEANSTALK_LEAVES.get(),
+				TFBlocks.FALLEN_LEAVES.get(), TFBlocks.FIDDLEHEAD.get(), TFBlocks.POTTED_FIDDLEHEAD.get(), TFBlocks.PINK_CASTLE_RUNE_BRICK.get(), TFBlocks.BLUE_CASTLE_RUNE_BRICK.get(), TFBlocks.YELLOW_CASTLE_RUNE_BRICK.get(), TFBlocks.VIOLET_CASTLE_RUNE_BRICK.get(),
+				TFBlocks.YELLOW_CASTLE_DOOR.get(), TFBlocks.BLUE_CASTLE_DOOR.get(), TFBlocks.PINK_CASTLE_DOOR.get(), TFBlocks.VIOLET_CASTLE_DOOR.get(), TFBlocks.PINK_FORCE_FIELD.get(), TFBlocks.BLUE_FORCE_FIELD.get(), TFBlocks.GREEN_FORCE_FIELD.get(), TFBlocks.ORANGE_FORCE_FIELD.get(), TFBlocks.VIOLET_FORCE_FIELD.get(), TFBlocks.HUGE_LILY_PAD.get(),
+				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get(), /*TFBlocks.HEDGE_MAZE_MINIATURE_STRUCTURE.get(), TFBlocks.HOLLOW_HILL_MINIATURE_STRUCTURE.get(), TFBlocks.QUEST_GROVE_MINIATURE_STRUCTURE.get(), TFBlocks.MUSHROOM_TOWER_MINIATURE_STRUCTURE.get(),*/ TFBlocks.NAGA_COURTYARD_MINIATURE_STRUCTURE.get(), TFBlocks.LICH_TOWER_MINIATURE_STRUCTURE.get()//, TFBlocks.MINOTAUR_LABYRINTH_MINIATURE_STRUCTURE.get(),
+				/*TFBlocks.HYDRA_LAIR_MINIATURE_STRUCTURE.get(), TFBlocks.GOBLIN_STRONGHOLD_MINIATURE_STRUCTURE.get(), TFBlocks.DARK_TOWER_MINIATURE_STRUCTURE.get(), TFBlocks.YETI_CAVE_MINIATURE_STRUCTURE.get(), TFBlocks.AURORA_PALACE_MINIATURE_STRUCTURE.get(), TFBlocks.TROLL_CAVE_COTTAGE_MINIATURE_STRUCTURE.get(), TFBlocks.FINAL_CASTLE_MINIATURE_STRUCTURE.get()*/);
 
 		itemColors.register((stack, tintIndex) ->
 				stack.getItem() instanceof ArcticArmorItem
 						? ((ArcticArmorItem) stack.getItem()).getColor(stack, tintIndex)
 						: 0xFFFFFF,
-				TFItems.arctic_helmet, TFItems.arctic_chestplate, TFItems.arctic_leggings, TFItems.arctic_boots);
+				TFItems.ARCTIC_HELMET.get(), TFItems.ARCTIC_CHESTPLATE.get(), TFItems.ARCTIC_LEGGINGS.get(), TFItems.ARCTIC_BOOTS.get());
 
 		itemColors.register((stack, tintIndex) ->
 				tintIndex > 0 ? -1 : PotionUtils.getColor(stack),
-				TFItems.brittle_flask, TFItems.greater_flask);
+				TFItems.BRITTLE_FLASK.get(), TFItems.GREATER_FLASK.get());
 
 		//FIXME IE Compat
 		/*if (ModList.isLoaded("immersiveengineering")) {

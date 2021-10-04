@@ -36,6 +36,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 
 	private final int hillSize;
 	final int radius;
+	final int hdiam;
 
 	public HollowHillComponent(ServerLevel level, CompoundTag nbt) {
 		this(TFFeature.TFHill, nbt);
@@ -45,6 +46,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 		super(piece, nbt);
 		hillSize = nbt.getInt("hillSize");
 		this.radius = ((hillSize * 2 + 1) * 8) - 6;
+		this.hdiam = (hillSize * 2 + 1) * 16;
 	}
 
 	public HollowHillComponent(StructurePieceType piece, TFFeature feature, int i, int size, int x, int y, int z) {
@@ -54,7 +56,8 @@ public class HollowHillComponent extends TFStructureComponentOld {
 
 		// get the size of this hill?
 		this.hillSize = size;
-		radius = ((hillSize * 2 + 1) * 8) - 6;
+		this.radius = ((hillSize * 2 + 1) * 8) - 6;
+		this.hdiam = (hillSize * 2 + 1) * 16;
 
 		// can we determine the size here?
 		this.boundingBox = feature.getComponentToAddBoundingBox(x, y, z, -radius, -(3 + hillSize), -radius, radius * 2, radius / 2, radius * 2, Direction.SOUTH);
@@ -90,7 +93,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 		for (int i = 0; i < stalactiteCount; i++) {
 			BlockPos.MutableBlockPos dest = this.randomFloorCoordinates(rand, this.radius);
 			this.generateBlockSpike(world, STONE_STALAGMITE, dest.getX(), dest.getY(), dest.getZ(), sbb);
-			//this.setBlockStateRotated(world, Blocks.EMERALD_BLOCK.defaultBlockState(), dest.getX(), dest.getY(), dest.getZ(), Rotation.NONE, sbb);
+			//this.setBlockStateRotated(world, Blocks.SCAFFOLDING.defaultBlockState(), dest.getX(), dest.getY(), dest.getZ(), Rotation.NONE, sbb);
 		}
 
 		// Place these important blocks last so they don't get overwritten by generation
@@ -148,7 +151,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 		Random chestRNG = new Random(world.getSeed() + (long) x * z);
 
 		// try placing it
-		placeTreasureAtCurrentPosition(world, x, y, z, this.hillSize == 3 ? TFTreasure.hill3 : (this.hillSize == 2 ? TFTreasure.hill2 : TFTreasure.hill1), sbb);
+		placeTreasureAtCurrentPosition(world, x, y, z, this.hillSize == 3 ? TFTreasure.LARGE_HOLLOW_HILL : (this.hillSize == 2 ? TFTreasure.MEDIUM_HOLLOW_HILL : TFTreasure.SMALL_HOLLOW_HILL), sbb);
 
 		// make something for it to stand on, if necessary
 		placeBlock(world, Blocks.COBBLESTONE.defaultBlockState(), x, y - 1, z, sbb);
@@ -224,19 +227,21 @@ public class HollowHillComponent extends TFStructureComponentOld {
 	BlockPos.MutableBlockPos randomFloorCoordinates(Random rand, float maximumRadius) {
 		float degree = rand.nextFloat() * Mth.TWO_PI;
 		// The full radius isn't actually hollow. Not feeling like doing the math to find the intersections of the curves involved
-		float radius = rand.nextFloat() * (maximumRadius * 0.9f);
+		float radius = rand.nextFloat() * 0.9f * maximumRadius;
 		// Nonetheless the floor-carving curve is one-third the top-level terrain curve
-		float height = (maximumRadius - Mth.sqrt(maximumRadius * maximumRadius - radius * radius)) / 4f;
+		float dist = Mth.sqrt(radius * radius);
+		float height = (this.hillSize * 2) - Mth.cos(dist / this.hdiam * Mth.PI) * (this.hdiam / 20f);
 
-		return new BlockPos.MutableBlockPos(maximumRadius - Mth.cos(degree) * radius, height - 1, maximumRadius - Mth.sin(degree) * radius);
+		return new BlockPos.MutableBlockPos(maximumRadius - Mth.cos(degree) * radius, height, maximumRadius - Mth.sin(degree) * radius);
 	}
 
 	BlockPos.MutableBlockPos randomCeilingCoordinates(Random rand, float maximumRadius) {
 		float degree = rand.nextFloat() * Mth.TWO_PI;
 		// The full radius isn't actually hollow. Not feeling like doing the math to find the intersections of the curves involved
-		float radius = rand.nextFloat() * (maximumRadius * 0.9f);
+		float radius = rand.nextFloat() * 0.9f * maximumRadius;
 		// Nonetheless the floor-carving curve is one-third the top-level terrain curve
-		float height = Mth.sqrt(Mth.square(maximumRadius + 2) - radius * radius) - (maximumRadius / 2);
+		float dist = Mth.sqrt(radius * radius);
+		float height = Mth.cos(dist / this.hdiam * Mth.PI) * (this.hdiam / 4f);
 
 		return new BlockPos.MutableBlockPos(maximumRadius - Mth.cos(degree) * radius, height, maximumRadius - Mth.sin(degree) * radius);
 	}
@@ -277,7 +282,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 			case 1:
 			case 2:
 			default:
-				return TFEntities.swarm_spider;
+				return TFEntities.SWARM_SPIDER;
 			case 3:
 			case 4:
 			case 5:
@@ -288,7 +293,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 			case 8:
 				return EntityType.SILVERFISH;
 			case 9:
-				return TFEntities.redcap;
+				return TFEntities.REDCAP;
 		}
 	}
 
@@ -301,7 +306,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 			case 1:
 			case 2:
 			default:
-				return TFEntities.redcap;
+				return TFEntities.REDCAP;
 			case 3:
 			case 4:
 			case 5:
@@ -310,7 +315,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 			case 7:
 				return EntityType.SKELETON;
 			case 8:
-				return TFEntities.swarm_spider;
+				return TFEntities.SWARM_SPIDER;
 			case 9:
 				return EntityType.CAVE_SPIDER;
 		}
@@ -322,11 +327,11 @@ public class HollowHillComponent extends TFStructureComponentOld {
 	public EntityType<?> getLevel3Mob(Random rand) {
 		switch (rand.nextInt(11)) {
 			case 0:
-				return TFEntities.slime_beetle;
+				return TFEntities.SLIME_BEETLE;
 			case 1:
-				return TFEntities.fire_beetle;
+				return TFEntities.FIRE_BEETLE;
 			case 2:
-				return TFEntities.pinch_beetle;
+				return TFEntities.PINCH_BEETLE;
 			case 3:
 			case 4:
 			case 5:
@@ -339,7 +344,7 @@ public class HollowHillComponent extends TFStructureComponentOld {
 				return EntityType.CREEPER;
 			case 10:
 			default:
-				return TFEntities.wraith;
+				return TFEntities.WRAITH;
 		}
 	}
 }

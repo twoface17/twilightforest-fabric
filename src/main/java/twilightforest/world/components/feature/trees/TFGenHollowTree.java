@@ -413,7 +413,7 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 		world.setBlock(pos.above(), Blocks.SPAWNER.defaultBlockState(), 16 | 2);
 		SpawnerBlockEntity ms = (SpawnerBlockEntity) world.getBlockEntity(pos.above());
 		if (ms != null) {
-			ms.getSpawner().setEntityId(TFEntities.swarm_spider);
+			ms.getSpawner().setEntityId(TFEntities.SWARM_SPIDER);
 		}
 
 		// treasure chests?
@@ -421,8 +421,9 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 	}
 
 	private void makeLeafDungeonChest(WorldGenLevel world, Random random, BlockPos pos) {
-		pos = pos.relative(Direction.Plane.HORIZONTAL.getRandomDirection(random));
-		TFTreasure.tree_cache.generateChest(world, pos.below(), Direction.NORTH, false);
+		Direction chestDir = Direction.Plane.HORIZONTAL.getRandomDirection(random);
+		pos = pos.relative(chestDir, 2);
+		TFTreasure.TREE_CACHE.generateChest(world, pos.below(), chestDir.getOpposite(), false);
 	}
 
 	/**
@@ -452,8 +453,8 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 			facing = Direction.WEST;
 		}
 
-		if (TFBlocks.firefly.defaultBlockState().setValue(DirectionalBlock.FACING, facing).canSurvive(world, src)) {
-			world.setBlock(src, TFBlocks.firefly.defaultBlockState().setValue(DirectionalBlock.FACING, facing), 3);
+		if (TFBlocks.FIREFLY.defaultBlockState().setValue(DirectionalBlock.FACING, facing).canSurvive(world, src)) {
+			world.setBlock(src, TFBlocks.FIREFLY.defaultBlockState().setValue(DirectionalBlock.FACING, facing), 3);
 		}
 	}
 
@@ -473,8 +474,8 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 			facing = Direction.WEST;
 		}
 
-		if (TFBlocks.cicada.defaultBlockState().setValue(DirectionalBlock.FACING, facing).canSurvive(world, src)) {
-			world.setBlock(src, TFBlocks.cicada.defaultBlockState().setValue(DirectionalBlock.FACING, facing), 3);
+		if (TFBlocks.CICADA.defaultBlockState().setValue(DirectionalBlock.FACING, facing).canSurvive(world, src)) {
+			world.setBlock(src, TFBlocks.CICADA.defaultBlockState().setValue(DirectionalBlock.FACING, facing), 3);
 		}
 	}
 }

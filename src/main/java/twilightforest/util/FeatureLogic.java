@@ -50,16 +50,16 @@ public final class FeatureLogic {
         Block block = state.getBlock();
 
         return /*(state.getDestroySpeed() >= 0) // TODO Starting to sound like we should have a generalized no-replace tag list
-                &&*/ block != TFBlocks.stronghold_shield
-                && block != TFBlocks.trophy_pedestal
-                && block != TFBlocks.boss_spawner_naga
-                && block != TFBlocks.boss_spawner_lich
-                && block != TFBlocks.boss_spawner_hydra
-                && block != TFBlocks.boss_spawner_ur_ghast
-                && block != TFBlocks.boss_spawner_knight_phantom
-                && block != TFBlocks.boss_spawner_snow_queen
-                && block != TFBlocks.boss_spawner_minoshroom
-                && block != TFBlocks.boss_spawner_alpha_yeti
+                &&*/ block != TFBlocks.STRONGHOLD_SHIELD
+                && block != TFBlocks.TROPHY_PEDESTAL
+                && block != TFBlocks.NAGA_BOSS_SPAWNER
+                && block != TFBlocks.LICH_BOSS_SPAWNER
+                && block != TFBlocks.HYDRA_BOSS_SPAWNER
+                && block != TFBlocks.UR_GHAST_BOSS_SPAWNER
+                && block != TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER
+                && block != TFBlocks.SNOW_QUEEN_BOSS_SPAWNER
+                && block != TFBlocks.MINOSHROOM_BOSS_SPAWNER
+                && block != TFBlocks.ALPHA_YETI_BOSS_SPAWNER
                 && (state.getMaterial() == Material.GRASS || state.getMaterial() == Material.DIRT || state.getMaterial() == Material.STONE || state.getMaterial() == Material.WATER);
     }
 

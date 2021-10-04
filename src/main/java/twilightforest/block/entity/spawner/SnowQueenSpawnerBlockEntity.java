@@ -10,7 +10,7 @@ import twilightforest.block.entity.TFBlockEntities;
 public class SnowQueenSpawnerBlockEntity extends BossSpawnerBlockEntity<SnowQueen> {
 
 	public SnowQueenSpawnerBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.SNOW_QUEEN_SPAWNER, TFEntities.snow_queen, pos, state);
+		super(TFBlockEntities.SNOW_QUEEN_SPAWNER, TFEntities.SNOW_QUEEN, pos, state);
 	}
 
 	@Override

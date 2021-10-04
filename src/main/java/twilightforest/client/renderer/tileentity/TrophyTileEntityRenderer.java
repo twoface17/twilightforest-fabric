@@ -62,7 +62,7 @@ public class TrophyTileEntityRenderer implements BlockEntityRenderer<TrophyBlock
 		return trophyList.build();
 	}
 
-	public static ItemStack stack = new ItemStack(TFBlocks.naga_trophy);
+	public static ItemStack stack = new ItemStack(TFBlocks.NAGA_TROPHY);
 	@Override
 	public void render(TrophyBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		float f = tileEntityIn.getAnimationProgress(partialTicks);

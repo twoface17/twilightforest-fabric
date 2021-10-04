@@ -377,7 +377,7 @@ public class FinalCastleMazeTower13Component extends TowerWingComponent {
 
 		// what color of tower?
 		FinalCastleMazeTower13Component eTower;
-		if (this.color == TFBlocks.castle_rune_brick_pink.defaultBlockState()) {
+		if (this.color == TFBlocks.PINK_CASTLE_RUNE_BRICK.defaultBlockState()) {
 			eTower = new FinalCastleEntranceTowerComponent(getFeatureType(), rand, this.getGenDepth() + 1, tc.getX(), tc.getY(), tc.getZ(), facing);
 		} else {
 			eTower = new FinalCastleBellTower21Component(getFeatureType(), rand, this.getGenDepth() + 1, tc.getX(), tc.getY(), tc.getZ(), facing);
@@ -513,7 +513,7 @@ public class FinalCastleMazeTower13Component extends TowerWingComponent {
 	public BlockState getGlyphColour() {
 		if (color == null) {
 			TwilightForestMod.LOGGER.warn("Final Castle tower has null for glyph color, this is a bug.");
-			return TFBlocks.castle_rune_brick_blue.defaultBlockState();
+			return TFBlocks.BLUE_CASTLE_RUNE_BRICK.defaultBlockState();
 		} else {
 			return color;
 		}
@@ -596,17 +596,17 @@ public class FinalCastleMazeTower13Component extends TowerWingComponent {
 	}
 
 	public BlockState doorColor() {
-		if (color == TFBlocks.castle_rune_brick_pink.defaultBlockState()) {
-			return TFBlocks.castle_door_pink.defaultBlockState();
+		if (color == TFBlocks.PINK_CASTLE_RUNE_BRICK.defaultBlockState()) {
+			return TFBlocks.PINK_CASTLE_DOOR.defaultBlockState();
 		}
-		if (color == TFBlocks.castle_rune_brick_blue.defaultBlockState()) {
-			return TFBlocks.castle_door_blue.defaultBlockState();
+		if (color == TFBlocks.BLUE_CASTLE_RUNE_BRICK.defaultBlockState()) {
+			return TFBlocks.BLUE_CASTLE_DOOR.defaultBlockState();
 		}
-		if (color == TFBlocks.castle_rune_brick_yellow.defaultBlockState()) {
-			return TFBlocks.castle_door_yellow.defaultBlockState();
+		if (color == TFBlocks.YELLOW_CASTLE_RUNE_BRICK.defaultBlockState()) {
+			return TFBlocks.YELLOW_CASTLE_DOOR.defaultBlockState();
 		}
-		if (color == TFBlocks.castle_rune_brick_purple.defaultBlockState()) {
-			return TFBlocks.castle_door_purple.defaultBlockState();
+		if (color == TFBlocks.VIOLET_CASTLE_RUNE_BRICK.defaultBlockState()) {
+			return TFBlocks.VIOLET_CASTLE_DOOR.defaultBlockState();
 		}
 		TwilightForestMod.LOGGER.warn("Couldn't add door to tower, rune color couldn't be read");
 		return Blocks.AIR.defaultBlockState();

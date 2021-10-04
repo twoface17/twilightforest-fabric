@@ -16,13 +16,13 @@ public class TowerwoodProcessor extends StructurePiece.BlockSelector {
 			float randFloat = random.nextFloat();
 
 			if (randFloat < 0.1F) {
-				this.next = TFBlocks.tower_wood_cracked.defaultBlockState();
+				this.next = TFBlocks.CRACKED_TOWERWOOD.defaultBlockState();
 			} else if (randFloat < 0.2F) {
-				this.next = TFBlocks.tower_wood_mossy.defaultBlockState();
+				this.next = TFBlocks.MOSSY_TOWERWOOD.defaultBlockState();
 			} else if (randFloat < 0.225F) {
-				this.next = TFBlocks.tower_wood_infested.defaultBlockState();
+				this.next = TFBlocks.INFESTED_TOWERWOOD.defaultBlockState();
 			} else {
-				this.next = TFBlocks.tower_wood.defaultBlockState();
+				this.next = TFBlocks.TOWERWOOD.defaultBlockState();
 			}
 		}
 	}

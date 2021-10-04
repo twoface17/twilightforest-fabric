@@ -3,6 +3,9 @@ package twilightforest.client.model;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
+import net.minecraft.client.model.*;
+import net.minecraft.client.model.geom.LayerDefinitions;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.armor.*;
 import twilightforest.client.model.entity.*;
 import twilightforest.client.model.entity.legacy.*;
@@ -141,6 +144,7 @@ public class TFLayerDefinitions {
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SNOW_QUEEN, SnowQueenLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SQUIRREL, SquirrelLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_TINY_BIRD, TinyBirdLegacyModel::create);
+		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_TROLL, TrollLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_UPPER_GOBLIN_KNIGHT, UpperGoblinKnightLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_UR_GHAST, UrGhastLegacyModel::create);
 

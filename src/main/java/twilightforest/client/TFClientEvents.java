@@ -70,14 +70,14 @@ public class TFClientEvents {
 	}
 
 	public static void modelBake(Map<ResourceLocation, BakedModel> event) {
-		fullbrightItem(event, TFItems.fiery_ingot);
-		fullbrightItem(event, TFItems.fiery_boots);
-		fullbrightItem(event, TFItems.fiery_chestplate);
-		fullbrightItem(event, TFItems.fiery_helmet);
-		fullbrightItem(event, TFItems.fiery_leggings);
-		fullbrightItem(event, TFItems.fiery_pickaxe);
-		fullbrightItem(event, TFItems.fiery_sword);
-		fullbright(event, Registry.BLOCK.getKey(TFBlocks.fiery_block), "");
+		fullbrightItem(event, TFItems.FIERY_INGOT);
+		fullbrightItem(event, TFItems.FIERY_BOOTS);
+		fullbrightItem(event, TFItems.FIERY_CHESTPLATE);
+		fullbrightItem(event, TFItems.FIERY_HELMET);
+		fullbrightItem(event, TFItems.FIERY_LEGGINGS);
+		fullbrightItem(event, TFItems.FIERY_PICKAXE);
+		fullbrightItem(event, TFItems.FIERY_SWORD);
+		fullbright(event, Registry.BLOCK.getKey(TFBlocks.FIERY_BLOCK), "");
 	}
 
 	private static void fullbrightItem(Map<ResourceLocation, BakedModel> event, Item item) {

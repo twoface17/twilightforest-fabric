@@ -89,9 +89,9 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
-		setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.knightmetal_sword));
-		setItemSlot(EquipmentSlot.CHEST, new ItemStack(TFItems.phantom_chestplate));
-		setItemSlot(EquipmentSlot.HEAD, new ItemStack(TFItems.phantom_helmet));
+		setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
+		setItemSlot(EquipmentSlot.CHEST, new ItemStack(TFItems.PHANTOM_CHESTPLATE));
+		setItemSlot(EquipmentSlot.HEAD, new ItemStack(TFItems.PHANTOM_HELMET));
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (hasHome() && getNumber() == 0) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.boss_spawner_knight_phantom.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.defaultBlockState());
 			}
 			discard();
 		} else {
@@ -157,7 +157,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 		if (isChargingAtPlayer()) {
 			// make particles
 			for (int i = 0; i < 4; ++i) {
-				Item particleID = random.nextBoolean() ? TFItems.phantom_helmet : TFItems.knightmetal_sword;
+				Item particleID = random.nextBoolean() ? TFItems.PHANTOM_HELMET : TFItems.KNIGHTMETAL_SWORD;
 
 				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(particleID)), getX() + (random.nextFloat() - 0.5D) * getBbWidth(), getY() + random.nextFloat() * (getBbHeight() - 0.75D) + 0.5D, getZ() + (random.nextFloat() - 0.5D) * getBbWidth(), 0, -0.1, 0);
 				level.addParticle(ParticleTypes.SMOKE, getX() + (random.nextFloat() - 0.5D) * getBbWidth(), getY() + random.nextFloat() * (getBbHeight() - 0.75D) + 0.5D, getZ() + (random.nextFloat() - 0.5D) * getBbWidth(), 0, 0.1, 0);
@@ -187,7 +187,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 			BlockPos treasurePos = hasHome() ? getRestrictCenter().below() : new BlockPos(this.blockPosition());
 
 			// make treasure for killing the last knight
-			TFTreasure.stronghold_boss.generateChest(serverLevel, treasurePos, Direction.NORTH, false);
+			TFTreasure.STRONGHOLD_BOSS.generateChest(serverLevel, treasurePos, Direction.NORTH, false);
 
 			// mark the stronghold as defeated
 			TFGenerationSettings.markStructureConquered(level, treasurePos, TFFeature.KNIGHT_STRONGHOLD);
@@ -370,15 +370,15 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 	}
 
 	public boolean isSwordKnight() {
-		return getMainHandItem().getItem() == TFItems.knightmetal_sword;
+		return getMainHandItem().getItem() == TFItems.KNIGHTMETAL_SWORD;
 	}
 
 	public boolean isAxeKnight() {
-		return getMainHandItem().getItem() == TFItems.knightmetal_axe;
+		return getMainHandItem().getItem() == TFItems.KNIGHTMETAL_AXE;
 	}
 
 	public boolean isPickKnight() {
-		return getMainHandItem().getItem() == TFItems.knightmetal_pickaxe;
+		return getMainHandItem().getItem() == TFItems.KNIGHTMETAL_PICKAXE;
 	}
 
 	public int getNumber() {
@@ -391,13 +391,13 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 		// set weapon per number
 		switch (number % 3) {
 			case 0:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.knightmetal_sword));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
 				break;
 			case 1:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.knightmetal_axe));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE));
 				break;
 			case 2:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.knightmetal_pickaxe));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE));
 				break;
 		}
 	}

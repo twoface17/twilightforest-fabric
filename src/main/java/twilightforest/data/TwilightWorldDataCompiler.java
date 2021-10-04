@@ -159,7 +159,7 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.DIMENSION_TYPE_REGISTRY), ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(TFConstants.ID, "forest_type")), () -> twilightType);
 
 		return ImmutableMap.of(
-				TFConstants.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true))//,
+				TFConstants.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true, Optional.of(12)))//,
 				//TwilightForestMod.prefix("skylight_forest"), new LevelStem(() -> twilightType, skyChunkGen)
 				// TODO add *actual* twilightforest:void world without islands
 		);

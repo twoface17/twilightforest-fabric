@@ -2,6 +2,7 @@ package twilightforest.world.components.structures.finalcastle;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.NoiseEffect;
 import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.material.Material;
@@ -167,8 +168,8 @@ public class FinalCastleDungeonRoom31Component extends TowerWingComponent {
 
 		this.fillWithAir(world, sbb, 0, 0, 0, this.size - 1, this.height - 1, this.size - 1, state -> state.getMaterial() == Material.STONE);
 
-		BlockState floor = TFBlocks.castle_brick.defaultBlockState();
-		BlockState border = TFBlocks.castle_brick_frame.defaultBlockState();
+		BlockState floor = TFBlocks.CASTLE_BRICK.defaultBlockState();
+		BlockState border = TFBlocks.THICK_CASTLE_BRICK.defaultBlockState();
 
 		Predicate<BlockState> replacing = state -> {
 			Material material = state.getMaterial();
@@ -203,15 +204,20 @@ public class FinalCastleDungeonRoom31Component extends TowerWingComponent {
 			biome == TFBiomes.highlandsCenter || biome == TFBiomes.thornlands*/;
 
 	protected BlockState getRuneColor(BlockState forceFieldColor) {
-		return forceFieldColor == TFBlocks.force_field_blue.defaultBlockState() ? TFBlocks.castle_rune_brick_blue.defaultBlockState() : TFBlocks.castle_rune_brick_yellow.defaultBlockState();
+		return forceFieldColor == TFBlocks.BLUE_FORCE_FIELD.defaultBlockState() ? TFBlocks.BLUE_CASTLE_RUNE_BRICK.defaultBlockState() : TFBlocks.YELLOW_CASTLE_RUNE_BRICK.defaultBlockState();
 	}
 
 	protected BlockState getForceFieldColor(Random decoRNG) {
 		int i = decoRNG.nextInt(2) + 3;
 
 		if (i == 3)
-			return TFBlocks.force_field_green.defaultBlockState();
+			return TFBlocks.GREEN_FORCE_FIELD.defaultBlockState();
 		else
-			return TFBlocks.force_field_blue.defaultBlockState();
+			return TFBlocks.BLUE_FORCE_FIELD.defaultBlockState();
+	}
+
+	@Override
+	public NoiseEffect getNoiseEffect() {
+		return NoiseEffect.BURY;
 	}
 }

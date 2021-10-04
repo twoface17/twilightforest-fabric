@@ -34,10 +34,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import twilightforest.TFConstants;
+import net.minecraftforge.items.ItemHandlerHelper;
+import twilightforest.TwilightForestMod;
 import twilightforest.item.TFItems;
 
 import java.util.Random;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Experiment115Block extends Block {
 
@@ -79,7 +82,7 @@ public class Experiment115Block extends Block {
 		ItemStack stack = player.getItemInHand(hand);
 
 		if (!player.isShiftKeyDown()) {
-			if (bitesTaken > 0 && stack.getItem() == TFItems.experiment_115) {
+			if (bitesTaken > 0 && stack.getItem() == TFItems.EXPERIMENT_115.get()) {
 				worldIn.setBlockAndUpdate(pos, state.setValue(BITES_TAKEN, bitesTaken - 1));
 				if (!player.isCreative()) stack.shrink(1);
 				if (player instanceof ServerPlayer) CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, stack);
@@ -93,7 +96,7 @@ public class Experiment115Block extends Block {
 					//fallback if the advancement criteria doesnt work since its inconsistent
 					PlayerAdvancements advancements = ((ServerPlayer) player).getAdvancements();
 					ServerAdvancementManager manager = ((ServerLevel)player.getCommandSenderWorld()).getServer().getAdvancements();
-					Advancement advancement = manager.getAdvancement(TFConstants.prefix("experiment_115_self_replenishing"));
+					Advancement advancement = manager.getAdvancement(TwilightForestMod.prefix("experiment_115_self_replenishing"));
 					if(advancement != null) {
 						advancements.award(advancement, "place_complete_e115");
 					}
@@ -107,7 +110,7 @@ public class Experiment115Block extends Block {
 				} else {
 					worldIn.removeBlock(pos, false);
 				}
-				if(!player.isCreative()) player.getInventory().add(new ItemStack(TFItems.experiment_115));
+				if(!player.isCreative()) ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(TFItems.EXPERIMENT_115.get()));
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -129,8 +132,8 @@ public class Experiment115Block extends Block {
             }
 
             if (player instanceof ServerPlayer) {
-				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, new ItemStack(TFItems.experiment_115, 8 - i));
-				player.awardStat(Stats.ITEM_USED.get(TFItems.experiment_115));
+				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, new ItemStack(TFItems.EXPERIMENT_115.get(), 8 - i));
+				player.awardStat(Stats.ITEM_USED.get(TFItems.EXPERIMENT_115.get()));
 			}
 
             return InteractionResult.SUCCESS;

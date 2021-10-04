@@ -230,7 +230,7 @@ public class AntibuilderBlockEntity extends BlockEntity {
 		} else if (this.rand.nextInt(REVERT_CHANCE) == 0) {
 			// don't revert everything instantly
 			if (!replaceWith.isAir()) {
-				replaceWith = TFBlocks.antibuilt_block.defaultBlockState();
+				replaceWith = TFBlocks.ANTIBUILT_BLOCK.defaultBlockState();
 			}
 
 			if (stateThere.isAir()) {
