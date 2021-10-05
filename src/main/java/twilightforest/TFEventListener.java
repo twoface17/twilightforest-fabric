@@ -308,6 +308,9 @@ public class TFEventListener {
 							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_WALL_SKULL_CANDLE);
 							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_SKULL_CANDLE);
 						}
+						default -> {
+							return;
+						}
 					}
 					if(!player.getAbilities().instabuild) stack.shrink(1);
 					player.swing(hand);
