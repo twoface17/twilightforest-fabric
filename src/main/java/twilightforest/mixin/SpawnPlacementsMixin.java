@@ -45,7 +45,7 @@ public class SpawnPlacementsMixin {
                 BlockState state = world.getBlockState(pos.below());
                 Block block = state.getBlock();
                 BlockPos up = pos.above();
-                return (block == TFBlocks.wispy_cloud || block == TFBlocks.wispy_cloud) && block != Blocks.BEDROCK && block != Blocks.BARRIER && NaturalSpawner.isValidEmptySpawnBlock(world, pos, world.getBlockState(pos), world.getFluidState(pos), entityType) && NaturalSpawner.isValidEmptySpawnBlock(world, up, world.getBlockState(up), world.getFluidState(up), entityType);
+                return (block == TFBlocks.WISPY_CLOUD || block == TFBlocks.WISPY_CLOUD) && block != Blocks.BEDROCK && block != Blocks.BARRIER && NaturalSpawner.isValidEmptySpawnBlock(world, pos, world.getBlockState(pos), world.getFluidState(pos), entityType) && NaturalSpawner.isValidEmptySpawnBlock(world, up, world.getBlockState(up), world.getFluidState(up), entityType);
             };
         } else if(enumName.equals("CLOUD_DWELLERS")) {
             canSpawn = (world, pos, entityType) -> {

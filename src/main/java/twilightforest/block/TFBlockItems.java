@@ -1,5 +1,6 @@
 package twilightforest.block;
 
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -8,10 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import twilightforest.TFConstants;
 import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
-
-import static twilightforest.TwilightForestMod.creativeTab;
-import java.util.Objects;
-import java.util.function.Consumer;
+import static twilightforest.item.TFItems.creativeTab;
 
 public class TFBlockItems {
 
@@ -52,134 +50,134 @@ public class TFBlockItems {
 		blockItem(TFBlocks.SNOW_QUEEN_BOSS_SPAWNER);
 		blockItem(TFBlocks.FINAL_BOSS_BOSS_SPAWNER);
 
-		blockItem(TFBlocks.ETCHED_NAGASTONE));
-		blockItem(TFBlocks.CRACKED_ETCHED_NAGASTONE));
-		blockItem(TFBlocks.MOSSY_ETCHED_NAGASTONE));
-		blockItem(TFBlocks.NAGASTONE_PILLAR));
-		blockItem(TFBlocks.CRACKED_NAGASTONE_PILLAR));
-		blockItem(TFBlocks.MOSSY_NAGASTONE_PILLAR));
-		blockItem(TFBlocks.NAGASTONE_STAIRS_LEFT));
-		blockItem(TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT));
-		blockItem(TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT));
-		blockItem(TFBlocks.NAGASTONE_STAIRS_RIGHT));
-		blockItem(TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT));
-		blockItem(TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT));
-		blockItem(TFBlocks.NAGASTONE_HEAD));
-		blockItem(TFBlocks.NAGASTONE));
-		blockItem(TFBlocks.SPIRAL_BRICKS));
-//      blockItem(TFBlocks.TERRORCOTTA_CIRCLE));
-//      blockItem(TFBlocks.TERRORCOTTA_DIAGONAL));
-//      blockItem(TFBlocks.LAPIS_BLOCK));
-		blockItem(TFBlocks.TWISTED_STONE));
-		blockItem(TFBlocks.TWISTED_STONE_PILLAR));
-		makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET.get(), TFItems.defaultBuilder()) {
-			@Override
-			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-				consumer.accept(new IItemRenderProperties() {
-					@Override
-					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-						return new ISTER(TFBlockEntities.KEEPSAKE_CASKET.getId());
-					}
-				});
-			}
-		}, TFBlocks.KEEPSAKE_CASKET));
-		blockItem(TFBlocks.CANDELABRA));
-		blockItem(TFBlocks.BOLD_STONE_PILLAR));
-		blockItem(TFBlocks.DEATH_TOME_SPAWNER));
-		blockItem(TFBlocks.EMPTY_CANOPY_BOOKSHELF));
-		skullCandleItem(TFBlocks.ZOMBIE_SKULL_CANDLE, TFBlocks.ZOMBIE_WALL_SKULL_CANDLE));
-		skullCandleItem(TFBlocks.SKELETON_SKULL_CANDLE, TFBlocks.SKELETON_WALL_SKULL_CANDLE));
-		skullCandleItem(TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE));
-		skullCandleItem(TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.CREEPER_WALL_SKULL_CANDLE));
-		skullCandleItem(TFBlocks.PLAYER_SKULL_CANDLE, TFBlocks.PLAYER_WALL_SKULL_CANDLE));
-		makeBlockItem(new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_WATER_LILY));
-		makeBlockItem(new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_LILY_PAD));
-		blockItem(TFBlocks.MAZESTONE));
-		blockItem(TFBlocks.MAZESTONE_BRICK));
-		blockItem(TFBlocks.CRACKED_MAZESTONE));
-		blockItem(TFBlocks.MOSSY_MAZESTONE));
-		blockItem(TFBlocks.DECORATIVE_MAZESTONE));
-		blockItem(TFBlocks.CUT_MAZESTONE));
-		blockItem(TFBlocks.MAZESTONE_BORDER));
-		blockItem(TFBlocks.MAZESTONE_MOSAIC));
-		blockItem(TFBlocks.SMOKER));
-		blockItem(TFBlocks.ENCASED_SMOKER));
-		blockItem(TFBlocks.FIRE_JET));
-		blockItem(TFBlocks.ENCASED_FIRE_JET));
-		blockItem(TFBlocks.STRONGHOLD_SHIELD));
-		blockItem(TFBlocks.TROPHY_PEDESTAL));
-		blockItem(TFBlocks.UNDERBRICK));
-		blockItem(TFBlocks.CRACKED_UNDERBRICK));
-		blockItem(TFBlocks.MOSSY_UNDERBRICK));
-		blockItem(TFBlocks.UNDERBRICK_FLOOR));
-		blockItem(TFBlocks.TOWERWOOD));
-		blockItem(TFBlocks.CRACKED_TOWERWOOD));
-		blockItem(TFBlocks.MOSSY_TOWERWOOD));
-		blockItem(TFBlocks.INFESTED_TOWERWOOD));
-		blockItem(TFBlocks.ENCASED_TOWERWOOD));
-		blockItem(TFBlocks.VANISHING_BLOCK));
-		blockItem(TFBlocks.REAPPEARING_BLOCK));
-		blockItem(TFBlocks.LOCKED_VANISHING_BLOCK));
-		blockItem(TFBlocks.CARMINITE_BUILDER));
-		blockItem(TFBlocks.ANTIBUILDER));
-		blockItem(TFBlocks.CARMINITE_REACTOR));
-		blockItem(TFBlocks.GHAST_TRAP));
-		blockItem(TFBlocks.AURORA_BLOCK));
-		blockItem(TFBlocks.AURORA_PILLAR));
-		blockItem(TFBlocks.AURORA_SLAB));
-		blockItem(TFBlocks.AURORALIZED_GLASS));
-		blockItem(TFBlocks.TROLLSTEINN));
-		blockItem(TFBlocks.TROLLVIDR));
-		blockItem(TFBlocks.UNRIPE_TROLLBER));
-		blockItem(TFBlocks.TROLLBER));
-		blockItem(TFBlocks.HUGE_MUSHGLOOM));
-		blockItem(TFBlocks.HUGE_MUSHGLOOM_STEM));
-		blockItem(TFBlocks.UBEROUS_SOIL));
-		blockItem(TFBlocks.HUGE_STALK));
-		blockItem(TFBlocks.BEANSTALK_LEAVES));
-		blockItem(TFBlocks.WISPY_CLOUD));
-		blockItem(TFBlocks.FLUFFY_CLOUD));
-		blockItem(TFBlocks.GIANT_COBBLESTONE));
-		blockItem(TFBlocks.GIANT_LOG));
-		blockItem(TFBlocks.GIANT_LEAVES));
-		blockItem(TFBlocks.GIANT_OBSIDIAN));
-		blockItem(TFBlocks.DEADROCK));
-		blockItem(TFBlocks.CRACKED_DEADROCK));
-		blockItem(TFBlocks.WEATHERED_DEADROCK));
-		blockItem(TFBlocks.BROWN_THORNS));
-		blockItem(TFBlocks.GREEN_THORNS));
-		blockItem(TFBlocks.BURNT_THORNS));
-		blockItem(TFBlocks.THORN_ROSE));
-		blockItem(TFBlocks.THORN_LEAVES));
-		blockItem(TFBlocks.CASTLE_BRICK));
-		blockItem(TFBlocks.WORN_CASTLE_BRICK));
-		blockItem(TFBlocks.CRACKED_CASTLE_BRICK));
-		blockItem(TFBlocks.MOSSY_CASTLE_BRICK));
-		blockItem(TFBlocks.THICK_CASTLE_BRICK));
-		blockItem(TFBlocks.CASTLE_ROOF_TILE));
-		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR));
-		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_TILE));
-		blockItem(TFBlocks.BOLD_CASTLE_BRICK_PILLAR));
-		blockItem(TFBlocks.BOLD_CASTLE_BRICK_TILE));
-		blockItem(TFBlocks.CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.WORN_CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.CRACKED_CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.MOSSY_CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.BOLD_CASTLE_BRICK_STAIRS));
-		blockItem(TFBlocks.PINK_CASTLE_RUNE_BRICK));
-		blockItem(TFBlocks.YELLOW_CASTLE_RUNE_BRICK));
-		blockItem(TFBlocks.BLUE_CASTLE_RUNE_BRICK));
-		blockItem(TFBlocks.VIOLET_CASTLE_RUNE_BRICK));
-		blockItem(TFBlocks.PINK_CASTLE_DOOR));
-		blockItem(TFBlocks.YELLOW_CASTLE_DOOR));
-		blockItem(TFBlocks.BLUE_CASTLE_DOOR));
-		blockItem(TFBlocks.VIOLET_CASTLE_DOOR));
-		blockItem(TFBlocks.PINK_FORCE_FIELD));
-		blockItem(TFBlocks.ORANGE_FORCE_FIELD));
-		blockItem(TFBlocks.GREEN_FORCE_FIELD));
-		blockItem(TFBlocks.BLUE_FORCE_FIELD));
-		blockItem(TFBlocks.VIOLET_FORCE_FIELD));
+		blockItem(TFBlocks.ETCHED_NAGASTONE);
+		blockItem(TFBlocks.CRACKED_ETCHED_NAGASTONE);
+		blockItem(TFBlocks.MOSSY_ETCHED_NAGASTONE);
+		blockItem(TFBlocks.NAGASTONE_PILLAR);
+		blockItem(TFBlocks.CRACKED_NAGASTONE_PILLAR);
+		blockItem(TFBlocks.MOSSY_NAGASTONE_PILLAR);
+		blockItem(TFBlocks.NAGASTONE_STAIRS_LEFT);
+		blockItem(TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT);
+		blockItem(TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT);
+		blockItem(TFBlocks.NAGASTONE_STAIRS_RIGHT);
+		blockItem(TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT);
+		blockItem(TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT);
+		blockItem(TFBlocks.NAGASTONE_HEAD);
+		blockItem(TFBlocks.NAGASTONE);
+		blockItem(TFBlocks.SPIRAL_BRICKS);
+//      blockItem(TFBlocks.TERRORCOTTA_CIRCLE);
+//      blockItem(TFBlocks.TERRORCOTTA_DIAGONAL);
+//      blockItem(TFBlocks.LAPIS_BLOCK);
+		blockItem(TFBlocks.TWISTED_STONE);
+		blockItem(TFBlocks.TWISTED_STONE_PILLAR);
+		makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET, TFItems.defaultBuilder()) {
+//			@Override
+//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+//				consumer.accept(new IItemRenderProperties() {
+//					@Override
+//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+//						return new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.KEEPSAKE_CASKET);
+//					}
+//				});
+//			}
+		}, TFBlocks.KEEPSAKE_CASKET);
+		blockItem(TFBlocks.CANDELABRA);
+		blockItem(TFBlocks.BOLD_STONE_PILLAR);
+		blockItem(TFBlocks.DEATH_TOME_SPAWNER);
+		blockItem(TFBlocks.EMPTY_CANOPY_BOOKSHELF);
+		skullCandleItem(TFBlocks.ZOMBIE_SKULL_CANDLE, TFBlocks.ZOMBIE_WALL_SKULL_CANDLE);
+		skullCandleItem(TFBlocks.SKELETON_SKULL_CANDLE, TFBlocks.SKELETON_WALL_SKULL_CANDLE);
+		skullCandleItem(TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE);
+		skullCandleItem(TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.CREEPER_WALL_SKULL_CANDLE);
+		skullCandleItem(TFBlocks.PLAYER_SKULL_CANDLE, TFBlocks.PLAYER_WALL_SKULL_CANDLE);
+		makeBlockItem(new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY, TFItems.defaultBuilder()), TFBlocks.HUGE_WATER_LILY);
+		makeBlockItem(new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD, TFItems.defaultBuilder()), TFBlocks.HUGE_LILY_PAD);
+		blockItem(TFBlocks.MAZESTONE);
+		blockItem(TFBlocks.MAZESTONE_BRICK);
+		blockItem(TFBlocks.CRACKED_MAZESTONE);
+		blockItem(TFBlocks.MOSSY_MAZESTONE);
+		blockItem(TFBlocks.DECORATIVE_MAZESTONE);
+		blockItem(TFBlocks.CUT_MAZESTONE);
+		blockItem(TFBlocks.MAZESTONE_BORDER);
+		blockItem(TFBlocks.MAZESTONE_MOSAIC);
+		blockItem(TFBlocks.SMOKER);
+		blockItem(TFBlocks.ENCASED_SMOKER);
+		blockItem(TFBlocks.FIRE_JET);
+		blockItem(TFBlocks.ENCASED_FIRE_JET);
+		blockItem(TFBlocks.STRONGHOLD_SHIELD);
+		blockItem(TFBlocks.TROPHY_PEDESTAL);
+		blockItem(TFBlocks.UNDERBRICK);
+		blockItem(TFBlocks.CRACKED_UNDERBRICK);
+		blockItem(TFBlocks.MOSSY_UNDERBRICK);
+		blockItem(TFBlocks.UNDERBRICK_FLOOR);
+		blockItem(TFBlocks.TOWERWOOD);
+		blockItem(TFBlocks.CRACKED_TOWERWOOD);
+		blockItem(TFBlocks.MOSSY_TOWERWOOD);
+		blockItem(TFBlocks.INFESTED_TOWERWOOD);
+		blockItem(TFBlocks.ENCASED_TOWERWOOD);
+		blockItem(TFBlocks.VANISHING_BLOCK);
+		blockItem(TFBlocks.REAPPEARING_BLOCK);
+		blockItem(TFBlocks.LOCKED_VANISHING_BLOCK);
+		blockItem(TFBlocks.CARMINITE_BUILDER);
+		blockItem(TFBlocks.ANTIBUILDER);
+		blockItem(TFBlocks.CARMINITE_REACTOR);
+		blockItem(TFBlocks.GHAST_TRAP);
+		blockItem(TFBlocks.AURORA_BLOCK);
+		blockItem(TFBlocks.AURORA_PILLAR);
+		blockItem(TFBlocks.AURORA_SLAB);
+		blockItem(TFBlocks.AURORALIZED_GLASS);
+		blockItem(TFBlocks.TROLLSTEINN);
+		blockItem(TFBlocks.TROLLVIDR);
+		blockItem(TFBlocks.UNRIPE_TROLLBER);
+		blockItem(TFBlocks.TROLLBER);
+		blockItem(TFBlocks.HUGE_MUSHGLOOM);
+		blockItem(TFBlocks.HUGE_MUSHGLOOM_STEM);
+		blockItem(TFBlocks.UBEROUS_SOIL);
+		blockItem(TFBlocks.HUGE_STALK);
+		blockItem(TFBlocks.BEANSTALK_LEAVES);
+		blockItem(TFBlocks.WISPY_CLOUD);
+		blockItem(TFBlocks.FLUFFY_CLOUD);
+		blockItem(TFBlocks.GIANT_COBBLESTONE);
+		blockItem(TFBlocks.GIANT_LOG);
+		blockItem(TFBlocks.GIANT_LEAVES);
+		blockItem(TFBlocks.GIANT_OBSIDIAN);
+		blockItem(TFBlocks.DEADROCK);
+		blockItem(TFBlocks.CRACKED_DEADROCK);
+		blockItem(TFBlocks.WEATHERED_DEADROCK);
+		blockItem(TFBlocks.BROWN_THORNS);
+		blockItem(TFBlocks.GREEN_THORNS);
+		blockItem(TFBlocks.BURNT_THORNS);
+		blockItem(TFBlocks.THORN_ROSE);
+		blockItem(TFBlocks.THORN_LEAVES);
+		blockItem(TFBlocks.CASTLE_BRICK);
+		blockItem(TFBlocks.WORN_CASTLE_BRICK);
+		blockItem(TFBlocks.CRACKED_CASTLE_BRICK);
+		blockItem(TFBlocks.MOSSY_CASTLE_BRICK);
+		blockItem(TFBlocks.THICK_CASTLE_BRICK);
+		blockItem(TFBlocks.CASTLE_ROOF_TILE);
+		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR);
+		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_TILE);
+		blockItem(TFBlocks.BOLD_CASTLE_BRICK_PILLAR);
+		blockItem(TFBlocks.BOLD_CASTLE_BRICK_TILE);
+		blockItem(TFBlocks.CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.WORN_CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.CRACKED_CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.MOSSY_CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.ENCASED_CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.BOLD_CASTLE_BRICK_STAIRS);
+		blockItem(TFBlocks.PINK_CASTLE_RUNE_BRICK);
+		blockItem(TFBlocks.YELLOW_CASTLE_RUNE_BRICK);
+		blockItem(TFBlocks.BLUE_CASTLE_RUNE_BRICK);
+		blockItem(TFBlocks.VIOLET_CASTLE_RUNE_BRICK);
+		blockItem(TFBlocks.PINK_CASTLE_DOOR);
+		blockItem(TFBlocks.YELLOW_CASTLE_DOOR);
+		blockItem(TFBlocks.BLUE_CASTLE_DOOR);
+		blockItem(TFBlocks.VIOLET_CASTLE_DOOR);
+		blockItem(TFBlocks.PINK_FORCE_FIELD);
+		blockItem(TFBlocks.ORANGE_FORCE_FIELD);
+		blockItem(TFBlocks.GREEN_FORCE_FIELD);
+		blockItem(TFBlocks.BLUE_FORCE_FIELD);
+		blockItem(TFBlocks.VIOLET_FORCE_FIELD);
 
 		blockItem(TFBlocks.UNCRAFTING_TABLE);
 		blockItem(TFBlocks.CINDER_FURNACE);
@@ -385,7 +383,7 @@ public class TFBlockItems {
 //				consumer.accept(new IItemRenderProperties() {
 //					@Override
 //					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId());
+//						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId();
 //					}
 //				});
 //			}

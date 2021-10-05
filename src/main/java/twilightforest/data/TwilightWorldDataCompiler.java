@@ -25,6 +25,7 @@ import net.minecraft.world.level.levelgen.NoiseSettings;
 import net.minecraft.world.level.levelgen.NoiseSamplingSettings;
 import net.minecraft.world.level.levelgen.NoiseSlideSettings;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.TFBiomeProvider;
 import twilightforest.world.components.chunkgenerators.ChunkGeneratorTwilight;
 import twilightforest.world.registration.ConfiguredWorldCarvers;
@@ -120,8 +121,8 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 		);
 
 		// Register the dimension noise settings in the local datagen registry.
-		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY), ResourceKey.create(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY, TFConstants.prefix("forest_noise_config")), () -> forestDimensionSettings);
-		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY), ResourceKey.create(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY, TFConstants.prefix("sky_noise_config")), () -> skyDimensionSettings);
+		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY), ResourceKey.create(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY, TwilightForestMod.prefix("forest_noise_config")), () -> forestDimensionSettings);
+		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY), ResourceKey.create(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY, TwilightForestMod.prefix("sky_noise_config")), () -> skyDimensionSettings);
 
 		//TFDimensions.init();
 
@@ -151,7 +152,7 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 				32+256, // Logical Height
 				FuzzyOffsetBiomeZoomer.INSTANCE,
 				new ResourceLocation("infiniburn_overworld"),
-				TFConstants.prefix("renderer"), // DimensionRenderInfo
+				TwilightForestMod.prefix("renderer"), // DimensionRenderInfo
 				0f // Wish this could be set to -0.05 since it'll make the world truly blacked out if an area is not sky-lit (see: Dark Forests) Sadly this also messes up night vision so it gets 0
 		);
 
@@ -159,7 +160,7 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.DIMENSION_TYPE_REGISTRY), ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(TFConstants.ID, "forest_type")), () -> twilightType);
 
 		return ImmutableMap.of(
-				TFConstants.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true, Optional.of(12)))//,
+				TwilightForestMod.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true, Optional.of(12)))//,
 				//TwilightForestMod.prefix("skylight_forest"), new LevelStem(() -> twilightType, skyChunkGen)
 				// TODO add *actual* twilightforest:void world without islands
 		);

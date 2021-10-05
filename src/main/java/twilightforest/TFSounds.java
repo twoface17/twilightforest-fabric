@@ -275,7 +275,7 @@ public final class TFSounds {
 	public static final SoundEvent MUSIC_DISC_MOTION = createEvent("music_disc.twilightforest.motion");
 
 	private static SoundEvent createEvent(String sound) {
-		ResourceLocation name = TFConstants.prefix(sound);
+		ResourceLocation name = TwilightForestMod.prefix(sound);
 		return Registry.register(Registry.SOUND_EVENT, name, new SoundEvent(name));
 	}
 

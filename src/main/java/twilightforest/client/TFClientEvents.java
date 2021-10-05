@@ -9,6 +9,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import twilightforest.TFConstants;
 import twilightforest.TFEventListener;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.client.model.item.FullbrightBakedModel;
 import twilightforest.client.renderer.entity.ShieldLayer;
@@ -61,12 +62,12 @@ public class TFClientEvents {
 
 	public static void registerModels() {
 		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(ShieldLayer.LOC));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TFConstants.prefix("trophy"), "inventory")));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TFConstants.prefix("trophy_minor"), "inventory")));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TFConstants.prefix("trophy_quest"), "inventory")));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TFConstants.prefix("block/casket_obsidian")));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TFConstants.prefix("block/casket_stone")));
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TFConstants.prefix("block/casket_basalt")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TwilightForestMod.prefix("trophy"), "inventory")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TwilightForestMod.prefix("trophy_minor"), "inventory")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(new ModelResourceLocation(TwilightForestMod.prefix("trophy_quest"), "inventory")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TwilightForestMod.prefix("block/casket_obsidian")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TwilightForestMod.prefix("block/casket_stone")));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((resourceManger, consumer) -> consumer.accept(TwilightForestMod.prefix("block/casket_basalt")));
 	}
 
 	public static void modelBake(Map<ResourceLocation, BakedModel> event) {
@@ -158,7 +159,7 @@ public class TFClientEvents {
 		sineTicker = sineTicker + partial;
 
 		BugModelAnimationHelper.animate();
-		DimensionSpecialEffects info = DimensionSpecialEffects.EFFECTS.get(TFConstants.prefix("renderer"));
+		DimensionSpecialEffects info = DimensionSpecialEffects.EFFECTS.get(TwilightForestMod.prefix("renderer"));
 
 		// add weather box if needed
 		if (!mc.isPaused() && mc.level != null && info instanceof TwilightForestRenderInfo twilightForestRenderInfo) {

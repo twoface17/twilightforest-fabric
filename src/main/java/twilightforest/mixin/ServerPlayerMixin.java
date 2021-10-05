@@ -4,10 +4,9 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import twilightforest.TwilightForestMod;
 import twilightforest.extensions.IEntityEx;
 import twilightforest.util.WorldUtil;
-import twilightforest.world.components.TFTeleporter;
+import twilightforest.world.TFTeleporter;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.*;

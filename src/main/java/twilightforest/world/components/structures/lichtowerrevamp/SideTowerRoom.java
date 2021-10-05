@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.util.ArrayUtil;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
 
@@ -57,7 +58,7 @@ public final class SideTowerRoom extends TwilightTemplateStructurePiece {
     private SideTowerRoom(StructureManager structureManager, Rotation roomRotation, Rotation exteriorRotation, String name, BlockPos startPosition, int squareDiameter) {
         this(
                 structureManager,
-                TFConstants.prefix("lich_tower/side_tower_rooms/" + name),
+                TwilightForestMod.prefix("lich_tower/side_tower_rooms/" + name),
                 makeSettings(roomRotation),
                 startPosition.offset(OFFSETS.get(roomRotation).multiply(squareDiameter - 1)).offset(OFFSETS.get(exteriorRotation).multiply(1 - squareDiameter)),
                 squareDiameter,

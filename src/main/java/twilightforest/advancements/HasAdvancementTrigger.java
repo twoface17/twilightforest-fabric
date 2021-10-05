@@ -14,6 +14,7 @@ import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.resources.ResourceLocation;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Set;
 
 public class HasAdvancementTrigger implements CriterionTrigger<HasAdvancementTrigger.Instance> {
 
-	private static final ResourceLocation ID = TFConstants.prefix("has_advancement");
+	private static final ResourceLocation ID = TwilightForestMod.prefix("has_advancement");
 	private final Map<PlayerAdvancements, HasAdvancementTrigger.Listeners> listeners = Maps.newHashMap();
 
 	@Override

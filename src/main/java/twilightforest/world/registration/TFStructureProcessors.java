@@ -5,6 +5,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.*;
 import twilightforest.world.components.feature.templates.GraveyardFeature;
 import twilightforest.world.components.structures.courtyard.CourtyardStairsTemplateProcessor;
@@ -26,7 +27,7 @@ public class TFStructureProcessors {
 	public static final StructureProcessorType<BoxCuttingProcessor> BOX_CUTTING_PROCESSOR = registerProcessor("box_cutting", BoxCuttingProcessor.CODEC);
 
 	public static <P extends StructureProcessor> StructureProcessorType<P> registerProcessor(String name, Codec<P> processor) {
-		return Registry.register(Registry.STRUCTURE_PROCESSOR, TFConstants.prefix(name), () -> processor);
+		return Registry.register(Registry.STRUCTURE_PROCESSOR, TwilightForestMod.prefix(name), () -> processor);
 	}
 
 	public static void init() {}

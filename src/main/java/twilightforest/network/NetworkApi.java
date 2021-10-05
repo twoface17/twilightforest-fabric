@@ -2,6 +2,7 @@ package twilightforest.network;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import java.util.function.Consumer;
 
@@ -38,7 +39,7 @@ public class NetworkApi {
         }
 
         public void add() {
-            ClientPlayNetworking.registerGlobalReceiver(TFConstants.prefix("channel"), handler);
+            ClientPlayNetworking.registerGlobalReceiver(TwilightForestMod.prefix("channel"), handler);
         }
     }
 }

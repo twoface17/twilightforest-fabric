@@ -24,6 +24,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import twilightforest.TFConstants;
 import twilightforest.TFSounds;
+import twilightforest.TwilightForestMod;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.util.PlayerHelper;
@@ -115,7 +116,7 @@ public class TrophyPedestalBlock extends Block implements SimpleWaterloggedBlock
 	}
 
 	private boolean isPlayerEligible(Player player) {
-		return PlayerHelper.doesPlayerHaveRequiredAdvancements(player, TFConstants.prefix("progress_lich"));
+		return PlayerHelper.doesPlayerHaveRequiredAdvancements(player, TwilightForestMod.prefix("progress_lich"));
 	}
 
 	private void doPedestalEffect(Level world, BlockPos pos, BlockState state) {

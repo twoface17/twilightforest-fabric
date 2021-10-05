@@ -2,12 +2,13 @@ package twilightforest.capabilities.shield;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import net.minecraft.resources.ResourceLocation;
 
 public interface IShieldCapability extends Component {
 
-	ResourceLocation ID = TFConstants.prefix("cap_shield");
+	ResourceLocation ID = TwilightForestMod.prefix("cap_shield");
 
 	void update();
 

@@ -24,7 +24,7 @@ public class CourtyardPathPiece extends TwilightTemplateStructurePiece {
     }
 
     public CourtyardPathPiece(int i, int x, int y, int z, StructureManager structureManager) {
-        super(NagaCourtyardPieces.TFNCPa, i, structureManager, TFConstants.prefix("courtyard/pathway"), makeSettings(Rotation.NONE).addProcessor(CourtyardMain.WALL_PROCESSOR), new BlockPos(x, y + 1, z));
+        super(NagaCourtyardPieces.TFNCPa, i, structureManager, TwilightForestMod.prefix("courtyard/pathway"), makeSettings(Rotation.NONE).addProcessor(CourtyardMain.WALL_PROCESSOR), new BlockPos(x, y + 1, z));
     }
 
     @Override

@@ -5,10 +5,13 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.ClientAdvancements;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
 public class PlayerHelper {
 	/**
@@ -56,6 +59,12 @@ public class PlayerHelper {
 			}
 		}
 		return true;
+	}
+
+	public static void giveItemToPlayer(Player player, ItemStack stack) {
+		if(!player.getInventory().add(stack)) {
+			Containers.dropItemStack(player.level, player.getX(), player.getY(), player.getZ(), stack);
+		}
 	}
 
 }

@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 
 import java.util.function.Consumer;
@@ -70,7 +71,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 		ShapelessRecipeBuilder.shapeless(result)
 				.requires(item, 4)
 				.unlockedBy("has_item", has(item))
-				.save(consumer, TFConstants.prefix(name));
+				.save(consumer, TwilightForestMod.prefix(name));
 	}
 
 	protected final void castleBlock(Consumer<FinishedRecipe> consumer, Block result, ItemLike... ingredients) {
@@ -78,8 +79,8 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.pattern("##")
 				.pattern("##")
 				.define('#', Ingredient.of(ingredients))
-				.unlockedBy("has_castle_brick", has(TFBlocks.CASTLE_BRICK.get()))
-				.save(consumer, locCastle(result.get().getRegistryName().getPath()));
+				.unlockedBy("has_castle_brick", has(TFBlocks.CASTLE_BRICK))
+				.save(consumer, locCastle(Registry.BLOCK.getKey(result).getPath()));
 	}
 
 	protected final void stairsBlock(Consumer<FinishedRecipe> consumer, ResourceLocation loc, Block result, Block criteria, ItemLike... ingredients) {
@@ -109,14 +110,15 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.pattern("###")
 				.define('#', ingredient)
 				.unlockedBy("has_item", has(ingredient))
-				.save(consumer, TFConstants.prefix("compressed_blocks/" + name));
+				.save(consumer, TwilightForestMod.prefix("compressed_blocks/" + name));
 	}
 
 	protected final void reverseCompressBlock(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> ingredient) {
+		TwilightForestMod.LOGGER.info(Registry.ITEM.getKey(result));
 		ShapelessRecipeBuilder.shapeless(result, 9)
 				.requires(ingredient)
 				.unlockedBy("has_item", has(ingredient))
-				.save(consumer, TFConstants.prefix("compressed_blocks/reversed/" + name));
+				.save(consumer, TwilightForestMod.prefix("compressed_blocks/reversed/" + name));
 	}
 
 	protected final void helmetItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material) {
@@ -315,18 +317,18 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 	}
 
 	protected final ResourceLocation locCastle(String name) {
-		return TFConstants.prefix("castleblock/" + name);
+		return TwilightForestMod.prefix("castleblock/" + name);
 	}
 
 	protected final ResourceLocation locEquip(String name) {
-		return TFConstants.prefix("equipment/" + name);
+		return TwilightForestMod.prefix("equipment/" + name);
 	}
 
 	protected final ResourceLocation locNaga(String name) {
-		return TFConstants.prefix("nagastone/" + name);
+		return TwilightForestMod.prefix("nagastone/" + name);
 	}
 
 	protected final ResourceLocation locWood(String name) {
-		return TFConstants.prefix("wood/" + name);
+		return TwilightForestMod.prefix("wood/" + name);
 	}
 }

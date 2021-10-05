@@ -5,10 +5,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class HydraNeck extends HydraPart {
 
-	public static final ResourceLocation RENDERER = TFConstants.prefix("hydra_neck");
+	public static final ResourceLocation RENDERER = TwilightForestMod.prefix("hydra_neck");
 
 	public final HydraHead head;
 

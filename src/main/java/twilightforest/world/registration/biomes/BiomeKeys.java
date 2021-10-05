@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.data.worldgen.SurfaceBuilders;
 
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class BiomeKeys {
 	//public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, TwilightForestMod.ID);
@@ -43,7 +44,7 @@ public class BiomeKeys {
 
 	private static ResourceKey<Biome> makeKey(String name) {
 		// Apparently this resolves biome shuffling /shrug
-		Registry.register(BuiltinRegistries.BIOME, TFConstants.prefix(name), new Biome.BiomeBuilder()
+		Registry.register(BuiltinRegistries.BIOME, TwilightForestMod.prefix(name), new Biome.BiomeBuilder()
 				.precipitation(Biome.Precipitation.NONE)
 				.biomeCategory(Biome.BiomeCategory.NONE)
 				.depth(0)
@@ -55,7 +56,7 @@ public class BiomeKeys {
 				.mobSpawnSettings(new MobSpawnSettings.Builder().build())
 				.temperatureAdjustment(Biome.TemperatureModifier.NONE)
 				.build());
-		return ResourceKey.create(Registry.BIOME_REGISTRY, TFConstants.prefix(name));
+		return ResourceKey.create(Registry.BIOME_REGISTRY, TwilightForestMod.prefix(name));
 	}
 
 	//public static final BiomeDictionary.Type TWILIGHT = BiomeDictionary.Type.getType("TWILIGHT");

@@ -14,11 +14,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.resources.ResourceLocation;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 //im pretty sure we dont have to handle this via advancement triggers
 public class MakePortalTrigger implements CriterionTrigger<MakePortalTrigger.Instance> {
 
-    public static final ResourceLocation ID = TFConstants.prefix("make_tf_portal");
+    public static final ResourceLocation ID = TwilightForestMod.prefix("make_tf_portal");
     private final Map<PlayerAdvancements, MakePortalTrigger.Listeners> listeners = Maps.newHashMap();
 
     @Override

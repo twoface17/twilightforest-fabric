@@ -51,7 +51,7 @@ public class GiantPickItem extends PickaxeItem implements DynamicAttributeTool {
 	//TODO: Get this working by creating a mixin within the ServerPlayerGameMode and anywhere else forge dose it to add reach modifier
 	@Override
 	public Multimap<Attribute, AttributeModifier> getDynamicModifiers(EquipmentSlot slot, ItemStack stack, @org.jetbrains.annotations.Nullable LivingEntity user) {
-		if ((stack == TFItems.giant_pickaxe.getDefaultInstance() || stack == TFItems.giant_sword.getDefaultInstance()) && slot.equals(EquipmentSlot.MAINHAND)) {
+		if ((stack == TFItems.GIANT_PICKAXE.getDefaultInstance() || stack == TFItems.GIANT_SWORD.getDefaultInstance()) && slot.equals(EquipmentSlot.MAINHAND)) {
 			ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 			builder.put(TFAttributes.REACH_DISTANCE, new AttributeModifier(TFItems.GIANT_REACH_MODIFIER, "Tool modifier", 2.5, AttributeModifier.Operation.ADDITION));
 			return builder.build();

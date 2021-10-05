@@ -28,6 +28,7 @@ import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.monster.Kobold;
 import twilightforest.world.components.structures.lichtowerrevamp.TowerFoyer;
 import twilightforest.world.registration.biomes.BiomeKeys;
@@ -150,7 +151,7 @@ public class TFFeature {
 			return new CourtyardMain(this, rand, 0, x + 1, y + 1, z + 1, structureManager);
 		}
 	};
-	public static final TFFeature LICH_TOWER = new TFFeature( 1, "lich_tower", true, TFConstants.prefix("progress_naga") ) {
+	public static final TFFeature LICH_TOWER = new TFFeature( 1, "lich_tower", true, TwilightForestMod.prefix("progress_naga") ) {
 		{
 			this.addMonster(EntityType.ZOMBIE, 10, 4, 4)
 					.addMonster(EntityType.SKELETON, 10, 4, 4)
@@ -177,7 +178,7 @@ public class TFFeature {
 			return rand.nextBoolean() ? new TowerMainComponent(this, rand, 0, x, y, z) : new TowerFoyer(structureManager, new BlockPos(x, y - 3, z));
 		}
 	};
-	public static final TFFeature HYDRA_LAIR = new TFFeature( 2, "hydra_lair"    , true, true, TFConstants.prefix("progress_labyrinth") ) {
+	public static final TFFeature HYDRA_LAIR = new TFFeature( 2, "hydra_lair"    , true, true, TwilightForestMod.prefix("progress_labyrinth") ) {
 		{
 			this.enableTerrainAlterations();
 			this.undergroundDecoAllowed = false;
@@ -198,7 +199,7 @@ public class TFFeature {
 			return new HydraLairComponent(this, rand, 0, x - 7, y, z - 7);
 		}
 	};
-	public static final TFFeature LABYRINTH = new TFFeature( 3, "labyrinth", true, TFConstants.prefix("progress_lich") ) {
+	public static final TFFeature LABYRINTH = new TFFeature( 3, "labyrinth", true, TwilightForestMod.prefix("progress_lich") ) {
 		{
 			this.enableDecorations();
 			this.undergroundDecoAllowed = false;
@@ -233,7 +234,7 @@ public class TFFeature {
 			return GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
 		}
 	};
-	public static final TFFeature DARK_TOWER = new TFFeature( 1, "dark_tower", true, TFConstants.prefix("progress_knights") ) {
+	public static final TFFeature DARK_TOWER = new TFFeature( 1, "dark_tower", true, TwilightForestMod.prefix("progress_knights") ) {
 		{
 			this.addMonster(TFEntities.CARMINITE_GOLEM, 10, 4, 4)
 					.addMonster(EntityType.SKELETON, 10, 4, 4)
@@ -266,7 +267,7 @@ public class TFFeature {
 			return new DarkTowerMainComponent(this, rand, 0, x, y, z);
 		}
 	};
-	public static final TFFeature KNIGHT_STRONGHOLD = new TFFeature( 3, "knight_stronghold", true, TFConstants.prefix("progress_trophy_pedestal") ) {
+	public static final TFFeature KNIGHT_STRONGHOLD = new TFFeature( 3, "knight_stronghold", true, TwilightForestMod.prefix("progress_trophy_pedestal") ) {
 		{
 			this.enableDecorations().disableProtectionAura();
 			this.undergroundDecoAllowed = false;
@@ -301,7 +302,7 @@ public class TFFeature {
 			return GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
 		}
 	};
-	public static final TFFeature YETI_CAVE = new TFFeature( 2, "yeti_lairs", true, true, TFConstants.prefix("progress_lich") ) {
+	public static final TFFeature YETI_CAVE = new TFFeature( 2, "yeti_lairs", true, true, TwilightForestMod.prefix("progress_lich") ) {
 		{
 			this.enableDecorations().enableTerrainAlterations();
 			this.undergroundDecoAllowed = false;
@@ -324,7 +325,7 @@ public class TFFeature {
 			return new YetiCaveComponent(this, rand, 0, x, y, z);
 		}
 	};
-	public static final TFFeature ICE_TOWER = new TFFeature( 2, "ice_tower", true, TFConstants.prefix("progress_yeti") ) {
+	public static final TFFeature ICE_TOWER = new TFFeature( 2, "ice_tower", true, TwilightForestMod.prefix("progress_yeti") ) {
 		{
 			this.addMonster(TFEntities.SNOW_GUARDIAN, 10, 4, 4)
 					.addMonster(TFEntities.STABLE_ICE_CORE, 10, 4, 4)
@@ -347,7 +348,7 @@ public class TFFeature {
 		}
 	};
 	// TODO split cloud giants from this
-	public static final TFFeature TROLL_CAVE = new TFFeature( 4, "troll_lairs", true, TFConstants.prefix("progress_merge") ) {
+	public static final TFFeature TROLL_CAVE = new TFFeature( 4, "troll_lairs", true, TwilightForestMod.prefix("progress_merge") ) {
 		{
 			this.enableDecorations().enableTerrainAlterations().disableProtectionAura();
 
@@ -380,7 +381,7 @@ public class TFFeature {
 			return new TrollCaveMainComponent(TrollCavePieces.TFTCMai, this, 0, x, y, z);
 		}
 	};
-	public static final TFFeature FINAL_CASTLE = new TFFeature( 4, "final_castle", true, TFConstants.prefix("progress_troll") ) {
+	public static final TFFeature FINAL_CASTLE = new TFFeature( 4, "final_castle", true, TwilightForestMod.prefix("progress_troll") ) {
 		{
 			// plain parts of the castle, like the tower maze
 			this.addMonster(TFEntities.KOBOLD, 10, 4, 4)
@@ -960,7 +961,7 @@ public class TFFeature {
 	}
 
 	public static StructurePieceType registerPiece(String name, StructurePieceType piece) {
-		return Registry.register(Registry.STRUCTURE_PIECE, TFConstants.prefix(name.toLowerCase(Locale.ROOT)), piece);
+		return Registry.register(Registry.STRUCTURE_PIECE, TwilightForestMod.prefix(name.toLowerCase(Locale.ROOT)), piece);
 	}
 
 	public final BoundingBox getComponentToAddBoundingBox(int x, int y, int z, int minX, int minY, int minZ, int spanX, int spanY, int spanZ, @Nullable Direction dir) {

@@ -1,5 +1,6 @@
 package twilightforest;
 
+import com.chocohead.mm.api.ClassTinkerers;
 import com.google.common.collect.Maps;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ModInitializer;
@@ -8,6 +9,8 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.BlockPos;
@@ -38,10 +41,12 @@ import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfig;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
+import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.CrumbleDispenseBehavior;
 import twilightforest.dispenser.FeatherFanDispenseBehavior;
 import twilightforest.dispenser.MoonwormDispenseBehavior;
 import twilightforest.dispenser.TransformationDispenseBehavior;
+import twilightforest.enchantment.TFEnchantments;
 import twilightforest.entity.TFEntities;
 import twilightforest.entity.projectile.MoonwormShot;
 import twilightforest.entity.projectile.TwilightWandBolt;
@@ -73,9 +78,9 @@ public class TwilightForestMod implements ModInitializer {
 
 	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
-	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(new ResourceLocation(TFConstants.ID, TFConstants.ID), () -> new ItemStack(TFBlocks.twilight_portal_miniature_structure));
-
 	public static final Logger LOGGER = LogManager.getLogger(TFConstants.ID);
+
+	private static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
 
 	public static TFConfigCommon COMMON_CONFIG;
 	public static boolean SERVER_SIDE_ONLY = true;
@@ -84,6 +89,7 @@ public class TwilightForestMod implements ModInitializer {
 	public void onInitialize() {
 		TwilightForestMod();
 		init();
+
 	}
 
 	public void TwilightForestMod() {
@@ -102,22 +108,21 @@ public class TwilightForestMod implements ModInitializer {
 		//modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
 		TFBlockEntities.init();
 		TFParticleType.init();
+		TFEnchantments.init();
 		TFStructures.registerFabricEvents();
 		TFBiomeFeatures.init();
 		//TFContainers.CONTAINERS.register(modbus);
 		//TFEnchantments.ENCHANTMENTS.register(modbus);
 
-		{
-			TFStructureProcessors.init();
-			TreeConfigurations.init();
-			TreeDecorators.init();
-			TFStructures.register();
-			ConfiguredWorldCarvers.register();
-			TwilightFeatures.registerPlacementConfigs();
-			ConfiguredFeatures.init();
-			TwilightSurfaceBuilders.register();
-			registerSerializers();
-		}
+		TFStructureProcessors.init();
+		TreeConfigurations.init();
+		TreeDecorators.init();
+		TFStructures.register();
+		ConfiguredWorldCarvers.register();
+		TwilightFeatures.registerPlacementConfigs();
+		ConfiguredFeatures.init();
+		TwilightSurfaceBuilders.register();
+		registerSerializers();
 
 		// Poke these so they exist when we need them FIXME this is probably terrible design
 		new TwilightFeatures();
@@ -259,7 +264,6 @@ public class TwilightForestMod implements ModInitializer {
 			DispenseItemBehavior transformbehavior = new TransformationDispenseBehavior();
 			DispenserBlock.registerBehavior(TFItems.TRANSFORMATION_POWDER.asItem(), transformbehavior);
 
-			DispenserBlock.registerBehavior(TFItems.twilight_scepter, new MoonwormDispenseBehavior() {
 			DispenserBlock.registerBehavior(TFItems.TWILIGHT_SCEPTER, new MoonwormDispenseBehavior() {
 				@Override
 				protected Projectile getProjectileEntity(Level worldIn, Position position, ItemStack stackIn) {
@@ -281,10 +285,11 @@ public class TwilightForestMod implements ModInitializer {
 			WoodType.register(TFBlocks.MINING);
 			WoodType.register(TFBlocks.SORTING);
 		}
+		DataGenerators.gatherData();
 	}
 
 	//-----FABRIC ONLY METHODS-----
-	public static void commonConfigInit(){
+	public static void commonConfigInit() {
 		if(SERVER_SIDE_ONLY){
 			COMMON_CONFIG = AutoConfig.getConfigHolder(TFConfigCommon.class).getConfig();
 		}
@@ -294,7 +299,7 @@ public class TwilightForestMod implements ModInitializer {
 		}
 	}
 
-	public void clothConfigSetup(){
+	public void clothConfigSetup() {
 		AutoConfig.register(TFConfigCommon.class, Toml4jConfigSerializerExtended::new);
 		commonConfigInit();
 
@@ -315,5 +320,25 @@ public class TwilightForestMod implements ModInitializer {
 				});
 			}
 		});
+	}
+
+	public static ResourceLocation prefix(String name) {
+		return new ResourceLocation(ID, name.toLowerCase(Locale.ROOT));
+	}
+
+	public static ResourceLocation getModelTexture(String name) {
+		return new ResourceLocation(ID, MODEL_DIR + name);
+	}
+
+	public static ResourceLocation getGuiTexture(String name) {
+		return new ResourceLocation(ID, GUI_DIR + name);
+	}
+
+	public static ResourceLocation getEnvTexture(String name) {
+		return new ResourceLocation(ID, ENVIRO_DIR + name);
+	}
+
+	public static Rarity getRarity() {
+		return rarity != null ? rarity : Rarity.EPIC;
 	}
 }

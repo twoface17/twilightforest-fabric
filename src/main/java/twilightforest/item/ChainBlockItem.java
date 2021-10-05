@@ -28,7 +28,7 @@ public class ChainBlockItem extends DiggerItem implements IItemEx {
 	private static final String THROWN_UUID_KEY = "chainEntity";
 
 	protected ChainBlockItem(Properties props) {
-		super(6, -3.0F, TwilightItemTier.TOOL_KNIGHTLY, BlockTags.BASE_STONE_OVERWORLD, props);
+		super(6, -3.0F, TwilightItemTier.KNIGHTMETAL, BlockTags.BASE_STONE_OVERWORLD, props);
 	}
 
 	@Override

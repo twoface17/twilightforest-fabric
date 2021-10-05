@@ -20,7 +20,7 @@ public class CourtyardTerraceBrazier extends TwilightTemplateStructurePiece {
     }
 
     public CourtyardTerraceBrazier(int i, int x, int y, int z, Rotation rotation, StructureManager structureManager) {
-        super(NagaCourtyardPieces.TFNCTr, i, structureManager, TFConstants.prefix("courtyard/terrace_fire"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
+        super(NagaCourtyardPieces.TFNCTr, i, structureManager, TwilightForestMod.prefix("courtyard/terrace_fire"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
     }
 
     @Override

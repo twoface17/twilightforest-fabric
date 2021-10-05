@@ -8,11 +8,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TFConstants;
 import twilightforest.TFSounds;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFPart;
 
 public class SnowQueenIceShield extends TFPart<SnowQueen> {
 
-	public static final ResourceLocation RENDERER = TFConstants.prefix("snowqueen_iceshield");
+	public static final ResourceLocation RENDERER = TwilightForestMod.prefix("snowqueen_iceshield");
 
     public SnowQueenIceShield(SnowQueen parent) {
         super(parent);

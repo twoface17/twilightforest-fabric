@@ -75,7 +75,7 @@ public enum TwilightArmorMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return repairMaterial;
+		return repairMaterial.get();
 	}
 
 	@Override

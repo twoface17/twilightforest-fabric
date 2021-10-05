@@ -1,7 +1,7 @@
 package twilightforest.extensions;
 
 import twilightforest.client.model.entity.PartEntity;
-import twilightforest.world.components.TFTeleporter;
+import twilightforest.world.TFTeleporter;
 
 import javax.annotation.Nullable;
 

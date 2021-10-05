@@ -49,17 +49,17 @@ public class CourtyardWallTemplateProcessor extends RandomizedTemplateProcessor 
 			if (state == Blocks.SMOOTH_STONE_SLAB.defaultBlockState())
 				return (random.nextBoolean() ? newInfo : random.nextBoolean() ? new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, Blocks.COBBLESTONE_SLAB, SlabBlock.TYPE), null) : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, Blocks.MOSSY_COBBLESTONE_SLAB, SlabBlock.TYPE), null));
 
-			if (block == TFBlocks.ETCHED_NAGASTONE.get())
-				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_ETCHED_NAGASTONE.get(), TFBlocks.CRACKED_ETCHED_NAGASTONE.get()), DirectionalBlock.FACING), null);
+			if (block == TFBlocks.ETCHED_NAGASTONE)
+				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_ETCHED_NAGASTONE, TFBlocks.CRACKED_ETCHED_NAGASTONE), DirectionalBlock.FACING), null);
 
-			if (block == TFBlocks.NAGASTONE_PILLAR.get())
-				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_PILLAR.get(), TFBlocks.CRACKED_NAGASTONE_PILLAR.get()), RotatedPillarBlock.AXIS), null);
+			if (block == TFBlocks.NAGASTONE_PILLAR)
+				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_PILLAR, TFBlocks.CRACKED_NAGASTONE_PILLAR), RotatedPillarBlock.AXIS), null);
 
-			if (block == TFBlocks.NAGASTONE_STAIRS_LEFT.get())
-				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT.get()), StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE), null);
+			if (block == TFBlocks.NAGASTONE_STAIRS_LEFT)
+				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT, TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT), StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE), null);
 
-			if (block == TFBlocks.NAGASTONE_STAIRS_RIGHT.get())
-				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT.get()), StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE), null);
+			if (block == TFBlocks.NAGASTONE_STAIRS_RIGHT)
+				return random.nextBoolean() ? newInfo : new StructureTemplate.StructureBlockInfo(newInfo.pos, translateState(state, randomBlock(random, TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT, TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT), StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE), null);
 
 			return newInfo;
 		}

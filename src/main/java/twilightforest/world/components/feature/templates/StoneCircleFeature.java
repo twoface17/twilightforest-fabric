@@ -7,13 +7,14 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureMana
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.MossyCobbleTemplateProcessor;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class StoneCircleFeature extends TemplateFeature<NoneFeatureConfiguration> {
-    private static final ResourceLocation STONE_CIRCLE = TFConstants.prefix("feature/ruins/stone_circle");
+    private static final ResourceLocation STONE_CIRCLE = TwilightForestMod.prefix("feature/ruins/stone_circle");
 
     public StoneCircleFeature(Codec<NoneFeatureConfiguration> config) {
         super(config);

@@ -28,7 +28,7 @@ import net.minecraft.world.item.crafting.Recipe;
 public class REIClient implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
-        registry.addWorkstations(REIServer.UNCRAFTING_ID, EntryStacks.of(new ItemStack(TFBlocks.uncrafting_table)));
+        registry.addWorkstations(REIServer.UNCRAFTING_ID, EntryStacks.of(new ItemStack(TFBlocks.UNCRAFTING_TABLE)));
     }
 
     @Override
@@ -38,6 +38,6 @@ public class REIClient implements REIClientPlugin {
 
     @Override
     public String getPluginProviderName() {
-        return TFConstants.prefix("rei_plugin").toString();
+        return TwilightForestMod.prefix("rei_plugin").toString();
     }
 }

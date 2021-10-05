@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.ChatFormatting;
@@ -71,6 +72,7 @@ import twilightforest.entity.passive.TinyBird;
 import twilightforest.enums.BlockLoggingEnum;
 import twilightforest.item.PhantomArmorItem;
 import twilightforest.item.TFItems;
+import twilightforest.mixin.MobAccessor;
 import twilightforest.network.AreaProtectionPacket;
 import twilightforest.network.EnforceProgressionStatusPacket;
 import twilightforest.network.TFPacketHandler;
@@ -116,41 +118,40 @@ public class TFEventListener {
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> onPlayerLogout(handler.player));
 		//ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> playerLogsIn(handler.getPlayer())));
 		ServerLifecycleEvents.SERVER_STARTED.register((server -> minecraftServer = server));
-
+		ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> addPrey(entity));
 	}
 
 //	public static void addReach(ItemAttributeModifierEvent event) {
 //		Item item = event.getItemStack().getItem();
-//		if ((item == TFItems.GIANT_PICKAXE.get() || item == TFItems.GIANT_SWORD.get()) && event.getSlotType() == EquipmentSlot.MAINHAND) {
-//			event.addModifier(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(TFItems.GIANT_REACH_MODIFIER, "Tool modifier", 2.5, AttributeModifier.Operation.ADDITION));
+//		if ((item == TFItems.GIANT_PICKAXE || item == TFItems.GIANT_SWORD) && event.getSlotType() == EquipmentSlot.MAINHAND) {
+//			event.addModifier(ForgeMod.REACH_DISTANCE, new AttributeModifier(TFItems.GIANT_REACH_MODIFIER, "Tool modifier", 2.5, AttributeModifier.Operation.ADDITION));
 //		}
 //	}
 
 //	@SubscribeEvent
-	public static void addPrey(EntityJoinWorldEvent event) {
-		Entity entity = event.getEntity();
+	public static void addPrey(Entity entity) {
 		EntityType<?> type = entity.getType();
 		if(entity instanceof Mob mob) {
 			if (type == EntityType.CAT) {
-				mob.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, DwarfRabbit.class, false, null));
-				mob.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Squirrel.class, false, null));
-				mob.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, TinyBird.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, DwarfRabbit.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Squirrel.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NonTameRandomTargetGoal<>((TamableAnimal)entity, TinyBird.class, false, null));
 			} else if(type == EntityType.OCELOT) {
-				mob.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(mob, DwarfRabbit.class, false));
-				mob.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(mob, Squirrel.class, false));
-				mob.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(mob, TinyBird.class, false));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NearestAttackableTargetGoal<>(mob, DwarfRabbit.class, false));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NearestAttackableTargetGoal<>(mob, Squirrel.class, false));
+				((MobAccessor)mob).getTargetSelector().addGoal(1, new NearestAttackableTargetGoal<>(mob, TinyBird.class, false));
 			} else if (type == EntityType.FOX) {
-				mob.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(mob, DwarfRabbit.class, false));
-				mob.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(mob, Squirrel.class, false));
+				((MobAccessor)mob).getTargetSelector().addGoal(6, new NearestAttackableTargetGoal<>(mob, DwarfRabbit.class, false));
+				((MobAccessor)mob).getTargetSelector().addGoal(6, new NearestAttackableTargetGoal<>(mob, Squirrel.class, false));
 			} else if(type == EntityType.WOLF) {
-				mob.targetSelector.addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, DwarfRabbit.class, false, null));
-				mob.targetSelector.addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Squirrel.class, false, null));
-				mob.targetSelector.addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Bighorn.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, DwarfRabbit.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Squirrel.class, false, null));
+				((MobAccessor)mob).getTargetSelector().addGoal(7, new NonTameRandomTargetGoal<>((TamableAnimal)entity, Bighorn.class, false, null));
 			}
 		}
 	}
 
-	@SubscribeEvent
+//	@SubscribeEvent
 //	public static void addReach(ItemAttributeModifierEvent event) {
 //		Item item = event.getItemStack().getItem();
 //		if((item == TFItems.giant_pickaxe || item == TFItems.giant_sword) && event.getSlotType() == EquipmentSlot.MAINHAND) {
@@ -340,8 +341,8 @@ public class TFEventListener {
 	public static boolean applyDeathItems(Player player) {
 		if (player.level.isClientSide) return true;
 
-		if (living.level.isClientSide || !(living instanceof Player player) ||
-				player.isCreative()) return;
+		if (player.level.isClientSide ||
+				player.isCreative()) return true;
 
 		if (charmOfLife(player)) {
 			return false; // Executes if the player had charms
@@ -510,14 +511,14 @@ public class TFEventListener {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_3.get()));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_3));
 
 		} else if (tier2) {
 			for (int i = 0; i < 9; i++) {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_2.get()));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_2));
 
 		} else if (tier1) {
 			int i = player.getInventory().selected;
@@ -525,7 +526,7 @@ public class TFEventListener {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_1.get()));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_1));
 		}
 
 		//TODO: Baubles is dead, replace with curios
@@ -536,7 +537,7 @@ public class TFEventListener {
 		// always keep tower keys and held phantom armor
 		for (int i = 0; i < player.getInventory().items.size(); i++) {
 			ItemStack stack = player.getInventory().items.get(i);
-			if (stack.getItem() == TFItems.TOWER_KEY.get()) {
+			if (stack.getItem() == TFItems.TOWER_KEY) {
 				keepInventory.items.set(i, stack.copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
@@ -755,7 +756,7 @@ public class TFEventListener {
 	private static boolean canHarvestWithGiantPick(Player player, BlockState state) {
 		ItemStack heldStack = player.getMainHandItem();
 		Item heldItem = heldStack.getItem();
-		return heldItem == TFItems.GIANT_PICKAXE.get()/* && heldItem.canHarvestBlock(heldStack, state)*/;
+		return heldItem == TFItems.GIANT_PICKAXE/* && heldItem.canHarvestBlock(heldStack, state)*/;
 	}
 
 	public static InteractionResult onPlayerRightClick(Player player, BlockPos pos) {
@@ -776,7 +777,7 @@ public class TFEventListener {
 
 	private static boolean isBlockProtectedFromBreaking(Level world, BlockPos pos) {
 		// todo improve
-		return !world.getBlockState(pos).getBlock().getRegistryName().getPath().contains("grave") || !world.getBlockState(pos).is(TFBlocks.KEEPSAKE_CASKET.get());
+		return !Registry.BLOCK.getKey(world.getBlockState(pos).getBlock()).getPath().contains("grave") || !world.getBlockState(pos).is(TFBlocks.KEEPSAKE_CASKET);
 	}
 
 	/**
@@ -918,7 +919,7 @@ public class TFEventListener {
 //		playerData.putBoolean(NBT_TAG_TWILIGHT, true); // set true once player has spawned either way
 //		tagCompound.put(Player.PERSISTED_NBT_TAG, playerData); // commit
 //
-//		if (shouldBanishPlayer) TFPortalBlock.attemptSendPlayer(player, true, TFConfig.COMMON_CONFIG.DIMENSION.portalForNewPlayerSpawn.get()); // See ya hate to be ya
+//		if (shouldBanishPlayer) TFPortalBlock.attemptSendPlayer(player, true, TFConfig.COMMON_CONFIG.DIMENSION.portalForNewPlayerSpawn); // See ya hate to be ya
 	}
 
 	// Advancement Trigger

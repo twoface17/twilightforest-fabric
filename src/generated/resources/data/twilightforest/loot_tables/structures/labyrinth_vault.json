@@ -107,8 +107,8 @@
             {
               "function": "twilightforest:enchant",
               "enchantments": {
-                "minecraft:infinity": 1,
-                "minecraft:punch": 2
+                "minecraft:punch": 2,
+                "minecraft:infinity": 1
               }
             }
           ],
@@ -148,8 +148,8 @@
             {
               "function": "twilightforest:enchant",
               "enchantments": {
-                "minecraft:efficiency": 4,
-                "minecraft:unbreaking": 2
+                "minecraft:unbreaking": 2,
+                "minecraft:efficiency": 4
               }
             }
           ],
@@ -248,8 +248,8 @@
             {
               "function": "twilightforest:enchant",
               "enchantments": {
-                "minecraft:knockback": 2,
-                "minecraft:sharpness": 4
+                "minecraft:sharpness": 4,
+                "minecraft:knockback": 2
               }
             }
           ],
@@ -261,8 +261,8 @@
             {
               "function": "twilightforest:enchant",
               "enchantments": {
-                "minecraft:bane_of_arthropods": 5,
-                "minecraft:fire_aspect": 2
+                "minecraft:fire_aspect": 2,
+                "minecraft:bane_of_arthropods": 5
               }
             }
           ],
@@ -274,9 +274,9 @@
             {
               "function": "twilightforest:enchant",
               "enchantments": {
-                "minecraft:efficiency": 4,
+                "minecraft:fortune": 2,
                 "minecraft:unbreaking": 3,
-                "minecraft:fortune": 2
+                "minecraft:efficiency": 4
               }
             }
           ],

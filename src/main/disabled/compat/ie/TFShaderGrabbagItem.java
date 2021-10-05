@@ -63,7 +63,7 @@ public class TFShaderGrabbagItem extends Item {
         if ( shader == null || shader.getPath().isEmpty() )
             return new InteractionResultHolder<>(InteractionResult.FAIL, stack);
 
-        ItemStack shaderItem = new ItemStack(ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")));
+        ItemStack shaderItem = new ItemStack(Registry.ITEM.get(TwilightForestMod.prefix("shader")));
         ItemNBTHelper.putString(shaderItem, TFShaderItem.TAG_SHADER, shader.toString());
 
         stack.shrink(1);

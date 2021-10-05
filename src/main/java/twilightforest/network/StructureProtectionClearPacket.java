@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.TwilightForestRenderInfo;
 import twilightforest.client.renderer.TFWeatherRenderer;
 
@@ -25,7 +26,7 @@ public class StructureProtectionClearPacket extends ISimplePacket {
 	public static class Handler {
 		public static boolean onMessage(StructureProtectionClearPacket message) {
 			Minecraft.getInstance().execute(() -> {
-				DimensionSpecialEffects info = DimensionSpecialEffects.EFFECTS.get(TFConstants.prefix("renderer"));
+				DimensionSpecialEffects info = DimensionSpecialEffects.EFFECTS.get(TwilightForestMod.prefix("renderer"));
 
 				// add weather box if needed
 				if (info instanceof TwilightForestRenderInfo twilightForestRenderInfo) {

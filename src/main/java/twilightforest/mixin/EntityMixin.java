@@ -8,9 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import twilightforest.TwilightForestMod;
 import twilightforest.extensions.IEntityEx;
-import twilightforest.world.components.TFTeleporter;
+import twilightforest.world.TFTeleporter;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;

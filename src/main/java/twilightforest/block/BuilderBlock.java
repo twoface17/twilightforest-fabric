@@ -162,7 +162,7 @@ public class BuilderBlock extends BaseEntityBlock {
 	public static void activateBuiltBlocks(Level world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == TFBlocks.BUILT_BLOCK.get() && !state.getValue(TranslucentBuiltBlock.ACTIVE)) {
+		if (state.getBlock() == TFBlocks.BUILT_BLOCK && !state.getValue(TranslucentBuiltBlock.ACTIVE)) {
 			world.setBlockAndUpdate(pos, state.setValue(TranslucentBuiltBlock.ACTIVE, true));
 			world.playSound(null, pos, TFSounds.BUILDER_REPLACE, SoundSource.BLOCKS, 0.3F, 0.6F);
 			world.getBlockTicks().scheduleTick(pos, state.getBlock(), /*state.getBlock().tickRate(world)*/ 15); //TODO: Potentially incorrect, but we aren't allowed block tick rates

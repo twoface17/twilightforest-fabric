@@ -217,256 +217,6 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.QUEST_RAM_TROPHY, createSingleItemTable(TFBlocks.QUEST_RAM_TROPHY.asItem()));
 		add(TFBlocks.QUEST_RAM_WALL_TROPHY, createSingleItemTable(TFBlocks.QUEST_RAM_TROPHY.asItem()));
 
-		add(TFBlocks.zombie_skull_candle, dropWithoutSilk(Blocks.ZOMBIE_HEAD));
-		add(TFBlocks.zombie_wall_skull_candle, dropWithoutSilk(Blocks.ZOMBIE_HEAD));
-		add(TFBlocks.skeleton_skull_candle, dropWithoutSilk(Blocks.SKELETON_SKULL));
-		add(TFBlocks.skeleton_wall_skull_candle, dropWithoutSilk(Blocks.SKELETON_SKULL));
-		add(TFBlocks.wither_skele_skull_candle, dropWithoutSilk(Blocks.WITHER_SKELETON_SKULL));
-		add(TFBlocks.wither_skele_wall_skull_candle, dropWithoutSilk(Blocks.WITHER_SKELETON_SKULL));
-		add(TFBlocks.creeper_skull_candle, dropWithoutSilk(Blocks.CREEPER_HEAD));
-		add(TFBlocks.creeper_wall_skull_candle, dropWithoutSilk(Blocks.CREEPER_HEAD));
-		add(TFBlocks.player_skull_candle, dropWithoutSilk(Blocks.PLAYER_HEAD));
-		add(TFBlocks.player_wall_skull_candle, dropWithoutSilk(Blocks.PLAYER_HEAD));
-
-		dropSelf(TFBlocks.iron_ladder);
-		dropSelf(TFBlocks.stone_twist);
-		dropSelf(TFBlocks.stone_twist_thin);
-		dropSelf(TFBlocks.stone_bold);
-		registerEmpty(TFBlocks.tome_spawner);
-		dropWhenSilkTouch(TFBlocks.empty_bookshelf);
-		//registerDropSelfLootTable(TFBlocks.lapis_block);
-		add(TFBlocks.keepsake_casket, casketInfo(TFBlocks.keepsake_casket));
-		dropSelf(TFBlocks.candelabra);
-		dropPottedContents(TFBlocks.potted_twilight_oak_sapling);
-		dropPottedContents(TFBlocks.potted_canopy_sapling);
-		dropPottedContents(TFBlocks.potted_mangrove_sapling);
-		dropPottedContents(TFBlocks.potted_darkwood_sapling);
-		dropPottedContents(TFBlocks.potted_hollow_oak_sapling);
-		dropPottedContents(TFBlocks.potted_rainboak_sapling);
-		dropPottedContents(TFBlocks.potted_time_sapling);
-		dropPottedContents(TFBlocks.potted_trans_sapling);
-		dropPottedContents(TFBlocks.potted_mine_sapling);
-		dropPottedContents(TFBlocks.potted_sort_sapling);
-		dropPottedContents(TFBlocks.potted_mayapple);
-		dropPottedContents(TFBlocks.potted_fiddlehead);
-		dropPottedContents(TFBlocks.potted_mushgloom);
-		dropPottedContents(TFBlocks.potted_thorn);
-		dropPottedContents(TFBlocks.potted_green_thorn);
-		dropPottedContents(TFBlocks.potted_dead_thorn);
-
-		dropSelf(TFBlocks.oak_banister);
-		dropSelf(TFBlocks.spruce_banister);
-		dropSelf(TFBlocks.birch_banister);
-		dropSelf(TFBlocks.jungle_banister);
-		dropSelf(TFBlocks.acacia_banister);
-		dropSelf(TFBlocks.dark_oak_banister);
-		dropSelf(TFBlocks.crimson_banister);
-		dropSelf(TFBlocks.warped_banister);
-
-		dropSelf(TFBlocks.oak_log);
-		dropSelf(TFBlocks.stripped_oak_log);
-		dropSelf(TFBlocks.oak_wood);
-		dropSelf(TFBlocks.stripped_oak_wood);
-		dropSelf(TFBlocks.oak_sapling);
-		add(TFBlocks.oak_leaves, createLeavesDrops(TFBlocks.oak_leaves, TFBlocks.oak_sapling, DEFAULT_SAPLING_DROP_RATES));
-		dropSelf(TFBlocks.rainboak_sapling);
-		add(TFBlocks.rainboak_leaves, createLeavesDrops(TFBlocks.rainboak_leaves, TFBlocks.rainboak_sapling, RARE_SAPLING_DROP_RATES));
-		dropSelf(TFBlocks.hollow_oak_sapling);
-		dropSelf(TFBlocks.twilight_oak_planks);
-		dropSelf(TFBlocks.twilight_oak_stairs);
-		add(TFBlocks.twilight_oak_slab, createSlabItemTable(TFBlocks.twilight_oak_slab));
-		dropSelf(TFBlocks.twilight_oak_button);
-		dropSelf(TFBlocks.twilight_oak_fence);
-		dropSelf(TFBlocks.twilight_oak_gate);
-		dropSelf(TFBlocks.twilight_oak_plate);
-		add(TFBlocks.twilight_oak_door, createSinglePropConditionTable(TFBlocks.twilight_oak_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.twilight_oak_trapdoor);
-		add(TFBlocks.twilight_oak_sign, createSingleItemTable(TFBlocks.twilight_oak_sign.asItem()));
-		add(TFBlocks.twilight_wall_sign, createSingleItemTable(TFBlocks.twilight_oak_sign.asItem()));
-		dropSelf(TFBlocks.twilight_oak_banister);
-
-		dropSelf(TFBlocks.canopy_log);
-		dropSelf(TFBlocks.stripped_canopy_log);
-		dropSelf(TFBlocks.canopy_wood);
-		dropSelf(TFBlocks.stripped_canopy_wood);
-		dropSelf(TFBlocks.canopy_sapling);
-		add(TFBlocks.canopy_leaves, createLeavesDrops(TFBlocks.canopy_leaves, TFBlocks.canopy_sapling, DEFAULT_SAPLING_DROP_RATES));
-		dropSelf(TFBlocks.canopy_planks);
-		dropSelf(TFBlocks.canopy_stairs);
-		add(TFBlocks.canopy_slab, createSlabItemTable(TFBlocks.canopy_slab));
-		dropSelf(TFBlocks.canopy_button);
-		dropSelf(TFBlocks.canopy_fence);
-		dropSelf(TFBlocks.canopy_gate);
-		dropSelf(TFBlocks.canopy_plate);
-		add(TFBlocks.canopy_door, createSinglePropConditionTable(TFBlocks.canopy_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.canopy_trapdoor);
-		add(TFBlocks.canopy_sign, createSingleItemTable(TFBlocks.canopy_sign.asItem()));
-		add(TFBlocks.canopy_wall_sign, createSingleItemTable(TFBlocks.canopy_sign.asItem()));
-		add(TFBlocks.canopy_bookshelf, createSingleItemTableWithSilkTouch(TFBlocks.canopy_bookshelf, Items.BOOK, ConstantValue.exactly(3.0F)));
-		dropSelf(TFBlocks.canopy_banister);
-
-		dropSelf(TFBlocks.mangrove_log);
-		dropSelf(TFBlocks.stripped_mangrove_log);
-		dropSelf(TFBlocks.mangrove_wood);
-		dropSelf(TFBlocks.stripped_mangrove_wood);
-		dropSelf(TFBlocks.mangrove_sapling);
-		add(TFBlocks.mangrove_leaves, createLeavesDrops(TFBlocks.mangrove_leaves, TFBlocks.mangrove_sapling, DEFAULT_SAPLING_DROP_RATES));
-		dropSelf(TFBlocks.mangrove_planks);
-		dropSelf(TFBlocks.mangrove_stairs);
-		add(TFBlocks.mangrove_slab, createSlabItemTable(TFBlocks.mangrove_slab));
-		dropSelf(TFBlocks.mangrove_button);
-		dropSelf(TFBlocks.mangrove_fence);
-		dropSelf(TFBlocks.mangrove_gate);
-		dropSelf(TFBlocks.mangrove_plate);
-		add(TFBlocks.mangrove_door, createSinglePropConditionTable(TFBlocks.mangrove_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.mangrove_trapdoor);
-		add(TFBlocks.mangrove_sign, createSingleItemTable(TFBlocks.mangrove_sign.asItem()));
-		add(TFBlocks.mangrove_wall_sign, createSingleItemTable(TFBlocks.mangrove_sign.asItem()));
-		dropSelf(TFBlocks.mangrove_banister);
-
-		dropSelf(TFBlocks.dark_log);
-		dropSelf(TFBlocks.stripped_dark_log);
-		dropSelf(TFBlocks.dark_wood);
-		dropSelf(TFBlocks.stripped_dark_wood);
-		dropSelf(TFBlocks.darkwood_sapling);
-		add(TFBlocks.dark_leaves, createLeavesDrops(TFBlocks.dark_leaves, TFBlocks.darkwood_sapling, RARE_SAPLING_DROP_RATES));
-		add(TFBlocks.hardened_dark_leaves, createLeavesDrops(TFBlocks.dark_leaves, TFBlocks.darkwood_sapling, RARE_SAPLING_DROP_RATES));
-		dropSelf(TFBlocks.dark_planks);
-		dropSelf(TFBlocks.dark_stairs);
-		add(TFBlocks.dark_slab, createSlabItemTable(TFBlocks.dark_slab));
-		dropSelf(TFBlocks.dark_button);
-		dropSelf(TFBlocks.dark_fence);
-		dropSelf(TFBlocks.dark_gate);
-		dropSelf(TFBlocks.dark_plate);
-		add(TFBlocks.dark_door, createSinglePropConditionTable(TFBlocks.dark_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.dark_trapdoor);
-		add(TFBlocks.darkwood_sign, createSingleItemTable(TFBlocks.darkwood_sign.asItem()));
-		add(TFBlocks.darkwood_wall_sign, createSingleItemTable(TFBlocks.darkwood_sign.asItem()));
-		dropSelf(TFBlocks.darkwood_banister);
-
-		dropSelf(TFBlocks.time_log);
-		dropSelf(TFBlocks.stripped_time_log);
-		dropSelf(TFBlocks.time_wood);
-		dropSelf(TFBlocks.stripped_time_wood);
-		dropOther(TFBlocks.time_log_core, TFBlocks.time_log);
-		dropSelf(TFBlocks.time_sapling);
-		registerLeavesNoSapling(TFBlocks.time_leaves);
-		dropSelf(TFBlocks.time_planks);
-		dropSelf(TFBlocks.time_stairs);
-		add(TFBlocks.time_slab, createSlabItemTable(TFBlocks.time_slab));
-		dropSelf(TFBlocks.time_button);
-		dropSelf(TFBlocks.time_fence);
-		dropSelf(TFBlocks.time_gate);
-		dropSelf(TFBlocks.time_plate);
-		add(TFBlocks.time_door, createSinglePropConditionTable(TFBlocks.time_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.time_trapdoor);
-		add(TFBlocks.time_sign, createSingleItemTable(TFBlocks.time_sign.asItem()));
-		add(TFBlocks.time_wall_sign, createSingleItemTable(TFBlocks.time_sign.asItem()));
-		dropSelf(TFBlocks.time_banister);
-
-		dropSelf(TFBlocks.transformation_log);
-		dropSelf(TFBlocks.stripped_transformation_log);
-		dropSelf(TFBlocks.transformation_wood);
-		dropSelf(TFBlocks.stripped_transformation_wood);
-		dropOther(TFBlocks.transformation_log_core, TFBlocks.transformation_log);
-		dropSelf(TFBlocks.transformation_sapling);
-		registerLeavesNoSapling(TFBlocks.transformation_leaves);
-		dropSelf(TFBlocks.trans_planks);
-		dropSelf(TFBlocks.trans_stairs);
-		add(TFBlocks.trans_slab, createSlabItemTable(TFBlocks.trans_slab));
-		dropSelf(TFBlocks.trans_button);
-		dropSelf(TFBlocks.trans_fence);
-		dropSelf(TFBlocks.trans_gate);
-		dropSelf(TFBlocks.trans_plate);
-		add(TFBlocks.trans_door, createSinglePropConditionTable(TFBlocks.trans_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.trans_trapdoor);
-		add(TFBlocks.trans_sign, createSingleItemTable(TFBlocks.trans_sign.asItem()));
-		add(TFBlocks.trans_wall_sign, createSingleItemTable(TFBlocks.trans_sign.asItem()));
-		dropSelf(TFBlocks.trans_banister);
-
-		dropSelf(TFBlocks.mining_log);
-		dropSelf(TFBlocks.stripped_mining_log);
-		dropSelf(TFBlocks.mining_wood);
-		dropSelf(TFBlocks.stripped_mining_wood);
-		dropOther(TFBlocks.mining_log_core, TFBlocks.mining_log);
-		dropSelf(TFBlocks.mining_sapling);
-		registerLeavesNoSapling(TFBlocks.mining_leaves);
-		dropSelf(TFBlocks.mine_planks);
-		dropSelf(TFBlocks.mine_stairs);
-		add(TFBlocks.mine_slab, createSlabItemTable(TFBlocks.mine_slab));
-		dropSelf(TFBlocks.mine_button);
-		dropSelf(TFBlocks.mine_fence);
-		dropSelf(TFBlocks.mine_gate);
-		dropSelf(TFBlocks.mine_plate);
-		add(TFBlocks.mine_door, createSinglePropConditionTable(TFBlocks.mine_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.mine_trapdoor);
-		add(TFBlocks.mine_sign, createSingleItemTable(TFBlocks.mine_sign.asItem()));
-		add(TFBlocks.mine_wall_sign, createSingleItemTable(TFBlocks.mine_sign.asItem()));
-		dropSelf(TFBlocks.mine_banister);
-
-		dropSelf(TFBlocks.sorting_log);
-		dropSelf(TFBlocks.stripped_sorting_log);
-		dropSelf(TFBlocks.sorting_wood);
-		dropSelf(TFBlocks.stripped_sorting_wood);
-		dropOther(TFBlocks.sorting_log_core, TFBlocks.sorting_log);
-		dropSelf(TFBlocks.sorting_sapling);
-		registerLeavesNoSapling(TFBlocks.sorting_leaves);
-		dropSelf(TFBlocks.sort_planks);
-		dropSelf(TFBlocks.sort_stairs);
-		add(TFBlocks.sort_slab, createSlabItemTable(TFBlocks.sort_slab));
-		dropSelf(TFBlocks.sort_button);
-		dropSelf(TFBlocks.sort_fence);
-		dropSelf(TFBlocks.sort_gate);
-		dropSelf(TFBlocks.sort_plate);
-		add(TFBlocks.sort_door, createSinglePropConditionTable(TFBlocks.sort_door, DoorBlock.HALF, DoubleBlockHalf.LOWER));
-		dropSelf(TFBlocks.sort_trapdoor);
-		add(TFBlocks.sort_sign, createSingleItemTable(TFBlocks.sort_sign.asItem()));
-		add(TFBlocks.sort_wall_sign, createSingleItemTable(TFBlocks.sort_sign.asItem()));
-		dropSelf(TFBlocks.sort_banister);
-
-	}
-
-	private void registerLeavesNoSapling(Block leaves) {
-		LootPoolEntryContainer.Builder<?> sticks = applyExplosionDecay(leaves, LootItem.lootTableItem(Items.STICK)
-				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-				.when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F)));
-		add(leaves, createSilkTouchOrShearsDispatchTable(leaves, sticks));
-	}
-
-
-	// [VanillaCopy] super.droppingWithChancesAndSticks, but non-silk touch parameter can be an item instead of a block
-	private static LootTable.Builder silkAndStick(Block block, ItemLike nonSilk, float... nonSilkFortune) {
-		LootItemCondition.Builder NOT_SILK_TOUCH_OR_SHEARS = BlockLoot.HAS_NO_SHEARS_OR_SILK_TOUCH;
-		return createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(nonSilk.asItem())).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, nonSilkFortune))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(NOT_SILK_TOUCH_OR_SHEARS).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
-	}
-
-	private static LootTable.Builder casketInfo(Block block) {
-		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).apply(CopyBlockState.copyState(block).copy(KeepsakeCasketBlock.BREAKAGE)));
-	}
-
-	private static LootTable.Builder particleSpawner() {
-		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(applyExplosionDecay(TFBlocks.firefly_spawner, LootItem.lootTableItem(TFBlocks.firefly_spawner))))
-				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(TFBlocks.firefly)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 2))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 3))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(3.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 4))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 5))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(5.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 6))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 7))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(7.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 8))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(8.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 9))))
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(9.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.firefly_spawner).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 10))))));
-	}
-
-	protected static LootTable.Builder torchberryPlant(Block pBlock) {
-		LootItemCondition.Builder HAS_SHEARS = BlockLoot.HAS_SHEARS;
-		return LootTable.lootTable()
-				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(pBlock).when(HAS_SHEARS)))
-				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(TFItems.torchberries)
 		add(TFBlocks.ZOMBIE_SKULL_CANDLE, dropWithoutSilk(Blocks.ZOMBIE_HEAD));
 		add(TFBlocks.ZOMBIE_WALL_SKULL_CANDLE, dropWithoutSilk(Blocks.ZOMBIE_HEAD));
 		add(TFBlocks.SKELETON_SKULL_CANDLE, dropWithoutSilk(Blocks.SKELETON_SKULL));
@@ -477,6 +227,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.CREEPER_WALL_SKULL_CANDLE, dropWithoutSilk(Blocks.CREEPER_HEAD));
 		add(TFBlocks.PLAYER_SKULL_CANDLE, dropWithoutSilk(Blocks.PLAYER_HEAD));
 		add(TFBlocks.PLAYER_WALL_SKULL_CANDLE, dropWithoutSilk(Blocks.PLAYER_HEAD));
+
 		dropSelf(TFBlocks.IRON_LADDER);
 		dropSelf(TFBlocks.TWISTED_STONE);
 		dropSelf(TFBlocks.TWISTED_STONE_PILLAR);
@@ -502,6 +253,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		dropPottedContents(TFBlocks.POTTED_THORN);
 		dropPottedContents(TFBlocks.POTTED_GREEN_THORN);
 		dropPottedContents(TFBlocks.POTTED_DEAD_THORN);
+
 		dropSelf(TFBlocks.OAK_BANISTER);
 		dropSelf(TFBlocks.SPRUCE_BANISTER);
 		dropSelf(TFBlocks.BIRCH_BANISTER);
@@ -510,6 +262,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		dropSelf(TFBlocks.DARK_OAK_BANISTER);
 		dropSelf(TFBlocks.CRIMSON_BANISTER);
 		dropSelf(TFBlocks.WARPED_BANISTER);
+
 		dropSelf(TFBlocks.TWILIGHT_OAK_LOG);
 		dropSelf(TFBlocks.STRIPPED_TWILIGHT_OAK_LOG);
 		dropSelf(TFBlocks.TWILIGHT_OAK_WOOD);
@@ -531,6 +284,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.TWILIGHT_OAK_SIGN, createSingleItemTable(TFBlocks.TWILIGHT_OAK_SIGN.asItem()));
 		add(TFBlocks.TWILIGHT_WALL_SIGN, createSingleItemTable(TFBlocks.TWILIGHT_OAK_SIGN.asItem()));
 		dropSelf(TFBlocks.TWILIGHT_OAK_BANISTER);
+
 		dropSelf(TFBlocks.CANOPY_LOG);
 		dropSelf(TFBlocks.STRIPPED_CANOPY_LOG);
 		dropSelf(TFBlocks.CANOPY_WOOD);
@@ -550,6 +304,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.CANOPY_WALL_SIGN, createSingleItemTable(TFBlocks.CANOPY_SIGN.asItem()));
 		add(TFBlocks.CANOPY_BOOKSHELF, createSingleItemTableWithSilkTouch(TFBlocks.CANOPY_BOOKSHELF, Items.BOOK, ConstantValue.exactly(3.0F)));
 		dropSelf(TFBlocks.CANOPY_BANISTER);
+
 		dropSelf(TFBlocks.MANGROVE_LOG);
 		dropSelf(TFBlocks.STRIPPED_MANGROVE_LOG);
 		dropSelf(TFBlocks.MANGROVE_WOOD);
@@ -568,6 +323,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.MANGROVE_SIGN, createSingleItemTable(TFBlocks.MANGROVE_SIGN.asItem()));
 		add(TFBlocks.MANGROVE_WALL_SIGN, createSingleItemTable(TFBlocks.MANGROVE_SIGN.asItem()));
 		dropSelf(TFBlocks.MANGROVE_BANISTER);
+
 		dropSelf(TFBlocks.DARK_LOG);
 		dropSelf(TFBlocks.STRIPPED_DARK_LOG);
 		dropSelf(TFBlocks.DARK_WOOD);
@@ -587,6 +343,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.DARKWOOD_SIGN, createSingleItemTable(TFBlocks.DARKWOOD_SIGN.asItem()));
 		add(TFBlocks.DARKWOOD_WALL_SIGN, createSingleItemTable(TFBlocks.DARKWOOD_SIGN.asItem()));
 		dropSelf(TFBlocks.DARKWOOD_BANISTER);
+
 		dropSelf(TFBlocks.TIME_LOG);
 		dropSelf(TFBlocks.STRIPPED_TIME_LOG);
 		dropSelf(TFBlocks.TIME_WOOD);
@@ -606,6 +363,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.TIME_SIGN, createSingleItemTable(TFBlocks.TIME_SIGN.asItem()));
 		add(TFBlocks.TIME_WALL_SIGN, createSingleItemTable(TFBlocks.TIME_SIGN.asItem()));
 		dropSelf(TFBlocks.TIME_BANISTER);
+
 		dropSelf(TFBlocks.TRANSFORMATION_LOG);
 		dropSelf(TFBlocks.STRIPPED_TRANSFORMATION_LOG);
 		dropSelf(TFBlocks.TRANSFORMATION_WOOD);
@@ -625,6 +383,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.TRANSFORMATION_SIGN, createSingleItemTable(TFBlocks.TRANSFORMATION_SIGN.asItem()));
 		add(TFBlocks.TRANSFORMATION_WALL_SIGN, createSingleItemTable(TFBlocks.TRANSFORMATION_SIGN.asItem()));
 		dropSelf(TFBlocks.TRANSFORMATION_BANISTER);
+
 		dropSelf(TFBlocks.MINING_LOG);
 		dropSelf(TFBlocks.STRIPPED_MINING_LOG);
 		dropSelf(TFBlocks.MINING_WOOD);
@@ -644,6 +403,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.MINING_SIGN, createSingleItemTable(TFBlocks.MINING_SIGN.asItem()));
 		add(TFBlocks.MINING_WALL_SIGN, createSingleItemTable(TFBlocks.MINING_SIGN.asItem()));
 		dropSelf(TFBlocks.MINING_BANISTER);
+
 		dropSelf(TFBlocks.SORTING_LOG);
 		dropSelf(TFBlocks.STRIPPED_SORTING_LOG);
 		dropSelf(TFBlocks.SORTING_WOOD);
@@ -663,7 +423,31 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(TFBlocks.SORTING_SIGN, createSingleItemTable(TFBlocks.SORTING_SIGN.asItem()));
 		add(TFBlocks.SORTING_WALL_SIGN, createSingleItemTable(TFBlocks.SORTING_SIGN.asItem()));
 		dropSelf(TFBlocks.SORTING_BANISTER);
+
+	}
+
+	private void registerLeavesNoSapling(Block leaves) {
+		LootPoolEntryContainer.Builder<?> sticks = applyExplosionDecay(leaves, LootItem.lootTableItem(Items.STICK)
+				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+				.when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F)));
+		add(leaves, createSilkTouchOrShearsDispatchTable(leaves, sticks));
+	}
+
+
+	// [VanillaCopy] super.droppingWithChancesAndSticks, but non-silk touch parameter can be an item instead of a block
+	private static LootTable.Builder silkAndStick(Block block, ItemLike nonSilk, float... nonSilkFortune) {
+		LootItemCondition.Builder NOT_SILK_TOUCH_OR_SHEARS = BlockLoot.HAS_NO_SHEARS_OR_SILK_TOUCH;
+		return createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(nonSilk.asItem())).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, nonSilkFortune))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(NOT_SILK_TOUCH_OR_SHEARS).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
+	}
+
+	private static LootTable.Builder casketInfo(Block block) {
+		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).apply(CopyBlockState.copyState(block).copy(KeepsakeCasketBlock.BREAKAGE)));
+	}
+
+	private static LootTable.Builder particleSpawner() {
+		return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(applyExplosionDecay(TFBlocks.FIREFLY_SPAWNER, LootItem.lootTableItem(TFBlocks.FIREFLY_SPAWNER))))
+				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(TFBlocks.FIREFLY)
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.FIREFLY_SPAWNER).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 2))))
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.FIREFLY_SPAWNER).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 3))))
@@ -674,6 +458,14 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(7.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.FIREFLY_SPAWNER).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 8))))
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(8.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.FIREFLY_SPAWNER).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 9))))
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(9.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TFBlocks.FIREFLY_SPAWNER).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AbstractParticleSpawnerBlock.RADIUS, 10))))));
+	}
+
+	protected static LootTable.Builder torchberryPlant(Block pBlock) {
+		LootItemCondition.Builder HAS_SHEARS = BlockLoot.HAS_SHEARS;
+		return LootTable.lootTable()
+				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+						.add(LootItem.lootTableItem(pBlock).when(HAS_SHEARS)))
+				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(TFItems.TORCHBERRIES)
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(pBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TorchberryPlantBlock.HAS_BERRIES, true)))));
 	}

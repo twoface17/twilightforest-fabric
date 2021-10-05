@@ -37,16 +37,16 @@ public class KnightmetalSwordItem extends SwordItem {
 
 			if (!weapon.isEmpty()) {
 				if (target.getArmorValue() > 0 && (weapon.is(TFItems.KNIGHTMETAL_PICKAXE) || weapon.is(TFItems.KNIGHTMETAL_SWORD))) {
-					if(target.getArmorCoverPercentage() > 0) {
-						int moreBonus = (int) (BONUS_DAMAGE * target.getArmorCoverPercentage());
-						evt.setAmount(evt.getAmount() + moreBonus);
-					} else {
-						evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
-					}
-					// enchantment attack sparkles
-					((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
-				} else if(target.getArmorValue() == 0 && weapon.is(TFItems.KNIGHTMETAL_AXE)) {
-					evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
+//					if(target.getArmorCoverPercentage() > 0) {
+//						int moreBonus = (int) (BONUS_DAMAGE * target.getArmorCoverPercentage());
+//						evt.setAmount(evt.getAmount() + moreBonus);
+//					} else {
+//						evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
+//					}
+//					// enchantment attack sparkles
+//					((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
+//				} else if(target.getArmorValue() == 0 && weapon.is(TFItems.KNIGHTMETAL_AXE)) {
+//					evt.setAmount(evt.getAmount() + BONUS_DAMAGE);
 					// enchantment attack sparkles
 					((ServerLevel) target.level).getChunkSource().broadcastAndSend(target, new ClientboundAnimatePacket(target, 5));
 				}

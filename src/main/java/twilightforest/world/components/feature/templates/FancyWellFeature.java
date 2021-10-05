@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureMana
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.components.processors.CobblePlankSwizzler;
 
@@ -22,8 +23,8 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class FancyWellFeature extends TemplateFeature<NoneFeatureConfiguration> {
-    private static final ResourceLocation WELL_TOP = TFConstants.prefix("feature/well/fancy_well_top");
-    private static final ResourceLocation WELL_BOTTOM = TFConstants.prefix("feature/well/fancy_well_bottom");
+    private static final ResourceLocation WELL_TOP = TwilightForestMod.prefix("feature/well/fancy_well_top");
+    private static final ResourceLocation WELL_BOTTOM = TwilightForestMod.prefix("feature/well/fancy_well_bottom");
 
     public FancyWellFeature(Codec<NoneFeatureConfiguration> config) {
         super(config);

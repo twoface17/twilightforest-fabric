@@ -20,7 +20,7 @@ public class CourtyardTerraceDuct extends TwilightTemplateStructurePiece {
     }
 
     public CourtyardTerraceDuct(int i, int x, int y, int z, Rotation rotation, StructureManager structureManager) {
-        super(NagaCourtyardPieces.TFNCDu, i, structureManager, TFConstants.prefix("courtyard/terrace_duct"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
+        super(NagaCourtyardPieces.TFNCDu, i, structureManager, TwilightForestMod.prefix("courtyard/terrace_duct"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
     }
 
     @Override

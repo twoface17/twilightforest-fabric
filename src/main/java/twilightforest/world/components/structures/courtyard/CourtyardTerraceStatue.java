@@ -20,7 +20,7 @@ public class CourtyardTerraceStatue extends TwilightTemplateStructurePiece {
     }
 
     public CourtyardTerraceStatue(int i, int x, int y, int z, Rotation rotation, StructureManager structureManager) {
-        super(NagaCourtyardPieces.TFNCSt, i, structureManager, TFConstants.prefix("terrace_statue/terrace_fire"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
+        super(NagaCourtyardPieces.TFNCSt, i, structureManager, TwilightForestMod.prefix("terrace_statue/terrace_fire"), makeSettings(rotation).addProcessor(CourtyardMain.TERRACE_PROCESSOR), new BlockPos(x, y, z));
     }
 
     @Override

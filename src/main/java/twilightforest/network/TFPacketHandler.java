@@ -2,10 +2,11 @@ package twilightforest.network;
 
 import net.fabricmc.api.EnvType;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class TFPacketHandler {
 	private static final String PROTOCOL_VERSION = "1";
-	public static final NetworkWrapper CHANNEL = new NetworkWrapper(TFConstants.prefix("channel"));
+	public static final NetworkWrapper CHANNEL = new NetworkWrapper(TwilightForestMod.prefix("channel"));
 
 	@SuppressWarnings("UnusedAssignment")
 	public static void init() {

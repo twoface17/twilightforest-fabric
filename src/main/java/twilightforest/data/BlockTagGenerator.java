@@ -14,27 +14,28 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
 public class BlockTagGenerator extends BlockTagsProvider {
-    public static final Tag.Named<Block> TOWERWOOD = TagFactory.BLOCK.create(TFConstants.prefix("towerwood"));
+    public static final Tag.Named<Block> TOWERWOOD = TagFactory.BLOCK.create(TwilightForestMod.prefix("towerwood"));
 
-    public static final Tag.Named<Block> TWILIGHT_OAK_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("twilight_oak_logs"));
-    public static final Tag.Named<Block> CANOPY_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("canopy_logs"));
-    public static final Tag.Named<Block> MANGROVE_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("mangrove_logs"));
-    public static final Tag.Named<Block> DARKWOOD_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("darkwood_logs"));
-    public static final Tag.Named<Block> TIME_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("timewood_logs"));
-    public static final Tag.Named<Block> TRANSFORMATION_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("transwood_logs"));
-    public static final Tag.Named<Block> MINING_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("mining_logs"));
-    public static final Tag.Named<Block> SORTING_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("sortwood_logs"));
+    public static final Tag.Named<Block> TWILIGHT_OAK_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("twilight_oak_logs"));
+    public static final Tag.Named<Block> CANOPY_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("canopy_logs"));
+    public static final Tag.Named<Block> MANGROVE_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("mangrove_logs"));
+    public static final Tag.Named<Block> DARKWOOD_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("darkwood_logs"));
+    public static final Tag.Named<Block> TIME_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("timewood_logs"));
+    public static final Tag.Named<Block> TRANSFORMATION_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("transwood_logs"));
+    public static final Tag.Named<Block> MINING_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("mining_logs"));
+    public static final Tag.Named<Block> SORTING_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("sortwood_logs"));
 
-    public static final Tag.Named<Block> TF_LOGS = TagFactory.BLOCK.create(TFConstants.prefix("logs"));
-    public static final Tag.Named<Block> TF_FENCES = TagFactory.BLOCK.create(TFConstants.prefix("fences"));
-    public static final Tag.Named<Block> TF_FENCE_GATES = TagFactory.BLOCK.create(TFConstants.prefix("fence_gates"));
-    public static final Tag.Named<Block> BANISTERS = TagFactory.BLOCK.create(TFConstants.prefix("banisters"));
+    public static final Tag.Named<Block> TF_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("logs"));
+    public static final Tag.Named<Block> TF_FENCES = TagFactory.BLOCK.create(TwilightForestMod.prefix("fences"));
+    public static final Tag.Named<Block> TF_FENCE_GATES = TagFactory.BLOCK.create(TwilightForestMod.prefix("fence_gates"));
+    public static final Tag.Named<Block> BANISTERS = TagFactory.BLOCK.create(TwilightForestMod.prefix("banisters"));
 
     public static final Tag.Named<Block> STORAGE_BLOCKS_ARCTIC_FUR = TagFactory.BLOCK.create(new ResourceLocation("c:arctic_fur_storage_block"));
     public static final Tag.Named<Block> STORAGE_BLOCKS_CARMINITE = TagFactory.BLOCK.create(new ResourceLocation("c:carminite_storage_block"));
@@ -46,27 +47,27 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> ORES_IRONWOOD = TagFactory.BLOCK.create(new ResourceLocation("c:ironwood_ores"));
     public static final Tag.Named<Block> ORES_KNIGHTMETAL = TagFactory.BLOCK.create(new ResourceLocation("c:knightmetal_ores"));
 
-    public static final Tag.Named<Block> PORTAL_EDGE = TagFactory.BLOCK.create(TFConstants.prefix("portal/edge"));
-    public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TFConstants.prefix("portal/fluid"));
-    public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TFConstants.prefix("portal/decoration"));
+    public static final Tag.Named<Block> PORTAL_EDGE = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/edge"));
+    public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/fluid"));
+    public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/decoration"));
 
-    public static final Tag.Named<Block> SPECIAL_POTS = TagFactory.BLOCK.create(TFConstants.prefix("dark_tower_excluded_pots"));
-    public static final Tag.Named<Block> TROPHIES = TagFactory.BLOCK.create(TFConstants.prefix("trophies"));
-    public static final Tag.Named<Block> FIRE_JET_FUEL = TagFactory.BLOCK.create(TFConstants.prefix("fire_jet_fuel"));
+    public static final Tag.Named<Block> SPECIAL_POTS = TagFactory.BLOCK.create(TwilightForestMod.prefix("dark_tower_excluded_pots"));
+    public static final Tag.Named<Block> TROPHIES = TagFactory.BLOCK.create(TwilightForestMod.prefix("trophies"));
+    public static final Tag.Named<Block> FIRE_JET_FUEL = TagFactory.BLOCK.create(TwilightForestMod.prefix("fire_jet_fuel"));
 
-    public static final Tag.Named<Block> COMMON_PROTECTIONS = TagFactory.BLOCK.create(TFConstants.prefix("common_protections"));
-    public static final Tag.Named<Block> ANNIHILATION_INCLUSIONS = TagFactory.BLOCK.create(TFConstants.prefix("annihilation_inclusions"));
-    public static final Tag.Named<Block> ANTIBUILDER_IGNORES = TagFactory.BLOCK.create(TFConstants.prefix("antibuilder_ignores"));
-    public static final Tag.Named<Block> CARMINITE_REACTOR_IMMUNE = TagFactory.BLOCK.create(TFConstants.prefix("carminite_reactor_immune"));
-    public static final Tag.Named<Block> STRUCTURE_BANNED_INTERACTIONS = TagFactory.BLOCK.create(TFConstants.prefix("structure_banned_interactions"));
+    public static final Tag.Named<Block> COMMON_PROTECTIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("common_protections"));
+    public static final Tag.Named<Block> ANNIHILATION_INCLUSIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("annihilation_inclusions"));
+    public static final Tag.Named<Block> ANTIBUILDER_IGNORES = TagFactory.BLOCK.create(TwilightForestMod.prefix("antibuilder_ignores"));
+    public static final Tag.Named<Block> CARMINITE_REACTOR_IMMUNE = TagFactory.BLOCK.create(TwilightForestMod.prefix("carminite_reactor_immune"));
+    public static final Tag.Named<Block> STRUCTURE_BANNED_INTERACTIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("structure_banned_interactions"));
 
-    public static final Tag.Named<Block> ORE_MAGNET_SAFE_REPLACE_BLOCK = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/ore_safe_replace_block").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_BLOCK_REPLACE_ORE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/block_replace_ore").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_STONE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/stone").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_NETHERRACK = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/netherrack").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_END_STONE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/end_stone").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_ROOT = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/" + TwilightForestMod.ID + "/root").toString());
-    public static final Tag.Named<Block> ORE_MAGNET_DEEPSLATE = BlockTags.bind(TwilightForestMod.prefix("ore_magnet/minecraft/deepslate").toString());
+    public static final Tag.Named<Block> ORE_MAGNET_SAFE_REPLACE_BLOCK = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/ore_safe_replace_block"));
+    public static final Tag.Named<Block> ORE_MAGNET_BLOCK_REPLACE_ORE = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/block_replace_ore"));
+    public static final Tag.Named<Block> ORE_MAGNET_STONE = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/minecraft/stone"));
+    public static final Tag.Named<Block> ORE_MAGNET_NETHERRACK = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/minecraft/netherrack"));
+    public static final Tag.Named<Block> ORE_MAGNET_END_STONE = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/minecraft/end_stone"));
+    public static final Tag.Named<Block> ORE_MAGNET_ROOT = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/" + TwilightForestMod.ID + "/root"));
+    public static final Tag.Named<Block> ORE_MAGNET_DEEPSLATE = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/minecraft/deepslate"));
 
     public BlockTagGenerator(DataGenerator generator) {
         super(generator);
@@ -226,7 +227,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
         tag(ORES_KNIGHTMETAL); // Intentionally blank
 
         tag(BlockTags.DIRT).add(TFBlocks.UBEROUS_SOIL);
-        tag(PORTAL_EDGE).addTags(BlockTags.DIRT);
+        tag(PORTAL_EDGE).addTag(BlockTags.DIRT);
         // So yes, we could do fluid tags for the portal pool but the problem is that we're -replacing- the block, effectively replacing what would be waterlogged, with the portal block
         // In the future if we can "portal log" blocks then we can re-explore doing it as a fluid
         tag(PORTAL_POOL).add(Blocks.WATER);
@@ -321,7 +322,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
         tag(BlockTags.BUTTONS);
         tag(STRUCTURE_BANNED_INTERACTIONS)
-                .addTags(BlockTags.BUTTONS, Tags.Blocks.CHESTS).add(Blocks.LEVER)
+                .addTag(BlockTags.BUTTONS).add(Blocks.CHEST).add(Blocks.TRAPPED_CHEST).add(Blocks.ENDER_CHEST).add(Blocks.LEVER)
                 .add(TFBlocks.ANTIBUILDER);
 
         tag(ORE_MAGNET_SAFE_REPLACE_BLOCK)

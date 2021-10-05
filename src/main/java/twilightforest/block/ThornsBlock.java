@@ -43,8 +43,8 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 	@Override
 	public boolean canConnectTo(BlockState state, boolean solidSide) {
 		return (state.getBlock() instanceof ThornsBlock
-						|| state.getBlock() == TFBlocks.THORN_ROSE.get()
-						|| state.getBlock() == TFBlocks.THORN_LEAVES.get()
+						|| state.getBlock() == TFBlocks.THORN_ROSE
+						|| state.getBlock() == TFBlocks.THORN_LEAVES
 						|| state.getMaterial() == Material.PLANT
 						|| state.getMaterial() == Material.DIRT);
 	}

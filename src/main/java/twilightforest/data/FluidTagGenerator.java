@@ -12,7 +12,7 @@ import twilightforest.TwilightForestMod;
 
 public class FluidTagGenerator extends FluidTagsProvider {
 
-    public static final Tag.Named<Fluid> FIRE_JET_FUEL = (Tag.Named<Fluid>) TagRegistry.fluid(TFConstants.prefix("fire_jet_fuel"));
+    public static final Tag.Named<Fluid> FIRE_JET_FUEL = (Tag.Named<Fluid>) TagRegistry.fluid(TwilightForestMod.prefix("fire_jet_fuel"));
 
     public FluidTagGenerator(DataGenerator generatorIn) {
         super(generatorIn/*, TwilightForestMod.ID, existingFileHelper*/);
