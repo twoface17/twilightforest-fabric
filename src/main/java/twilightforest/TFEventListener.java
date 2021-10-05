@@ -309,7 +309,7 @@ public class TFEventListener {
 							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_SKULL_CANDLE);
 						}
 						default -> {
-							return;
+							return InteractionResult.FAIL;
 						}
 					}
 					if(!player.getAbilities().instabuild) stack.shrink(1);
