@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -34,12 +33,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.enums.BanisterShape;
-import twilightforest.extensions.IAIPath;
+import twilightforest.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BanisterBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, IAIPath {
+public class BanisterBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, IBlockMethods {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<BanisterShape> SHAPE = EnumProperty.create("shape", BanisterShape.class);
     public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
