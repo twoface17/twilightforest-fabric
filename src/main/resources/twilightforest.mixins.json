@@ -28,6 +28,7 @@
     "BlockStateMixin",
     "ServerPlayerGameModeMixin",
     "BushBlockMixin",
+    "FireBlockMixin",
     "TntBlockAccessor",
     "ResultSlotMixin"
   ],
