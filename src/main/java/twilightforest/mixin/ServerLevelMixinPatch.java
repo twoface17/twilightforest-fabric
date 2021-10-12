@@ -1,11 +1,9 @@
 package twilightforest.mixin;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
-
-import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import twilightforest.ASMHooks;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 @Mixin(ServerLevel.class)
 @Debug(export = true)
