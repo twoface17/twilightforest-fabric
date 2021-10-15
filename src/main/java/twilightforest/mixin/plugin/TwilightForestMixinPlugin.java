@@ -15,12 +15,12 @@ public class TwilightForestMixinPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
         patches = new ArrayList<>();
-        patches.add(new LevelPatch());
+        //patches.add(new LevelPatch());
         //patches.add(new ServerLevelPatch());
-        patches.add(new ServerLevelPatchStart());
-        patches.add(new ServerLevelPatchEnd());
+        //patches.add(new ServerLevelPatchStart());
+        //patches.add(new ServerLevelPatchEnd());
 //        patches.add(new ServerLevelEntitycallbackPatch());
-        patches.add(new ServerEntityPatch());
+        //patches.add(new ServerEntityPatch());
         patches.add(new EntityRenderDispatcherPatch());
         patches.add(new MapItemPatch());
 //        patches.add(new BiomeColorsPatch());

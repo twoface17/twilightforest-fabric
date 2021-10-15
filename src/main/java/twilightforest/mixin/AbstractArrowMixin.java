@@ -17,7 +17,7 @@ public class AbstractArrowMixin {
     @Unique
     private HitResult result;
 
-    @ModifyVariable(method = "tick", at = @At(value = "STORE"), ordinal = 0)
+    @ModifyVariable(method = "tick", at = @At(value = "STORE"))
     public HitResult saveHitResult(HitResult result){
         this.result = result;
         return result;

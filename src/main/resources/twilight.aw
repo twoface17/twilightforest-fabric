@@ -117,6 +117,7 @@ accessible class net/minecraft/client/gui/MapRenderer$MapInstance
 accessible field net/minecraft/client/gui/MapRenderer MAP_ICONS Lnet/minecraft/client/renderer/RenderType;
 accessible field net/minecraft/server/level/ServerLevel players Ljava/util/List;
 accessible field net/minecraft/server/level/ServerLevel navigatingMobs Ljava/util/Set;
+accessible field net/minecraft/server/level/ServerLevel navigatingMobs Ljava/util/Set;
 accessible method net/minecraft/world/entity/Entity unsetRemoved ()V
 extendable class net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator
 accessible method net/minecraft/world/level/block/BushBlock mayPlaceOn (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z

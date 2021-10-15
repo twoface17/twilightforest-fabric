@@ -17,7 +17,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 @Mixin(LivingEntity.class)
-@Debug(export = true)
 public class LivingEntityMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     public void livingUpdate(CallbackInfo ci) {

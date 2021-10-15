@@ -6,6 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.impl.resource.loader.FabricModResourcePack;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -77,7 +78,7 @@ public class TFClientSetup implements ClientModInitializer {
         FabricClientEvents();
         FabricRenderingCalls();
         //TODO: Currently only work's in Dev Environment
-        //twilightforest.client.TFClientSetup.addLegacyPack();
+        //TFClientSetup.addLegacyPack();
 		TFItems.addItemModelProperties();
 
         ScreenEvents.BEFORE_INIT.register(((client, screen, scaledWidth, scaledHeight) -> LoadingScreenListener.onOpenGui(screen))); //MinecraftForge.EVENT_BUS.register(new LoadingScreenListener());
