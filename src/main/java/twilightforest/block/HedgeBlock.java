@@ -51,7 +51,7 @@ public class HedgeBlock extends Block implements IBlockMethods {
 	@Nullable
 	//@Override
 	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-		return entity != null && shouldDamage(entity) ? BlockPathTypes.DAMAGE_CACTUS : null;
+		return entity != null && shouldDamage(entity) ? BlockPathTypes.DANGER_CACTUS : null;
 	}
 
 	@Override

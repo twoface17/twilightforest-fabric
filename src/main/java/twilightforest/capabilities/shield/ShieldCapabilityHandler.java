@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.network.UpdateShieldPacket;
+import twilightforest.util.TFStats;
 
 public class ShieldCapabilityHandler implements IShieldCapability {
 	private int temporaryShields;
@@ -53,6 +54,7 @@ public class ShieldCapabilityHandler implements IShieldCapability {
 			permanentShields--;
 		}
 
+		if(host instanceof Player player && player instanceof ServerPlayer) player.awardStat(TFStats.TF_SHIELDS_BROKEN);
 		host.level.playSound(null, host.blockPosition(), TFSounds.SHIELD_BREAK, SoundSource.PLAYERS, 1.0F, ((host.getRandom().nextFloat() - host.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 		sendUpdatePacket();
 	}

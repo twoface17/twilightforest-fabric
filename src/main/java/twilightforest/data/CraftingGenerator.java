@@ -197,16 +197,16 @@ public class CraftingGenerator extends CraftingDataHelper {
 
 		ShapelessRecipeBuilder.shapeless(TFItems.CARMINITE)
 				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
+				.requires(Items.REDSTONE)
 				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
-				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
-				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
+				.requires(Items.REDSTONE)
 				.requires(Ingredient.of(Items.GHAST_TEAR))
 				.requires(Items.REDSTONE)
+				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
 				.requires(Items.REDSTONE)
-				.requires(Items.REDSTONE)
-				.requires(Items.REDSTONE)
+				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
 				.unlockedBy("has_item", has(TFItems.BORER_ESSENCE))
-				.save(consumer, TwilightForestMod.prefix("material/" + Registry.ITEM.getKey(TFItems.CARMINITE).getPath()));
+				.save(consumer, TwilightForestMod.prefix("material/" + TFItems.CARMINITE.getId().getPath()));
 
 		ShapelessRecipeBuilder.shapeless(TFItems.RAW_IRONWOOD, 2)
 				.requires(Ingredient.of(TFItems.LIVEROOT))
@@ -694,6 +694,12 @@ public class CraftingGenerator extends CraftingDataHelper {
 	private void fieryConversions(Consumer<FinishedRecipe> consumer) {
 		UpgradeRecipeBuilder.smithing(Ingredient.of(Items.IRON_INGOT), Ingredient.of(ItemTagGenerator.FIERY_VIAL), TFItems.FIERY_INGOT).unlocks("has_item", has(TFItems.FIERY_INGOT)).save(consumer, TwilightForestMod.prefix("material/fiery_iron_ingot"));
 		UpgradeRecipeBuilder.smithing(Ingredient.of(ItemTagGenerator.FIERY_VIAL), Ingredient.of(Items.IRON_INGOT), TFItems.FIERY_INGOT).unlocks("has_item", has(TFItems.FIERY_INGOT)).save(consumer, TwilightForestMod.prefix("material/fiery_iron_ingot_reversed"));
+
+		ShapelessRecipeBuilder.shapeless(TFItems.FIERY_INGOT.get())
+				.requires(Ingredient.of(ItemTagGenerator.FIERY_VIAL))
+				.requires(Ingredient.of(Tags.Items.INGOTS_IRON))
+				.unlockedBy("has_item", has(ItemTagGenerator.FIERY_VIAL))
+				.save(consumer, locEquip("fiery_ingot_crafting"));
 
 		fieryConversion(consumer, TFItems.FIERY_HELMET, Items.IRON_HELMET, 5);
 		fieryConversion(consumer, TFItems.FIERY_CHESTPLATE, Items.IRON_CHESTPLATE, 8);

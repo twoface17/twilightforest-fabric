@@ -182,7 +182,7 @@
   "block.twilightforest.twilight_oak_leaves": "Twilight Oak Leaves",
   "block.twilightforest.canopy_leaves": "Canopy Tree Leaves",
   "block.twilightforest.mangrove_leaves": "Mangrove Leaves",
-  "block.twilightforest.rainboak_leaves": "Rainbow Oak Leaves",
+  "block.twilightforest.rainbow_oak_leaves": "Rainbow Oak Leaves",
   "block.twilightforest.firefly": "Firefly",
   "block.twilightforest.cicada": "Cicada",
   "block.twilightforest.cicada.desc": "What if this could be launched at someone with a Railgun...?",
@@ -238,7 +238,7 @@
   "block.twilightforest.transformation_sapling": "Tree of Transformation Sapling",
   "block.twilightforest.mining_sapling": "Miner's Tree Sapling",
   "block.twilightforest.sorting_sapling": "Sorting Tree Sapling",
-  "block.twilightforest.rainboak_sapling": "Rainbow Oak Sapling",
+  "block.twilightforest.rainbow_oak_sapling": "Rainbow Oak Sapling",
   "block.twilightforest.moonworm": "Moonworm",
   "block.twilightforest.time_log": "Timewood Log",
   "block.twilightforest.transformation_log": "Transwood Log",
@@ -925,7 +925,6 @@
   "item.twilightforest.guide": "Traveller's Logbook [WIP]",
 
   "item.twilightforest.minotaur_axe.tooltip": "Extra damage while charging",
-  "item.twilightforest.minotaur_axe_gold.tooltip": "Extra damage while charging",
   "item.twilightforest.knightmetal_sword.tooltip": "Extra damage to armored targets",
   "item.twilightforest.knightmetal_pickaxe.tooltip": "Extra damage to armored targets",
   "item.twilightforest.knightmetal_axe.tooltip": "Extra damage to unarmored targets",
@@ -937,7 +936,7 @@
   "item.twilightforest.yeti_armor.tooltip": "Chills attackers",
   "item.twilightforest.glass_sword.tooltip.1": "Creative Mode only",
 
-  "item.twilightforest.arctic_armor.tooltip": "Dyeable like Leather Armor",
+  "item.twilightforest.arctic_armor.tooltip": "Dyeable",
 
   "item.twilightforest.skull_candle.desc": "Has: %s %s Candle",
   "item.twilightforest.skull_candle.desc.multiple": "Has: %s %s Candles",
@@ -1320,6 +1319,18 @@
   "death.attack.twilightforest.yeeted": "%1$s was yeeted for the last time by %2$s",
   "death.attack.twilightforest.yeeted.item": "%1$s was yeeted for the last time by %2$s while somehow holding %3$s",
 
+  // Stats
+  "stat.twilightforest.blocks_crumbled": "Blocks Crumbled with Horn",
+  "stat.twilightforest.bugs_squished": "Bugs Squished",
+  "stat.twilightforest.e115_slices_eaten": "Experiment 115 Slices Eaten",
+  "stat.twilightforest.keeping_charms_activated": "Activated Charms of Keeping",
+  "stat.twilightforest.life_charms_activated": "Activated Charms of Life",
+  "stat.twilightforest.skull_candles_made": "Skull Candles Made",
+  "stat.twilightforest.tf_shields_broken": "Fortification Shields Broken",
+  "stat.twilightforest.torchberries_harvested": "Torchberries Harvested",
+  "stat.twilightforest.trophy_pedestals_activated": "Trophy Pedestals Activated",
+  "stat.twilightforest.uncrafting_table_interactions": "Interactions with Uncrafting Table",
+
   // Misc
   "twilightforest.misc.wip0": "This block is a work in progress and may have bugs or unintended effects that may damage your world.",
   "twilightforest.misc.wip1": "Use with caution.",
@@ -1329,8 +1340,11 @@
   "twilightforest.loading.title.leave": "Whisking you from the Twilight Forest...",
 
   "twilightforest.ui.magicmap.fail": "The Magic faltered. Perhaps it doesn't work here?",
-  "twilightforest.ui.biome_locked": "Unnatural forces impede you from progressing further.",
-  "twilightforest.ui.biome_locked_2": "(Check your advancements)",
+  "twilightforest.ui.biome_locked": "Biome Locked!",
+  "twilightforest.ui.biome_locked_2": "Check your advancements",
+  "twilightforest.ui.portal.unworthy": "The Portal pool is unresponsive. Perhaps something was neglected?",
+  "twilightforest.ui.advancement.required": "Advancement Required:",
+  "twilightforest.ui.advancement.no_title": "<Hidden Advancement>",
 
   // Config
 
@@ -1401,6 +1415,9 @@
 
   "text.autoconfig.twilightforest.option.tfConfigCommon.disableUncrafting": "Disable Uncrafting in Uncrafting Table",
   "text.autoconfig.twilightforest.option.tfConfigCommon.disableUncrafting.@Tooltip": "Disable the uncrafting function of the uncrafting table. Provided as an option when interaction with other mods produces exploitable recipes.",
+
+  "twilightforest.config.locked_toast": "Disable the Locked Biome Toasts.",
+  "twilightforest.config.locked_toast.tooltip": "Disables the toasts that appear when a biome is locked. Not recommended if you're not familiar with progression.",
 
   "text.autoconfig.twilightforest.option.tfConfigCommon.antibuilder_blacklist": "Antibuilder Blacklist",
   "text.autoconfig.twilightforest.option.tfConfigCommon.antibuilder_blacklist.@Tooltip": "Anti-Builder blacklist. (domain:block:meta) meta is optional.",

@@ -104,31 +104,6 @@ public class TFClientSetup implements ClientModInitializer {
         armorRegistry();
     }
 
-    public static void addLegacyPack() {
-        //noinspection ConstantConditions
-        if (Minecraft.getInstance() == null)
-            // Normally Minecraft Client is never null except when generating through runData
-            return;
-
-        Minecraft.getInstance().getResourcePackRepository().sources.add(
-                (consumer, iFactory) -> consumer.accept(
-                        Pack.create(
-                                TwilightForestMod.prefix("classic_textures").toString(),
-                                false,
-                                () -> new TwilightLegacyPack(
-                                        FabricLoader
-                                                .getInstance()
-                                                .getModContainer(TFConstants.ID)
-                                                .get()
-                                ),
-                                iFactory,
-                                Pack.Position.TOP,
-								PackSource.BUILT_IN
-                        )
-                )
-        );
-    }
-
 	private static Field field_EntityRenderersEvent$AddLayers_renderers;
 
 //	@SuppressWarnings("unchecked")

@@ -1,8 +1,11 @@
 package twilightforest.block;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +21,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import twilightforest.TFSounds;
 import twilightforest.TFConstants;
 import twilightforest.block.entity.CicadaBlockEntity;
 import twilightforest.block.entity.TFBlockEntities;
@@ -50,6 +54,12 @@ public class CicadaBlock extends CritterBlock {
 	@Override
 	public ItemStack getSquishResult() {
 		return new ItemStack(Items.GRAY_DYE, 1);
+	}
+
+	@Override
+	public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
+		super.destroy(pLevel, pPos, pState);
+		if(pLevel.isClientSide()) Minecraft.getInstance().getSoundManager().stop(TFSounds.CICADA.getLocation(), SoundSource.NEUTRAL);
 	}
 
 	@Override

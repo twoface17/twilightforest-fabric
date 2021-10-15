@@ -173,9 +173,9 @@
 //						.texture("all", blockTexture(Blocks.OAK_LEAVES)));
 //		simpleBlock(TFBlocks.GIANT_OBSIDIAN.get(), models().withExistingParent(TFBlocks.GIANT_OBSIDIAN.getId().getPath(), prefix("block/util/giant_block"))
 //						.texture("all", blockTexture(Blocks.OBSIDIAN)));
-//		simpleBlock(TFBlocks.UBEROUS_SOIL.get(), models().withExistingParent(TFBlocks.UBEROUS_SOIL.getId().getPath(), prefix("block/util/cube_all_2_layer"))
-//						.texture("all", blockTexture(TFBlocks.UBEROUS_SOIL.get()))
-//						.texture("all2", prefix("block/" + TFBlocks.UBEROUS_SOIL.getId().getPath() + "_glow")));
+//		simpleBlock(TFBlocks.UBEROUS_SOIL.get(), models().withExistingParent(TFBlocks.UBEROUS_SOIL.getId().getPath(), "block/template_farmland")
+//						.texture("top", blockTexture(TFBlocks.UBEROUS_SOIL.get()))
+//						.texture("dirt", blockTexture(TFBlocks.UBEROUS_SOIL.get())));
 //		axisBlock(TFBlocks.HUGE_STALK.get(), prefix("block/huge_stalk"), prefix("block/huge_stalk_top"));
 //		perFaceBlock(TFBlocks.HUGE_MUSHGLOOM.get(), prefix("block/huge_gloom_inside"), prefix("block/huge_gloom_cap"));
 //		perFaceBlock(TFBlocks.HUGE_MUSHGLOOM_STEM.get(), prefix("block/huge_gloom_inside"), prefix("block/huge_mushgloom_stem"));
@@ -262,11 +262,21 @@
 //		registerPlantBlocks();
 //		simpleBlock(TFBlocks.ROOT_BLOCK.get());
 //		simpleBlock(TFBlocks.LIVEROOT_BLOCK.get());
-//		simpleBlock(TFBlocks.UNCRAFTING_TABLE.get(), models().withExistingParent(TFBlocks.UNCRAFTING_TABLE.getId().getPath(), prefix("block/util/cube_bottom_double_top"))
-//						.texture("top", prefix("block/uncrafting_top"))
-//						.texture("glow", prefix("block/uncrafting_glow"))
-//						.texture("bottom", new ResourceLocation("block/jungle_planks"))
-//						.texture("side", prefix("block/uncrafting_side")));
+//
+//		ModelFile glowing = models().withExistingParent(TFBlocks.UNCRAFTING_TABLE.getId().getPath() + "_glowing", prefix("block/util/cube_bottom_double_top_and_sides"))
+//				.texture("top", prefix("block/uncrafting_top"))
+//				.texture("glow", prefix("block/uncrafting_glow"))
+//				.texture("sideglow", prefix("block/uncrafting_glow_side"))
+//				.texture("bottom", new ResourceLocation("block/jungle_planks"))
+//				.texture("side", prefix("block/uncrafting_side"));
+//
+//		ModelFile notglowing = models().withExistingParent(TFBlocks.UNCRAFTING_TABLE.getId().getPath(), prefix("block/util/cube_bottom_double_top"))
+//				.texture("top", prefix("block/uncrafting_top"))
+//				.texture("glow", prefix("block/uncrafting_glow"))
+//				.texture("bottom", new ResourceLocation("block/jungle_planks"))
+//				.texture("side", prefix("block/uncrafting_side"));
+//
+//		getVariantBuilder(TFBlocks.UNCRAFTING_TABLE.get()).forAllStates(s -> ConfiguredModel.builder().modelFile(s.getValue(UncraftingTableBlock.POWERED) ? glowing : notglowing).build());
 //		registerSmokersAndJets();
 //		axisBlock(TFBlocks.TWISTED_STONE.get(), prefix("block/stone_twist/twist_side"), prefix("block/stone_twist/twist_end"));
 //		axisBlock(TFBlocks.BOLD_STONE_PILLAR.get(), prefix("block/stone_pillar_side"), prefix("block/stone_pillar_end"));

@@ -22,8 +22,14 @@ import java.util.Random;
 
 public class UberousSoilBlock extends Block implements BonemealableBlock, IBlockMethods {
 
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+
 	public UberousSoilBlock(Properties props) {
 		super(props);
+	}
+
+	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+		return SHAPE;
 	}
 
 	@Override
@@ -40,7 +46,7 @@ public class UberousSoilBlock extends Block implements BonemealableBlock, IBlock
 		Material aboveMaterial = above.getMaterial();
 
 		if (aboveMaterial.isSolid()) {
-			world.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
+			world.setBlockAndUpdate(pos, pushEntitiesUp(state, Blocks.DIRT.defaultBlockState(), world, pos));
 		}
 
 		if (above.getBlock() instanceof BonemealableBlock) {

@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import twilightforest.extensions.IBlockMethods;
 import twilightforest.util.FeaturePlacers;
 import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
+import twilightforest.world.components.feature.trees.growers.SnowTreePlacer;
 
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -37,10 +38,8 @@ public class TFGenLargeWinter extends TFTreeGenerator<TFTreeFeatureConfig> {
 			return false;
 		}
 
-		// check if we're on dirt or grass
-		BlockState state = world.getBlockState(pos.below());
-
-		if (!((IBlockMethods)state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
+		// check if we're on a valid block
+		if (!SnowTreePlacer.isBlockUnderValid(world, pos.below())) {
 			return false;
 		}
 

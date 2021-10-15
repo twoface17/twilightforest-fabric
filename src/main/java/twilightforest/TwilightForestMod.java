@@ -55,10 +55,12 @@ import twilightforest.loot.TFTreasure;
 import twilightforest.mixin.plugin.patches.Patch;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.world.components.BiomeGrassColors;
+import twilightforest.util.TFStats;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import net.minecraft.world.item.ArmorItem;
@@ -141,6 +143,35 @@ public class TwilightForestMod implements ModInitializer {
 		} else {
 			LOGGER.warn("Skipping compatibility!");
 		}
+
+		WoodType.register(TFBlocks.TWILIGHT_OAK);
+		WoodType.register(TFBlocks.CANOPY);
+		WoodType.register(TFBlocks.MANGROVE);
+		WoodType.register(TFBlocks.DARKWOOD);
+		WoodType.register(TFBlocks.TIMEWOOD);
+		WoodType.register(TFBlocks.TRANSFORMATION);
+		WoodType.register(TFBlocks.MINING);
+		WoodType.register(TFBlocks.SORTING);
+	}
+
+	@SubscribeEvent
+	public static void addClassicPack(AddPackFindersEvent event) {
+		try {
+			if (event.getPackType() == PackType.CLIENT_RESOURCES) {
+				var resourcePath = ModList.get().getModFileById(TwilightForestMod.ID).getFile().findResource("classic");
+				var pack = new PathResourcePack(ModList.get().getModFileById(TwilightForestMod.ID).getFile().getFileName() + ":" + resourcePath, resourcePath);
+				var metadataSection = pack.getMetadataSection(PackMetadataSection.SERIALIZER);
+				if (metadataSection != null) {
+					event.addRepositorySource((packConsumer, packConstructor) ->
+							packConsumer.accept(packConstructor.create(
+									"builtin/twilight_forest_legacy_resources", new TextComponent("Twilight Classic"), false,
+									() -> pack, metadataSection, Pack.Position.TOP, PackSource.BUILT_IN, false)));
+				}
+			}
+		}
+		catch(IOException ex) {
+			throw new RuntimeException(ex);
+		}
 	}
 
 	public static void registerSerializers() {
@@ -173,6 +204,7 @@ public class TwilightForestMod implements ModInitializer {
 		TFAdvancements.init();
 		BiomeKeys.addBiomeTypes();
 		TFDimensions.init();
+		TFStats.init();
 
 		{
 			TFEntities.registerEntities();
@@ -209,6 +241,11 @@ public class TwilightForestMod implements ModInitializer {
 			TFBlocks.TFBurnables();
 			TFBlocks.TFPots();
 			TFSounds.registerParrotSounds();
+
+			CauldronInteraction.WATER.put(TFItems.ARCTIC_HELMET.get(), CauldronInteraction.DYED_ITEM);
+			CauldronInteraction.WATER.put(TFItems.ARCTIC_CHESTPLATE.get(), CauldronInteraction.DYED_ITEM);
+			CauldronInteraction.WATER.put(TFItems.ARCTIC_LEGGINGS.get(), CauldronInteraction.DYED_ITEM);
+			CauldronInteraction.WATER.put(TFItems.ARCTIC_BOOTS.get(), CauldronInteraction.DYED_ITEM);
 
 			AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
 			AxeItem.STRIPPABLES.put(TFBlocks.TWILIGHT_OAK_LOG, TFBlocks.STRIPPED_TWILIGHT_OAK_LOG);

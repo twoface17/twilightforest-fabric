@@ -54,12 +54,14 @@ public class TFBiomeFeatures {
 			new TFGenHugeWaterLily(NoneFeatureConfiguration.CODEC));
 	public static final Feature<BlockStateConfiguration> LAMPPOSTS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":lampposts",
 			new TFGenLampposts(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<Feature<TFTreeFeatureConfig>> LARGE_WINTER_TREE = FEATURES.register("large_winter_tree", () ->
+			new TFGenLargeWinter(TFTreeFeatureConfig.codecTFTreeConfig));
 	public static final Feature<TFTreeFeatureConfig> MINERS_TREE = Registry.register(Registry.FEATURE, TFConstants.ID+ ":miners_tree",
 			new TFGenMinersTree(TFTreeFeatureConfig.codecTFTreeConfig));
 	public static final Feature<NoneFeatureConfiguration> MONOLITH = Registry.register(Registry.FEATURE, TFConstants.ID+ ":monolith",
 			new TFGenMonolith(NoneFeatureConfiguration.CODEC));
 	public static final Feature<DiskConfiguration> MYCELIUM_BLOB = Registry.register(Registry.FEATURE, TFConstants.ID+ ":mycelium_blob",
-			new BaseDiskFeature(DiskConfiguration.CODEC));
+			new CheckAbovePatchFeature(DiskConfiguration.CODEC));
 	public static final Feature<BlockStateConfiguration> UNDERGROUND_PLANTS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":underground_plants",
 			new UndergroundPlantFeature(BlockStateConfiguration.CODEC, false));
 	public static final Feature<BlockStateConfiguration> TROLL_VINES = Registry.register(Registry.FEATURE, TFConstants.ID+ ":troll_vines",

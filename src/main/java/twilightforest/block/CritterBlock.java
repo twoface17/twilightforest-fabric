@@ -1,7 +1,9 @@
 package twilightforest.block;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,6 +35,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import twilightforest.TFSounds;
 import twilightforest.entity.projectile.MoonwormShot;
+import twilightforest.util.TFStats;
 
 import javax.annotation.Nullable;
 
@@ -141,6 +144,7 @@ public abstract class CritterBlock extends BaseEntityBlock implements SimpleWate
 			} else if(this == TFBlocks.CICADA) {
 				if(!player.isCreative()) stack.shrink(1);
 				player.getInventory().add(new ItemStack(TFBlocks.CICADA_JAR));
+				if(worldIn.isClientSide) Minecraft.getInstance().getSoundManager().stop(TFSounds.CICADA.getLocation(), SoundSource.NEUTRAL);
 				worldIn.setBlockAndUpdate(pos,state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState());
 				return InteractionResult.SUCCESS;
 			}
@@ -152,9 +156,13 @@ public abstract class CritterBlock extends BaseEntityBlock implements SimpleWate
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
 		if ((entityIn instanceof Projectile && !(entityIn instanceof MoonwormShot)) || entityIn instanceof FallingBlockEntity) {
 			worldIn.setBlockAndUpdate(pos, state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState());
+			if(worldIn.isClientSide) Minecraft.getInstance().getSoundManager().stop(TFSounds.CICADA.getLocation(), SoundSource.NEUTRAL);
 			worldIn.playSound(null, pos, TFSounds.BUG_SQUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
 			ItemEntity squish = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), this.getSquishResult());
 			squish.spawnAtLocation(squish.getItem());
+			if(entityIn instanceof Projectile projectile && projectile.getOwner() instanceof ServerPlayer player) {
+				player.awardStat(TFStats.BUGS_SQUISHED);
+			}
 		}
 	}
 

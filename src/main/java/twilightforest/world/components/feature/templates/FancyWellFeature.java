@@ -18,6 +18,7 @@ import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.components.processors.CobblePlankSwizzler;
+import twilightforest.world.components.processors.SmartGrassProcessor;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -47,7 +48,8 @@ public class FancyWellFeature extends TemplateFeature<NoneFeatureConfiguration> 
 
         if (template == null) return;
 
-        placementPos = placementPos.below(11);//.relative(rotation.rotate(mirror.mirror(Direction.SOUTH)), 1).relative(rotation.rotate(mirror.mirror(Direction.EAST)), 1);
+        placementPos = placementPos.below(template.getSize().getY());//.relative(rotation.rotate(mirror.mirror(Direction.SOUTH)), 1).relative(rotation.rotate(mirror.mirror(Direction.EAST)), 1);
+        placementSettings.addProcessor(SmartGrassProcessor.INSTANCE);
 
         template.placeInWorld(world, placementPos, placementPos, placementSettings, random, 20);
 

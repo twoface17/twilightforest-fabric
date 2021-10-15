@@ -78,6 +78,7 @@ public final class BlockConstants {
     public static final BlockState TROLLVIDR = TFBlocks.TROLLVIDR.defaultBlockState();
     public static final BlockState TORCHBERRIES = TFBlocks.TORCHBERRY_PLANT.defaultBlockState().setValue(TorchberryPlantBlock.HAS_BERRIES, true);
     public static final BlockState ROOT_STRAND = TFBlocks.ROOT_STRAND.defaultBlockState();
+    public static final BlockState HANGING_ROOTS = Blocks.HANGING_ROOTS.defaultBlockState();
     public static final BlockState PUMPKIN = Blocks.PUMPKIN.defaultBlockState();
     public static final BlockState DEAD_BUSH = Blocks.DEAD_BUSH.defaultBlockState();
     public static final BlockState BROWN_MUSHROOM = Blocks.BROWN_MUSHROOM.defaultBlockState();

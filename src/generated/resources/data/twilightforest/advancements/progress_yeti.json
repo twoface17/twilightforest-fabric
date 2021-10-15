@@ -11,7 +11,7 @@
       "translate": "advancement.twilightforest.progress_yeti.desc",
       "with": [
         {
-          "translate": "entity.twilightforest.yeti_alpha"
+          "translate": "entity.twilightforest.alpha_yeti"
         }
       ]
     },
@@ -19,6 +19,9 @@
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
+  },
+  "rewards": {
+    "function": "twilightforest:give_3_shields"
   },
   "criteria": {
     "yeti": {

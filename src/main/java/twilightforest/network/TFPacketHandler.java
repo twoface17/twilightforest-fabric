@@ -5,7 +5,8 @@ import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 
 public class TFPacketHandler {
-	private static final String PROTOCOL_VERSION = "1";
+	// Bump this number every time theres a breaking change, to ensure people dont mess things up when joining on the wrong version
+	private static final String PROTOCOL_VERSION = "2";
 	public static final NetworkWrapper CHANNEL = new NetworkWrapper(TwilightForestMod.prefix("channel"));
 
 	@SuppressWarnings("UnusedAssignment")
@@ -23,5 +24,6 @@ public class TFPacketHandler {
 		CHANNEL.registerPacket(UncraftingGuiPacket.class, UncraftingGuiPacket::new, EnvType.CLIENT);
 		CHANNEL.registerPacket(UpdateTFMultipartPacket.class, UpdateTFMultipartPacket::new, EnvType.CLIENT);
 		CHANNEL.registerPacket(SpawnFallenLeafFromPacket.class, SpawnFallenLeafFromPacket::new, EnvType.CLIENT);
+		CHANNEL.messageBuilder(MissingAdvancementToastPacket.class, id++).encoder(MissingAdvancementToastPacket::encode).decoder(MissingAdvancementToastPacket::new).consumer(MissingAdvancementToastPacket::handle).add();
 	}
 }

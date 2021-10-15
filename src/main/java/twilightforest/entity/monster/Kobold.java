@@ -216,6 +216,7 @@ public class Kobold extends Monster {
 		this.lastEatenBreadTicks = tag.getInt("TimeSinceBreadLastEaten");
 	}
 
+	//TODO: PORT IDK
 	@Override
 	protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
 		super.dropCustomDeathLoot(source, looting, recentlyHit);

@@ -16,13 +16,6 @@ public class CapabilityList implements EntityComponentInitializer {
 
 	public static final ComponentKey<IShieldCapability> SHIELD_CAPABILITY_COMPONENT_KEY = ComponentRegistryV3.INSTANCE.getOrCreate(new ResourceLocation(TFConstants.ID,"shield"), IShieldCapability.class);
 
-	//@CapabilityInject(IShieldCapability.class)
-	public static final IShieldCapability SHIELDS;
-
-	static {
-		SHIELDS = null;
-	}
-
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
 		registry.registerFor(LivingEntity.class, SHIELD_CAPABILITY_COMPONENT_KEY, ShieldCapabilityHandler::new);
