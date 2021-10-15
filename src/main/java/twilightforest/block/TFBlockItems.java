@@ -9,7 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import twilightforest.TFConstants;
 import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
-import static twilightforest.item.TFItems.creativeTab;
+
+import static twilightforest.TwilightForestMod.creativeTab;
 
 public class TFBlockItems {
 
@@ -370,7 +371,6 @@ public class TFBlockItems {
 	public static Item.Properties defaultBuilder() {
 		return new Item.Properties().tab(creativeTab);
 	}
-
 
 	private static <B extends Block> Item blockItem(B block) {
 		return makeBlockItem(new BlockItem(block, defaultBuilder()), block);

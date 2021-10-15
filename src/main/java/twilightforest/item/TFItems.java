@@ -31,6 +31,8 @@ import java.util.UUID;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.food.FoodProperties;
 
+import static twilightforest.TwilightForestMod.creativeTab;
+
 public class TFItems {
 	public static final FoodProperties E115 = new FoodProperties.Builder().nutrition(4).saturationMod(0.3F).build();
 	public static final FoodProperties CHOP = new FoodProperties.Builder().nutrition(18).saturationMod(2.0F).meat().effect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
@@ -183,9 +185,7 @@ public class TFItems {
 	public static final Item QUEST_RAM_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":quest_ram_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_QUEST_RAM"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
 
 	public static void init(){
-
 	}
-	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(TwilightForestMod.prefix(TwilightForestMod.ID), () -> new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE));
 
 	public static Item.Properties defaultBuilder() {
 		return new Item.Properties().tab(creativeTab);

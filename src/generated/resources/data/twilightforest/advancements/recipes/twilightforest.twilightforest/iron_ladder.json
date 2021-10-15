@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "twilightforest:iron_ladder"
+    ]
+  },
+  "criteria": {
+    "has_iron_ladder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "twilightforest:iron_ladder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "twilightforest:iron_ladder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_ladder",
+      "has_the_recipe"
+    ]
+  ]
+}

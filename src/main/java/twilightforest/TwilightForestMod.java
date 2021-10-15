@@ -78,6 +78,8 @@ public class TwilightForestMod implements ModInitializer {
 
 	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
+	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(TwilightForestMod.prefix(TwilightForestMod.ID), () -> new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE));
+
 	public static final Logger LOGGER = LogManager.getLogger(TFConstants.ID);
 
 	private static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
@@ -285,7 +287,7 @@ public class TwilightForestMod implements ModInitializer {
 			WoodType.register(TFBlocks.MINING);
 			WoodType.register(TFBlocks.SORTING);
 		}
-		DataGenerators.gatherData();
+		//DataGenerators.gatherData();
 	}
 
 	//-----FABRIC ONLY METHODS-----
