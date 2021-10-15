@@ -29,7 +29,6 @@ public class ServerPlayerGameModeMixin {
         ThornsBlock blockThorn = this.level.getBlockState(pos).getBlock() instanceof ThornsBlock blockThorny? blockThorny : null;
         if(blockThorn != null){
             cir.setReturnValue(removeBlock(pos, blockThorn, false));
-            cir.cancel();
         }
     }
 
