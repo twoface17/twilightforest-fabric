@@ -5,12 +5,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SpiderRenderer;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.monster.SwarmSpider;
 
 public class SwarmSpiderRenderer extends SpiderRenderer<SwarmSpider> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("swarmspider.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("swarmspider.png");
 
 	public SwarmSpiderRenderer(EntityRendererProvider.Context manager) {
 		super(manager);

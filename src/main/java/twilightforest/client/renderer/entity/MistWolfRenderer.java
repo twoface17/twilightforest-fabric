@@ -7,11 +7,11 @@ import net.minecraft.client.renderer.entity.WolfRenderer;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class MistWolfRenderer extends WolfRenderer {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("mistwolf.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("mistwolf.png");
 
 	public MistWolfRenderer(EntityRendererProvider.Context manager) {
 		super(manager);

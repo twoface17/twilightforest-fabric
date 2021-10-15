@@ -5,14 +5,14 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.NagaModel;
 import twilightforest.entity.boss.NagaSegment;
 
 //FIXME legacy: scaling was commented out since textures are bigger now
 public class NagaSegmentRenderer<T extends NagaSegment> extends TFPartRenderer<T, NagaModel<T>> {
-	private static final ResourceLocation part_TextureLoc = TFConstants.getModelTexture("nagasegment.png");
+	private static final ResourceLocation part_TextureLoc = TwilightForestMod.getModelTexture("nagasegment.png");
 
 	public NagaSegmentRenderer(EntityRendererProvider.Context m) {
 		super(m, new NagaModel<>(m.bakeLayer(TFModelLayers.NAGA_BODY)));

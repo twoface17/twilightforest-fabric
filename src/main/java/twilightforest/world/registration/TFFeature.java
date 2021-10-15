@@ -27,10 +27,8 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.monster.Kobold;
-import twilightforest.world.components.structures.lichtowerrevamp.TowerFoyer;
 import twilightforest.world.registration.biomes.BiomeKeys;
 import twilightforest.entity.*;
 import twilightforest.world.components.structures.*;
@@ -166,7 +164,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.lichtower", 4);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.lichtower", 4);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -187,7 +185,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.hydralair", 4);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.hydralair", 4);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -217,7 +215,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.labyrinth", 5);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.labyrinth", 5);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -255,7 +253,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.darktower", 3);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.darktower", 3);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -285,7 +283,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.tfstronghold", 5);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.tfstronghold", 5);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -313,7 +311,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.yeticave", 3);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.yeticave", 3);
 
 			book.addTagElement("pages" , bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -335,7 +333,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.icetower", 3);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.icetower", 3);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -364,7 +362,7 @@ public class TFFeature {
 		@Override
 		protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-			addTranslatedPages(bookPages, TFConstants.ID + ".book.trollcave", 3);
+			addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.trollcave", 3);
 
 			book.addTagElement("pages", bookPages);
 			book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));
@@ -938,7 +936,7 @@ public class TFFeature {
 
 	protected void addBookInformation(ItemStack book, ListTag bookPages) {
 
-		addTranslatedPages(bookPages, TFConstants.ID + ".book.unknown", 2);
+		addTranslatedPages(bookPages, TwilightForestMod.ID + ".book.unknown", 2);
 
 		book.addTagElement("pages", bookPages);
 		book.addTagElement("author", StringTag.valueOf(BOOK_AUTHOR));

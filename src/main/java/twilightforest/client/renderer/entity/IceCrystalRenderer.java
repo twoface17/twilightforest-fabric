@@ -5,14 +5,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.IceCrystalModel;
 import twilightforest.entity.monster.IceCrystal;
 
 public class IceCrystalRenderer extends MobRenderer<IceCrystal, IceCrystalModel> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("icecrystal.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("icecrystal.png");
 
 	public IceCrystalRenderer(EntityRendererProvider.Context manager) {
 		super(manager, new IceCrystalModel(manager.bakeLayer(TFModelLayers.ICE_CRYSTAL)), 0.25F);

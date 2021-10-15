@@ -15,10 +15,8 @@ import net.minecraft.util.Mth;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
-import twilightforest.item.TFItems;
 
 import java.util.Random;
 
@@ -83,7 +81,7 @@ public class LoadingScreenGui extends Screen {
 
 		drawBouncingWobblyItem(partialTicks, resolution.getGuiScaledWidth(), resolution.getGuiScaledHeight());
 
-		String loadTitle = I18n.get(TFConstants.ID + ".loading.title." + (isEntering ? "enter" : "leave"));
+		String loadTitle = I18n.get(TwilightForestMod.ID + ".loading.title." + (isEntering ? "enter" : "leave"));
 		ms.pushPose();
 		ms.translate(
 				(resolution.getGuiScaledWidth() / 2f) - (fontRenderer.width(loadTitle) / 4f),

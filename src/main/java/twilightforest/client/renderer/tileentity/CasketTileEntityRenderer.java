@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.KeepsakeCasketBlock;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.KeepsakeCasketBlockEntity;
@@ -96,7 +96,7 @@ public class CasketTileEntityRenderer<T extends KeepsakeCasketBlockEntity & LidB
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
 
-            ResourceLocation CASKET = TFConstants.getModelTexture("casket/keepsake_casket_" + damage + ".png");
+            ResourceLocation CASKET = TwilightForestMod.getModelTexture("casket/keepsake_casket_" + damage + ".png");
             this.renderModels(matrixStackIn, bufferIn.getBuffer(RenderType.entityCutoutNoCull(CASKET)), this.lid, this.base, f1, combinedLightIn, combinedOverlayIn);
             matrixStackIn.popPose();
         }

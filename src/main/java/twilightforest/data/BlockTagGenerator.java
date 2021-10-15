@@ -13,7 +13,6 @@ import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 
@@ -513,7 +512,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
     private static Block[] getAllMinecraftOrTwilightBlocks(Predicate<Block> predicate) {
         return Registry.BLOCK.stream()
-                .filter(b -> Registry.BLOCK.getKey(b) != null && (Registry.BLOCK.getKey(b).getNamespace().equals(TFConstants.ID) || Registry.BLOCK.getKey(b).getNamespace().equals("minecraft")) && predicate.test(b))
+                .filter(b -> Registry.BLOCK.getKey(b) != null && (Registry.BLOCK.getKey(b).getNamespace().equals(TwilightForestMod.ID) || Registry.BLOCK.getKey(b).getNamespace().equals("minecraft")) && predicate.test(b))
                 .toArray(Block[]::new);
     }
 

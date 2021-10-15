@@ -5,13 +5,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.CarminiteGolemModel;
 import twilightforest.entity.monster.CarminiteGolem;
 
 public class CarminiteGolemRenderer<T extends CarminiteGolem, M extends CarminiteGolemModel<T>> extends MobRenderer<T, M> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("carminitegolem.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("carminitegolem.png");
 
 	public CarminiteGolemRenderer(EntityRendererProvider.Context manager, M model, float shadowSize) {
 		super(manager, model, shadowSize);

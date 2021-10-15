@@ -10,9 +10,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Position;
@@ -41,7 +38,6 @@ import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfig;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
-import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.CrumbleDispenseBehavior;
 import twilightforest.dispenser.FeatherFanDispenseBehavior;
 import twilightforest.dispenser.MoonwormDispenseBehavior;
@@ -52,7 +48,6 @@ import twilightforest.entity.projectile.MoonwormShot;
 import twilightforest.entity.projectile.TwilightWandBolt;
 import twilightforest.item.TFItems;
 import twilightforest.loot.TFTreasure;
-import twilightforest.mixin.plugin.patches.Patch;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.util.TFStats;
@@ -60,36 +55,35 @@ import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
-import java.io.IOException;
 import java.util.Locale;
 
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 public class TwilightForestMod implements ModInitializer {
 
 	// TODO: might be a good idea to find proper spots for all of these? also remove redundants
 	public static final String ID = "twilightforest";
 
-	private static final String MODEL_DIR = "textures/model/";
+    private static final String MODEL_DIR = "textures/model/";
 	private static final String GUI_DIR = "textures/gui/";
 	private static final String ENVIRO_DIR = "textures/environment/";
 	// odd one out, as armor textures are a stringy mess at present
-	public static final String ARMOR_DIR = ID + ":textures/armor/";
+	private static final String ARMOR_DIR = "textures/armor/";
 
 	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
-	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(TwilightForestMod.prefix(TwilightForestMod.ID), () -> new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE));
+    public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(TwilightForestMod.prefix(TwilightForestMod.ID), () -> new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE));
 
-	public static final Logger LOGGER = LogManager.getLogger(TFConstants.ID);
+    // TODO: might be a good idea to find proper spots for all of these? also remove redundants
 
-	private static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
+    public static final Logger LOGGER = LogManager.getLogger(ID);
+
+	public static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
 
 	public static TFConfigCommon COMMON_CONFIG;
 	public static boolean SERVER_SIDE_ONLY = true;
 
-	@Override
+
+    @Override
 	public void onInitialize() {
 		TwilightForestMod();
 		init();
@@ -384,7 +378,21 @@ public class TwilightForestMod implements ModInitializer {
 		return new ResourceLocation(ID, ENVIRO_DIR + name);
 	}
 
+	public static ResourceLocation getArmorTexture(String name) {
+		return new ResourceLocation(ID, ARMOR_DIR + name);
+	}
+
 	public static Rarity getRarity() {
 		return rarity != null ? rarity : Rarity.EPIC;
 	}
+
+
+
+
+
+
+
+
+
+
 }

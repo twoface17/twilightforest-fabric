@@ -13,14 +13,14 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.MinoshroomModel;
 import twilightforest.entity.boss.Minoshroom;
 
 //old renderer had the head mushroom in a different spot - line is commented out
 public class MinoshroomRenderer extends HumanoidMobRenderer<Minoshroom, MinoshroomModel> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("minoshroomtaur.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("minoshroomtaur.png");
 
 	public MinoshroomRenderer(EntityRendererProvider.Context manager, MinoshroomModel model, float shadowSize) {
 		super(manager, model, shadowSize);

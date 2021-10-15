@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class TFGenericMobRenderer<T extends Mob, M extends EntityModel<T>> extends MobRenderer<T, M> {
 
@@ -17,7 +17,7 @@ public class TFGenericMobRenderer<T extends Mob, M extends EntityModel<T>> exten
 		if (textureName.startsWith("textures")) {
 			textureLoc = new ResourceLocation(textureName);
 		} else {
-			textureLoc = TFConstants.getModelTexture(textureName);
+			textureLoc = TwilightForestMod.getModelTexture(textureName);
 		}
 	}
 

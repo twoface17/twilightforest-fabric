@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.HydraNeckModel;
 import twilightforest.entity.boss.HydraNeck;
@@ -13,7 +13,7 @@ import twilightforest.entity.boss.HydraHeadContainer;
 
 public class HydraNeckRenderer extends TFPartRenderer<HydraNeck, HydraNeckModel> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("hydra4.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("hydra4.png");
 
 
 	public HydraNeckRenderer(EntityRendererProvider.Context manager) {

@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.BugModelAnimationHelper;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.CicadaModel;
@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 public class CicadaTileEntityRenderer implements BlockEntityRenderer<CicadaBlockEntity> {
 
 	private final CicadaModel cicadaModel;
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("cicada-model.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("cicada-model.png");
 
 	public CicadaTileEntityRenderer(BlockEntityRendererProvider.Context renderer) {
 		this.cicadaModel = new CicadaModel(renderer.bakeLayer(TFModelLayers.CICADA));

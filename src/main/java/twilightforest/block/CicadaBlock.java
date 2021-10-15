@@ -22,7 +22,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import twilightforest.TFSounds;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.entity.CicadaBlockEntity;
 import twilightforest.block.entity.TFBlockEntities;
 
@@ -33,7 +33,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class CicadaBlock extends CritterBlock {
 	@Environment(EnvType.CLIENT)
-	private static final MutableComponent TOOLTIP = new TranslatableComponent("block.twilightforest.cicada.desc").withStyle(TFConstants.getRarity().color).withStyle(ChatFormatting.ITALIC);
+	private static final MutableComponent TOOLTIP = new TranslatableComponent("block.twilightforest.cicada.desc").withStyle(TwilightForestMod.getRarity().color).withStyle(ChatFormatting.ITALIC);
 
 	protected CicadaBlock(BlockBehaviour.Properties props) {
 		super(props);

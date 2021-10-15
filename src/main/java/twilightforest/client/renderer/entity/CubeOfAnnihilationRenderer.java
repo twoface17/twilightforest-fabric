@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.CubeOfAnnihilationModel;
 import twilightforest.entity.CubeOfAnnihilation;
 
 public class CubeOfAnnihilationRenderer extends EntityRenderer<CubeOfAnnihilation> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("cubeofannihilation.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("cubeofannihilation.png");
 	private final Model model;
 
 	public CubeOfAnnihilationRenderer(EntityRendererProvider.Context manager) {

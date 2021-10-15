@@ -17,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.advancements.*;
 import twilightforest.block.Experiment115Block;
@@ -53,7 +52,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE,
 				new TranslatableComponent("itemGroup.twilightforest"),
 				new TranslatableComponent("advancement.twilightforest.root.desc"),
-				new ResourceLocation(TFConstants.ID, "textures/block/mazestone_large_brick.png"),
+				new ResourceLocation(TwilightForestMod.ID, "textures/block/mazestone_large_brick.png"),
 				FrameType.TASK,
 				true, false, false)
 				.requirements(RequirementsStrategy.OR)

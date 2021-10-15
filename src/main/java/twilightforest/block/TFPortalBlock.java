@@ -17,7 +17,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,12 +40,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 //import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import org.apache.commons.lang3.mutable.MutableInt;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
 //import twilightforest.network.MissingAdvancementToastPacket;
-import twilightforest.network.TFPacketHandler;
 import twilightforest.util.PlayerHelper;
 import twilightforest.world.NoReturnTeleporter;
 import twilightforest.extensions.IEntityEx;
@@ -115,7 +112,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 					if (!TFTeleporter.isSafeAround(world, pos, catalyst, checkProgression)) {
 						// TODO: "failure" effect - particles?
 						if (player != null) {
-							player.displayClientMessage(new TranslatableComponent(TFConstants.ID + ".twilight_portal.unsafe"), true);
+							player.displayClientMessage(new TranslatableComponent(TwilightForestMod.ID + ".twilight_portal.unsafe"), true);
 						}
 						return false;
 					}
