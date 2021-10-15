@@ -50,12 +50,14 @@ public class TwilightWandItem extends Item {
 		return false;
 	}
 
+	//TODO: PORT
 	//@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
 		return false;
 	}
 
-	@Override
+	//TODO: PORT
+	//@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
 		return false;
 	}

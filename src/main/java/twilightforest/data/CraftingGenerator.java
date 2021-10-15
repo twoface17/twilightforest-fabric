@@ -206,7 +206,7 @@ public class CraftingGenerator extends CraftingDataHelper {
 				.requires(Items.REDSTONE)
 				.requires(Ingredient.of(TFItems.BORER_ESSENCE))
 				.unlockedBy("has_item", has(TFItems.BORER_ESSENCE))
-				.save(consumer, TwilightForestMod.prefix("material/" + TFItems.CARMINITE.getId().getPath()));
+				.save(consumer, TwilightForestMod.prefix("material/" + Registry.ITEM.getKey(TFItems.CARMINITE).getPath()));
 
 		ShapelessRecipeBuilder.shapeless(TFItems.RAW_IRONWOOD, 2)
 				.requires(Ingredient.of(TFItems.LIVEROOT))
@@ -695,9 +695,9 @@ public class CraftingGenerator extends CraftingDataHelper {
 		UpgradeRecipeBuilder.smithing(Ingredient.of(Items.IRON_INGOT), Ingredient.of(ItemTagGenerator.FIERY_VIAL), TFItems.FIERY_INGOT).unlocks("has_item", has(TFItems.FIERY_INGOT)).save(consumer, TwilightForestMod.prefix("material/fiery_iron_ingot"));
 		UpgradeRecipeBuilder.smithing(Ingredient.of(ItemTagGenerator.FIERY_VIAL), Ingredient.of(Items.IRON_INGOT), TFItems.FIERY_INGOT).unlocks("has_item", has(TFItems.FIERY_INGOT)).save(consumer, TwilightForestMod.prefix("material/fiery_iron_ingot_reversed"));
 
-		ShapelessRecipeBuilder.shapeless(TFItems.FIERY_INGOT.get())
+		ShapelessRecipeBuilder.shapeless(TFItems.FIERY_INGOT)
 				.requires(Ingredient.of(ItemTagGenerator.FIERY_VIAL))
-				.requires(Ingredient.of(Tags.Items.INGOTS_IRON))
+				.requires(Ingredient.of(Items.IRON_INGOT))
 				.unlockedBy("has_item", has(ItemTagGenerator.FIERY_VIAL))
 				.save(consumer, locEquip("fiery_ingot_crafting"));
 

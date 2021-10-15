@@ -7,6 +7,7 @@ import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.extensions.IItemEx;
+import twilightforest.util.TFStats;
 import twilightforest.util.WorldUtil;
 import java.util.ArrayList;
 import java.util.List;

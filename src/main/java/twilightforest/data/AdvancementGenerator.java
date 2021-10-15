@@ -78,7 +78,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				new TranslatableComponent("advancement.twilightforest.kill_naga"),
 				new TranslatableComponent("advancement.twilightforest.kill_naga.desc",
 						new TranslatableComponent(TFEntities.NAGA.getDescriptionId()),
-						new TranslatableComponent(TFItems.NAGA_SCALE.get().getDescriptionId())),
+						new TranslatableComponent(TFItems.NAGA_SCALE.getDescriptionId())),
 				null, FrameType.GOAL, true, true, false)
 				.addCriterion("naga", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.NAGA)))
 				.addCriterion("scale", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.NAGA_SCALE))
@@ -156,7 +156,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				new TranslatableComponent("advancement.twilightforest.ghast_trap"),
 				new TranslatableComponent("advancement.twilightforest.ghast_trap.desc",
 						new TranslatableComponent(TFEntities.CARMINITE_GHASTLING.getDescriptionId()),
-						new TranslatableComponent(TFBlocks.GHAST_TRAP.get().getDescriptionId()),
+						new TranslatableComponent(TFBlocks.GHAST_TRAP.getDescriptionId()),
 						new TranslatableComponent(TFEntities.UR_GHAST.getDescriptionId())),
 				null, FrameType.TASK, true, true, false)
 				.addCriterion("activate_ghast_trap", new ActivateGhastTrapTrigger.Instance(EntityPredicate.Composite.ANY))
@@ -230,7 +230,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFBlocks.HUGE_STALK,
 						new TranslatableComponent("advancement.twilightforest.beanstalk"),
 						new TranslatableComponent("advancement.twilightforest.beanstalk.desc",
-								new TranslatableComponent(TFItems.MAGIC_BEANS.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.MAGIC_BEANS.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("beans", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.MAGIC_BEANS))
 				.addCriterion("use_beans", ItemUsedOnBlockTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(TFBlocks.UBEROUS_SOIL).build()), ItemPredicate.Builder.item().of(TFItems.MAGIC_BEANS)))
@@ -241,7 +241,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.giants"),
 						new TranslatableComponent("advancement.twilightforest.giants.desc",
 								new TranslatableComponent(TFEntities.GIANT_MINER.getDescriptionId()),
-								new TranslatableComponent(TFItems.GIANT_PICKAXE.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.GIANT_PICKAXE.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("giant", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.GIANT_MINER)))
 				.addCriterion("pickaxe", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.MAGIC_BEANS))
@@ -251,7 +251,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.LAMP_OF_CINDERS,
 						new TranslatableComponent("advancement.twilightforest.progress_troll"),
 						new TranslatableComponent("advancement.twilightforest.progress_troll.desc",
-								new TranslatableComponent(TFItems.LAMP_OF_CINDERS.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.LAMP_OF_CINDERS.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("lamp", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.LAMP_OF_CINDERS))
 				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, merge.getId()))
@@ -289,10 +289,10 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.MAGIC_MAP_FOCUS,
 						new TranslatableComponent("advancement.twilightforest.magic_map_focus"),
 						new TranslatableComponent("advancement.twilightforest.magic_map_focus.desc",
-								new TranslatableComponent(TFItems.MAGIC_MAP_FOCUS.get().getDescriptionId()),
-								new TranslatableComponent(TFItems.RAVEN_FEATHER.get().getDescriptionId()),
+								new TranslatableComponent(TFItems.MAGIC_MAP_FOCUS.getDescriptionId()),
+								new TranslatableComponent(TFItems.RAVEN_FEATHER.getDescriptionId()),
 								new TranslatableComponent(Items.GLOWSTONE_DUST.getDescriptionId()),
-								new TranslatableComponent(TFItems.TORCHBERRIES.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.TORCHBERRIES.getDescriptionId())),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("focus", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.MAGIC_MAP_FOCUS))
 				.save(consumer, "twilightforest:magic_map_focus");
@@ -301,7 +301,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.FILLED_MAGIC_MAP,
 						new TranslatableComponent("advancement.twilightforest.magic_map"),
 						new TranslatableComponent("advancement.twilightforest.magic_map.desc",
-								new TranslatableComponent(TFItems.FILLED_MAGIC_MAP.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.FILLED_MAGIC_MAP.getDescriptionId())),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("magic_map", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FILLED_MAGIC_MAP))
 				.save(consumer, "twilightforest:magic_map");
@@ -310,7 +310,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.FILLED_MAZE_MAP,
 						new TranslatableComponent("advancement.twilightforest.maze_map"),
 						new TranslatableComponent("advancement.twilightforest.maze_map.desc",
-								new TranslatableComponent(TFItems.FILLED_MAZE_MAP.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.FILLED_MAZE_MAP.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("maze_map", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FILLED_MAZE_MAP))
 				.save(consumer, "twilightforest:maze_map");
@@ -319,7 +319,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.FILLED_ORE_MAP,
 						new TranslatableComponent("advancement.twilightforest.ore_map"),
 						new TranslatableComponent("advancement.twilightforest.ore_map.desc",
-								new TranslatableComponent(TFItems.FILLED_ORE_MAP.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.FILLED_ORE_MAP.getDescriptionId())),
 						null, FrameType.CHALLENGE, true, true, true)
 				.addCriterion("ore_map", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FILLED_ORE_MAP))
 				.save(consumer, "twilightforest:ore_map");
@@ -387,7 +387,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.NAGA_CHESTPLATE,
 						new TranslatableComponent("advancement.twilightforest.naga_armors"),
 						new TranslatableComponent("advancement.twilightforest.naga_armors.desc",
-								new TranslatableComponent(TFItems.NAGA_SCALE.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.NAGA_SCALE.getDescriptionId())),
 						null, FrameType.CHALLENGE, true, true, false)
 				.addCriterion("armor", InventoryChangeTrigger.TriggerInstance.hasItems(
 						TFItems.NAGA_CHESTPLATE, TFItems.NAGA_LEGGINGS))
@@ -418,7 +418,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						TFItems.MAZEBREAKER_PICKAXE,
 						new TranslatableComponent("advancement.twilightforest.mazebreaker"),
 						new TranslatableComponent("advancement.twilightforest.mazebreaker.desc",
-								new TranslatableComponent(TFItems.MAZEBREAKER_PICKAXE.get().getDescriptionId())),
+								new TranslatableComponent(TFItems.MAZEBREAKER_PICKAXE.getDescriptionId())),
 						null, FrameType.CHALLENGE, true, true, false)
 				.addCriterion("pick", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.MAZEBREAKER_PICKAXE))
 				.rewards(AdvancementRewards.Builder.experience(50))

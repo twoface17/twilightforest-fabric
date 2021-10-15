@@ -316,7 +316,7 @@ public class TFEventListener {
 					}
 					if(!player.getAbilities().instabuild) stack.shrink(1);
 					player.swing(hand);
-					if(event.getPlayer() instanceof ServerPlayer) event.getPlayer().awardStat(TFStats.SKULL_CANDLES_MADE);
+					if(player instanceof ServerPlayer) player.awardStat(TFStats.SKULL_CANDLES_MADE);
 					//this is to prevent anything from being placed afterwords
 					return InteractionResult.FAIL;
 				}

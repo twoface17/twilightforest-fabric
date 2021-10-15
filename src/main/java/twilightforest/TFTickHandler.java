@@ -39,6 +39,8 @@ public class TFTickHandler {
 	public static void playerTick(Player player) {
 		if (!(player.level instanceof ServerLevel))
 			return;
+		if (!(player instanceof ServerPlayer serverPlayer))
+			return;
 
 		ServerLevel world = (ServerLevel) player.level;
 
@@ -48,11 +50,11 @@ public class TFTickHandler {
 			if (TwilightForestMod.COMMON_CONFIG.adminOnlyPortals) {
 				if (world.getServer().getProfilePermissions(player.getGameProfile()) != 0) {
 					// reduce range to 4.0 when the option is on
-					checkForPortalCreation(player, world, 4.0F);
+					checkForPortalCreation(serverPlayer, world, 4.0F);
 				}
 			} else {
 				// normal check, no special options
-				checkForPortalCreation(player, world, 32.0F);
+				checkForPortalCreation(serverPlayer, world, 32.0F);
 			}
 		}
 

@@ -54,7 +54,7 @@ public class TFBiomeFeatures {
 			new TFGenHugeWaterLily(NoneFeatureConfiguration.CODEC));
 	public static final Feature<BlockStateConfiguration> LAMPPOSTS = Registry.register(Registry.FEATURE, TFConstants.ID+ ":lampposts",
 			new TFGenLampposts(BlockStateConfiguration.CODEC));
-	public static final RegistryObject<Feature<TFTreeFeatureConfig>> LARGE_WINTER_TREE = FEATURES.register("large_winter_tree", () ->
+	public static final Feature<TFTreeFeatureConfig> LARGE_WINTER_TREE = Registry.register(Registry.FEATURE,TFConstants.ID+ ":large_winter_tree",
 			new TFGenLargeWinter(TFTreeFeatureConfig.codecTFTreeConfig));
 	public static final Feature<TFTreeFeatureConfig> MINERS_TREE = Registry.register(Registry.FEATURE, TFConstants.ID+ ":miners_tree",
 			new TFGenMinersTree(TFTreeFeatureConfig.codecTFTreeConfig));

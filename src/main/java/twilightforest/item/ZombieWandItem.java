@@ -75,7 +75,8 @@ public class ZombieWandItem extends Item implements IItemEx {
 		return false;
 	}
 
-	@Override
+	//TODO: PORT
+	//@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
 		return false;
 	}
