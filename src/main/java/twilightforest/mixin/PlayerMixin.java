@@ -23,7 +23,6 @@ import twilightforest.block.ThornsBlock;
 import twilightforest.client.model.entity.PartEntity;
 
 @Mixin(Player.class)
-@Debug(export = true)
 public class PlayerMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     public void playerTickEnd(CallbackInfo ci) {

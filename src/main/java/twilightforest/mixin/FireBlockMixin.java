@@ -22,31 +22,12 @@ import twilightforest.block.CompressedBlock;
 import java.util.Random;
 
 @Mixin(FireBlock.class)
-@Debug(export = true)
 public class FireBlockMixin {
 
-    @Unique
-    private BlockPos currentPos;
-
-    @Unique
-    private ServerLevel currentLevel;
-
-    //@Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/Tag;)Z"))
-    //public boolean isFireBlock(BlockState blockState, Tag<Block> tag) {
-    //    return blockState.is(tag);
-    //}
-
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/Tag;)Z"))
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random, CallbackInfo ci) {
-        currentPos = pos;
-        currentLevel = level;
-    }
-
     @ModifyVariable(method = "tick", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/Tag;)Z"))
-    public boolean isFireBlock(boolean bl) {
-
-        if(this.currentLevel.getBlockState(currentPos.below()).getBlock() instanceof CompressedBlock block){
-            return block.isFireSource(this.currentLevel.getBlockState(currentPos.below()), this.currentLevel, currentPos, null); //Direction dosn't matter
+    public boolean isFireBlock(boolean bl, BlockState state, ServerLevel level, BlockPos pos, Random random) {
+        if(level.getBlockState(pos.below()).getBlock() instanceof CompressedBlock block){
+            return block.isFireSource(level.getBlockState(pos.below()), level, pos, Direction.UP); //Direction dosn't matter
         }
         else{
             return bl;
