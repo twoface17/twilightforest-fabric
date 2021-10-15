@@ -1,24 +1,17 @@
 package twilightforest.mixin.client;
 
-import net.minecraft.world.level.block.Block;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import twilightforest.TwilightForestMod;
-import twilightforest.block.ThornsBlock;
-import twilightforest.extensions.IBlockMethods;
-import twilightforest.extensions.IBlockStateEx;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import twilightforest.block.ThornsBlock;
 
 @Mixin(MultiPlayerGameMode.class)
+@Debug(export = true)
 public class MultiPlayerGameModeMixin {
     @Shadow @Final private Minecraft minecraft;
 
