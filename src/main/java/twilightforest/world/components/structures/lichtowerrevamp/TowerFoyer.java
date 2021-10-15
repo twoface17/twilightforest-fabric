@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.BoxCuttingProcessor;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
 import twilightforest.world.registration.TFFeature;
@@ -32,7 +32,7 @@ public final class TowerFoyer extends TwilightTemplateStructurePiece {
     }
 
     public TowerFoyer(StructureManager structureManager, BlockPos startPosition) {
-        super(LichTowerRevampPieces.TOWER_FOYER, 0, structureManager, TFConstants.prefix("lich_tower/foyer"), LichTowerUtil.makeSettings(Rotation.NONE), startPosition);
+        super(LichTowerRevampPieces.TOWER_FOYER, 0, structureManager, TwilightForestMod.prefix("lich_tower/foyer"), LichTowerUtil.makeSettings(Rotation.NONE), startPosition);
     }
 
     @Override

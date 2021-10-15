@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.NagaModel;
 import twilightforest.entity.boss.Naga;
 
@@ -16,9 +16,9 @@ import twilightforest.entity.boss.Naga;
 //FIXME legacy: scaling was commented out since textures are bigger now
 public class NagaRenderer<M extends NagaModel<Naga>> extends MobRenderer<Naga, M> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("nagahead.png");
-	private static final ResourceLocation textureLocDazed = TFConstants.getModelTexture("nagahead_dazed.png");
-	private static final ResourceLocation textureLocCharging = TFConstants.getModelTexture("nagahead_charge.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("nagahead.png");
+	private static final ResourceLocation textureLocDazed = TwilightForestMod.getModelTexture("nagahead_dazed.png");
+	private static final ResourceLocation textureLocCharging = TwilightForestMod.getModelTexture("nagahead_charge.png");
 
 	public NagaRenderer(EntityRendererProvider.Context manager, M modelbase, float shadowSize) {
 		super(manager, modelbase, shadowSize);

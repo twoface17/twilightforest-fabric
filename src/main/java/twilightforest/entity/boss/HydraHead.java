@@ -7,11 +7,11 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class HydraHead extends HydraPart {
 
-	public static final ResourceLocation RENDERER = TFConstants.prefix("hydra_head");
+	public static final ResourceLocation RENDERER = TwilightForestMod.prefix("hydra_head");
 
 	private static final EntityDataAccessor<Float> DATA_MOUTH_POSITION = SynchedEntityData.defineId(HydraHead.class, EntityDataSerializers.FLOAT);
 	private static final EntityDataAccessor<Float> DATA_MOUTH_POSITION_LAST = SynchedEntityData.defineId(HydraHead.class, EntityDataSerializers.FLOAT);

@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 @Environment(EnvType.CLIENT)
 public class SteeleafArmorProvider implements ArmorRenderingRegistry.TextureProvider{
@@ -18,9 +18,9 @@ public class SteeleafArmorProvider implements ArmorRenderingRegistry.TextureProv
     @Override
     public @NotNull ResourceLocation getArmorTexture(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean secondLayer, @Nullable String suffix, ResourceLocation defaultTexture) {
         if (slot == EquipmentSlot.LEGS) {
-            return TFConstants.getArmorTexture("steeleaf_2.png");
+            return TwilightForestMod.getArmorTexture("steeleaf_2.png");
         } else {
-            return TFConstants.getArmorTexture("steeleaf_1.png");
+            return TwilightForestMod.getArmorTexture("steeleaf_1.png");
         }
     }
 }

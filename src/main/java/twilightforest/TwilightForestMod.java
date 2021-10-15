@@ -1,5 +1,6 @@
 package twilightforest;
 
+import com.chocohead.mm.api.ClassTinkerers;
 import com.google.common.collect.Maps;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ModInitializer;
@@ -8,8 +9,6 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Position;
@@ -19,10 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -47,23 +43,32 @@ import twilightforest.entity.projectile.MoonwormShot;
 import twilightforest.entity.projectile.TwilightWandBolt;
 import twilightforest.item.TFItems;
 import twilightforest.loot.TFTreasure;
-import twilightforest.mixin.plugin.patches.Patch;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
+import java.util.Locale;
+
 public class TwilightForestMod implements ModInitializer {
 
 	// TODO: might be a good idea to find proper spots for all of these? also remove redundants
 	public static final String ID = "twilightforest";
 
+	static final String MODEL_DIR = "textures/model/";
+	static final String GUI_DIR = "textures/gui/";
+	static final String ENVIRO_DIR = "textures/environment/";
+
+	static final String ARMOR_DIR = "textures/armor/";
+
 	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
-	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(new ResourceLocation(TFConstants.ID, TFConstants.ID), () -> new ItemStack(TFBlocks.twilight_portal_miniature_structure));
+	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(new ResourceLocation(ID, ID), () -> new ItemStack(TFBlocks.twilight_portal_miniature_structure));
 
-	public static final Logger LOGGER = LogManager.getLogger(TFConstants.ID);
+	public static final Logger LOGGER = LogManager.getLogger(ID);
+
+	public static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
 
 	public static TFConfigCommon COMMON_CONFIG;
 	public static boolean SERVER_SIDE_ONLY = true;
@@ -268,6 +273,30 @@ public class TwilightForestMod implements ModInitializer {
 			WoodType.register(TFBlocks.MINING);
 			WoodType.register(TFBlocks.SORTING);
 		}
+	}
+
+	public static ResourceLocation prefix(String name) {
+		return new ResourceLocation(ID, name.toLowerCase(Locale.ROOT));
+	}
+
+	public static ResourceLocation getModelTexture(String name) {
+		return new ResourceLocation(ID, MODEL_DIR + name);
+	}
+
+	public static ResourceLocation getGuiTexture(String name) {
+		return new ResourceLocation(ID, GUI_DIR + name);
+	}
+
+	public static ResourceLocation getEnvTexture(String name) {
+		return new ResourceLocation(ID, ENVIRO_DIR + name);
+	}
+
+	public static ResourceLocation getArmorTexture(String name) {
+		return new ResourceLocation(ID, ARMOR_DIR + name);
+	}
+
+	public static Rarity getRarity() {
+		return rarity != null ? rarity : Rarity.EPIC;
 	}
 
 	//-----FABRIC ONLY METHODS-----

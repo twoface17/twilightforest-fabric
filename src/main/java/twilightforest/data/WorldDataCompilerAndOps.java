@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.mojang.serialization.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import twilightforest.TFConstants;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -30,6 +29,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.*;
+import twilightforest.TwilightForestMod;
 
 public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<Format> implements DataProvider {
     protected static final Logger LOGGER = LogManager.getLogger();
@@ -196,7 +196,7 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
 
         // five freaking locations to check... Let's see if we won a prize
         if (instanceKey.isPresent()) {
-            if (TFConstants.ID.equals(instanceKey.get().getNamespace())) // This avoids generating anything that belongs to Minecraft
+            if (TwilightForestMod.ID.equals(instanceKey.get().getNamespace())) // This avoids generating anything that belongs to Minecraft
                 serialize(registryKey, instanceKey.get(), resource, codec);
 
             return ResourceLocation.CODEC.encode(instanceKey.get(), this.delegate, dynamic);

@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.MoonwormModel;
 import twilightforest.entity.projectile.MoonwormShot;
 
 public class MoonwormShotRenderer extends EntityRenderer<MoonwormShot> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("moonworm.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("moonworm.png");
 	private final MoonwormModel wormModel;
 
 	public MoonwormShotRenderer(EntityRendererProvider.Context manager) {

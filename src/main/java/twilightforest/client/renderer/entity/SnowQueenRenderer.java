@@ -5,13 +5,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.SnowQueenModel;
 import twilightforest.entity.boss.SnowQueen;
 
 public class SnowQueenRenderer extends HumanoidMobRenderer<SnowQueen, SnowQueenModel> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("snowqueen.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("snowqueen.png");
 
 	public SnowQueenRenderer(EntityRendererProvider.Context manager, SnowQueenModel model) {
 		super(manager, model, 0.625F);

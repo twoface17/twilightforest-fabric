@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.AbstractSkullCandleBlock;
 import twilightforest.block.KeepsakeCasketBlock;
 import twilightforest.block.AbstractTrophyBlock;
@@ -62,7 +62,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer {
 
 				if(camera == ItemTransforms.TransformType.GUI) {
 
-					ModelResourceLocation back = new ModelResourceLocation(TFConstants.prefix(((AbstractTrophyBlock) block).getVariant().getTrophyType().getModelName()), "inventory");
+					ModelResourceLocation back = new ModelResourceLocation(TwilightForestMod.prefix(((AbstractTrophyBlock) block).getVariant().getTrophyType().getModelName()), "inventory");
 					BakedModel modelBack = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(back);
 
 					Lighting.setupForFlatItems();

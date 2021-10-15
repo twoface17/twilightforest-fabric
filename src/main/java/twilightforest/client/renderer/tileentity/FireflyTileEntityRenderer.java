@@ -14,7 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
 import org.lwjgl.opengl.GL11;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.BugModelAnimationHelper;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.FireflyModel;
@@ -25,10 +25,10 @@ import javax.annotation.Nullable;
 public class FireflyTileEntityRenderer implements BlockEntityRenderer<FireflyBlockEntity> {
 
 	private final FireflyModel fireflyModel;
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("firefly-tiny.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("firefly-tiny.png");
 	//private static final RenderType GLOW_LAYER;
 	static {
-		RenderStateShard.TransparencyStateShard transparencyState = new RenderStateShard.TransparencyStateShard(TFConstants.ID + ":firefly_glow", () -> {
+		RenderStateShard.TransparencyStateShard transparencyState = new RenderStateShard.TransparencyStateShard(TwilightForestMod.ID + ":firefly_glow", () -> {
 			RenderSystem.enableBlend();
 			RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		}, () -> {

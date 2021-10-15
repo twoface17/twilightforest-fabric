@@ -3,7 +3,7 @@ package twilightforest.client.renderer.entity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.BoarModel;
 import twilightforest.entity.passive.Boar;
@@ -11,7 +11,7 @@ import twilightforest.entity.passive.Boar;
 //old renderer used to use PigModel, had to change it because of the texture size change
 public class BoarRenderer extends MobRenderer<Boar, BoarModel<Boar>> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("wildboar.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("wildboar.png");
 
 	public BoarRenderer(EntityRendererProvider.Context manager, BoarModel<Boar> model) {
 		super(manager, new BoarModel<>(manager.bakeLayer(TFModelLayers.BOAR)), 0.7F);

@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.CicadaModel;
 import twilightforest.entity.projectile.CicadaShot;
 
 public class CicadaShotRenderer extends EntityRenderer<CicadaShot> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("cicada-model.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("cicada-model.png");
 	private final CicadaModel cicadaModel;
 
 	public CicadaShotRenderer(EntityRendererProvider.Context manager) {

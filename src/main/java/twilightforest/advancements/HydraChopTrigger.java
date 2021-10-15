@@ -11,7 +11,7 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +19,7 @@ import java.util.Set;
 //can we move this to the item class itself rather than having this?
 public class HydraChopTrigger implements CriterionTrigger<HydraChopTrigger.Instance> {
 
-    public static final ResourceLocation ID = TFConstants.prefix("consume_hydra_chop_on_low_hunger");
+    public static final ResourceLocation ID = TwilightForestMod.prefix("consume_hydra_chop_on_low_hunger");
     private final Map<PlayerAdvancements, HydraChopTrigger.Listeners> listeners = Maps.newHashMap();
 
     @Override

@@ -4,7 +4,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.surfacebuilders.FillingSurfaceBuilder;
 import twilightforest.world.components.surfacebuilders.GlacierSurfaceBuilder;
 
@@ -22,10 +22,10 @@ public class ConfiguredSurfaceBuilders {
 	public static final ConfiguredSurfaceBuilder<GlacierSurfaceBuilder.GlacierSurfaceConfig> CONFIGURED_GLACIER = TwilightSurfaceBuilders.GLACIER.configured(GLACIER_CONFIG);
 
 	public static void registerConfigurations(Registry<ConfiguredSurfaceBuilder<?>> registry) {
-		Registry.register(registry, TFConstants.prefix("coarse_podzol_surface"), ConfiguredSurfaceBuilders.CONFIGURED_HIGHLANDS);
-		Registry.register(registry, TFConstants.prefix("deadrock_filler"), ConfiguredSurfaceBuilders.CONFIGURED_PLATEAU);
-		Registry.register(registry, TFConstants.prefix("heavy_snow"), ConfiguredSurfaceBuilders.CONFIGURED_SNOW);
-		Registry.register(registry, TFConstants.prefix("all_gravel"), ConfiguredSurfaceBuilders.CONFIGURED_GRAVEL);
-		Registry.register(registry, TFConstants.prefix("glacier"), ConfiguredSurfaceBuilders.CONFIGURED_GLACIER);
+		Registry.register(registry, TwilightForestMod.prefix("coarse_podzol_surface"), ConfiguredSurfaceBuilders.CONFIGURED_HIGHLANDS);
+		Registry.register(registry, TwilightForestMod.prefix("deadrock_filler"), ConfiguredSurfaceBuilders.CONFIGURED_PLATEAU);
+		Registry.register(registry, TwilightForestMod.prefix("heavy_snow"), ConfiguredSurfaceBuilders.CONFIGURED_SNOW);
+		Registry.register(registry, TwilightForestMod.prefix("all_gravel"), ConfiguredSurfaceBuilders.CONFIGURED_GRAVEL);
+		Registry.register(registry, TwilightForestMod.prefix("glacier"), ConfiguredSurfaceBuilders.CONFIGURED_GLACIER);
 	}
 }

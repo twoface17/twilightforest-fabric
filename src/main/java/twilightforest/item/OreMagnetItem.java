@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
@@ -241,7 +240,7 @@ public class OreMagnetItem extends Item implements IItemEx {
 
 		for (Block blockReplaceOre : BlockTagGenerator.ORE_MAGNET_BLOCK_REPLACE_ORE.getValues()) {
 			ResourceLocation rl = Registry.BLOCK.getKey(blockReplaceOre);
-			Tag<Block> tag = BlockTags.getAllTags().getTagOrEmpty(TFConstants.prefix("ore_magnet/" + rl.getNamespace() + "/" + rl.getPath()));
+			Tag<Block> tag = BlockTags.getAllTags().getTagOrEmpty(TwilightForestMod.prefix("ore_magnet/" + rl.getNamespace() + "/" + rl.getPath()));
 
 			for (Block oreBlock : tag.getValues()) {
 				ORE_TO_BLOCK_REPLACEMENTS.put(oreBlock, blockReplaceOre);

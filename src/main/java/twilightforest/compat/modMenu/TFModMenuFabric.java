@@ -7,13 +7,13 @@ import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import java.util.*;
 
-@Config(name = TFConstants.ID)
+@Config(name = TwilightForestMod.ID)
 public class TFModMenuFabric implements ConfigData {
-    private static final String config = TFConstants.ID + ".config.";
+    private static final String config = TwilightForestMod.ID + ".config.";
 
     private final static TranslatableComponent toolTip(String string){
         return new TranslatableComponent(config + string + ".tooltip");
@@ -242,7 +242,7 @@ public class TFModMenuFabric implements ConfigData {
 
         }
 
-        builder.setDefaultBackgroundTexture(new ResourceLocation(TFConstants.ID, "textures/block/maze_stone_brick.png"));
+        builder.setDefaultBackgroundTexture(new ResourceLocation(TwilightForestMod.ID, "textures/block/maze_stone_brick.png"));
 
         return builder;
 

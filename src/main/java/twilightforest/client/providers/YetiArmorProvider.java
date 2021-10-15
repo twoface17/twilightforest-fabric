@@ -14,7 +14,7 @@ import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.armor.YetiArmorModel;
 
@@ -30,9 +30,9 @@ public class YetiArmorProvider implements ArmorRenderingRegistry.ModelProvider, 
     @Override
     public @NotNull ResourceLocation getArmorTexture(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean secondLayer, @Nullable String suffix, ResourceLocation defaultTexture) {
         if (slot == EquipmentSlot.LEGS || slot == EquipmentSlot.CHEST) {
-            return TFConstants.getArmorTexture("yetiarmor_2.png");
+            return TwilightForestMod.getArmorTexture("yetiarmor_2.png");
         } else {
-            return TFConstants.getArmorTexture("yetiarmor_1.png");
+            return TwilightForestMod.getArmorTexture("yetiarmor_1.png");
         }
     }
 }

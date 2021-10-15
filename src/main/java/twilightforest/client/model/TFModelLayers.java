@@ -3,7 +3,7 @@ package twilightforest.client.model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class TFModelLayers {
 
@@ -143,7 +143,7 @@ public class TFModelLayers {
 	}
 
 	private static ModelLayerLocation register(String p_171301_, String p_171302_) {
-		return new ModelLayerLocation(new ResourceLocation(TFConstants.ID, p_171301_), p_171302_);
+		return new ModelLayerLocation(new ResourceLocation(TwilightForestMod.ID, p_171301_), p_171302_);
 	}
 
 	public static void init() {}

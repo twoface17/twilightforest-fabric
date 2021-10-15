@@ -15,9 +15,8 @@ import net.minecraft.util.Mth;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
-import twilightforest.item.TFItems;
 
 import java.util.Random;
 
@@ -82,7 +81,7 @@ public class LoadingScreenGui extends Screen {
 
 		drawBouncingWobblyItem(partialTicks, resolution.getGuiScaledWidth(), resolution.getGuiScaledHeight());
 
-		String loadTitle = I18n.get(TFConstants.ID + ".loading.title." + (isEntering ? "enter" : "leave"));
+		String loadTitle = I18n.get(TwilightForestMod.ID + ".loading.title." + (isEntering ? "enter" : "leave"));
 		ms.pushPose();
 		ms.translate(
 				(resolution.getGuiScaledWidth() / 2f) - (fontRenderer.width(loadTitle) / 4f),
@@ -141,12 +140,12 @@ public class LoadingScreenGui extends Screen {
 
 	public enum BackgroundThemes {
 		LABYRINTH(
-				TFConstants.prefix("textures/block/maze_stone_brick.png"),
-				TFConstants.prefix("textures/block/maze_stone_brick.png"),
+				TwilightForestMod.prefix("textures/block/maze_stone_brick.png"),
+				TwilightForestMod.prefix("textures/block/maze_stone_brick.png"),
 				//TwilightForestMod.prefix("textures/block/maze_stone_mossy.png"     ),
-				TFConstants.prefix("textures/block/maze_stone_cracked.png")
+				TwilightForestMod.prefix("textures/block/maze_stone_cracked.png")
 		) {
-			private final ResourceLocation mazestoneDecor = TFConstants.prefix("textures/block/maze_stone_decorative.png");
+			private final ResourceLocation mazestoneDecor = TwilightForestMod.prefix("textures/block/maze_stone_decorative.png");
 
 			@Override
 			void postRenderBackground(float width, float height) {
@@ -197,18 +196,18 @@ public class LoadingScreenGui extends Screen {
 			}
 		},
 		STRONGHOLD(
-				TFConstants.prefix("textures/block/underbrick.png"),
-				TFConstants.prefix("textures/block/underbrick_mossy.png"),
-				TFConstants.prefix("textures/block/underbrick_cracked.png")
+				TwilightForestMod.prefix("textures/block/underbrick.png"),
+				TwilightForestMod.prefix("textures/block/underbrick_mossy.png"),
+				TwilightForestMod.prefix("textures/block/underbrick_cracked.png")
 		),
 		DARKTOWER(
-				TFConstants.prefix("textures/block/tower_wood.png"),
-				TFConstants.prefix("textures/block/tower_wood.png"),
-				TFConstants.prefix("textures/block/tower_wood_mossy.png"),
-				TFConstants.prefix("textures/block/tower_wood_cracked.png"),
-				TFConstants.prefix("textures/block/tower_wood_cracked_alt.png")
+				TwilightForestMod.prefix("textures/block/tower_wood.png"),
+				TwilightForestMod.prefix("textures/block/tower_wood.png"),
+				TwilightForestMod.prefix("textures/block/tower_wood_mossy.png"),
+				TwilightForestMod.prefix("textures/block/tower_wood_cracked.png"),
+				TwilightForestMod.prefix("textures/block/tower_wood_cracked_alt.png")
 		) {
-			private final ResourceLocation towerwoodEncased = TFConstants.prefix("textures/block/tower_wood_encased.png");
+			private final ResourceLocation towerwoodEncased = TwilightForestMod.prefix("textures/block/tower_wood_encased.png");
 
 			private final float stretch = 0.985F;
             private final float depth = 1.15F;
@@ -349,24 +348,24 @@ public class LoadingScreenGui extends Screen {
 			}
 		},
 		FINALCASTLE(
-				TFConstants.prefix("textures/block/castle_brick.png"),
-				TFConstants.prefix("textures/block/castle_brick.png"),
-				TFConstants.prefix("textures/block/castle_brick.png"),
-				TFConstants.prefix("textures/block/castle_brick.png"),
-				TFConstants.prefix("textures/block/castle_brick.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick.png"),
 				//TwilightForestMod.prefix("textures/block/castle_brick_mossy.png"   ), // Jeez this one does not fit at ALL. Out!
-				TFConstants.prefix("textures/block/castle_brick_cracked.png"),
-				TFConstants.prefix("textures/block/castle_brick_worn.png")
+				TwilightForestMod.prefix("textures/block/castle_brick_cracked.png"),
+				TwilightForestMod.prefix("textures/block/castle_brick_worn.png")
 		) {
 			private final ResourceLocation[] magic = new ResourceLocation[]{
-					TFConstants.prefix("textures/block/castleblock_magic_0.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_1.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_2.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_3.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_4.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_5.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_6.png"),
-					TFConstants.prefix("textures/block/castleblock_magic_7.png")
+					TwilightForestMod.prefix("textures/block/castleblock_magic_0.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_1.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_2.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_3.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_4.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_5.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_6.png"),
+					TwilightForestMod.prefix("textures/block/castleblock_magic_7.png")
 			};
 
 			private final int[] colors = new int[]{0xFF00FF, 0x00FFFF, 0xFFFF00, 0x4B0082};

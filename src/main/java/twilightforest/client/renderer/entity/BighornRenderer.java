@@ -7,11 +7,11 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.SheepModel;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 public class BighornRenderer extends SheepRenderer {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("bighorn.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("bighorn.png");
 
 	@SuppressWarnings("unchecked")
 	public BighornRenderer(EntityRendererProvider.Context manager, SheepModel<? extends Sheep> baseModel, EntityModel<?> coatModel, float shadowSize) {

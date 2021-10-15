@@ -7,7 +7,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import shadow.cloth.clothconfig.com.moandjiezana.toml.TomlComment;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 @Config(name = "twilightforest-common")
-@Config.Gui.Background(TFConstants.ID + ":textures/block/maze_stone_brick.png")
+@Config.Gui.Background(TwilightForestMod.ID + ":textures/block/maze_stone_brick.png")
 public class TFConfigCommon implements ConfigData {
 
     @ConfigEntry.Category("common")

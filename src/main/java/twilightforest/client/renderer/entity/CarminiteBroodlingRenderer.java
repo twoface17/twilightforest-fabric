@@ -4,12 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SpiderRenderer;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.monster.TowerBroodling;
 
 public class CarminiteBroodlingRenderer<T extends TowerBroodling> extends SpiderRenderer<T> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("towerbroodling.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("towerbroodling.png");
 
 	public CarminiteBroodlingRenderer(EntityRendererProvider.Context manager) {
 		super(manager);

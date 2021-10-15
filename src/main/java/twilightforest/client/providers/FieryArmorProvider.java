@@ -14,7 +14,7 @@ import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.armor.FieryArmorModel;
 
@@ -30,9 +30,9 @@ public class FieryArmorProvider implements ArmorRenderingRegistry.ModelProvider,
     @Override
     public @NotNull ResourceLocation getArmorTexture(LivingEntity entity, ItemStack stack, EquipmentSlot slot, boolean secondLayer, @Nullable String suffix, ResourceLocation defaultTexture) {
         if (slot == EquipmentSlot.LEGS) {
-			return TFConstants.getArmorTexture("fiery_2.png");
+			return TwilightForestMod.getArmorTexture("fiery_2.png");
 		} else {
-            return TFConstants.getArmorTexture("fiery_1.png");
+            return TwilightForestMod.getArmorTexture("fiery_1.png");
 		}
     }
 }

@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class ArmorInventoryChangedTrigger implements CriterionTrigger<ArmorInventoryChangedTrigger.Instance> {
 
-	public static final ResourceLocation ID = TFConstants.prefix("armor_changed");
+	public static final ResourceLocation ID = TwilightForestMod.prefix("armor_changed");
 	private final Map<PlayerAdvancements, Listeners> listeners = Maps.newHashMap();
 
 	@Override

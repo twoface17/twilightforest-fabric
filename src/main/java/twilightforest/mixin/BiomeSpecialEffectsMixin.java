@@ -5,12 +5,12 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import twilightforest.TFConstants;
 
 import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import twilightforest.TwilightForestMod;
 
 @Mixin(BiomeSpecialEffects.GrassColorModifier.class)
 public abstract class BiomeSpecialEffectsMixin {
@@ -48,10 +48,10 @@ public abstract class BiomeSpecialEffectsMixin {
 
     {
         // add new value
-        init("ENCHANTED_FOREST",values().length + 1, TFConstants.prefix("enchanted_forest").toString());
-        init("SWAMP", values().length + 2, TFConstants.prefix("swamp").toString());
-        init("DARK_FOREST", values().length + 3, TFConstants.prefix("dark_forest").toString());
-        init("DARK_FOREST_CENTER",values().length + 4, TFConstants.prefix("dark_forest_center").toString());
+        init("ENCHANTED_FOREST",values().length + 1, TwilightForestMod.prefix("enchanted_forest").toString());
+        init("SWAMP", values().length + 2, TwilightForestMod.prefix("swamp").toString());
+        init("DARK_FOREST", values().length + 3, TwilightForestMod.prefix("dark_forest").toString());
+        init("DARK_FOREST_CENTER",values().length + 4, TwilightForestMod.prefix("dark_forest_center").toString());
         start = true;
 
     }

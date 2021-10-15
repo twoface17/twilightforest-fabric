@@ -1,37 +1,21 @@
 package twilightforest.client;
 
-import com.google.common.collect.Maps;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.impl.resource.loader.FabricModResourcePack;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
 import twilightforest.ASMHooks;
-import twilightforest.TFConstants;
-import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
@@ -39,16 +23,9 @@ import twilightforest.client.model.TFLayerDefinitions;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.client.providers.*;
-import twilightforest.client.shader.ShaderManager;
 import twilightforest.compat.clothConfig.TFClientConfigEvent;
 import twilightforest.compat.clothConfig.configFiles.TFConfig;
 import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
-import twilightforest.dispenser.CrumbleDispenseBehavior;
-import twilightforest.dispenser.FeatherFanDispenseBehavior;
-import twilightforest.dispenser.MoonwormDispenseBehavior;
-import twilightforest.dispenser.TransformationDispenseBehavior;
-import twilightforest.entity.projectile.MoonwormShot;
-import twilightforest.entity.projectile.TwilightWandBolt;
 import twilightforest.inventory.TFContainers;
 import twilightforest.item.TFItems;
 import twilightforest.network.TFPacketHandler;
@@ -87,7 +64,7 @@ public class TFClientSetup implements ClientModInitializer {
         TFContainers.renderScreens();
 
         TwilightForestRenderInfo renderInfo = new TwilightForestRenderInfo(128.0F, false, DimensionSpecialEffects.SkyType.NONE, false, false);
-        DimensionSpecialEffects.EFFECTS.put(TFConstants.prefix("renderer"), renderInfo);
+        DimensionSpecialEffects.EFFECTS.put(TwilightForestMod.prefix("renderer"), renderInfo);
 
         Minecraft.getInstance().execute(() -> {
             Sheets.SIGN_MATERIALS.put(TFBlocks.TWILIGHT_OAK, Sheets.createSignMaterial(TFBlocks.TWILIGHT_OAK));
@@ -112,12 +89,12 @@ public class TFClientSetup implements ClientModInitializer {
         Minecraft.getInstance().getResourcePackRepository().sources.add(
                 (consumer, iFactory) -> consumer.accept(
                         Pack.create(
-                                TFConstants.prefix("classic_textures").toString(),
+                                TwilightForestMod.prefix("classic_textures").toString(),
                                 false,
                                 () -> new TwilightLegacyPack(
                                         FabricLoader
                                                 .getInstance()
-                                                .getModContainer(TFConstants.ID)
+                                                .getModContainer(TwilightForestMod.ID)
                                                 .get()
                                 ),
                                 iFactory,

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
 import twilightforest.world.registration.TFFeature;
 
@@ -39,7 +39,7 @@ public final class SideTowerCover extends TwilightTemplateStructurePiece {
     }
 
     private SideTowerCover(StructureManager structureManager, Rotation rotation, String name, BlockPos startPosition, int width) {
-        this(structureManager, TFConstants.prefix("lich_tower/side_tower_covers/" + name), LichTowerUtil.makeSettings(rotation), startPosition, width);
+        this(structureManager, TwilightForestMod.prefix("lich_tower/side_tower_covers/" + name), LichTowerUtil.makeSettings(rotation), startPosition, width);
     }
 
     private SideTowerCover(StructureManager structureManager, ResourceLocation templateLocation, StructurePlaceSettings placeSettings, BlockPos startPosition, int width) {

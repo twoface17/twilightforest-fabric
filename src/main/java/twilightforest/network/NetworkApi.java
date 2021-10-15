@@ -1,11 +1,11 @@
 package twilightforest.network;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import twilightforest.TFConstants;
 
 import java.util.function.Consumer;
 
 import net.minecraft.network.FriendlyByteBuf;
+import twilightforest.TwilightForestMod;
 
 public class NetworkApi {
     public PacketInfo messageBuilder(Class<ChangeBiomePacket> changeBiomePacketClass, int i) {
@@ -38,7 +38,7 @@ public class NetworkApi {
         }
 
         public void add() {
-            ClientPlayNetworking.registerGlobalReceiver(TFConstants.prefix("channel"), handler);
+            ClientPlayNetworking.registerGlobalReceiver(TwilightForestMod.prefix("channel"), handler);
         }
     }
 }

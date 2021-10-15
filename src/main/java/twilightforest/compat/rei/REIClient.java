@@ -3,11 +3,9 @@ package twilightforest.compat.rei;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
-import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
-import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.fabricmc.loader.api.FabricLoader;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.compat.rei.common.REIServer;
 
@@ -35,6 +33,6 @@ public class REIClient implements REIClientPlugin {
 
     @Override
     public String getPluginProviderName() {
-        return TFConstants.prefix("rei_plugin").toString();
+        return TwilightForestMod.prefix("rei_plugin").toString();
     }
 }

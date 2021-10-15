@@ -10,14 +10,14 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.SlimeBeetleModel;
 import twilightforest.entity.monster.SlimeBeetle;
 
 public class SlimeBeetleRenderer extends MobRenderer<SlimeBeetle, SlimeBeetleModel> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("slimebeetle.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("slimebeetle.png");
 
 	public SlimeBeetleRenderer(EntityRendererProvider.Context manager, SlimeBeetleModel model, float shadowSize) {
 		super(manager, model, shadowSize);

@@ -5,13 +5,11 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
 
 import static twilightforest.TwilightForestMod.creativeTab;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 public class TFBlockItems {
 
@@ -397,7 +395,7 @@ public class TFBlockItems {
 	}
 
 	private static <B extends Block, W extends Block> Item trophyBlock(B block, W wallblock) {
-		return makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TFConstants.getRarity())) {
+		return makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TwilightForestMod.getRarity())) {
 //			@Override
 //			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 //				consumer.accept(new IItemRenderProperties() {

@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.entity.ChainModel;
 import twilightforest.client.model.entity.SpikeBlockModel;
@@ -21,7 +21,7 @@ import twilightforest.entity.ChainBlock;
 
 public class BlockChainRenderer extends EntityRenderer<ChainBlock> {
 
-	private static final ResourceLocation textureLoc = TFConstants.getModelTexture("blockgoblin.png");
+	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("blockgoblin.png");
 	private final Model model;
 	private final Model chainModel;
 
