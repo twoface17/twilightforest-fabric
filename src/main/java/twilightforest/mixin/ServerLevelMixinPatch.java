@@ -24,14 +24,14 @@ public abstract class ServerLevelMixinPatch {
     @Unique
     int cachedID;
 
-    @Shadow public abstract LevelEntityGetter<Entity> getEntities();
-    @Shadow public Int2ObjectMap<EnderDragonPart> dragonParts;
-
-    @Inject(method = "getEntityOrPart", at=@At(value = "RETURN", ordinal = 1), cancellable = true)
-    public void multipartFromIDTEST(int i, CallbackInfoReturnable<Entity> cir){
-        Entity entity = (Entity)this.getEntities().get(i);
-        if (cir.getReturnValue() == null) {
-            cir.setReturnValue(ASMHooks.multipartFromID(entity, i));
-        }
+    @Inject(method = "getEntityOrPart", at=@At(value = "HEAD"))
+    public void grabEntityID(int i, CallbackInfoReturnable<Entity> cir){
+        cachedID = i;
     }
+
+    @ModifyVariable(method = "getEntityOrPart", at=@At(value = "STORE", ordinal = 0))
+    private Entity multipartFromID(Entity entity){
+        return ASMHooks.multipartFromID(entity, cachedID);
+    }
+
 }
