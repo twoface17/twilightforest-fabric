@@ -36,67 +36,6 @@ import net.minecraft.world.phys.Vec3;
 public abstract class EntityRenderDispatcherMixin {
     @Shadow public abstract <T extends Entity> EntityRenderer<? super T> getRenderer(T entity);
 
-    @Shadow private Map<EntityType<?>, EntityRenderer<?>> renderers;
-
-    /**
-     * @author AlphaMode
-     * fuck you forge I don't want to write a actual mixin rn
-     */
-    /*
-    @Overwrite
-    private static void renderHitbox(PoseStack poseStack, VertexConsumer matrixStack, Entity buffer, float pPartialTicks) {
-        AABB aabb = buffer.getBoundingBox().move(-buffer.getX(), -buffer.getY(), -buffer.getZ());
-        LevelRenderer.renderLineBox(poseStack, matrixStack, aabb, 1.0F, 1.0F, 1.0F, 1.0F);
-        if (((IEntityEx)buffer).isMultipartEntity()) {
-            double d0 = -Mth.lerp(pPartialTicks, buffer.xOld, buffer.getX());
-            double d1 = -Mth.lerp(pPartialTicks, buffer.yOld, buffer.getY());
-            double d2 = -Mth.lerp(pPartialTicks, buffer.zOld, buffer.getZ());
-
-            for(PartEntity<?> enderdragonpart : ((IEntityEx)buffer).getParts()) {
-                poseStack.pushPose();
-                double d3 = d0 + Mth.lerp(pPartialTicks, enderdragonpart.xOld, enderdragonpart.getX());
-                double d4 = d1 + Mth.lerp(pPartialTicks, enderdragonpart.yOld, enderdragonpart.getY());
-                double d5 = d2 + Mth.lerp(pPartialTicks, enderdragonpart.zOld, enderdragonpart.getZ());
-                poseStack.translate(d3, d4, d5);
-                LevelRenderer.renderLineBox(poseStack, matrixStack, enderdragonpart.getBoundingBox().move(-enderdragonpart.getX(), -enderdragonpart.getY(), -enderdragonpart.getZ()), 0.25F, 1.0F, 0.0F, 1.0F);
-                poseStack.popPose();
-            }
-        }
-
-        //Start of Vanilla Code: BADDDDDDDD
-
-        if (buffer instanceof EnderDragon) {
-            double d = -Mth.lerp(pPartialTicks, buffer.xOld, buffer.getX());
-            double e = -Mth.lerp(pPartialTicks, buffer.yOld, buffer.getY());
-            double g = -Mth.lerp(pPartialTicks, buffer.zOld, buffer.getZ());
-            EnderDragonPart[] var11 = ((EnderDragon)buffer).getSubEntities();
-            int var12 = var11.length;
-
-            for(int var13 = 0; var13 < var12; ++var13) {
-                EnderDragonPart enderDragonPart = var11[var13];
-                poseStack.pushPose();
-                double h = d + Mth.lerp(pPartialTicks, enderDragonPart.xOld, enderDragonPart.getX());
-                double i = e + Mth.lerp(pPartialTicks, enderDragonPart.yOld, enderDragonPart.getY());
-                double j = g + Mth.lerp(pPartialTicks, enderDragonPart.zOld, enderDragonPart.getZ());
-                poseStack.translate(h, i, j);
-                LevelRenderer.renderLineBox(poseStack, matrixStack, enderDragonPart.getBoundingBox().move(-enderDragonPart.getX(), -enderDragonPart.getY(), -enderDragonPart.getZ()), 0.25F, 1.0F, 0.0F, 1.0F);
-                poseStack.popPose();
-            }
-        }
-
-        if (buffer instanceof LivingEntity) {
-            float f = 0.01F;
-            LevelRenderer.renderLineBox(poseStack, matrixStack, aabb.minX, (double)(buffer.getEyeHeight() - 0.01F), aabb.minZ, aabb.maxX, (double)(buffer.getEyeHeight() + 0.01F), aabb.maxZ, 1.0F, 0.0F, 0.0F, 1.0F);
-        }
-
-        Vec3 vec3 = buffer.getViewVector(pPartialTicks);
-        Matrix4f matrix4f = poseStack.last().pose();
-        Matrix3f matrix3f = poseStack.last().normal();
-        matrixStack.vertex(matrix4f, 0.0F, buffer.getEyeHeight(), 0.0F).color(0, 0, 255, 255).normal(matrix3f, (float)vec3.x, (float)vec3.y, (float)vec3.z).endVertex();
-        matrixStack.vertex(matrix4f, (float)(vec3.x * 2.0D), (float)((double)buffer.getEyeHeight() + vec3.y * 2.0D), (float)(vec3.z * 2.0D)).color(0, 0, 255, 255).normal(matrix3f, (float)vec3.x, (float)vec3.y, (float)vec3.z).endVertex();
-    }
-    */
-
     //TODO: Double Check that this is a proper replacement
     @Inject(method = "renderHitbox", at=@At(value = "HEAD"))
     private static void multiPartRenderHitbox(PoseStack poseStack, VertexConsumer matrixStack, Entity buffer, float entity, CallbackInfo ci) {
@@ -105,13 +44,13 @@ public abstract class EntityRenderDispatcherMixin {
             double d1 = -Mth.lerp(entity, buffer.yOld, buffer.getY());
             double d2 = -Mth.lerp(entity, buffer.zOld, buffer.getZ());
 
-            for(PartEntity<?> enderdragonpart : ((IEntityEx)buffer).getParts()) {
+            for(PartEntity<?> multiPart : ((IEntityEx)buffer).getParts()) {
                 poseStack.pushPose();
-                double d3 = d0 + Mth.lerp(entity, enderdragonpart.xOld, enderdragonpart.getX());
-                double d4 = d1 + Mth.lerp(entity, enderdragonpart.yOld, enderdragonpart.getY());
-                double d5 = d2 + Mth.lerp(entity, enderdragonpart.zOld, enderdragonpart.getZ());
+                double d3 = d0 + Mth.lerp(entity, multiPart.xOld, multiPart.getX());
+                double d4 = d1 + Mth.lerp(entity, multiPart.yOld, multiPart.getY());
+                double d5 = d2 + Mth.lerp(entity, multiPart.zOld, multiPart.getZ());
                 poseStack.translate(d3, d4, d5);
-                LevelRenderer.renderLineBox(poseStack, matrixStack, enderdragonpart.getBoundingBox().move(-enderdragonpart.getX(), -enderdragonpart.getY(), -enderdragonpart.getZ()), 0.25F, 1.0F, 0.0F, 1.0F);
+                LevelRenderer.renderLineBox(poseStack, matrixStack, multiPart.getBoundingBox().move(-multiPart.getX(), -multiPart.getY(), -multiPart.getZ()), 0.25F, 1.0F, 0.0F, 1.0F);
                 poseStack.popPose();
             }
         }

@@ -36,16 +36,9 @@ public abstract class ItemInHandRendererMixin {
 
     @Shadow protected abstract void renderOneHandedMap(PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, float equippedProgress, HumanoidArm hand, float swingProgress, ItemStack stack);
 
-    private static ItemStack capturedStack = null;
-
-    @Inject(method = "renderMap", at = @At("HEAD"))
-    public void renderMapHead(PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, ItemStack stack, CallbackInfo ci) {
-        capturedStack = stack;
-    }
-
     @ModifyVariable(method = "renderMap", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/item/MapItem;getSavedData(Ljava/lang/Integer;Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/level/saveddata/maps/MapItemSavedData;"))
-    public MapItemSavedData renderMapData(MapItemSavedData mapItemSavedData) {
-        return ASMHooks.renderMapData(MapItem.getSavedData(capturedStack, minecraft.level), capturedStack, minecraft.level);
+    public MapItemSavedData renderMapData(MapItemSavedData mapItemSavedData, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, ItemStack stack) {
+        return ASMHooks.renderMapData(MapItem.getSavedData(stack, minecraft.level), stack, minecraft.level);
     }
 
 
