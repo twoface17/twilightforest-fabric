@@ -64,6 +64,11 @@ public class TFConfigCommon implements ConfigData {
 
     @ConfigEntry.Category("common")
     @ConfigEntry.Gui.Tooltip
+    @TomlComment("Use a valid advancement resource location as a string, with default String \"minecraft:story/mine_diamond\". Invalid/Empty Advancement resource IDs will leave the portal entirely unlocked.")
+    public String portalAdvancementLock = "minecraft:story/mine_diamond";
+
+    @ConfigEntry.Category("common")
+    @ConfigEntry.Gui.Tooltip
     @TomlComment("Disable the uncrafting function of the uncrafting table. Provided as an option when interaction with other mods produces exploitable recipes.")
     public boolean disableUncrafting = false;
 

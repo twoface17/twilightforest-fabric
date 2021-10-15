@@ -20,7 +20,7 @@ import twilightforest.block.TFBlocks;
 import twilightforest.block.TFPortalBlock;
 import twilightforest.data.ItemTagGenerator;
 import twilightforest.item.BrittleFlaskItem;
-import twilightforest.network.MissingAdvancementToastPacket;
+//import twilightforest.network.MissingAdvancementToastPacket;
 import twilightforest.network.StructureProtectionPacket;
 import twilightforest.network.StructureProtectionClearPacket;
 import twilightforest.network.TFPacketHandler;
@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Random;
 
 public class TFTickHandler {
-
 
 	public static void playerTick(Player player) {
 		if (!(player.level instanceof ServerLevel))
@@ -138,14 +137,14 @@ public class TFTickHandler {
 			if (qualified == null) return;
 
 			if (!player.isCreative() && !player.isSpectator()) {
-				Advancement requirement = PlayerHelper.getAdvancement(player, TFConfig.getPortalLockingAdvancement());
+				Advancement requirement = PlayerHelper.getAdvancement(player, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.portalAdvancementLock));
 				if (requirement != null && !PlayerHelper.doesPlayerHaveRequiredAdvancement(player, requirement)) {
 					player.displayClientMessage(PORTAL_UNWORTHY, true);
 
 					if (!TFPortalBlock.isPlayerNotifiedOfRequirement(player)) {
 						// .doesPlayerHaveRequiredAdvancement null-checks already, so we can skip null-checking the `requirement`
 						DisplayInfo info = requirement.getDisplay();
-						TFPacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()));
+						//TFPacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()));
 
 						TFPortalBlock.playerNotifiedOfRequirement(player);
 					}

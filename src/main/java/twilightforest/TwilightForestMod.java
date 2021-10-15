@@ -154,6 +154,8 @@ public class TwilightForestMod implements ModInitializer {
 		WoodType.register(TFBlocks.SORTING);
 	}
 
+	//TODO: PORT THE NEW LEGACY/CLASSIC LOADING PROCESS
+	/*
 	@SubscribeEvent
 	public static void addClassicPack(AddPackFindersEvent event) {
 		try {
@@ -173,6 +175,8 @@ public class TwilightForestMod implements ModInitializer {
 			throw new RuntimeException(ex);
 		}
 	}
+
+	 */
 
 	public static void registerSerializers() {
 		//How do I add a condition serializer as fast as possible? An event that fires really early
@@ -242,10 +246,13 @@ public class TwilightForestMod implements ModInitializer {
 			TFBlocks.TFPots();
 			TFSounds.registerParrotSounds();
 
+			//TODO: PORT????
+			/*
 			CauldronInteraction.WATER.put(TFItems.ARCTIC_HELMET.get(), CauldronInteraction.DYED_ITEM);
 			CauldronInteraction.WATER.put(TFItems.ARCTIC_CHESTPLATE.get(), CauldronInteraction.DYED_ITEM);
 			CauldronInteraction.WATER.put(TFItems.ARCTIC_LEGGINGS.get(), CauldronInteraction.DYED_ITEM);
 			CauldronInteraction.WATER.put(TFItems.ARCTIC_BOOTS.get(), CauldronInteraction.DYED_ITEM);
+			 */
 
 			AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
 			AxeItem.STRIPPABLES.put(TFBlocks.TWILIGHT_OAK_LOG, TFBlocks.STRIPPED_TWILIGHT_OAK_LOG);
