@@ -22,7 +22,7 @@ public class ServerEntityMixinPatch {
         TFEventListener.onStartTracking(player, this.entity);
     }
 
-    @Inject(method = "sendDirtyEntityData", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity;getEntityData()Lnet/minecraft/network/syncher/SynchedEntityData;"))
+    @Inject(method = "sendDirtyEntityData", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;getEntityData()Lnet/minecraft/network/syncher/SynchedEntityData;"))
     public void updateMultiparts(CallbackInfo ci) {
         ASMHooks.updateMultiparts(this.entity);
     }
