@@ -17,7 +17,7 @@
     "ServerEntityMixinPatch",
     "ServerLevelEntityCallbacksMixinPatch",
     "ServerLevelMixinPatch",
-
+    "MobAccessor",
     "ServerPlayerMixin",
     "SpawnPlacementsMixin",
     "BoundingBoxMixin",
