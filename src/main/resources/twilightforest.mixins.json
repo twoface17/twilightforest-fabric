@@ -17,6 +17,7 @@
     "ServerEntityMixinPatch",
     "ServerLevelEntityCallbacksMixinPatch",
     "ServerLevelMixinPatch",
+
     "ServerPlayerMixin",
     "SpawnPlacementsMixin",
     "BoundingBoxMixin",
@@ -28,6 +29,7 @@
     "BlockStateMixin",
     "ServerPlayerGameModeMixin",
     "BushBlockMixin",
+    "FireBlockMixin",
     "TntBlockAccessor",
     "ResultSlotMixin"
   ],

@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import twilightforest.ASMHooks;
 import twilightforest.TFEventListener;
 
 import net.minecraft.server.level.ServerEntity;
@@ -19,5 +20,10 @@ public class ServerEntityMixinPatch {
     @Inject(method = "addPairing", at = @At("TAIL"))
     public void trackPlayer(ServerPlayer player, CallbackInfo ci) {
         TFEventListener.onStartTracking(player, this.entity);
+    }
+
+    @Inject(method = "sendDirtyEntityData", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;getEntityData()Lnet/minecraft/network/syncher/SynchedEntityData;"))
+    public void updateMultiparts(CallbackInfo ci) {
+        ASMHooks.updateMultiparts(this.entity);
     }
 }

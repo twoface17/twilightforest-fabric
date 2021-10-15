@@ -11,15 +11,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import twilightforest.ASMHooks;
 
-import javax.annotation.Nullable;
-
 @Mixin(ServerLevel.class)
 @Debug(export = true)
-public abstract class ServerLevelMixinPatch {
+public abstract class ServerLevelMixin {
 
     @Unique
     int cachedID;
