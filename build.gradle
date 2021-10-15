@@ -1,6 +1,5 @@
 plugins {
     id 'fabric-loom' version '0.10-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.3.0'
     id 'maven-publish'
 }
 
@@ -91,6 +90,7 @@ dependencies {
     include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.0.0"
 
     include 'com.github.Chocohead:Fabric-ASM:v2.3'
+    modImplementation 'net.alphamode:FabricExtendibleEnum:1.0.0'
 }
 
 processResources {

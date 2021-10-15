@@ -56,6 +56,9 @@ import twilightforest.world.registration.biomes.BiomeKeys;
 
 public class TwilightForestMod implements ModInitializer {
 
+	// TODO: might be a good idea to find proper spots for all of these? also remove redundants
+	public static final String ID = "twilightforest";
+
 	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
 	public static CreativeModeTab creativeTab = FabricItemGroupBuilder.build(new ResourceLocation(TFConstants.ID, TFConstants.ID), () -> new ItemStack(TFBlocks.twilight_portal_miniature_structure));

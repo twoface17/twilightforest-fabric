@@ -1,5 +1,6 @@
 package twilightforest.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.Registry;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import net.alphamode.enums.EnumUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TFConstants;
@@ -47,7 +49,7 @@ public class TFItems {
 
 	//public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TwilightForestMod.ID);
 
-	public static final Item naga_scale = Registry.register(Registry.ITEM, TFConstants.ID + ":naga_scale", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final Item naga_scale = Registry.register(Registry.ITEM, TFConstants.ID + ":naga_scale", new Item(defaultBuilder().rarity(EnumUtil.createRarity("TF_CYAN", ChatFormatting.DARK_AQUA))));
 	public static final Item naga_chestplate = Registry.register(Registry.ITEM, TFConstants.ID + ":naga_chestplate", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
 	public static final Item naga_leggings = Registry.register(Registry.ITEM, TFConstants.ID + ":naga_leggings", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
 	public static final Item twilight_scepter = Registry.register(Registry.ITEM, TFConstants.ID + ":twilight_scepter", new TwilightWandItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));
