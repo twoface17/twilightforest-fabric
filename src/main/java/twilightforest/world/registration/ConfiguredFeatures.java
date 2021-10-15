@@ -20,7 +20,6 @@ import net.minecraft.world.level.levelgen.placement.ConfiguredDecorator;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.placement.WaterDepthThresholdConfiguration;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.feature.config.SpikeConfig;

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import twilightforest.TFConstants;
 import twilightforest.TFEventListener;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;

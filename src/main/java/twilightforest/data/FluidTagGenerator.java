@@ -1,7 +1,6 @@
 package twilightforest.data;
 
 import net.fabricmc.fabric.api.tag.TagRegistry;
-import twilightforest.TFConstants;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;

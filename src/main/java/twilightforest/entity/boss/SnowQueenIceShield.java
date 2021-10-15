@@ -6,7 +6,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFPart;

@@ -12,7 +12,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.NoiseEffect;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
 

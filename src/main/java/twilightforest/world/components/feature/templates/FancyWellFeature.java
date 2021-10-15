@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.components.processors.CobblePlankSwizzler;

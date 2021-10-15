@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFPart;
 

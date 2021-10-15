@@ -21,7 +21,6 @@ import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.server.level.ServerLevel;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.potions.TFPotions;
 import twilightforest.util.WorldUtil;

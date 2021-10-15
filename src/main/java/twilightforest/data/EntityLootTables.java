@@ -26,7 +26,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import com.google.common.collect.Sets;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFEntities;

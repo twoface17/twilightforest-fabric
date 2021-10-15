@@ -25,7 +25,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.extensions.IItemEx;

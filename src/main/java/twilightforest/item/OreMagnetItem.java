@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;

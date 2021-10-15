@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.feature.trees.treeplacers.*;
 

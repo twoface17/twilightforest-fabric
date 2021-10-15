@@ -19,10 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -81,7 +78,6 @@ public class TwilightForestMod implements ModInitializer {
 
 	public static TFConfigCommon COMMON_CONFIG;
 	public static boolean SERVER_SIDE_ONLY = true;
-
 
     @Override
 	public void onInitialize() {
@@ -328,6 +324,30 @@ public class TwilightForestMod implements ModInitializer {
 		//DataGenerators.gatherData();
 	}
 
+	public static ResourceLocation prefix(String name) {
+		return new ResourceLocation(ID, name.toLowerCase(Locale.ROOT));
+	}
+
+	public static ResourceLocation getModelTexture(String name) {
+		return new ResourceLocation(ID, MODEL_DIR + name);
+	}
+
+	public static ResourceLocation getGuiTexture(String name) {
+		return new ResourceLocation(ID, GUI_DIR + name);
+	}
+
+	public static ResourceLocation getEnvTexture(String name) {
+		return new ResourceLocation(ID, ENVIRO_DIR + name);
+	}
+
+	public static ResourceLocation getArmorTexture(String name) {
+		return new ResourceLocation(ID, ARMOR_DIR + name);
+	}
+
+	public static Rarity getRarity() {
+		return rarity != null ? rarity : Rarity.EPIC;
+	}
+
 	//-----FABRIC ONLY METHODS-----
 	public static void commonConfigInit() {
 		if(SERVER_SIDE_ONLY){
@@ -361,38 +381,5 @@ public class TwilightForestMod implements ModInitializer {
 			}
 		});
 	}
-
-	public static ResourceLocation prefix(String name) {
-		return new ResourceLocation(ID, name.toLowerCase(Locale.ROOT));
-	}
-
-	public static ResourceLocation getModelTexture(String name) {
-		return new ResourceLocation(ID, MODEL_DIR + name);
-	}
-
-	public static ResourceLocation getGuiTexture(String name) {
-		return new ResourceLocation(ID, GUI_DIR + name);
-	}
-
-	public static ResourceLocation getEnvTexture(String name) {
-		return new ResourceLocation(ID, ENVIRO_DIR + name);
-	}
-
-	public static ResourceLocation getArmorTexture(String name) {
-		return new ResourceLocation(ID, ARMOR_DIR + name);
-	}
-
-	public static Rarity getRarity() {
-		return rarity != null ? rarity : Rarity.EPIC;
-	}
-
-
-
-
-
-
-
-
-
 
 }

@@ -2,7 +2,6 @@ package twilightforest.item;
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import org.apache.commons.lang3.tuple.Pair;
-import twilightforest.TFConstants;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;

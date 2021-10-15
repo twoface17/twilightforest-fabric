@@ -91,6 +91,7 @@ dependencies {
     include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.0.0"
 
     include 'com.github.Chocohead:Fabric-ASM:v2.3'
+    //modImplementation 'net.alphamode:FabricExtendibleEnum:1.0.0'
 }
 
 processResources {

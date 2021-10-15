@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.compat.TFCompat;
 import twilightforest.enums.*;

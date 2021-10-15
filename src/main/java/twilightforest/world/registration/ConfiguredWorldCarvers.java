@@ -1,6 +1,6 @@
 package twilightforest.world.registration;
 
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.TFCavesCarver;
 

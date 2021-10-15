@@ -7,7 +7,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.EntityType;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFEntities;
 

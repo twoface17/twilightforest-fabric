@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.HitResult;
 import twilightforest.block.IPlantable;
 
@@ -168,5 +170,10 @@ public interface IBlockMethods {
 
     default ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
         return null;
+    }
+
+    @Nullable
+    default BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+        return state.getBlock() == Blocks.LAVA ? BlockPathTypes.LAVA : (this == Blocks.FIRE || this == Blocks.LAVA) ? BlockPathTypes.DAMAGE_FIRE : null;
     }
 }

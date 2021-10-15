@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.*;
 import twilightforest.world.components.feature.templates.GraveyardFeature;

@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 
 public class HydraHead extends HydraPart {

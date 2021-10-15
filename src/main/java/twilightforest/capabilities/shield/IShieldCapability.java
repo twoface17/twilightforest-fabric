@@ -1,10 +1,10 @@
 package twilightforest.capabilities.shield;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 
 import net.minecraft.resources.ResourceLocation;
+import twilightforest.TwilightForestMod;
 
 public interface IShieldCapability extends Component {
 

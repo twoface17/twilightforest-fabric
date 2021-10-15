@@ -1,7 +1,7 @@
 package twilightforest.network;
 
 import net.fabricmc.api.EnvType;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 
 public class TFPacketHandler {

@@ -2,7 +2,7 @@ package twilightforest.enchantment;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.enchantment.Enchantment;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 
 public class TFEnchantments {

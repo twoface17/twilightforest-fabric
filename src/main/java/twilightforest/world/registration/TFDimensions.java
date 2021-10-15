@@ -2,7 +2,7 @@ package twilightforest.world.registration;
 
 import net.minecraft.core.Registry;
 
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.TFBiomeDistributor;
 import twilightforest.world.components.TFBiomeProvider;

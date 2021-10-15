@@ -5,13 +5,13 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 
 import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import twilightforest.TwilightForestMod;
 
 @Mixin(BiomeSpecialEffects.GrassColorModifier.class)
 public abstract class BiomeSpecialEffectsMixin {

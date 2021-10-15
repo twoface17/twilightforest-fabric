@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.advancements.HasAdvancementTrigger;
 import twilightforest.block.TFBlocks;

@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
+import twilightforest.world.registration.TFStructures;
 import twilightforest.TwilightForestMod;
 import twilightforest.advancements.*;
 import twilightforest.block.Experiment115Block;

@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConstants;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.AbstractSkullCandleBlock;
 import twilightforest.block.KeepsakeCasketBlock;

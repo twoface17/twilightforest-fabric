@@ -11,7 +11,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;

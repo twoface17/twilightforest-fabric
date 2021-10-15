@@ -10,7 +10,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import twilightforest.TwilightForestMod;
-import twilightforest.TFConstants;
 import twilightforest.world.components.processors.MossyCobbleTemplateProcessor;
 import twilightforest.world.components.structures.TwilightDoubleTemplateStructurePiece;
 

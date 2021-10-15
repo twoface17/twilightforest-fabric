@@ -2,7 +2,7 @@ package twilightforest.world.registration;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.surfacebuilders.FillingSurfaceBuilder;
 import twilightforest.world.components.surfacebuilders.GlacierSurfaceBuilder;

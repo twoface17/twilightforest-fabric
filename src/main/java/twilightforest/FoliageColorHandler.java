@@ -1,10 +1,8 @@
 package twilightforest;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.registration.biomes.BiomeKeys;
 

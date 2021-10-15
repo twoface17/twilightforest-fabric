@@ -1,9 +1,9 @@
 package twilightforest.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.Registry;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
 import com.chocohead.mm.api.ClassTinkerers;
+//import net.alphamode.enums.EnumUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -48,7 +49,7 @@ public class TFItems {
 
 	//public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TwilightForestMod.ID);
 
-	public static final Item NAGA_SCALE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_scale", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final Item NAGA_SCALE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_scale", new Item(defaultBuilder().rarity(TwilightForestMod.getRarity())));
 	public static final Item NAGA_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_chestplate", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
 	public static final Item NAGA_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_leggings", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
 	public static final Item TWILIGHT_SCEPTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":twilight_scepter", new TwilightWandItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));

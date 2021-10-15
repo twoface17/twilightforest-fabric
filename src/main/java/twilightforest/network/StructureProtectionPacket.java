@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import twilightforest.TFConstants;
+import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.TwilightForestRenderInfo;
 import twilightforest.client.renderer.TFWeatherRenderer;

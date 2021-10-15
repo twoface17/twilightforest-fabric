@@ -45,7 +45,8 @@
     "client.ClientPlayerInteractionManagerMixin",
     "client.GamerRendererMixin",
     "client.MultiPlayerGameModeMixin",
-    "client.FogRendererMixin"
+    "client.FogRendererMixin",
+    "client.GameRendererMixin"
   ],
   "plugin": "twilightforest.mixin.plugin.TwilightForestMixinPlugin",
   "injectors": {
