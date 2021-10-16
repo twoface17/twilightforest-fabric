@@ -34,6 +34,6 @@ public class TFSmokerBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.SMOKER, TFSmokerBlockEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.SMOKER.get(), TFSmokerBlockEntity::tick);
 	}
 }

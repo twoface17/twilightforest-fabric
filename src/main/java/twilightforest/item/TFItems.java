@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 
 import com.chocohead.mm.api.ClassTinkerers;
 //import net.alphamode.enums.EnumUtil;
+import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -47,143 +49,143 @@ public class TFItems {
 
 	public static final UUID GIANT_REACH_MODIFIER = UUID.fromString("7f10172d-de69-49d7-81bd-9594286a6827");
 
-	//public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TwilightForestMod.ID);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(TwilightForestMod.ID, Registry.ITEM_REGISTRY);
 
-	public static final Item NAGA_SCALE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_scale", new Item(defaultBuilder().rarity(TwilightForestMod.getRarity())));
-	public static final Item NAGA_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_chestplate", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item NAGA_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_leggings", new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item TWILIGHT_SCEPTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":twilight_scepter", new TwilightWandItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));
-	public static final Item LIFEDRAIN_SCEPTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":lifedrain_scepter", new LifedrainScepterItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));
-	public static final Item ZOMBIE_SCEPTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":zombie_scepter", new ZombieWandItem(defaultBuilder().durability(9).rarity(Rarity.UNCOMMON)));
-	public static final Item FORTIFICATION_SCEPTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fortification_scepter", new FortificationWandItem(defaultBuilder().durability(9).rarity(Rarity.UNCOMMON)));
-	//Registry.register(Registry.ITEM, TwilightForestMod.ID + ":Wand of Pacification [NYI]", new Item().setIconIndex(6).setTranslationKey("wandPacification").setMaxStackSize(1));
-	public static final Item ORE_METER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ore_meter", new OreMeterItem(defaultBuilder()));
-	public static final Item FILLED_MAGIC_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":filled_magic_map", new MagicMapItem(new Item.Properties().stacksTo(1)));
-	public static final Item FILLED_MAZE_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":filled_maze_map", new MazeMapItem(false, new Item.Properties().stacksTo(1)));
-	public static final Item FILLED_ORE_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":filled_ore_map", new MazeMapItem(true, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
-	public static final Item RAVEN_FEATHER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":raven_feather", new Item(defaultBuilder()));
-	public static final Item MAGIC_MAP_FOCUS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":magic_map_focus", new Item(defaultBuilder()));
-	public static final Item MAZE_MAP_FOCUS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":maze_map_focus", new Item(defaultBuilder()));
-	public static final Item MAGIC_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":magic_map", new EmptyMagicMapItem(defaultBuilder()));
-	public static final Item MAZE_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":maze_map", new EmptyMazeMapItem(false, defaultBuilder()));
-	public static final Item ORE_MAP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ore_map", new EmptyMazeMapItem(true, defaultBuilder()));
-	public static final Item LIVEROOT = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":liveroot", new Item(defaultBuilder()));
-	public static final Item RAW_IRONWOOD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":raw_ironwood", new Item(defaultBuilder()));
-	public static final Item IRONWOOD_INGOT = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_ingot", new Item(defaultBuilder()));
-	public static final Item IRONWOOD_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_helmet", new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.HEAD, defaultBuilder()));
-	public static final Item IRONWOOD_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_chestplate", new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.CHEST, defaultBuilder()));
-	public static final Item IRONWOOD_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_leggings", new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.LEGS, defaultBuilder()));
-	public static final Item IRONWOOD_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_boots", new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.FEET, defaultBuilder()));
-	public static final Item IRONWOOD_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_sword", new IronwoodSwordItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
-	public static final Item IRONWOOD_SHOVEL = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_shovel", new IronwoodShovelItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
-	public static final Item IRONWOOD_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_pickaxe", new IronwoodPickItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
-	public static final Item IRONWOOD_AXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_axe", new IronwoodAxeItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
-	public static final Item IRONWOOD_HOE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ironwood_hoe", new IronwoodHoeItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
-	public static final Item TORCHBERRIES = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":torchberries", new Item(defaultBuilder().food(TORCHBERRY)));
-	public static final Item RAW_VENISON = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":raw_venison", new Item(defaultBuilder().food(VENISON_RAW)));
-	public static final Item COOKED_VENISON = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":cooked_venison", new Item(defaultBuilder().food(VENISON_COOKED)));
-	public static final Item HYDRA_CHOP = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":hydra_chop", new HydraChopItem(defaultBuilder().fireResistant().food(CHOP).rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_BLOOD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_blood", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_TEARS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_tears", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_INGOT = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_ingot", new Item(defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_helmet", new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.HEAD, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_chestplate", new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.CHEST, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_leggings", new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.LEGS, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_boots", new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.FEET, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_sword", new FierySwordItem(TwilightItemTier.FIERY, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item FIERY_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":fiery_pickaxe", new FieryPickItem(TwilightItemTier.FIERY, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item STEELEAF_INGOT = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_ingot", new Item(defaultBuilder()));
-	public static final Item STEELEAF_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_helmet", new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.HEAD, defaultBuilder()));
-	public static final Item STEELEAF_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_chestplate", new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.CHEST, defaultBuilder()));
-	public static final Item STEELEAF_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_leggings", new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.LEGS, defaultBuilder()));
-	public static final Item STEELEAF_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_boots", new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.FEET, defaultBuilder()));
-	public static final Item STEELEAF_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_sword", new SteeleafSwordItem(TwilightItemTier.STEELEAF, defaultBuilder()));
-	public static final Item STEELEAF_SHOVEL = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_shovel", new SteeleafShovelItem(TwilightItemTier.STEELEAF, defaultBuilder()));
-	public static final Item STEELEAF_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_pickaxe", new SteeleafPickItem(TwilightItemTier.STEELEAF, defaultBuilder()));
-	public static final Item STEELEAF_AXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_axe", new SteeleafAxeItem(TwilightItemTier.STEELEAF, defaultBuilder()));
-	public static final Item STEELEAF_HOE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":steeleaf_hoe", new SteeleafHoeItem(TwilightItemTier.STEELEAF, defaultBuilder()));
-	public static final Item GOLDEN_MINOTAUR_AXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":gold_minotaur_axe", new MinotaurAxeItem(Tiers.GOLD, defaultBuilder().rarity(Rarity.COMMON)));
-	public static final Item DIAMOND_MINOTAUR_AXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":diamond_minotaur_axe", new MinotaurAxeItem(Tiers.DIAMOND, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item MAZEBREAKER_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":mazebreaker_pickaxe", new MazebreakerPickItem(Tiers.DIAMOND, defaultBuilder()/*.setNoRepair()*/.rarity(Rarity.RARE)));
-	public static final Item TRANSFORMATION_POWDER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":transformation_powder", new TransformPowderItem(defaultBuilder()));
-	public static final Item RAW_MEEF = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":raw_meef", new Item(defaultBuilder().food(MEEF_RAW)));
-	public static final Item COOKED_MEEF = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":cooked_meef", new Item(defaultBuilder().food(MEEF_COOKED)));
-	public static final Item MEEF_STROGANOFF = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":meef_stroganoff", new BowlFoodItem(defaultBuilder().food(STROGANOFF).stacksTo(1)));
-	public static final Item MAZE_WAFER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":maze_wafer", new Item(defaultBuilder().food(WAFER)));
-	public static final Item ORE_MAGNET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ore_magnet", new OreMagnetItem(defaultBuilder().durability(12)));
-	public static final Item CRUMBLE_HORN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":crumble_horn", new CrumbleHornItem(defaultBuilder().durability(1024).rarity(Rarity.RARE)));
-	public static final Item PEACOCK_FEATHER_FAN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":peacock_feather_fan", new PeacockFanItem(defaultBuilder().durability(1024).rarity(Rarity.RARE)));
-	public static final Item MOONWORM_QUEEN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":moonworm_queen", new MoonwormQueenItem(defaultBuilder()/*.setNoRepair()*/.durability(256).rarity(Rarity.RARE)));
-	public static final Item BRITTLE_FLASK = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":brittle_potion_flask", new BrittleFlaskItem(defaultBuilder().stacksTo(1)));
-	public static final Item GREATER_FLASK = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":greater_potion_flask", new GreaterFlaskItem(defaultBuilder().rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)));
-	public static final Item CHARM_OF_LIFE_1 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":charm_of_life_1", new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item CHARM_OF_LIFE_2 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":charm_of_life_2", new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item CHARM_OF_KEEPING_1 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":charm_of_keeping_1", new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item CHARM_OF_KEEPING_2 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":charm_of_keeping_2", new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item CHARM_OF_KEEPING_3 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":charm_of_keeping_3", new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item TOWER_KEY = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":tower_key", new Item(defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item BORER_ESSENCE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":borer_essence", new Item(defaultBuilder()));
-	public static final Item CARMINITE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":carminite", new Item(defaultBuilder()));
-	public static final Item EXPERIMENT_115 = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":experiment_115", new Experiment115Item(TFBlocks.EXPERIMENT_115, defaultBuilder().food(E115)));
-	public static final Item ARMOR_SHARD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":armor_shard", new Item(defaultBuilder()));
-	public static final Item ARMOR_SHARD_CLUSTER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":armor_shard_cluster", new Item(defaultBuilder()));
-	public static final Item KNIGHTMETAL_INGOT = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_ingot", new Item(defaultBuilder()));
-	public static final Item KNIGHTMETAL_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_helmet", new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.HEAD, defaultBuilder()));
-	public static final Item KNIGHTMETAL_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_chestplate", new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.CHEST, defaultBuilder()));
-	public static final Item KNIGHTMETAL_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_leggings", new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.LEGS, defaultBuilder()));
-	public static final Item KNIGHTMETAL_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_boots", new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.FEET, defaultBuilder()));
-	public static final Item KNIGHTMETAL_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_sword", new KnightmetalSwordItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
-	public static final Item KNIGHTMETAL_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_pickaxe", new KnightmetalPickItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
-	public static final Item KNIGHTMETAL_AXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_axe", new KnightmetalAxeItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
-	public static final Item KNIGHTMETAL_RING = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_ring", new Item(defaultBuilder()));
-	public static final Item KNIGHTMETAL_SHIELD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knightmetal_shield", new KnightmetalShieldItem(defaultBuilder().durability(1024)));
-	public static final Item BLOCK_AND_CHAIN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":block_and_chain", new ChainBlockItem(defaultBuilder().durability(99)));
-	public static final Item PHANTOM_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":phantom_helmet", new PhantomArmorItem(TwilightArmorMaterial.ARMOR_PHANTOM, EquipmentSlot.HEAD, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item PHANTOM_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":phantom_chestplate", new PhantomArmorItem(TwilightArmorMaterial.ARMOR_PHANTOM, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item ICE_BOMB = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ice_bomb", new IceBombItem(defaultBuilder().stacksTo(16)));
-	public static final Item ARCTIC_FUR = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":arctic_fur", new Item(defaultBuilder()));
-	public static final Item ARCTIC_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":arctic_helmet", new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.HEAD, defaultBuilder()));
-	public static final Item ARCTIC_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":arctic_chestplate", new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.CHEST, defaultBuilder()));
-	public static final Item ARCTIC_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":arctic_leggings", new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.LEGS, defaultBuilder()));
-	public static final Item ARCTIC_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":arctic_boots", new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.FEET, defaultBuilder()));
-	public static final Item ALPHA_YETI_FUR = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":alpha_yeti_fur", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item YETI_HELMET = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":yeti_helmet", new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.HEAD, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item YETI_CHESTPLATE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":yeti_chestplate", new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item YETI_LEGGINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":yeti_leggings", new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item YETI_BOOTS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":yeti_boots", new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.FEET, defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item TRIPLE_BOW = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":triple_bow", new TripleBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
-	public static final Item SEEKER_BOW = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":seeker_bow", new SeekerBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
-	public static final Item ICE_BOW = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ice_bow", new IceBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
-	public static final Item ENDER_BOW = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ender_bow", new EnderBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
-	public static final Item ICE_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ice_sword", new IceSwordItem(TwilightItemTier.ICE, defaultBuilder()));
-	public static final Item GLASS_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":glass_sword", new GlassSwordItem(TwilightItemTier.GLASS, defaultBuilder()/*.setNoRepair()*/.rarity(Rarity.RARE)));
-	public static final Item MAGIC_BEANS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":magic_beans", new MagicBeansItem(defaultBuilder()));
-	public static final Item GIANT_PICKAXE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":giant_pickaxe", new GiantPickItem(TwilightItemTier.GIANT, defaultBuilder()));
-	public static final Item GIANT_SWORD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":giant_sword", new GiantSwordItem(TwilightItemTier.GIANT, defaultBuilder()));
-	public static final Item LAMP_OF_CINDERS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":lamp_of_cinders", new LampOfCindersItem(defaultBuilder().fireResistant().durability(1024).rarity(Rarity.UNCOMMON)));
-	public static final Item CUBE_TALISMAN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":cube_talisman", new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
-	public static final Item CUBE_OF_ANNIHILATION = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":cube_of_annihilation", new CubeOfAnnihilationItem(unstackable().rarity(Rarity.UNCOMMON)));
-	public static final Item MOON_DIAL = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":moon_dial", new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> NAGA_SCALE = ITEMS.register("naga_scale", () -> new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> NAGA_CHESTPLATE = ITEMS.register("naga_chestplate", () -> new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> NAGA_LEGGINGS = ITEMS.register("naga_leggings", () -> new NagaArmorItem(TwilightArmorMaterial.ARMOR_NAGA, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> TWILIGHT_SCEPTER = ITEMS.register("twilight_scepter", () -> new TwilightWandItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> LIFEDRAIN_SCEPTER = ITEMS.register("lifedrain_scepter", () -> new LifedrainScepterItem(defaultBuilder().durability(99).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> ZOMBIE_SCEPTER = ITEMS.register("zombie_scepter", () -> new ZombieWandItem(defaultBuilder().durability(9).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FORTIFICATION_SCEPTER = ITEMS.register("fortification_scepter", () -> new FortificationWandItem(defaultBuilder().durability(9).rarity(Rarity.UNCOMMON)));
+	//items.register("Wand of Pacification [NYI]", new Item().setIconIndex(6).setTranslationKey("wandPacification").setMaxStackSize(1));
+	public static final RegistrySupplier<Item> ORE_METER = ITEMS.register("ore_meter", () -> new OreMeterItem(defaultBuilder()));
+	public static final RegistrySupplier<Item> FILLED_MAGIC_MAP = ITEMS.register("filled_magic_map", () -> new MagicMapItem(new Item.Properties().stacksTo(1)));
+	public static final RegistrySupplier<Item> FILLED_MAZE_MAP = ITEMS.register("filled_maze_map", () -> new MazeMapItem(false, new Item.Properties().stacksTo(1)));
+	public static final RegistrySupplier<Item> FILLED_ORE_MAP = ITEMS.register("filled_ore_map", () -> new MazeMapItem(true, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> RAVEN_FEATHER = ITEMS.register("raven_feather", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> MAGIC_MAP_FOCUS = ITEMS.register("magic_map_focus", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> MAZE_MAP_FOCUS = ITEMS.register("maze_map_focus", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> MAGIC_MAP = ITEMS.register("magic_map", () -> new EmptyMagicMapItem(defaultBuilder()));
+	public static final RegistrySupplier<Item> MAZE_MAP = ITEMS.register("maze_map", () -> new EmptyMazeMapItem(false, defaultBuilder()));
+	public static final RegistrySupplier<Item> ORE_MAP = ITEMS.register("ore_map", () -> new EmptyMazeMapItem(true, defaultBuilder()));
+	public static final RegistrySupplier<Item> LIVEROOT = ITEMS.register("liveroot", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> RAW_IRONWOOD = ITEMS.register("raw_ironwood", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_INGOT = ITEMS.register("ironwood_ingot", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_HELMET = ITEMS.register("ironwood_helmet", () -> new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.HEAD, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_CHESTPLATE = ITEMS.register("ironwood_chestplate", () -> new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.CHEST, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_LEGGINGS = ITEMS.register("ironwood_leggings", () -> new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.LEGS, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_BOOTS = ITEMS.register("ironwood_boots", () -> new IronwoodArmorItem(TwilightArmorMaterial.ARMOR_IRONWOOD, EquipmentSlot.FEET, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_SWORD = ITEMS.register("ironwood_sword", () -> new IronwoodSwordItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_SHOVEL = ITEMS.register("ironwood_shovel", () -> new IronwoodShovelItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_PICKAXE = ITEMS.register("ironwood_pickaxe", () -> new IronwoodPickItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_AXE = ITEMS.register("ironwood_axe", () -> new IronwoodAxeItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
+	public static final RegistrySupplier<Item> IRONWOOD_HOE = ITEMS.register("ironwood_hoe", () -> new IronwoodHoeItem(TwilightItemTier.IRONWOOD, defaultBuilder()));
+	public static final RegistrySupplier<Item> TORCHBERRIES = ITEMS.register("torchberries", () -> new Item(defaultBuilder().food(TORCHBERRY)));
+	public static final RegistrySupplier<Item> RAW_VENISON = ITEMS.register("raw_venison", () -> new Item(defaultBuilder().food(VENISON_RAW)));
+	public static final RegistrySupplier<Item> COOKED_VENISON = ITEMS.register("cooked_venison", () -> new Item(defaultBuilder().food(VENISON_COOKED)));
+	public static final RegistrySupplier<Item> HYDRA_CHOP = ITEMS.register("hydra_chop", () -> new HydraChopItem(defaultBuilder().fireResistant().food(CHOP).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_BLOOD = ITEMS.register("fiery_blood", () -> new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_TEARS = ITEMS.register("fiery_tears", () -> new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_INGOT = ITEMS.register("fiery_ingot", () -> new Item(defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_HELMET = ITEMS.register("fiery_helmet", () -> new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.HEAD, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_CHESTPLATE = ITEMS.register("fiery_chestplate", () -> new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.CHEST, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_LEGGINGS = ITEMS.register("fiery_leggings", () -> new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.LEGS, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_BOOTS = ITEMS.register("fiery_boots", () -> new FieryArmorItem(TwilightArmorMaterial.ARMOR_FIERY, EquipmentSlot.FEET, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_SWORD = ITEMS.register("fiery_sword", () -> new FierySwordItem(TwilightItemTier.FIERY, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> FIERY_PICKAXE = ITEMS.register("fiery_pickaxe", () -> new FieryPickItem(TwilightItemTier.FIERY, defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> STEELEAF_INGOT = ITEMS.register("steeleaf_ingot", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_HELMET = ITEMS.register("steeleaf_helmet", () -> new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.HEAD, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_CHESTPLATE = ITEMS.register("steeleaf_chestplate", () -> new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.CHEST, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_LEGGINGS = ITEMS.register("steeleaf_leggings", () -> new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.LEGS, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_BOOTS = ITEMS.register("steeleaf_boots", () -> new SteeleafArmorItem(TwilightArmorMaterial.ARMOR_STEELEAF, EquipmentSlot.FEET, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_SWORD = ITEMS.register("steeleaf_sword", () -> new SteeleafSwordItem(TwilightItemTier.STEELEAF, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_SHOVEL = ITEMS.register("steeleaf_shovel", () -> new SteeleafShovelItem(TwilightItemTier.STEELEAF, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_PICKAXE = ITEMS.register("steeleaf_pickaxe", () -> new SteeleafPickItem(TwilightItemTier.STEELEAF, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_AXE = ITEMS.register("steeleaf_axe", () -> new SteeleafAxeItem(TwilightItemTier.STEELEAF, defaultBuilder()));
+	public static final RegistrySupplier<Item> STEELEAF_HOE = ITEMS.register("steeleaf_hoe", () -> new SteeleafHoeItem(TwilightItemTier.STEELEAF, defaultBuilder()));
+	public static final RegistrySupplier<Item> GOLDEN_MINOTAUR_AXE = ITEMS.register("gold_minotaur_axe", () -> new MinotaurAxeItem(Tiers.GOLD, defaultBuilder().rarity(Rarity.COMMON)));
+	public static final RegistrySupplier<Item> DIAMOND_MINOTAUR_AXE = ITEMS.register("diamond_minotaur_axe", () -> new MinotaurAxeItem(Tiers.DIAMOND, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> MAZEBREAKER_PICKAXE = ITEMS.register("mazebreaker_pickaxe", () -> new MazebreakerPickItem(Tiers.DIAMOND, defaultBuilder()/*.setNoRepair()*/.rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> TRANSFORMATION_POWDER = ITEMS.register("transformation_powder", () -> new TransformPowderItem(defaultBuilder()));
+	public static final RegistrySupplier<Item> RAW_MEEF = ITEMS.register("raw_meef", () -> new Item(defaultBuilder().food(MEEF_RAW)));
+	public static final RegistrySupplier<Item> COOKED_MEEF = ITEMS.register("cooked_meef", () -> new Item(defaultBuilder().food(MEEF_COOKED)));
+	public static final RegistrySupplier<Item> MEEF_STROGANOFF = ITEMS.register("meef_stroganoff", () -> new BowlFoodItem(defaultBuilder().food(STROGANOFF).stacksTo(1)));
+	public static final RegistrySupplier<Item> MAZE_WAFER = ITEMS.register("maze_wafer", () -> new Item(defaultBuilder().food(WAFER)));
+	public static final RegistrySupplier<Item> ORE_MAGNET = ITEMS.register("ore_magnet", () -> new OreMagnetItem(defaultBuilder().durability(12)));
+	public static final RegistrySupplier<Item> CRUMBLE_HORN = ITEMS.register("crumble_horn", () -> new CrumbleHornItem(defaultBuilder().durability(1024).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> PEACOCK_FEATHER_FAN = ITEMS.register("peacock_feather_fan", () -> new PeacockFanItem(defaultBuilder().durability(1024).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MOONWORM_QUEEN = ITEMS.register("moonworm_queen", () -> new MoonwormQueenItem(defaultBuilder()/*.setNoRepair()*/.durability(256).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> BRITTLE_FLASK = ITEMS.register("brittle_potion_flask", () -> new BrittleFlaskItem(defaultBuilder().stacksTo(1)));
+	public static final RegistrySupplier<Item> GREATER_FLASK = ITEMS.register("greater_potion_flask", () -> new GreaterFlaskItem(defaultBuilder().rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)));
+	public static final RegistrySupplier<Item> CHARM_OF_LIFE_1 = ITEMS.register("charm_of_life_1", () -> new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CHARM_OF_LIFE_2 = ITEMS.register("charm_of_life_2", () -> new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CHARM_OF_KEEPING_1 = ITEMS.register("charm_of_keeping_1", () -> new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CHARM_OF_KEEPING_2 = ITEMS.register("charm_of_keeping_2", () -> new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CHARM_OF_KEEPING_3 = ITEMS.register("charm_of_keeping_3", () -> new CuriosCharmItem(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> TOWER_KEY = ITEMS.register("tower_key", () -> new Item(defaultBuilder().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> BORER_ESSENCE = ITEMS.register("borer_essence", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> CARMINITE = ITEMS.register("carminite", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> EXPERIMENT_115 = ITEMS.register("experiment_115", () -> new Experiment115Item(TFBlocks.EXPERIMENT_115.get(), defaultBuilder().food(E115)));
+	public static final RegistrySupplier<Item> ARMOR_SHARD = ITEMS.register("armor_shard", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> ARMOR_SHARD_CLUSTER = ITEMS.register("armor_shard_cluster", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_INGOT = ITEMS.register("knightmetal_ingot", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_HELMET = ITEMS.register("knightmetal_helmet", () -> new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.HEAD, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_CHESTPLATE = ITEMS.register("knightmetal_chestplate", () -> new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.CHEST, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_LEGGINGS = ITEMS.register("knightmetal_leggings", () -> new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.LEGS, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_BOOTS = ITEMS.register("knightmetal_boots", () -> new KnightmetalArmorItem(TwilightArmorMaterial.ARMOR_KNIGHTLY, EquipmentSlot.FEET, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_SWORD = ITEMS.register("knightmetal_sword", () -> new KnightmetalSwordItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_PICKAXE = ITEMS.register("knightmetal_pickaxe", () -> new KnightmetalPickItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_AXE = ITEMS.register("knightmetal_axe", () -> new KnightmetalAxeItem(TwilightItemTier.KNIGHTMETAL, defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_RING = ITEMS.register("knightmetal_ring", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> KNIGHTMETAL_SHIELD = ITEMS.register("knightmetal_shield", () -> new KnightmetalShieldItem(defaultBuilder().durability(1024)));
+	public static final RegistrySupplier<Item> BLOCK_AND_CHAIN = ITEMS.register("block_and_chain", () -> new ChainBlockItem(defaultBuilder().durability(99)));
+	public static final RegistrySupplier<Item> PHANTOM_HELMET = ITEMS.register("phantom_helmet", () -> new PhantomArmorItem(TwilightArmorMaterial.ARMOR_PHANTOM, EquipmentSlot.HEAD, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> PHANTOM_CHESTPLATE = ITEMS.register("phantom_chestplate", () -> new PhantomArmorItem(TwilightArmorMaterial.ARMOR_PHANTOM, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> ICE_BOMB = ITEMS.register("ice_bomb", () -> new IceBombItem(defaultBuilder().stacksTo(16)));
+	public static final RegistrySupplier<Item> ARCTIC_FUR = ITEMS.register("arctic_fur", () -> new Item(defaultBuilder()));
+	public static final RegistrySupplier<Item> ARCTIC_HELMET = ITEMS.register("arctic_helmet", () -> new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.HEAD, defaultBuilder()));
+	public static final RegistrySupplier<Item> ARCTIC_CHESTPLATE = ITEMS.register("arctic_chestplate", () -> new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.CHEST, defaultBuilder()));
+	public static final RegistrySupplier<Item> ARCTIC_LEGGINGS = ITEMS.register("arctic_leggings", () -> new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.LEGS, defaultBuilder()));
+	public static final RegistrySupplier<Item> ARCTIC_BOOTS = ITEMS.register("arctic_boots", () -> new ArcticArmorItem(TwilightArmorMaterial.ARMOR_ARCTIC, EquipmentSlot.FEET, defaultBuilder()));
+	public static final RegistrySupplier<Item> ALPHA_YETI_FUR = ITEMS.register("alpha_yeti_fur", () -> new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> YETI_HELMET = ITEMS.register("yeti_helmet", () -> new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.HEAD, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> YETI_CHESTPLATE = ITEMS.register("yeti_chestplate", () -> new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.CHEST, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> YETI_LEGGINGS = ITEMS.register("yeti_leggings", () -> new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.LEGS, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> YETI_BOOTS = ITEMS.register("yeti_boots", () -> new YetiArmorItem(TwilightArmorMaterial.ARMOR_YETI, EquipmentSlot.FEET, defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> TRIPLE_BOW = ITEMS.register("triple_bow", () -> new TripleBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
+	public static final RegistrySupplier<Item> SEEKER_BOW = ITEMS.register("seeker_bow", () -> new SeekerBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
+	public static final RegistrySupplier<Item> ICE_BOW = ITEMS.register("ice_bow", () -> new IceBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
+	public static final RegistrySupplier<Item> ENDER_BOW = ITEMS.register("ender_bow", () -> new EnderBowItem(defaultBuilder().rarity(Rarity.UNCOMMON).durability(384)));
+	public static final RegistrySupplier<Item> ICE_SWORD = ITEMS.register("ice_sword", () -> new IceSwordItem(TwilightItemTier.ICE, defaultBuilder()));
+	public static final RegistrySupplier<Item> GLASS_SWORD = ITEMS.register("glass_sword", () -> new GlassSwordItem(TwilightItemTier.GLASS, defaultBuilder()/*.setNoRepair()*/.rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MAGIC_BEANS = ITEMS.register("magic_beans", () -> new MagicBeansItem(defaultBuilder()));
+	public static final RegistrySupplier<Item> GIANT_PICKAXE = ITEMS.register("giant_pickaxe", () -> new GiantPickItem(TwilightItemTier.GIANT, defaultBuilder()));
+	public static final RegistrySupplier<Item> GIANT_SWORD = ITEMS.register("giant_sword", () -> new GiantSwordItem(TwilightItemTier.GIANT, defaultBuilder()));
+	public static final RegistrySupplier<Item> LAMP_OF_CINDERS = ITEMS.register("lamp_of_cinders", () -> new LampOfCindersItem(defaultBuilder().fireResistant().durability(1024).rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CUBE_TALISMAN = ITEMS.register("cube_talisman", () -> new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> CUBE_OF_ANNIHILATION = ITEMS.register("cube_of_annihilation", () -> new CubeOfAnnihilationItem(unstackable().rarity(Rarity.UNCOMMON)));
+	public static final RegistrySupplier<Item> MOON_DIAL = ITEMS.register("moon_dial", () -> new Item(defaultBuilder()));
 
-	public static final Item MUSIC_DISC_RADIANCE = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_radiance", new RecordItem(15, TFSounds.MUSIC_DISC_RADIANCE, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_STEPS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_steps", new RecordItem(15, TFSounds.MUSIC_DISC_STEPS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_SUPERSTITIOUS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_superstitious", new RecordItem(15, TFSounds.MUSIC_DISC_SUPERSTITIOUS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_HOME = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_home", new RecordItem(15, TFSounds.MUSIC_DISC_HOME, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_WAYFARER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_wayfarer", new RecordItem(15, TFSounds.MUSIC_DISC_WAYFARER, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_FINDINGS = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_findings", new RecordItem(15, TFSounds.MUSIC_DISC_FINDINGS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_MAKER = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_maker", new RecordItem(15, TFSounds.MUSIC_DISC_MAKER, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_THREAD = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_thread", new RecordItem(15, TFSounds.MUSIC_DISC_THREAD, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Item MUSIC_DISC_MOTION = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":music_disc_motion", new RecordItem(15, TFSounds.MUSIC_DISC_MOTION, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_RADIANCE = ITEMS.register("music_disc_radiance", () -> new RecordItem(15, TFSounds.MUSIC_DISC_RADIANCE, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_STEPS = ITEMS.register("music_disc_steps", () -> new RecordItem(15, TFSounds.MUSIC_DISC_STEPS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_SUPERSTITIOUS = ITEMS.register("music_disc_superstitious", () -> new RecordItem(15, TFSounds.MUSIC_DISC_SUPERSTITIOUS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_HOME = ITEMS.register("music_disc_home", () -> new RecordItem(15, TFSounds.MUSIC_DISC_HOME, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_WAYFARER = ITEMS.register("music_disc_wayfarer", () -> new RecordItem(15, TFSounds.MUSIC_DISC_WAYFARER, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_FINDINGS = ITEMS.register("music_disc_findings", () -> new RecordItem(15, TFSounds.MUSIC_DISC_FINDINGS, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_MAKER = ITEMS.register("music_disc_maker", () -> new RecordItem(15, TFSounds.MUSIC_DISC_MAKER, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_THREAD = ITEMS.register("music_disc_thread", () -> new RecordItem(15, TFSounds.MUSIC_DISC_THREAD, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistrySupplier<Item> MUSIC_DISC_MOTION = ITEMS.register("music_disc_motion", () -> new RecordItem(15, TFSounds.MUSIC_DISC_MOTION, defaultBuilder().stacksTo(1).rarity(Rarity.RARE)));
 
-	public static final Item NAGA_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":naga_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_NAGA"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item LICH_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":lich_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_LICH"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item MINOSHROOM_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":minoshroom_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_MINOSHROOM"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item HYDRA_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":hydra_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_HYDRA"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item KNIGHT_PHANTOM_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":knight_phantom_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_PHANTOMS"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item UR_GHAST_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":ur_ghast_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_UR_GHAST"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item ALPHA_YETI_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":alpha_yeti_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_ALPHA_YETI"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item SNOW_QUEEN_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":snow_queen_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_SNOW_QUEEN"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
-	public static final Item QUEST_RAM_BANNER_PATTERN = Registry.register(Registry.ITEM, TwilightForestMod.ID + ":quest_ram_banner_pattern", new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class,"TF_QUEST_RAM"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> NAGA_BANNER_PATTERN = ITEMS.register("naga_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_NAGA"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> LICH_BANNER_PATTERN = ITEMS.register("lich_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_LICH"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> MINOSHROOM_BANNER_PATTERN = ITEMS.register("minoshroom_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_MINOSHROOM"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> HYDRA_BANNER_PATTERN = ITEMS.register("hydra_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_HYDRA"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> KNIGHT_PHANTOM_BANNER_PATTERN = ITEMS.register("knight_phantom_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_PHANTOMS"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> UR_GHAST_BANNER_PATTERN = ITEMS.register("ur_ghast_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_UR_GHAST"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> ALPHA_YETI_BANNER_PATTERN = ITEMS.register("alpha_yeti_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_ALPHA_YETI"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> SNOW_QUEEN_BANNER_PATTERN = ITEMS.register("snow_queen_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_SNOW_QUEEN"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
+	public static final RegistrySupplier<Item> QUEST_RAM_BANNER_PATTERN = ITEMS.register("quest_ram_banner_pattern", () -> new BannerPatternItem(ClassTinkerers.getEnum(BannerPattern.class, "TF_QUEST_RAM"), defaultBuilder().stacksTo(1).rarity(TwilightForestMod.getRarity())));
 
 	public static void init(){
 	}
@@ -198,13 +200,13 @@ public class TFItems {
 
 	@Environment(EnvType.CLIENT)
 	public static void addItemModelProperties() {
-		ItemProperties.register(CUBE_OF_ANNIHILATION, TwilightForestMod.prefix("thrown"), (stack, world, entity, idk) ->
+		ItemProperties.register(CUBE_OF_ANNIHILATION.get(), TwilightForestMod.prefix("thrown"), (stack, world, entity, idk) ->
 				CubeOfAnnihilationItem.getThrownUuid(stack) != null ? 1 : 0);
 
-		ItemProperties.register(TFItems.KNIGHTMETAL_SHIELD, new ResourceLocation("blocking"), (stack, world, entity, idk) ->
+		ItemProperties.register(TFItems.KNIGHTMETAL_SHIELD.get(), new ResourceLocation("blocking"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(MOON_DIAL, new ResourceLocation("phase"), new ClampedItemPropertyFunction() {
+		ItemProperties.register(MOON_DIAL.get(), new ResourceLocation("phase"), new ClampedItemPropertyFunction() {
 			@Override
 			public float call(ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entityBase, int idk) {
 				boolean flag = entityBase != null;
@@ -241,7 +243,7 @@ public class TFItems {
 			}
 		});
 
-		ItemProperties.register(MOONWORM_QUEEN, TwilightForestMod.prefix("alt"), (stack, world, entity, idk) -> {
+		ItemProperties.register(MOONWORM_QUEEN.get(), TwilightForestMod.prefix("alt"), (stack, world, entity, idk) -> {
 			if (entity != null && entity.getUseItem() == stack) {
 				int useTime = stack.getUseDuration() - entity.getUseItemRemainingTicks();
 				if (useTime >= MoonwormQueenItem.FIRING_TIME && (useTime >>> 1) % 2 == 0) {
@@ -251,60 +253,60 @@ public class TFItems {
 			return 0;
 		});
 
-		ItemProperties.register(TFItems.ENDER_BOW, new ResourceLocation("pull"), (stack, world, entity, idk) -> {
+		ItemProperties.register(TFItems.ENDER_BOW.get(), new ResourceLocation("pull"), (stack, world, entity, idk) -> {
 			if(entity == null) return 0.0F;
 			else return entity.getUseItem() != stack ? 0.0F : (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F; });
 
-		ItemProperties.register(TFItems.ENDER_BOW, new ResourceLocation("pulling"), (stack, world, entity, idk) ->
+		ItemProperties.register(TFItems.ENDER_BOW.get(), new ResourceLocation("pulling"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(TFItems.ICE_BOW, new ResourceLocation("pull"), (stack, world, entity, idk) -> {
+		ItemProperties.register(TFItems.ICE_BOW.get(), new ResourceLocation("pull"), (stack, world, entity, idk) -> {
 			if(entity == null) return 0.0F;
 			else return entity.getUseItem() != stack ? 0.0F : (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F; });
 
-		ItemProperties.register(TFItems.ICE_BOW, new ResourceLocation("pulling"), (stack, world, entity, idk) ->
+		ItemProperties.register(TFItems.ICE_BOW.get(), new ResourceLocation("pulling"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(TFItems.SEEKER_BOW, new ResourceLocation("pull"), (stack, world, entity, idk) -> {
+		ItemProperties.register(TFItems.SEEKER_BOW.get(), new ResourceLocation("pull"), (stack, world, entity, idk) -> {
 			if (entity == null) return 0.0F;
 			else return entity.getUseItem() != stack ? 0.0F : (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F; });
 
-		ItemProperties.register(TFItems.SEEKER_BOW, new ResourceLocation("pulling"), (stack, world, entity, idk) ->
+		ItemProperties.register(TFItems.SEEKER_BOW.get(), new ResourceLocation("pulling"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(TFItems.TRIPLE_BOW, new ResourceLocation("pull"), (stack, world, entity, idk) -> {
+		ItemProperties.register(TFItems.TRIPLE_BOW.get(), new ResourceLocation("pull"), (stack, world, entity, idk) -> {
 			if (entity == null) return 0.0F;
 			else return entity.getUseItem() != stack ? 0.0F : (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F; });
 
-		ItemProperties.register(TFItems.TRIPLE_BOW, new ResourceLocation("pulling"), (stack, world, entity, idk) ->
+		ItemProperties.register(TFItems.TRIPLE_BOW.get(), new ResourceLocation("pulling"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(ORE_MAGNET, new ResourceLocation("pull"), (stack, world, entity, idk) -> {
+		ItemProperties.register(ORE_MAGNET.get(), new ResourceLocation("pull"), (stack, world, entity, idk) -> {
 			if (entity == null) return 0.0F;
 			else {
 				ItemStack itemstack = entity.getUseItem();
 				return !itemstack.isEmpty() ? (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F : 0.0F;
 			}});
 
-		ItemProperties.register(ORE_MAGNET, new ResourceLocation("pulling"), (stack, world, entity, idk) ->
+		ItemProperties.register(ORE_MAGNET.get(), new ResourceLocation("pulling"), (stack, world, entity, idk) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-		ItemProperties.register(BLOCK_AND_CHAIN, TwilightForestMod.prefix("thrown"), (stack, world, entity, idk) ->
+		ItemProperties.register(BLOCK_AND_CHAIN.get(), TwilightForestMod.prefix("thrown"), (stack, world, entity, idk) ->
 				ChainBlockItem.getThrownUuid(stack) != null ? 1 : 0);
 
-		ItemProperties.register(EXPERIMENT_115, Experiment115Item.THINK, (stack, world, entity, idk) ->
+		ItemProperties.register(EXPERIMENT_115.get(), Experiment115Item.THINK, (stack, world, entity, idk) ->
 				stack.hasTag() && stack.getTag().contains("think") ? 1 : 0);
 
-		ItemProperties.register(EXPERIMENT_115, Experiment115Item.FULL, (stack, world, entity, idk) ->
+		ItemProperties.register(EXPERIMENT_115.get(), Experiment115Item.FULL, (stack, world, entity, idk) ->
 				stack.hasTag() && stack.getTag().contains("full") ? 1 : 0);
 
-		ItemProperties.register(TFItems.BRITTLE_FLASK, TwilightForestMod.prefix("breakage"), (stack, world, entity, i) ->
+		ItemProperties.register(TFItems.BRITTLE_FLASK.get(), TwilightForestMod.prefix("breakage"), (stack, world, entity, i) ->
 				stack.getOrCreateTag().getInt("Breakage"));
 
-		ItemProperties.register(TFItems.BRITTLE_FLASK, TwilightForestMod.prefix("potion_level"), (stack, world, entity, i) ->
+		ItemProperties.register(TFItems.BRITTLE_FLASK.get(), TwilightForestMod.prefix("potion_level"), (stack, world, entity, i) ->
 				stack.getOrCreateTag().getInt("Uses"));
 
-		ItemProperties.register(TFItems.GREATER_FLASK, TwilightForestMod.prefix("potion_level"), (stack, world, entity, i) ->
+		ItemProperties.register(TFItems.GREATER_FLASK.get(), TwilightForestMod.prefix("potion_level"), (stack, world, entity, i) ->
 				stack.getOrCreateTag().getInt("Uses"));
 	}
 }

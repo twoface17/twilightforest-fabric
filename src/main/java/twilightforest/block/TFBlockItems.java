@@ -5,6 +5,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import dev.architectury.registry.registries.RegistrySupplier;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
@@ -70,7 +72,7 @@ public class TFBlockItems {
 //      blockItem(TFBlocks.LAPIS_BLOCK);
 		blockItem(TFBlocks.TWISTED_STONE);
 		blockItem(TFBlocks.TWISTED_STONE_PILLAR);
-		makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET, TFItems.defaultBuilder()) {
+		makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET.get(), TFItems.defaultBuilder()) {
 //			@Override
 //			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 //				consumer.accept(new IItemRenderProperties() {
@@ -90,8 +92,8 @@ public class TFBlockItems {
 		skullCandleItem(TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE);
 		skullCandleItem(TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.CREEPER_WALL_SKULL_CANDLE);
 		skullCandleItem(TFBlocks.PLAYER_SKULL_CANDLE, TFBlocks.PLAYER_WALL_SKULL_CANDLE);
-		makeBlockItem(new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY, TFItems.defaultBuilder()), TFBlocks.HUGE_WATER_LILY);
-		makeBlockItem(new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD, TFItems.defaultBuilder()), TFBlocks.HUGE_LILY_PAD);
+		makeBlockItem(new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_WATER_LILY);
+		makeBlockItem(new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_LILY_PAD);
 		blockItem(TFBlocks.MAZESTONE);
 		blockItem(TFBlocks.MAZESTONE_BRICK);
 		blockItem(TFBlocks.CRACKED_MAZESTONE);
@@ -371,12 +373,12 @@ public class TFBlockItems {
 		return new Item.Properties().tab(creativeTab);
 	}
 
-	private static <B extends Block> Item blockItem(B block) {
-		return makeBlockItem(new BlockItem(block, defaultBuilder()), block);
+	private static <B extends Block> Item blockItem(RegistrySupplier<B> block) {
+		return makeBlockItem(new BlockItem(block.get(), defaultBuilder()), block);
 	}
 
-	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(B floor, B wall) {
-		return makeBlockItem(new SkullCandleItem(floor, wall, defaultBuilder().rarity(Rarity.UNCOMMON)) {
+	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(RegistrySupplier<B> floor, RegistrySupplier<B> wall) {
+		return makeBlockItem(new SkullCandleItem(floor.get(), wall.get(), defaultBuilder().rarity(Rarity.UNCOMMON)) {
 //			@Override
 //			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 //				consumer.accept(new IItemRenderProperties() {
@@ -389,12 +391,12 @@ public class TFBlockItems {
 		}, floor);
 	}
 
-	private static <B extends Block> Item burningItem(B block, int burntime) {
-		return makeBlockItem(new FurnaceFuelItem(block, defaultBuilder(), burntime), block);
+	private static <B extends Block> Item burningItem(RegistrySupplier<B> block, int burntime) {
+		return makeBlockItem(new FurnaceFuelItem(block.get(), defaultBuilder(), burntime), block);
 	}
 
-	private static <B extends Block, W extends Block> Item trophyBlock(B block, W wallblock) {
-		return makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TwilightForestMod.getRarity())) {
+	private static <B extends Block, W extends Block> Item trophyBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
+		return makeBlockItem(new TrophyItem(block.get(), wallblock.get(), defaultBuilder().rarity(TwilightForestMod.getRarity())) {
 //			@Override
 //			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 //				consumer.accept(new IItemRenderProperties() {
@@ -407,8 +409,8 @@ public class TFBlockItems {
 		}, block);
 	}
 
-	private static <T extends Block, E extends BlockEntity> Item wearableBlock(T block, BlockEntityType<E> tileentity) {
-		return makeBlockItem(new WearableItem(block, defaultBuilder()) {
+	private static <T extends Block, E extends BlockEntity> Item wearableBlock(RegistrySupplier<T> block, RegistrySupplier<BlockEntityType<E>> tileentity) {
+		return makeBlockItem(new WearableItem(block.get(), defaultBuilder()) {
 //			@Override
 //			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 //				consumer.accept(new IItemRenderProperties() {
@@ -422,15 +424,15 @@ public class TFBlockItems {
 	}
 
 
-	private static <B extends Block> Item tallBlock(B block) {
-		return makeBlockItem(new DoubleHighBlockItem(block, defaultBuilder()), block);
+	private static <B extends Block> Item tallBlock(RegistrySupplier<B> block) {
+		return makeBlockItem(new DoubleHighBlockItem(block.get(), defaultBuilder()), block);
 	}
 
-	private static <B extends Block, W extends Block> Item signBlock(B block, W wallblock) {
-		return makeBlockItem(new SignItem(defaultBuilder().stacksTo(16), block, wallblock), block);
+	private static <B extends Block, W extends Block> Item signBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
+		return makeBlockItem(new SignItem(defaultBuilder().stacksTo(16), block.get(), wallblock.get()), block);
 	}
 
-	private static Item makeBlockItem(Item blockitem, Block block) {
-		return Registry.register(Registry.ITEM, Registry.BLOCK.getKey(block), blockitem);
+	private static <B extends Block> Item makeBlockItem(Item blockitem, RegistrySupplier<B> block) {
+		return Registry.register(Registry.ITEM, block.getId(), blockitem);
 	}
 }

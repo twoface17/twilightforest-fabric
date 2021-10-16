@@ -138,12 +138,12 @@ public abstract class CritterBlock extends BaseEntityBlock implements SimpleWate
 		if(stack.getItem() == Items.GLASS_BOTTLE) {
 			if(this == TFBlocks.FIREFLY) {
 				if(!player.isCreative()) stack.shrink(1);
-				player.getInventory().add(new ItemStack(TFBlocks.FIREFLY_JAR));
+				player.getInventory().add(new ItemStack(TFBlocks.FIREFLY_JAR.get()));
 				worldIn.setBlockAndUpdate(pos,state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState());
 				return InteractionResult.SUCCESS;
 			} else if(this == TFBlocks.CICADA) {
 				if(!player.isCreative()) stack.shrink(1);
-				player.getInventory().add(new ItemStack(TFBlocks.CICADA_JAR));
+				player.getInventory().add(new ItemStack(TFBlocks.CICADA_JAR.get()));
 				if(worldIn.isClientSide) Minecraft.getInstance().getSoundManager().stop(TFSounds.CICADA.getLocation(), SoundSource.NEUTRAL);
 				worldIn.setBlockAndUpdate(pos,state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState());
 				return InteractionResult.SUCCESS;

@@ -83,7 +83,7 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.TROPHY, TrophyBlockEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.TROPHY.get(), TrophyBlockEntity::tick);
 	}
 
 	public BossVariant getVariant() {
@@ -190,7 +190,7 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 						break;
 					case KNIGHT_PHANTOM:
 						for (int brek = 0; brek < 10; brek++) {
-							((ServerLevel)world).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(TFItems.KNIGHTMETAL_SWORD)),
+							((ServerLevel)world).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(TFItems.KNIGHTMETAL_SWORD.get())),
 									pos.getX() + 0.5 + (rand.nextFloat() - 0.5),
 									pos.getY() + rand.nextFloat() + 0.5,
 									pos.getZ() + 0.5 + (rand.nextFloat() - 0.5),

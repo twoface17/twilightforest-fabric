@@ -28,7 +28,7 @@ public class AntibuilderBlockEntity extends BlockEntity {
 	private BlockState[] blockData;
 
 	public AntibuilderBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.ANTIBUILDER, pos, state);
+		super(TFBlockEntities.ANTIBUILDER.get(), pos, state);
 	}
 
 	public static void tick(Level level, BlockPos pos, BlockState state, AntibuilderBlockEntity te) {
@@ -230,7 +230,7 @@ public class AntibuilderBlockEntity extends BlockEntity {
 		} else if (this.rand.nextInt(REVERT_CHANCE) == 0) {
 			// don't revert everything instantly
 			if (!replaceWith.isAir()) {
-				replaceWith = TFBlocks.ANTIBUILT_BLOCK.defaultBlockState();
+				replaceWith = TFBlocks.ANTIBUILT_BLOCK.get().defaultBlockState();
 			}
 
 			if (stateThere.isAir()) {

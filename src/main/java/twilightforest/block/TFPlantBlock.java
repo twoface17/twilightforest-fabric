@@ -69,9 +69,9 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 	@Deprecated
 	public VoxelShape getShape(BlockState state, BlockGetter access, BlockPos pos, CollisionContext context) {
 		switch(plantVariant) {
-			case MOSSPATCH -> { return createCTMShape(TFBlocks.MOSS_PATCH, access, pos); }
+			case MOSSPATCH -> { return createCTMShape(TFBlocks.MOSS_PATCH.get(), access, pos); }
 			case MAYAPPLE -> { return MAYAPPLE_SHAPE; }
-			case CLOVERPATCH -> { return createCTMShape(TFBlocks.CLOVER_PATCH, access, pos); }
+			case CLOVERPATCH -> { return createCTMShape(TFBlocks.CLOVER_PATCH.get(), access, pos); }
 			case FIDDLEHEAD -> { return FIDDLEHEAD_SHAPE; }
 			case MUSHGLOOM -> { return MUSHGLOOM_SHAPE; }
 			case TORCHBERRY -> { return TORCHBERRY_SHAPE; }
@@ -106,8 +106,8 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 			return true;
 		} else {
 			return (state.getBlock() == TFBlocks.ROOT_STRAND
-					|| state.is(TFBlocks.ROOT_BLOCK)
-					|| state.is(TFBlocks.LIVEROOT_BLOCK));
+					|| state.is(TFBlocks.ROOT_BLOCK.get())
+					|| state.is(TFBlocks.LIVEROOT_BLOCK.get()));
 		}
 	}
 
@@ -191,9 +191,9 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 			BlockPos.MutableBlockPos mutable = pos.mutable();
 			do {
 				mutable.move(Direction.DOWN);
-			} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND));
+			} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND.get()));
 			if(level.getBlockState(mutable).isAir() || level.getBlockState(mutable).getMaterial().isReplaceable()) {
-				level.setBlockAndUpdate(mutable, TFBlocks.ROOT_STRAND.defaultBlockState());
+				level.setBlockAndUpdate(mutable, TFBlocks.ROOT_STRAND.get().defaultBlockState());
 			}
 		}
 	}
@@ -202,7 +202,7 @@ public class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlock
 		BlockPos.MutableBlockPos mutable = pos.mutable();
 		do {
 			mutable.move(Direction.DOWN);
-		} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND));
+		} while(level.getBlockState(mutable).is(TFBlocks.ROOT_STRAND.get()));
 
 		return level.getBlockState(mutable).isAir() || level.getBlockState(mutable).getMaterial().isReplaceable();
 	}

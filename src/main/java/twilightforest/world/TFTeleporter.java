@@ -425,7 +425,7 @@ public class TFTeleporter/* implements ITeleporter*/ {
 		world.setBlockAndUpdate(pos.east().south().below(), dirt);
 
 		// portal in it
-		BlockState portal = TFBlocks.TWILIGHT_PORTAL.defaultBlockState().setValue(TFPortalBlock.DISALLOW_RETURN, (locked || !TwilightForestMod.COMMON_CONFIG.shouldReturnPortalBeUsable));
+		BlockState portal = TFBlocks.TWILIGHT_PORTAL.get().defaultBlockState().setValue(TFPortalBlock.DISALLOW_RETURN, (locked || !TwilightForestMod.COMMON_CONFIG.shouldReturnPortalBeUsable));
 
 		world.setBlock(pos, portal, 2);
 		world.setBlock(pos.east(), portal, 2);

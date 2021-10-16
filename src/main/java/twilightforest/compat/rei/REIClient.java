@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 public class REIClient implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
-        registry.addWorkstations(REIServer.UNCRAFTING_ID, EntryStacks.of(new ItemStack(TFBlocks.UNCRAFTING_TABLE)));
+        registry.addWorkstations(REIServer.UNCRAFTING_ID, EntryStacks.of(new ItemStack(TFBlocks.UNCRAFTING_TABLE.get())));
     }
 
     @Override

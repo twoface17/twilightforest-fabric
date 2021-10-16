@@ -139,7 +139,7 @@ public class Minoshroom extends Minotaur {
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
 		super.populateDefaultEquipmentSlots(difficulty);
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.DIAMOND_MINOTAUR_AXE));
+		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.DIAMOND_MINOTAUR_AXE.get()));
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class Minoshroom extends Minotaur {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (hasRestriction()) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.MINOSHROOM_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.MINOSHROOM_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {

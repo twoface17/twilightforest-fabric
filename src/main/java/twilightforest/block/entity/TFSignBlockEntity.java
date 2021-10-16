@@ -13,6 +13,6 @@ public class TFSignBlockEntity extends SignBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return TFBlockEntities.TF_SIGN;
+        return TFBlockEntities.TF_SIGN.get();
     }
 }

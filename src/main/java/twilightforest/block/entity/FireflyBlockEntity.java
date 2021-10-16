@@ -17,7 +17,7 @@ public class FireflyBlockEntity extends BlockEntity {
 	private int glowDelay;
 
 	public FireflyBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.FIREFLY, pos, state);
+		super(TFBlockEntities.FIREFLY.get(), pos, state);
 	}
 
 	public static void tick(Level level, BlockPos pos, BlockState state, FireflyBlockEntity te) {

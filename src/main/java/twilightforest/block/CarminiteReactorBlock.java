@@ -68,6 +68,6 @@ public class CarminiteReactorBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.CARMINITE_REACTOR, CarminiteReactorBlockEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.CARMINITE_REACTOR.get(), CarminiteReactorBlockEntity::tick);
 	}
 }

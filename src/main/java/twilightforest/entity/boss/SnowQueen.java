@@ -235,7 +235,7 @@ public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (getRestrictCenter() != BlockPos.ZERO) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {

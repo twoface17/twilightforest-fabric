@@ -27,7 +27,7 @@ public class TomeSpawnerBlockEntity extends BlockEntity {
 	private int playerDistance;
 
 	public TomeSpawnerBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.TOME_SPAWNER, pos, state);
+		super(TFBlockEntities.TOME_SPAWNER.get(), pos, state);
 		if(state.getValue(TomeSpawnerBlock.SPAWNER)) {
 			this.entityType = "twilightforest:death_tome";
 			this.tomesLeft = 5;
@@ -51,7 +51,7 @@ public class TomeSpawnerBlockEntity extends BlockEntity {
 
 			if (te.tomesLeft <= 0) {
 				//te.invalidateCaps();
-				level.setBlockAndUpdate(pos, TFBlocks.EMPTY_CANOPY_BOOKSHELF.defaultBlockState());
+				level.setBlockAndUpdate(pos, TFBlocks.EMPTY_CANOPY_BOOKSHELF.get().defaultBlockState());
 			} else {
 				level.setBlockAndUpdate(pos, state.setValue(TomeSpawnerBlock.BOOK_STAGES, te.tomesLeft));
 			}

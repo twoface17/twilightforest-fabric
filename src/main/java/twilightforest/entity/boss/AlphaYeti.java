@@ -331,7 +331,7 @@ public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (getRestrictCenter() != BlockPos.ZERO) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.ALPHA_YETI_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.ALPHA_YETI_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			remove(RemovalReason.DISCARDED);
 		} else {

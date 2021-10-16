@@ -80,7 +80,7 @@ public class UncraftingGui extends AbstractContainerScreen<UncraftingContainer> 
 
 	@Override
 	protected void renderLabels(PoseStack ms, int mouseX, int mouseY) {
-		this.font.draw(ms, I18n.get(TFBlocks.UNCRAFTING_TABLE.getDescriptionId()), 6, 6, 4210752);
+		this.font.draw(ms, I18n.get(TFBlocks.UNCRAFTING_TABLE.get().getDescriptionId()), 6, 6, 4210752);
 		if(TwilightForestMod.COMMON_CONFIG.disableUncrafting) {
 			this.font.draw(ms, new TranslatableComponent("container.uncrafting_table.disabled").withStyle(ChatFormatting.DARK_RED), 6, this.imageHeight - 96 + 2, 4210752);
 		} else {

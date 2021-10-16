@@ -143,8 +143,8 @@ public class CinderFurnaceBlockEntity extends FurnaceBlockEntity {
 			direction = dy == 0 ? Direction.Axis.Y : null; //We return null so we can get Cinder Wood.
 		}
 
-		return direction != null ? TFBlocks.CINDER_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, direction)
-				: TFBlocks.CINDER_WOOD.defaultBlockState();
+		return direction != null ? TFBlocks.CINDER_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, direction)
+				: TFBlocks.CINDER_WOOD.get().defaultBlockState();
 	}
 
 	/**

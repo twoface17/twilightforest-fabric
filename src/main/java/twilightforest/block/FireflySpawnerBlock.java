@@ -51,14 +51,14 @@ public class FireflySpawnerBlock extends AbstractParticleSpawnerBlock{
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack stack = player.getItemInHand(hand);
-		if(stack.getItem() == TFBlocks.FIREFLY.asItem() && !player.isShiftKeyDown() && state.getValue(RADIUS) < 10) {
+		if(stack.getItem() == TFBlocks.FIREFLY.get().asItem() && !player.isShiftKeyDown() && state.getValue(RADIUS) < 10) {
 			level.setBlockAndUpdate(pos, state.setValue(RADIUS, state.getValue(RADIUS) + 1));
 			if(!player.isCreative()) stack.shrink(1);
 			player.displayClientMessage(new TranslatableComponent("block.twilightforest.firefly_spawner_radius", state.getValue(RADIUS) + 1), true);
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else if(player.isShiftKeyDown() && state.getValue(RADIUS) > 1) {
 			level.setBlockAndUpdate(pos, state.setValue(RADIUS, state.getValue(RADIUS) - 1));
-			ItemEntity bug = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, new ItemStack(TFBlocks.FIREFLY));
+			ItemEntity bug = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, new ItemStack(TFBlocks.FIREFLY.get()));
 			level.addFreshEntity(bug);
 			player.displayClientMessage(new TranslatableComponent("block.twilightforest.firefly_spawner_radius", state.getValue(RADIUS) - 1), true);
 			return InteractionResult.sidedSuccess(level.isClientSide);

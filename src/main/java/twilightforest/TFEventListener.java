@@ -171,7 +171,7 @@ public class TFEventListener {
 	}
 
 	private static boolean doesCraftMatrixHaveGiantLog(Container inv) {
-		Item giantLogItem = Item.byBlock(TFBlocks.GIANT_LOG);
+		Item giantLogItem = Item.byBlock(TFBlocks.GIANT_LOG.get());
 		for (int i = 0; i < inv.getContainerSize(); i++) {
 			if (inv.getItem(i).getItem() == giantLogItem) {
 				return true;
@@ -199,7 +199,7 @@ public class TFEventListener {
 				if (generatedLoot.get(0).getItem() == Item.byBlock(Blocks.COBBLESTONE)) {
 					generatedLoot.remove(0);
 					if (amountOfCobbleToReplace == 64) {
-						newLoot.add(new ItemStack(TFBlocks.GIANT_COBBLESTONE));
+						newLoot.add(new ItemStack(TFBlocks.GIANT_COBBLESTONE.get()));
 						flag = true;
 					}
 					amountOfCobbleToReplace--;
@@ -291,24 +291,24 @@ public class TFEventListener {
 					boolean wall = state.getBlock() instanceof WallSkullBlock;
 					switch (type) {
 						case SKELETON -> {
-							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.SKELETON_WALL_SKULL_CANDLE);
-							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.SKELETON_SKULL_CANDLE);
+							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.SKELETON_WALL_SKULL_CANDLE.get());
+							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.SKELETON_SKULL_CANDLE.get());
 						}
 						case WITHER_SKELETON -> {
-							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE);
-							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.WITHER_SKELE_SKULL_CANDLE);
+							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE.get());
+							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.WITHER_SKELE_SKULL_CANDLE.get());
 						}
 						case PLAYER -> {
-							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.PLAYER_WALL_SKULL_CANDLE);
-							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.PLAYER_SKULL_CANDLE);
+							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.PLAYER_WALL_SKULL_CANDLE.get());
+							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.PLAYER_SKULL_CANDLE.get());
 						}
 						case ZOMBIE -> {
-							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.ZOMBIE_WALL_SKULL_CANDLE);
-							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.ZOMBIE_SKULL_CANDLE);
+							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.ZOMBIE_WALL_SKULL_CANDLE.get());
+							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.ZOMBIE_SKULL_CANDLE.get());
 						}
 						case CREEPER -> {
-							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_WALL_SKULL_CANDLE);
-							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_SKULL_CANDLE);
+							if (wall) makeWallSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_WALL_SKULL_CANDLE.get());
+							else makeFloorSkull(world, pos, stack.getItem(), TFBlocks.CREEPER_SKULL_CANDLE.get());
 						}
 						default -> {
 							return InteractionResult.FAIL;
@@ -364,7 +364,7 @@ public class TFEventListener {
 
 	private static boolean casketExpiration = false;
 	private static void keepsakeCasket(Player player) {
-		boolean casketConsumed = TFItemStackUtils.consumeInventoryItem(player, TFBlocks.KEEPSAKE_CASKET.asItem());
+		boolean casketConsumed = TFItemStackUtils.consumeInventoryItem(player, TFBlocks.KEEPSAKE_CASKET.get().asItem());
 
 		if (casketConsumed) {
 			Level world = player.getCommandSenderWorld();
@@ -384,7 +384,7 @@ public class TFEventListener {
 			BlockPos immutablePos = pos.immutable();
 			FluidState fluidState = world.getFluidState(immutablePos);
 
-			if (world.setBlockAndUpdate(immutablePos, TFBlocks.KEEPSAKE_CASKET.defaultBlockState().setValue(BlockLoggingEnum.MULTILOGGED, BlockLoggingEnum.getFromFluid(fluidState.getType())).setValue(KeepsakeCasketBlock.BREAKAGE, TFItemStackUtils.damage))) {
+			if (world.setBlockAndUpdate(immutablePos, TFBlocks.KEEPSAKE_CASKET.get().defaultBlockState().setValue(BlockLoggingEnum.MULTILOGGED, BlockLoggingEnum.getFromFluid(fluidState.getType())).setValue(KeepsakeCasketBlock.BREAKAGE, TFItemStackUtils.damage))) {
 				BlockEntity te = world.getBlockEntity(immutablePos);
 
 				if (te instanceof KeepsakeCasketBlockEntity) {
@@ -414,7 +414,7 @@ public class TFEventListener {
 							TwilightForestMod.LOGGER.debug("{}'s Casket damage value was too high, alerting the player and dropping extra items", player.getName().getString());
 						} else {
 							damage = damage + 1;
-							world.setBlockAndUpdate(immutablePos, TFBlocks.KEEPSAKE_CASKET.defaultBlockState().setValue(BlockLoggingEnum.MULTILOGGED, BlockLoggingEnum.getFromFluid(fluidState.getType())).setValue(KeepsakeCasketBlock.BREAKAGE, damage));
+							world.setBlockAndUpdate(immutablePos, TFBlocks.KEEPSAKE_CASKET.get().defaultBlockState().setValue(BlockLoggingEnum.MULTILOGGED, BlockLoggingEnum.getFromFluid(fluidState.getType())).setValue(KeepsakeCasketBlock.BREAKAGE, damage));
 							TwilightForestMod.LOGGER.debug("{}'s Casket was randomly damaged, applying new damage", player.getName().getString());
 						}
 					}
@@ -460,8 +460,8 @@ public class TFEventListener {
 	}
 
 	private static boolean charmOfLife(Player player) {
-		boolean charm2 = TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_LIFE_2);
-		boolean charm1 = !charm2 && TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_LIFE_1);
+		boolean charm2 = TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_LIFE_2.get());
+		boolean charm1 = !charm2 && TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_LIFE_1.get());
 
 		if (charm2 || charm1) {
 			if (charm1) {
@@ -478,10 +478,10 @@ public class TFEventListener {
 			}
 
 			// spawn effect thingers
-			CharmEffect effect = new CharmEffect(TFEntities.CHARM_EFFECT, player.level, player, charm1 ? TFItems.CHARM_OF_LIFE_1 : TFItems.CHARM_OF_LIFE_2);
+			CharmEffect effect = new CharmEffect(TFEntities.CHARM_EFFECT, player.level, player, charm1 ? TFItems.CHARM_OF_LIFE_1.get() : TFItems.CHARM_OF_LIFE_2.get());
 			player.level.addFreshEntity(effect);
 
-			CharmEffect effect2 = new CharmEffect(TFEntities.CHARM_EFFECT, player.level, player, charm1 ? TFItems.CHARM_OF_LIFE_1 : TFItems.CHARM_OF_LIFE_2);
+			CharmEffect effect2 = new CharmEffect(TFEntities.CHARM_EFFECT, player.level, player, charm1 ? TFItems.CHARM_OF_LIFE_1.get() : TFItems.CHARM_OF_LIFE_2.get());
 			effect2.offset = (float) Math.PI;
 			player.level.addFreshEntity(effect2);
 
@@ -500,9 +500,9 @@ public class TFEventListener {
 		dropStoredItems(player);
 
 		// TODO also consider situations where the actual slots may be empty, and charm gets consumed anyway. Usually won't happen.
-		boolean tier3 = TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_3);
-		boolean tier2 = tier3 || TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_2);
-		boolean tier1 = tier2 || TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_1);
+		boolean tier3 = TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_3.get());
+		boolean tier2 = tier3 || TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_2.get());
+		boolean tier1 = tier2 || TFItemStackUtils.consumeInventoryItem(player, TFItems.CHARM_OF_KEEPING_1.get());
 
 		Inventory keepInventory = new Inventory(null);
 
@@ -519,14 +519,14 @@ public class TFEventListener {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_3));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_3.get()));
 
 		} else if (tier2) {
 			for (int i = 0; i < 9; i++) {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_2));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_2.get()));
 
 		} else if (tier1) {
 			int i = player.getInventory().selected;
@@ -534,7 +534,7 @@ public class TFEventListener {
 				keepInventory.items.set(i, player.getInventory().items.get(i).copy());
 				player.getInventory().items.set(i, ItemStack.EMPTY);
 			}
-			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_1));
+			keepInventory.setPickedItem(new ItemStack(TFItems.CHARM_OF_KEEPING_1.get()));
 		}
 
 		//TODO: Baubles is dead, replace with curios
@@ -787,7 +787,7 @@ public class TFEventListener {
 
 	private static boolean isBlockProtectedFromBreaking(Level world, BlockPos pos) {
 		// todo improve
-		return !Registry.BLOCK.getKey(world.getBlockState(pos).getBlock()).getPath().contains("grave") || !world.getBlockState(pos).is(TFBlocks.KEEPSAKE_CASKET);
+		return !Registry.BLOCK.getKey(world.getBlockState(pos).getBlock()).getPath().contains("grave") || !world.getBlockState(pos).is(TFBlocks.KEEPSAKE_CASKET.get());
 	}
 
 	/**

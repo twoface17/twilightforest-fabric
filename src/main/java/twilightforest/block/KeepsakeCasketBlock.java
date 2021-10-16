@@ -95,7 +95,7 @@ public class KeepsakeCasketBlock extends BaseEntityBlock implements BlockLogging
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.KEEPSAKE_CASKET, KeepsakeCasketBlockEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.KEEPSAKE_CASKET.get(), KeepsakeCasketBlockEntity::tick);
 	}
 
 	@Override

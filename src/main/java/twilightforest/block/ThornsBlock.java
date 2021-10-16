@@ -125,7 +125,7 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 			BlockPos dPos = pos.relative(dir, i);
 
 			if (world.isEmptyBlock(dPos)) {
-				world.setBlock(dPos, TFBlocks.GREEN_THORNS.defaultBlockState().setValue(AXIS, dir.getAxis()), 2);
+				world.setBlock(dPos, TFBlocks.GREEN_THORNS.get().defaultBlockState().setValue(AXIS, dir.getAxis()), 2);
 			} else {
 				break;
 			}

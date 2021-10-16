@@ -193,7 +193,7 @@ public class UrGhast extends CarminiteGhastguard {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (hasHome()) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.UR_GHAST_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.UR_GHAST_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {
@@ -522,8 +522,8 @@ public class UrGhast extends CarminiteGhastguard {
 	}
 
 	private boolean isTrapAt(BlockPos pos) {
-		BlockState inactive = TFBlocks.GHAST_TRAP.defaultBlockState().setValue(GhastTrapBlock.ACTIVE, false);
-		BlockState active = TFBlocks.GHAST_TRAP.defaultBlockState().setValue(GhastTrapBlock.ACTIVE, true);
+		BlockState inactive = TFBlocks.GHAST_TRAP.get().defaultBlockState().setValue(GhastTrapBlock.ACTIVE, false);
+		BlockState active = TFBlocks.GHAST_TRAP.get().defaultBlockState().setValue(GhastTrapBlock.ACTIVE, true);
 		return level.hasChunkAt(pos)
 				&& (level.getBlockState(pos) == inactive || level.getBlockState(pos) == active);
 	}

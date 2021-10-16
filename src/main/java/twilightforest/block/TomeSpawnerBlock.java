@@ -75,7 +75,7 @@ public class TomeSpawnerBlock extends BaseEntityBlock implements IBlockMethods {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return state.getValue(SPAWNER) ? createTickerHelper(type, TFBlockEntities.TOME_SPAWNER, TomeSpawnerBlockEntity::tick) : null;
+		return state.getValue(SPAWNER) ? createTickerHelper(type, TFBlockEntities.TOME_SPAWNER.get(), TomeSpawnerBlockEntity::tick) : null;
 	}
 
 

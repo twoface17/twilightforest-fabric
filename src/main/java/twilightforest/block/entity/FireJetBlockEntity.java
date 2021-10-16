@@ -22,7 +22,7 @@ public class FireJetBlockEntity extends BlockEntity {
 	private int counter = 0;
 
 	public FireJetBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.FLAME_JET, pos, state);
+		super(TFBlockEntities.FLAME_JET.get(), pos, state);
 	}
 
 	public static void tick(Level level, BlockPos pos, BlockState state, FireJetBlockEntity te) {

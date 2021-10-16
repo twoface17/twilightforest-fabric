@@ -104,7 +104,7 @@ public class Experiment115Block extends Block {
 				} else {
 					worldIn.removeBlock(pos, false);
 				}
-				if(!player.isCreative()) PlayerHelper.giveItemToPlayer(player, new ItemStack(TFItems.EXPERIMENT_115));
+				if(!player.isCreative()) PlayerHelper.giveItemToPlayer(player, new ItemStack(TFItems.EXPERIMENT_115.get()));
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -126,8 +126,8 @@ public class Experiment115Block extends Block {
             }
 
             if (player instanceof ServerPlayer) {
-				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, new ItemStack(TFItems.EXPERIMENT_115, 8 - i));
-				player.awardStat(Stats.ITEM_USED.get(TFItems.EXPERIMENT_115));
+				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, new ItemStack(TFItems.EXPERIMENT_115.get(), 8 - i));
+				player.awardStat(Stats.ITEM_USED.get(TFItems.EXPERIMENT_115.get()));
 			}
 
             return InteractionResult.SUCCESS;

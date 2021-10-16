@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SkullCandleBlockEntity extends BlockEntity {
 
 	public SkullCandleBlockEntity(BlockPos pos, BlockState state) {
-		super(TFBlockEntities.SKULL_CANDLE, pos, state);
+		super(TFBlockEntities.SKULL_CANDLE.get(), pos, state);
 	}
 }

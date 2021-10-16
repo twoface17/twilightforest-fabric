@@ -48,7 +48,7 @@ public class CicadaBlock extends CritterBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.CICADA, CicadaBlockEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.CICADA.get(), CicadaBlockEntity::tick);
 	}
 
 	@Override

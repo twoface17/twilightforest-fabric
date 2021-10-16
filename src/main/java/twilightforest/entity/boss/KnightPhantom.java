@@ -89,9 +89,9 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
-		setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
-		setItemSlot(EquipmentSlot.CHEST, new ItemStack(TFItems.PHANTOM_CHESTPLATE));
-		setItemSlot(EquipmentSlot.HEAD, new ItemStack(TFItems.PHANTOM_HELMET));
+		setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD.get()));
+		setItemSlot(EquipmentSlot.CHEST, new ItemStack(TFItems.PHANTOM_CHESTPLATE.get()));
+		setItemSlot(EquipmentSlot.HEAD, new ItemStack(TFItems.PHANTOM_HELMET.get()));
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (hasHome() && getNumber() == 0) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {
@@ -157,7 +157,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 		if (isChargingAtPlayer()) {
 			// make particles
 			for (int i = 0; i < 4; ++i) {
-				Item particleID = random.nextBoolean() ? TFItems.PHANTOM_HELMET : TFItems.KNIGHTMETAL_SWORD;
+				Item particleID = random.nextBoolean() ? TFItems.PHANTOM_HELMET.get() : TFItems.KNIGHTMETAL_SWORD.get();
 
 				level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(particleID)), getX() + (random.nextFloat() - 0.5D) * getBbWidth(), getY() + random.nextFloat() * (getBbHeight() - 0.75D) + 0.5D, getZ() + (random.nextFloat() - 0.5D) * getBbWidth(), 0, -0.1, 0);
 				level.addParticle(ParticleTypes.SMOKE, getX() + (random.nextFloat() - 0.5D) * getBbWidth(), getY() + random.nextFloat() * (getBbHeight() - 0.75D) + 0.5D, getZ() + (random.nextFloat() - 0.5D) * getBbWidth(), 0, 0.1, 0);
@@ -391,13 +391,13 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 		// set weapon per number
 		switch (number % 3) {
 			case 0:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD.get()));
 				break;
 			case 1:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE.get()));
 				break;
 			case 2:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE));
+				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE.get()));
 				break;
 		}
 	}

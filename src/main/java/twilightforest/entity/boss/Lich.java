@@ -173,7 +173,7 @@ public class Lich extends Monster {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL && !isShadowClone()) {
 			if (hasRestriction()) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.LICH_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.LICH_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {

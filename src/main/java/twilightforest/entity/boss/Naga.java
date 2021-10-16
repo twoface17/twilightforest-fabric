@@ -709,7 +709,7 @@ public class Naga extends Monster implements IEntityEx {
 	public void checkDespawn() {
 		if (level.getDifficulty() == Difficulty.PEACEFUL) {
 			if (getRestrictCenter() != BlockPos.ZERO) {
-				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.NAGA_BOSS_SPAWNER.defaultBlockState());
+				level.setBlockAndUpdate(getRestrictCenter(), TFBlocks.NAGA_BOSS_SPAWNER.get().defaultBlockState());
 			}
 			discard();
 		} else {

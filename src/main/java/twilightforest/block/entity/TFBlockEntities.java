@@ -1,5 +1,7 @@
 package twilightforest.block.entity;
 
+import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -21,129 +23,129 @@ import java.util.List;
 
 public class TFBlockEntities {
 
-	//public static final DeferredRegister<BlockEntityType<?> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, TwilightForestMod.ID);
+	public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(TwilightForestMod.ID, Registry.BLOCK_ENTITY_TYPE_REGISTRY);
 
-	public static final BlockEntityType<AntibuilderBlockEntity> ANTIBUILDER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":antibuilder",
-			BlockEntityType.Builder.of(AntibuilderBlockEntity::new, TFBlocks.ANTIBUILDER).build(null));
-	public static final BlockEntityType<CinderFurnaceBlockEntity> CINDER_FURNACE = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":cinder_furnace",
-			BlockEntityType.Builder.of(CinderFurnaceBlockEntity::new, TFBlocks.CINDER_FURNACE).build(null));
-	public static final BlockEntityType<CarminiteReactorBlockEntity> CARMINITE_REACTOR = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":carminite_reactor",
-			BlockEntityType.Builder.of(CarminiteReactorBlockEntity::new, TFBlocks.CARMINITE_REACTOR).build(null));
-	public static final BlockEntityType<FireJetBlockEntity> FLAME_JET = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":flame_jet",
-			BlockEntityType.Builder.of(FireJetBlockEntity::new, TFBlocks.FIRE_JET, TFBlocks.ENCASED_FIRE_JET).build(null));
-	public static final BlockEntityType<GhastTrapBlockEntity> GHAST_TRAP = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":ghast_trap",
-			BlockEntityType.Builder.of(GhastTrapBlockEntity::new, TFBlocks.GHAST_TRAP).build(null));
-	public static final BlockEntityType<TFSmokerBlockEntity> SMOKER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":smoker",
-			BlockEntityType.Builder.of(TFSmokerBlockEntity::new, TFBlocks.SMOKER, TFBlocks.ENCASED_SMOKER).build(null));
-	public static final BlockEntityType<CarminiteBuilderBlockEntity> TOWER_BUILDER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":tower_builder",
-			BlockEntityType.Builder.of(CarminiteBuilderBlockEntity::new, TFBlocks.CARMINITE_BUILDER).build(null));
-	public static final BlockEntityType<TrophyBlockEntity> TROPHY = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":trophy",
-			BlockEntityType.Builder.of(TrophyBlockEntity::new, TFBlocks.NAGA_TROPHY, TFBlocks.LICH_TROPHY, TFBlocks.MINOSHROOM_TROPHY,
-					TFBlocks.HYDRA_TROPHY, TFBlocks.KNIGHT_PHANTOM_TROPHY, TFBlocks.UR_GHAST_TROPHY, TFBlocks.ALPHA_YETI_TROPHY,
-					TFBlocks.SNOW_QUEEN_TROPHY, TFBlocks.QUEST_RAM_TROPHY, TFBlocks.NAGA_WALL_TROPHY, TFBlocks.LICH_WALL_TROPHY,
-					TFBlocks.MINOSHROOM_WALL_TROPHY, TFBlocks.HYDRA_WALL_TROPHY, TFBlocks.KNIGHT_PHANTOM_WALL_TROPHY, TFBlocks.UR_GHAST_WALL_TROPHY,
-					TFBlocks.ALPHA_YETI_WALL_TROPHY, TFBlocks.SNOW_QUEEN_WALL_TROPHY, TFBlocks.QUEST_RAM_WALL_TROPHY).build(null));
-	public static final BlockEntityType<AlphaYetiSpawnerBlockEntity> ALPHA_YETI_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":alpha_yeti_spawner",
-			BlockEntityType.Builder.of(AlphaYetiSpawnerBlockEntity::new, TFBlocks.ALPHA_YETI_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<FinalBossSpawnerBlockEntity> FINAL_BOSS_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":final_boss_spawner",
-			BlockEntityType.Builder.of(FinalBossSpawnerBlockEntity::new, TFBlocks.FINAL_BOSS_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<HydraSpawnerBlockEntity> HYDRA_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":hydra_boss_spawner",
-			BlockEntityType.Builder.of(HydraSpawnerBlockEntity::new, TFBlocks.HYDRA_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<KnightPhantomSpawnerBlockEntity> KNIGHT_PHANTOM_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":knight_phantom_spawner",
-			BlockEntityType.Builder.of(KnightPhantomSpawnerBlockEntity::new, TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<LichSpawnerBlockEntity> LICH_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":lich_spawner",
-			BlockEntityType.Builder.of(LichSpawnerBlockEntity::new, TFBlocks.LICH_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<MinoshroomSpawnerBlockEntity> MINOSHROOM_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":minoshroom_spawner",
-			BlockEntityType.Builder.of(MinoshroomSpawnerBlockEntity::new, TFBlocks.MINOSHROOM_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<NagaSpawnerBlockEntity> NAGA_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":naga_spawner",
-			BlockEntityType.Builder.of(NagaSpawnerBlockEntity::new, TFBlocks.NAGA_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<SnowQueenSpawnerBlockEntity> SNOW_QUEEN_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":snow_queen_spawner",
-			BlockEntityType.Builder.of(SnowQueenSpawnerBlockEntity::new, TFBlocks.SNOW_QUEEN_BOSS_SPAWNER).build(null));
-	public static final BlockEntityType<UrGhastSpawnerBlockEntity> UR_GHAST_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":tower_boss_spawner",
-			BlockEntityType.Builder.of(UrGhastSpawnerBlockEntity::new, TFBlocks.UR_GHAST_BOSS_SPAWNER).build(null));
+	public static final RegistrySupplier<BlockEntityType<AntibuilderBlockEntity>> ANTIBUILDER = TILE_ENTITIES.register("antibuilder", () ->
+			BlockEntityType.Builder.of(AntibuilderBlockEntity::new, TFBlocks.ANTIBUILDER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<CinderFurnaceBlockEntity>> CINDER_FURNACE = TILE_ENTITIES.register("cinder_furnace", () ->
+			BlockEntityType.Builder.of(CinderFurnaceBlockEntity::new, TFBlocks.CINDER_FURNACE.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<CarminiteReactorBlockEntity>> CARMINITE_REACTOR = TILE_ENTITIES.register("carminite_reactor", () ->
+			BlockEntityType.Builder.of(CarminiteReactorBlockEntity::new, TFBlocks.CARMINITE_REACTOR.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<FireJetBlockEntity>> FLAME_JET = TILE_ENTITIES.register("flame_jet", () ->
+			BlockEntityType.Builder.of(FireJetBlockEntity::new, TFBlocks.FIRE_JET.get(), TFBlocks.ENCASED_FIRE_JET.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<GhastTrapBlockEntity>> GHAST_TRAP = TILE_ENTITIES.register("ghast_trap", () ->
+			BlockEntityType.Builder.of(GhastTrapBlockEntity::new, TFBlocks.GHAST_TRAP.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<TFSmokerBlockEntity>> SMOKER = TILE_ENTITIES.register("smoker", () ->
+			BlockEntityType.Builder.of(TFSmokerBlockEntity::new, TFBlocks.SMOKER.get(), TFBlocks.ENCASED_SMOKER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<CarminiteBuilderBlockEntity>> TOWER_BUILDER = TILE_ENTITIES.register("tower_builder", () ->
+			BlockEntityType.Builder.of(CarminiteBuilderBlockEntity::new, TFBlocks.CARMINITE_BUILDER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<TrophyBlockEntity>> TROPHY = TILE_ENTITIES.register("trophy", () ->
+			BlockEntityType.Builder.of(TrophyBlockEntity::new, TFBlocks.NAGA_TROPHY.get(), TFBlocks.LICH_TROPHY.get(), TFBlocks.MINOSHROOM_TROPHY.get(),
+					TFBlocks.HYDRA_TROPHY.get(), TFBlocks.KNIGHT_PHANTOM_TROPHY.get(), TFBlocks.UR_GHAST_TROPHY.get(), TFBlocks.ALPHA_YETI_TROPHY.get(),
+					TFBlocks.SNOW_QUEEN_TROPHY.get(), TFBlocks.QUEST_RAM_TROPHY.get(), TFBlocks.NAGA_WALL_TROPHY.get(), TFBlocks.LICH_WALL_TROPHY.get(),
+					TFBlocks.MINOSHROOM_WALL_TROPHY.get(), TFBlocks.HYDRA_WALL_TROPHY.get(), TFBlocks.KNIGHT_PHANTOM_WALL_TROPHY.get(), TFBlocks.UR_GHAST_WALL_TROPHY.get(),
+					TFBlocks.ALPHA_YETI_WALL_TROPHY.get(), TFBlocks.SNOW_QUEEN_WALL_TROPHY.get(), TFBlocks.QUEST_RAM_WALL_TROPHY.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<AlphaYetiSpawnerBlockEntity>> ALPHA_YETI_SPAWNER = TILE_ENTITIES.register("alpha_yeti_spawner", () ->
+			BlockEntityType.Builder.of(AlphaYetiSpawnerBlockEntity::new, TFBlocks.ALPHA_YETI_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<FinalBossSpawnerBlockEntity>> FINAL_BOSS_SPAWNER = TILE_ENTITIES.register("final_boss_spawner", () ->
+			BlockEntityType.Builder.of(FinalBossSpawnerBlockEntity::new, TFBlocks.FINAL_BOSS_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<HydraSpawnerBlockEntity>> HYDRA_SPAWNER = TILE_ENTITIES.register("hydra_boss_spawner", () ->
+			BlockEntityType.Builder.of(HydraSpawnerBlockEntity::new, TFBlocks.HYDRA_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<KnightPhantomSpawnerBlockEntity>> KNIGHT_PHANTOM_SPAWNER = TILE_ENTITIES.register("knight_phantom_spawner", () ->
+			BlockEntityType.Builder.of(KnightPhantomSpawnerBlockEntity::new, TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<LichSpawnerBlockEntity>> LICH_SPAWNER = TILE_ENTITIES.register("lich_spawner", () ->
+			BlockEntityType.Builder.of(LichSpawnerBlockEntity::new, TFBlocks.LICH_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<MinoshroomSpawnerBlockEntity>> MINOSHROOM_SPAWNER = TILE_ENTITIES.register("minoshroom_spawner", () ->
+			BlockEntityType.Builder.of(MinoshroomSpawnerBlockEntity::new, TFBlocks.MINOSHROOM_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<NagaSpawnerBlockEntity>> NAGA_SPAWNER = TILE_ENTITIES.register("naga_spawner", () ->
+			BlockEntityType.Builder.of(NagaSpawnerBlockEntity::new, TFBlocks.NAGA_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<SnowQueenSpawnerBlockEntity>> SNOW_QUEEN_SPAWNER = TILE_ENTITIES.register("snow_queen_spawner", () ->
+			BlockEntityType.Builder.of(SnowQueenSpawnerBlockEntity::new, TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<UrGhastSpawnerBlockEntity>> UR_GHAST_SPAWNER = TILE_ENTITIES.register("tower_boss_spawner", () ->
+			BlockEntityType.Builder.of(UrGhastSpawnerBlockEntity::new, TFBlocks.UR_GHAST_BOSS_SPAWNER.get()).build(null));
 
-	public static final BlockEntityType<CicadaBlockEntity> CICADA = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":cicada",
-			BlockEntityType.Builder.of(CicadaBlockEntity::new, TFBlocks.CICADA).build(null));
-	public static final BlockEntityType<FireflyBlockEntity> FIREFLY = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":firefly",
-			BlockEntityType.Builder.of(FireflyBlockEntity::new, TFBlocks.FIREFLY).build(null));
-	public static final BlockEntityType<MoonwormBlockEntity> MOONWORM = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":moonworm",
-			BlockEntityType.Builder.of(MoonwormBlockEntity::new, TFBlocks.MOONWORM).build(null));
+	public static final RegistrySupplier<BlockEntityType<CicadaBlockEntity>> CICADA = TILE_ENTITIES.register("cicada", () ->
+			BlockEntityType.Builder.of(CicadaBlockEntity::new, TFBlocks.CICADA.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<FireflyBlockEntity>> FIREFLY = TILE_ENTITIES.register("firefly", () ->
+			BlockEntityType.Builder.of(FireflyBlockEntity::new, TFBlocks.FIREFLY.get()).build(null));
+	public static final RegistrySupplier<BlockEntityType<MoonwormBlockEntity>> MOONWORM = TILE_ENTITIES.register("moonworm", () ->
+			BlockEntityType.Builder.of(MoonwormBlockEntity::new, TFBlocks.MOONWORM.get()).build(null));
 
-	public static final BlockEntityType<KeepsakeCasketBlockEntity> KEEPSAKE_CASKET = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":keepsake_casket",
-			BlockEntityType.Builder.of(KeepsakeCasketBlockEntity::new, TFBlocks.KEEPSAKE_CASKET).build(null));
+	public static final RegistrySupplier<BlockEntityType<KeepsakeCasketBlockEntity>> KEEPSAKE_CASKET = TILE_ENTITIES.register("keepsake_casket", () ->
+			BlockEntityType.Builder.of(KeepsakeCasketBlockEntity::new, TFBlocks.KEEPSAKE_CASKET.get()).build(null));
 
-	public static final BlockEntityType<TFSignBlockEntity> TF_SIGN = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":tf_sign",
+	public static final RegistrySupplier<BlockEntityType<TFSignBlockEntity>> TF_SIGN = TILE_ENTITIES.register("tf_sign", () ->
 			BlockEntityType.Builder.of(TFSignBlockEntity::new,
-					TFBlocks.TWILIGHT_OAK_SIGN, TFBlocks.TWILIGHT_WALL_SIGN,
-					TFBlocks.CANOPY_SIGN, TFBlocks.CANOPY_WALL_SIGN,
-					TFBlocks.MANGROVE_SIGN, TFBlocks.MANGROVE_WALL_SIGN,
-					TFBlocks.DARKWOOD_SIGN, TFBlocks.DARKWOOD_WALL_SIGN,
-					TFBlocks.TIME_SIGN, TFBlocks.TIME_WALL_SIGN,
-					TFBlocks.TRANSFORMATION_SIGN, TFBlocks.TRANSFORMATION_WALL_SIGN,
-					TFBlocks.MINING_SIGN, TFBlocks.MINING_WALL_SIGN,
-					TFBlocks.SORTING_SIGN, TFBlocks.SORTING_WALL_SIGN).build(null));
+					TFBlocks.TWILIGHT_OAK_SIGN.get(), TFBlocks.TWILIGHT_WALL_SIGN.get(),
+					TFBlocks.CANOPY_SIGN.get(), TFBlocks.CANOPY_WALL_SIGN.get(),
+					TFBlocks.MANGROVE_SIGN.get(), TFBlocks.MANGROVE_WALL_SIGN.get(),
+					TFBlocks.DARKWOOD_SIGN.get(), TFBlocks.DARKWOOD_WALL_SIGN.get(),
+					TFBlocks.TIME_SIGN.get(), TFBlocks.TIME_WALL_SIGN.get(),
+					TFBlocks.TRANSFORMATION_SIGN.get(), TFBlocks.TRANSFORMATION_WALL_SIGN.get(),
+					TFBlocks.MINING_SIGN.get(), TFBlocks.MINING_WALL_SIGN.get(),
+					TFBlocks.SORTING_SIGN.get(), TFBlocks.SORTING_WALL_SIGN.get()).build(null));
 
-	public static final BlockEntityType<SkullCandleBlockEntity> SKULL_CANDLE = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":skull_candle",
+	public static final RegistrySupplier<BlockEntityType<SkullCandleBlockEntity>> SKULL_CANDLE = TILE_ENTITIES.register("skull_candle", () ->
 			BlockEntityType.Builder.of(SkullCandleBlockEntity::new,
-					TFBlocks.ZOMBIE_SKULL_CANDLE, TFBlocks.ZOMBIE_WALL_SKULL_CANDLE,
-					TFBlocks.SKELETON_SKULL_CANDLE, TFBlocks.SKELETON_WALL_SKULL_CANDLE,
-					TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE,
-					TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.CREEPER_WALL_SKULL_CANDLE,
-					TFBlocks.PLAYER_SKULL_CANDLE, TFBlocks.PLAYER_WALL_SKULL_CANDLE).build(null));
+					TFBlocks.ZOMBIE_SKULL_CANDLE.get(), TFBlocks.ZOMBIE_WALL_SKULL_CANDLE.get(),
+					TFBlocks.SKELETON_SKULL_CANDLE.get(), TFBlocks.SKELETON_WALL_SKULL_CANDLE.get(),
+					TFBlocks.WITHER_SKELE_SKULL_CANDLE.get(), TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE.get(),
+					TFBlocks.CREEPER_SKULL_CANDLE.get(), TFBlocks.CREEPER_WALL_SKULL_CANDLE.get(),
+					TFBlocks.PLAYER_SKULL_CANDLE.get(), TFBlocks.PLAYER_WALL_SKULL_CANDLE.get()).build(null));
 
-	public static final BlockEntityType<TomeSpawnerBlockEntity> TOME_SPAWNER = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":tome_spawner",
-			BlockEntityType.Builder.of(TomeSpawnerBlockEntity::new, TFBlocks.DEATH_TOME_SPAWNER).build(null));
+	public static final RegistrySupplier<BlockEntityType<TomeSpawnerBlockEntity>> TOME_SPAWNER = TILE_ENTITIES.register("tome_spawner", () ->
+			BlockEntityType.Builder.of(TomeSpawnerBlockEntity::new, TFBlocks.DEATH_TOME_SPAWNER.get()).build(null));
 
 	public static void init() {}
 
 	@Environment(EnvType.CLIENT)
 	public static void registerTileEntityRenders() {
 		// tile entities
-		BlockEntityRendererRegistry.register(FIREFLY, FireflyTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(CICADA, CicadaTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(MOONWORM, MoonwormTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(TROPHY, TrophyTileEntityRenderer::new);
-		BlockEntityRenderers.register(TF_SIGN, SignRenderer::new);
-		BlockEntityRendererRegistry.register(KEEPSAKE_CASKET, CasketTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(SKULL_CANDLE, SkullCandleTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(FIREFLY.get(), FireflyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(CICADA.get(), CicadaTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(MOONWORM.get(), MoonwormTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(TROPHY.get(), TrophyTileEntityRenderer::new);
+		BlockEntityRenderers.register(TF_SIGN.get(), SignRenderer::new);
+		BlockEntityRendererRegistry.register(KEEPSAKE_CASKET.get(), CasketTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(SKULL_CANDLE.get(), SkullCandleTileEntityRenderer::new);
 
 		registerTileEntitysItemRenders();
 	}
 
-	public static void registerTileEntitysItemRenders(){
-		List<AbstractTrophyBlock> TROPHYS = List.of(TFBlocks.NAGA_TROPHY, TFBlocks.LICH_TROPHY, TFBlocks.MINOSHROOM_TROPHY,
-				TFBlocks.HYDRA_TROPHY, TFBlocks.KNIGHT_PHANTOM_TROPHY, TFBlocks.UR_GHAST_TROPHY, TFBlocks.ALPHA_YETI_TROPHY,
-				TFBlocks.SNOW_QUEEN_TROPHY, TFBlocks.QUEST_RAM_TROPHY);
+	public static void registerTileEntitysItemRenders() {
+		List<AbstractTrophyBlock> TROPHYS = List.of(TFBlocks.NAGA_TROPHY.get(), TFBlocks.LICH_TROPHY.get(), TFBlocks.MINOSHROOM_TROPHY.get(),
+				TFBlocks.HYDRA_TROPHY.get(), TFBlocks.KNIGHT_PHANTOM_TROPHY.get(), TFBlocks.UR_GHAST_TROPHY.get(), TFBlocks.ALPHA_YETI_TROPHY.get(),
+				TFBlocks.SNOW_QUEEN_TROPHY.get(), TFBlocks.QUEST_RAM_TROPHY.get());
 
-		List<AbstractSkullCandleBlock> SKULLCANDLES = List.of(TFBlocks.ZOMBIE_SKULL_CANDLE, TFBlocks.SKELETON_SKULL_CANDLE,
-				TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.PLAYER_SKULL_CANDLE);
+		List<AbstractSkullCandleBlock> SKULLCANDLES = List.of(TFBlocks.ZOMBIE_SKULL_CANDLE.get(), TFBlocks.SKELETON_SKULL_CANDLE.get(),
+				TFBlocks.WITHER_SKELE_SKULL_CANDLE.get(), TFBlocks.CREEPER_SKULL_CANDLE.get(), TFBlocks.PLAYER_SKULL_CANDLE.get());
 
 		for(AbstractTrophyBlock block : TROPHYS){
 			BuiltinItemRendererRegistry.INSTANCE.register(block, (itemStack, transform, stack, source, light, overlay) -> {
-				new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TROPHY)).renderByItem(itemStack, transform, stack, source, light, overlay);
+				new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TROPHY.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 			});
 		}
 
 		for(AbstractSkullCandleBlock block : SKULLCANDLES){
 			BuiltinItemRendererRegistry.INSTANCE.register(block, (itemStack, transform, stack, source, light, overlay) -> {
-				new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE)).renderByItem(itemStack, transform, stack, source, light, overlay);
+				new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 			});
 		}
 
-		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.CICADA, (itemStack, transform, stack, source, light, overlay) -> {
-			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.CICADA)).renderByItem(itemStack, transform, stack, source, light, overlay);
+		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.CICADA.get(), (itemStack, transform, stack, source, light, overlay) -> {
+			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.CICADA.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 		});
 
-		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.FIREFLY, (itemStack, transform, stack, source, light, overlay) -> {
-			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.FIREFLY)).renderByItem(itemStack, transform, stack, source, light, overlay);
+		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.FIREFLY.get(), (itemStack, transform, stack, source, light, overlay) -> {
+			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.FIREFLY.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 		});
 
-		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.MOONWORM, (itemStack, transform, stack, source, light, overlay) -> {
-			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.MOONWORM)).renderByItem(itemStack, transform, stack, source, light, overlay);
+		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.MOONWORM.get(), (itemStack, transform, stack, source, light, overlay) -> {
+			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.MOONWORM.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 		});
 
-		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.KEEPSAKE_CASKET, (itemStack, transform, stack, source, light, overlay) -> {
-			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.KEEPSAKE_CASKET)).renderByItem(itemStack, transform, stack, source, light, overlay);
+		BuiltinItemRendererRegistry.INSTANCE.register(TFBlocks.KEEPSAKE_CASKET.get(), (itemStack, transform, stack, source, light, overlay) -> {
+			new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.KEEPSAKE_CASKET.get())).renderByItem(itemStack, transform, stack, source, light, overlay);
 		});
 	}
 
