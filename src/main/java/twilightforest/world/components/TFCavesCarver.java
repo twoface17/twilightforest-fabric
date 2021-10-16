@@ -104,7 +104,7 @@ public class TFCavesCarver extends WorldCarver<CaveCarverConfiguration> {
 						return false;
 					} else {
 						if (rand.nextInt(10) == 0 && access.getBlockState(pos).isAir() && access.getBlockState(pos.relative(facing)).is(BlockTags.BASE_STONE_OVERWORLD) && this.isHighlands) {
-							access.setBlockState(pos.relative(facing), TFBlocks.TROLLSTEINN.defaultBlockState(), false);
+							access.setBlockState(pos.relative(facing), TFBlocks.TROLLSTEINN.get().defaultBlockState(), false);
 						}
 						access.setBlockState(pos, CAVE_AIR, false);
 
@@ -193,7 +193,7 @@ public class TFCavesCarver extends WorldCarver<CaveCarverConfiguration> {
 	//make our own list of replaceables since otherwise it breaks structures like the yeti cave
 	@Override
 	protected boolean canReplaceBlock(BlockState state, BlockState aboveState) {
-		return (this.replaceableBlocks.contains(state.getBlock()) || state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(TFBlocks.TROLLSTEINN)) && !aboveState.getFluidState().is(FluidTags.WATER);
+		return (this.replaceableBlocks.contains(state.getBlock()) || state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(TFBlocks.TROLLSTEINN.get())) && !aboveState.getFluidState().is(FluidTags.WATER);
 	}
 
 	private static boolean shouldSkip(double posX, double posY, double posZ, double minY) {

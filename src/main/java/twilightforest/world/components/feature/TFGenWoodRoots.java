@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class TFGenWoodRoots extends Feature<NoneFeatureConfiguration> {
 
-	private final BlockState rootBlock = TFBlocks.ROOT_BLOCK.defaultBlockState();
-	private final BlockState oreBlock = TFBlocks.LIVEROOT_BLOCK.defaultBlockState();
+	private final BlockState rootBlock = TFBlocks.ROOT_BLOCK.get().defaultBlockState();
+	private final BlockState oreBlock = TFBlocks.LIVEROOT_BLOCK.get().defaultBlockState();
 
 	public TFGenWoodRoots(Codec<NoneFeatureConfiguration> configIn) {
 		super(configIn);

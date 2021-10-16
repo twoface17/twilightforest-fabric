@@ -19,7 +19,7 @@ public class LoadingScreenListener {
 	private static final Minecraft client = Minecraft.getInstance();
 	public static void onOpenGui(Screen event) {
 		if (event instanceof ReceivingLevelScreen && client.player != null) {
-			ResourceKey<Level> tfDimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID));
+			ResourceKey<Level> tfDimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.DIMENSION.portalDestinationID));
 			if (client.player.getCommandSenderWorld().getBlockState(client.player.blockPosition().below()) == TFBlocks.TWILIGHT_PORTAL.get().defaultBlockState() || client.player.getCommandSenderWorld().dimension() == tfDimension) {
 				LoadingScreenGui guiLoading = new LoadingScreenGui();
 				guiLoading.setEntering(client.player.getCommandSenderWorld().dimension() == Level.OVERWORLD);

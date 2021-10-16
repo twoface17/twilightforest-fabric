@@ -108,10 +108,10 @@ public class ItemTagGenerator extends ItemTagsProvider {
 
 		this.copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 		this.copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
-		tag(ItemTags.SIGNS).add(TFBlocks.TWILIGHT_OAK_SIGN.asItem(), TFBlocks.CANOPY_SIGN.asItem(),
-				TFBlocks.MANGROVE_SIGN.asItem(), TFBlocks.DARKWOOD_SIGN.asItem(),
-				TFBlocks.TIME_SIGN.asItem(), TFBlocks.TRANSFORMATION_SIGN.asItem(),
-				TFBlocks.MINING_SIGN.asItem(), TFBlocks.SORTING_SIGN.asItem());
+		tag(ItemTags.SIGNS).add(TFBlocks.TWILIGHT_OAK_SIGN.get().asItem(), TFBlocks.CANOPY_SIGN.get().asItem(),
+				TFBlocks.MANGROVE_SIGN.get().asItem(), TFBlocks.DARKWOOD_SIGN.get().asItem(),
+				TFBlocks.TIME_SIGN.get().asItem(), TFBlocks.TRANSFORMATION_SIGN.get().asItem(),
+				TFBlocks.MINING_SIGN.get().asItem(), TFBlocks.SORTING_SIGN.get().asItem());
 
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_ARCTIC_FUR, STORAGE_BLOCKS_ARCTIC_FUR);
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_CARMINITE, STORAGE_BLOCKS_CARMINITE);
@@ -135,14 +135,14 @@ public class ItemTagGenerator extends ItemTagsProvider {
 		tag(PAPER).add(Items.PAPER);
 //		tag(Tags.Items.FEATHERS).add(Items.FEATHER).add(TFItems.RAVEN_FEATHER);
 
-		tag(FIERY_VIAL).add(TFItems.FIERY_BLOOD, TFItems.FIERY_TEARS);
+		tag(FIERY_VIAL).add(TFItems.FIERY_BLOOD.get(), TFItems.FIERY_TEARS.get());
 
-		tag(ARCTIC_FUR).add(TFItems.ARCTIC_FUR);
-		tag(CARMINITE_GEMS).add(TFItems.CARMINITE);
-		tag(FIERY_INGOTS).add(TFItems.FIERY_INGOT);
-		tag(IRONWOOD_INGOTS).add(TFItems.IRONWOOD_INGOT);
-		tag(KNIGHTMETAL_INGOTS).add(TFItems.KNIGHTMETAL_INGOT);
-		tag(STEELEAF_INGOTS).add(TFItems.STEELEAF_INGOT);
+		tag(ARCTIC_FUR).add(TFItems.ARCTIC_FUR.get());
+		tag(CARMINITE_GEMS).add(TFItems.CARMINITE.get());
+		tag(FIERY_INGOTS).add(TFItems.FIERY_INGOT.get());
+		tag(IRONWOOD_INGOTS).add(TFItems.IRONWOOD_INGOT.get());
+		tag(KNIGHTMETAL_INGOTS).add(TFItems.KNIGHTMETAL_INGOT.get());
+		tag(STEELEAF_INGOTS).add(TFItems.STEELEAF_INGOT.get());
 
 //		tag(Tags.Items.GEMS).addTag(CARMINITE_GEMS);
 //
@@ -150,65 +150,65 @@ public class ItemTagGenerator extends ItemTagsProvider {
 //				.addTag(IRONWOOD_INGOTS).addTag(FIERY_INGOTS)
 //				.addTag(KNIGHTMETAL_INGOTS).addTag(STEELEAF_INGOTS);
 
-		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD);
-		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER);
+		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD.get());
+		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER.get());
 
-		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD);
-		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER);
+		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD.get());
+		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER.get());
 
 		tag(DIADMOND).add(Items.DIAMOND);
 
 		tag(PORTAL_ACTIVATOR).addTag(DIADMOND);
 
 		tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(
-				TFItems.FIERY_HELMET,
-				TFItems.FIERY_CHESTPLATE,
-				TFItems.FIERY_LEGGINGS,
-				TFItems.FIERY_BOOTS,
-				TFItems.ARCTIC_HELMET,
-				TFItems.ARCTIC_CHESTPLATE,
-				TFItems.ARCTIC_LEGGINGS,
-				TFItems.ARCTIC_BOOTS,
-				TFItems.YETI_HELMET,
-				TFItems.YETI_CHESTPLATE,
-				TFItems.YETI_LEGGINGS,
-				TFItems.YETI_BOOTS
+				TFItems.FIERY_HELMET.get(),
+				TFItems.FIERY_CHESTPLATE.get(),
+				TFItems.FIERY_LEGGINGS.get(),
+				TFItems.FIERY_BOOTS.get(),
+				TFItems.ARCTIC_HELMET.get(),
+				TFItems.ARCTIC_CHESTPLATE.get(),
+				TFItems.ARCTIC_LEGGINGS.get(),
+				TFItems.ARCTIC_BOOTS.get(),
+				TFItems.YETI_HELMET.get(),
+				TFItems.YETI_CHESTPLATE.get(),
+				TFItems.YETI_LEGGINGS.get(),
+				TFItems.YETI_BOOTS.get()
 		);
 
 		tag(WIP).add(
-				TFBlocks.MOSS_PATCH.asItem(),
-				TFBlocks.KEEPSAKE_CASKET.asItem(),
-				TFItems.CUBE_OF_ANNIHILATION
+				TFBlocks.MOSS_PATCH.get().asItem(),
+				TFBlocks.KEEPSAKE_CASKET.get().asItem(),
+				TFItems.CUBE_OF_ANNIHILATION.get()
 		);
 
 		tag(NYI).add(
-				TFBlocks.CINDER_FURNACE.asItem(),
-				TFBlocks.CINDER_LOG.asItem(),
-				TFBlocks.CINDER_WOOD.asItem(),
-				TFBlocks.UNDERBRICK_FLOOR.asItem(),
-				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.asItem(),
-				TFBlocks.NAGA_COURTYARD_MINIATURE_STRUCTURE.asItem(),
-				TFBlocks.LICH_TOWER_MINIATURE_STRUCTURE.asItem(),
-				TFBlocks.CLOVER_PATCH.asItem(),
-				TFBlocks.AURORALIZED_GLASS.asItem(),
-				TFBlocks.SLIDER.asItem(),
-				TFBlocks.TWISTED_STONE.asItem(),
-				TFBlocks.TWISTED_STONE_PILLAR.asItem(),
-				TFItems.ORE_METER
+				TFBlocks.CINDER_FURNACE.get().asItem(),
+				TFBlocks.CINDER_LOG.get().asItem(),
+				TFBlocks.CINDER_WOOD.get().asItem(),
+				TFBlocks.UNDERBRICK_FLOOR.get().asItem(),
+				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get().asItem(),
+				TFBlocks.NAGA_COURTYARD_MINIATURE_STRUCTURE.get().asItem(),
+				TFBlocks.LICH_TOWER_MINIATURE_STRUCTURE.get().asItem(),
+				TFBlocks.CLOVER_PATCH.get().asItem(),
+				TFBlocks.AURORALIZED_GLASS.get().asItem(),
+				TFBlocks.SLIDER.get().asItem(),
+				TFBlocks.TWISTED_STONE.get().asItem(),
+				TFBlocks.TWISTED_STONE_PILLAR.get().asItem(),
+				TFItems.ORE_METER.get()
 		);
 
 		tag(KOBOLD_PACIFICATION_BREADS).add(Items.BREAD);
 
 		tag(TF_MUSIC_DISCS).add(
-				TFItems.MUSIC_DISC_FINDINGS,
-				TFItems.MUSIC_DISC_HOME,
-				TFItems.MUSIC_DISC_MAKER,
-				TFItems.MUSIC_DISC_MOTION,
-				TFItems.MUSIC_DISC_RADIANCE,
-				TFItems.MUSIC_DISC_STEPS,
-				TFItems.MUSIC_DISC_SUPERSTITIOUS,
-				TFItems.MUSIC_DISC_THREAD,
-				TFItems.MUSIC_DISC_WAYFARER);
+				TFItems.MUSIC_DISC_FINDINGS.get(),
+				TFItems.MUSIC_DISC_HOME.get(),
+				TFItems.MUSIC_DISC_MAKER.get(),
+				TFItems.MUSIC_DISC_MOTION.get(),
+				TFItems.MUSIC_DISC_RADIANCE.get(),
+				TFItems.MUSIC_DISC_STEPS.get(),
+				TFItems.MUSIC_DISC_SUPERSTITIOUS.get(),
+				TFItems.MUSIC_DISC_THREAD.get(),
+				TFItems.MUSIC_DISC_WAYFARER.get());
 
 		tag(ItemTags.MUSIC_DISCS).addTag(TF_MUSIC_DISCS);
 	}

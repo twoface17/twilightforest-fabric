@@ -64,14 +64,14 @@ public abstract class TFStructureComponent extends StructurePiece implements Twi
 			.add(Blocks.STONE_BRICK_STAIRS)
 			.add(Blocks.LAVA)
 			.add(Blocks.WATER)
-			.add(TFBlocks.CASTLE_BRICK_STAIRS)
-			.add(TFBlocks.BLUE_FORCE_FIELD)
-			.add(TFBlocks.GREEN_FORCE_FIELD)
-			.add(TFBlocks.PINK_FORCE_FIELD)
-			.add(TFBlocks.VIOLET_FORCE_FIELD)
-			.add(TFBlocks.ORANGE_FORCE_FIELD)
-			.add(TFBlocks.BROWN_THORNS)
-			.add(TFBlocks.GREEN_THORNS)
+			.add(TFBlocks.CASTLE_BRICK_STAIRS.get())
+			.add(TFBlocks.BLUE_FORCE_FIELD.get())
+			.add(TFBlocks.GREEN_FORCE_FIELD.get())
+			.add(TFBlocks.PINK_FORCE_FIELD.get())
+			.add(TFBlocks.VIOLET_FORCE_FIELD.get())
+			.add(TFBlocks.ORANGE_FORCE_FIELD.get())
+			.add(TFBlocks.BROWN_THORNS.get())
+			.add(TFBlocks.GREEN_THORNS.get())
 			.build();
 
 

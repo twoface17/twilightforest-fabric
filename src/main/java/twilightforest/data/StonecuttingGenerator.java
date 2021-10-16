@@ -33,74 +33,74 @@ public class StonecuttingGenerator extends RecipeProvider {
 	}
 
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK, TFBlocks.THICK_CASTLE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK, TFBlocks.THICK_CASTLE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.WORN_CASTLE_BRICK, TFBlocks.THICK_CASTLE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_CASTLE_BRICK, TFBlocks.THICK_CASTLE_BRICK));
+		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.WORN_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
 
-		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK, TFBlocks.WORN_CASTLE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.THICK_CASTLE_BRICK, TFBlocks.BOLD_CASTLE_BRICK_PILLAR));
-		consumer.accept(stonecutting(TFBlocks.BOLD_CASTLE_BRICK_PILLAR, TFBlocks.BOLD_CASTLE_BRICK_TILE));
-		consumer.accept(stonecutting(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR, TFBlocks.ENCASED_CASTLE_BRICK_TILE));
+		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK.get(), TFBlocks.WORN_CASTLE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.THICK_CASTLE_BRICK.get(), TFBlocks.BOLD_CASTLE_BRICK_PILLAR.get()));
+		consumer.accept(stonecutting(TFBlocks.BOLD_CASTLE_BRICK_PILLAR.get(), TFBlocks.BOLD_CASTLE_BRICK_TILE.get()));
+		consumer.accept(stonecutting(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR.get(), TFBlocks.ENCASED_CASTLE_BRICK_TILE.get()));
 
-		consumer.accept(stonecutting(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR, TFBlocks.ENCASED_CASTLE_BRICK_STAIRS));
-		consumer.accept(stonecutting(TFBlocks.BOLD_CASTLE_BRICK_PILLAR, TFBlocks.BOLD_CASTLE_BRICK_STAIRS));
-		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK, TFBlocks.CASTLE_BRICK_STAIRS));
-		consumer.accept(stonecutting(TFBlocks.WORN_CASTLE_BRICK, TFBlocks.WORN_CASTLE_BRICK_STAIRS));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK, TFBlocks.CRACKED_CASTLE_BRICK_STAIRS));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_CASTLE_BRICK, TFBlocks.MOSSY_CASTLE_BRICK_STAIRS));
+		consumer.accept(stonecutting(TFBlocks.ENCASED_CASTLE_BRICK_PILLAR.get(), TFBlocks.ENCASED_CASTLE_BRICK_STAIRS.get()));
+		consumer.accept(stonecutting(TFBlocks.BOLD_CASTLE_BRICK_PILLAR.get(), TFBlocks.BOLD_CASTLE_BRICK_STAIRS.get()));
+		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK.get(), TFBlocks.CASTLE_BRICK_STAIRS.get()));
+		consumer.accept(stonecutting(TFBlocks.WORN_CASTLE_BRICK.get(), TFBlocks.WORN_CASTLE_BRICK_STAIRS.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK.get(), TFBlocks.CRACKED_CASTLE_BRICK_STAIRS.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_CASTLE_BRICK.get(), TFBlocks.MOSSY_CASTLE_BRICK_STAIRS.get()));
 
-		consumer.accept(stonecutting(TFBlocks.ETCHED_NAGASTONE, TFBlocks.NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.ETCHED_NAGASTONE, TFBlocks.NAGASTONE_STAIRS_RIGHT));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_ETCHED_NAGASTONE, TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_ETCHED_NAGASTONE, TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_ETCHED_NAGASTONE, TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_ETCHED_NAGASTONE, TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT));
+		consumer.accept(stonecutting(TFBlocks.ETCHED_NAGASTONE.get(), TFBlocks.NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.ETCHED_NAGASTONE.get(), TFBlocks.NAGASTONE_STAIRS_RIGHT.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_ETCHED_NAGASTONE.get(), TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_ETCHED_NAGASTONE.get(), TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_ETCHED_NAGASTONE.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_ETCHED_NAGASTONE.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT.get()));
 
-		consumer.accept(stonecutting(TFBlocks.NAGASTONE_STAIRS_RIGHT, TFBlocks.NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.NAGASTONE_STAIRS_LEFT, TFBlocks.NAGASTONE_STAIRS_RIGHT));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT, TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT, TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT, TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT));
-		consumer.accept(stonecutting(TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT, TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT));
-		
-		consumer.accept(stonecutting(TFBlocks.DARK_LOG, TFBlocks.TOWERWOOD));
-		consumer.accept(stonecutting(TFBlocks.DARK_WOOD, TFBlocks.TOWERWOOD));
-		consumer.accept(stonecutting(TFBlocks.TOWERWOOD, TFBlocks.ENCASED_TOWERWOOD));
-		
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE, TFBlocks.MAZESTONE_BORDER));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE, TFBlocks.MAZESTONE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE, TFBlocks.CUT_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE, TFBlocks.DECORATIVE_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE, TFBlocks.MAZESTONE_MOSAIC));
+		consumer.accept(stonecutting(TFBlocks.NAGASTONE_STAIRS_RIGHT.get(), TFBlocks.NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.NAGASTONE_STAIRS_LEFT.get(), TFBlocks.NAGASTONE_STAIRS_RIGHT.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT.get(), TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.MOSSY_NAGASTONE_STAIRS_LEFT.get(), TFBlocks.MOSSY_NAGASTONE_STAIRS_RIGHT.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT.get()));
+		consumer.accept(stonecutting(TFBlocks.CRACKED_NAGASTONE_STAIRS_LEFT.get(), TFBlocks.CRACKED_NAGASTONE_STAIRS_RIGHT.get()));
 
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK, TFBlocks.MAZESTONE_BORDER));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK, TFBlocks.CUT_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK, TFBlocks.DECORATIVE_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK, TFBlocks.MAZESTONE_MOSAIC));
+		consumer.accept(stonecutting(TFBlocks.DARK_LOG.get(), TFBlocks.TOWERWOOD.get()));
+		consumer.accept(stonecutting(TFBlocks.DARK_WOOD.get(), TFBlocks.TOWERWOOD.get()));
+		consumer.accept(stonecutting(TFBlocks.TOWERWOOD.get(), TFBlocks.ENCASED_TOWERWOOD.get()));
 
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER, TFBlocks.MAZESTONE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER, TFBlocks.CUT_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER, TFBlocks.DECORATIVE_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER, TFBlocks.MAZESTONE_MOSAIC));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE.get(), TFBlocks.MAZESTONE_BORDER.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE.get(), TFBlocks.MAZESTONE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE.get(), TFBlocks.CUT_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE.get(), TFBlocks.DECORATIVE_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE.get(), TFBlocks.MAZESTONE_MOSAIC.get()));
 
-		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE, TFBlocks.MAZESTONE_BORDER));
-		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE, TFBlocks.MAZESTONE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE, TFBlocks.DECORATIVE_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE, TFBlocks.MAZESTONE_MOSAIC));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK.get(), TFBlocks.MAZESTONE_BORDER.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK.get(), TFBlocks.CUT_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK.get(), TFBlocks.DECORATIVE_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BRICK.get(), TFBlocks.MAZESTONE_MOSAIC.get()));
 
-		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE, TFBlocks.MAZESTONE_BORDER));
-		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE, TFBlocks.CUT_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE, TFBlocks.MAZESTONE_BRICK));
-		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE, TFBlocks.MAZESTONE_MOSAIC));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER.get(), TFBlocks.MAZESTONE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER.get(), TFBlocks.CUT_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER.get(), TFBlocks.DECORATIVE_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_BORDER.get(), TFBlocks.MAZESTONE_MOSAIC.get()));
 
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC, TFBlocks.MAZESTONE_BORDER));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC, TFBlocks.CUT_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC, TFBlocks.DECORATIVE_MAZESTONE));
-		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC, TFBlocks.MAZESTONE_BRICK));
+		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE.get(), TFBlocks.MAZESTONE_BORDER.get()));
+		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE.get(), TFBlocks.MAZESTONE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE.get(), TFBlocks.DECORATIVE_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.CUT_MAZESTONE.get(), TFBlocks.MAZESTONE_MOSAIC.get()));
 
-		consumer.accept(stonecutting(Blocks.STONE, TFBlocks.TWISTED_STONE));
-		consumer.accept(stonecutting(Blocks.STONE, TFBlocks.BOLD_STONE_PILLAR));
+		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE.get(), TFBlocks.MAZESTONE_BORDER.get()));
+		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE.get(), TFBlocks.CUT_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE.get(), TFBlocks.MAZESTONE_BRICK.get()));
+		consumer.accept(stonecutting(TFBlocks.DECORATIVE_MAZESTONE.get(), TFBlocks.MAZESTONE_MOSAIC.get()));
+
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC.get(), TFBlocks.MAZESTONE_BORDER.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC.get(), TFBlocks.CUT_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC.get(), TFBlocks.DECORATIVE_MAZESTONE.get()));
+		consumer.accept(stonecutting(TFBlocks.MAZESTONE_MOSAIC.get(), TFBlocks.MAZESTONE_BRICK.get()));
+
+		consumer.accept(stonecutting(Blocks.STONE, TFBlocks.TWISTED_STONE.get()));
+		consumer.accept(stonecutting(Blocks.STONE, TFBlocks.BOLD_STONE_PILLAR.get()));
 	}
 
 	@Override

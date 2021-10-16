@@ -55,7 +55,7 @@ public class HydraLairComponent extends HollowHillComponent {
 		}
 
 		// boss spawner seems important
-		placeBlock(world, TFBlocks.HYDRA_BOSS_SPAWNER.defaultBlockState(), 27, 3, 27, sbb);
+		placeBlock(world, TFBlocks.HYDRA_BOSS_SPAWNER.get().defaultBlockState(), 27, 3, 27, sbb);
 
 		return true;
 	}

@@ -36,7 +36,7 @@ public class KnightmetalSwordItem extends SwordItem {
 			ItemStack weapon = ((LivingEntity) source.getDirectEntity()).getMainHandItem();
 
 			if (!weapon.isEmpty()) {
-				if (target.getArmorValue() > 0 && (weapon.is(TFItems.KNIGHTMETAL_PICKAXE) || weapon.is(TFItems.KNIGHTMETAL_SWORD))) {
+				if (target.getArmorValue() > 0 && (weapon.is(TFItems.KNIGHTMETAL_PICKAXE.get()) || weapon.is(TFItems.KNIGHTMETAL_SWORD.get()))) {
 //					if(target.getArmorCoverPercentage() > 0) {
 //						int moreBonus = (int) (BONUS_DAMAGE * target.getArmorCoverPercentage());
 //						evt.setAmount(evt.getAmount() + moreBonus);

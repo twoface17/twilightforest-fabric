@@ -186,8 +186,8 @@ public class BlockSpikeFeature extends Feature<SpikeConfig> {
         mediumHillStalactites.clear();
         largeHillStalactites.clear();
 
-        TwilightForestMod.COMMON_CONFIG.dimension.hollowHillStalactites.load();
-        if (TwilightForestMod.COMMON_CONFIG.dimension.hollowHillStalactites.useConfigOnly) {
+        TwilightForestMod.COMMON_CONFIG.DIMENSION.hollowHillStalactites.load();
+        if (TwilightForestMod.COMMON_CONFIG.DIMENSION.hollowHillStalactites.useConfigOnly) {
             if (smallHillStalactites.isEmpty()) {
                 TwilightForestMod.LOGGER.info("Not all hollow hills are populated with the config, adding fallback");
                 registerStalactite(1, Blocks.STONE.defaultBlockState(), 0.7F, 8, 1, 1);

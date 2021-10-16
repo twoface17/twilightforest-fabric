@@ -25,7 +25,6 @@ import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFEntities;
 import twilightforest.item.TFItems;
 import twilightforest.util.TFStats;
-import twilightforest.world.registration.TFStructures;
 
 import java.util.function.Consumer;
 
@@ -61,9 +60,9 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						LocationTrigger.TriggerInstance.located(
 								LocationPredicate.inDimension(
 										ResourceKey.create(Registry.DIMENSION_REGISTRY,
-												new ResourceLocation(TFConfig.COMMON_CONFIG.DIMENSION.portalDestinationID.get())))))
+												new ResourceLocation(TwilightForestMod.COMMON_CONFIG.DIMENSION.portalDestinationID)))))
 				.addCriterion("make_portal",
-						MakePortalTrigger.Instance.makePortal())
+						new MakePortalTrigger.Instance(EntityPredicate.Composite.ANY))
 				.save(consumer, "twilightforest:root");
 
 		Advancement silence = this.addTFKillable(Advancement.Builder.advancement().parent(root).display(
@@ -82,7 +81,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("naga", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.NAGA)))
 				.addCriterion("scale", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.NAGA_SCALE.get()))
-				.addCriterion("kill_mob", HasAdvancementTrigger.Instance.hasAdvancement(silence.getId()))
+				.addCriterion("kill_mob", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, silence.getId()))
 				.requirements(new CountRequirementsStrategy(2, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_naga");
@@ -99,7 +98,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.addCriterion("twilight_scepter", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.TWILIGHT_SCEPTER.get()))
 				.addCriterion("zombie_scepter", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.ZOMBIE_SCEPTER.get()))
 				.addCriterion("shield_scepter", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FORTIFICATION_SCEPTER.get()))
-				.addCriterion("kill_naga", HasAdvancementTrigger.Instance.hasAdvancement(naga.getId()))
+				.addCriterion("kill_naga", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, naga.getId()))
 				.requirements(new CountRequirementsStrategy(6, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_lich");
@@ -110,7 +109,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.progress_labyrinth.desc"),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("meef", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.MEEF_STROGANOFF.get()))
-				.addCriterion("kill_lich", HasAdvancementTrigger.Instance.hasAdvancement(lich.getId()))
+				.addCriterion("kill_lich", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, lich.getId()))
 				.requirements(RequirementsStrategy.AND)
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_labyrinth");
@@ -124,7 +123,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.addCriterion("kill_hydra", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.HYDRA)))
 				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.HYDRA_TROPHY.get()))
 				.addCriterion("blood", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FIERY_BLOOD.get()))
-				.addCriterion("stroganoff", HasAdvancementTrigger.Instance.hasAdvancement(minoshroom.getId()))
+				.addCriterion("stroganoff", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, minoshroom.getId()))
 				.requirements(new CountRequirementsStrategy(3, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_hydra");
@@ -135,7 +134,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.progress_trophy_pedestal.desc"),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("trophy_pedestal", new TrophyPedestalTrigger.Instance(EntityPredicate.Composite.ANY))
-				.addCriterion("kill_lich", HasAdvancementTrigger.Instance.hasAdvancement(lich.getId()))
+				.addCriterion("kill_lich", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, lich.getId()))
 				.requirements(RequirementsStrategy.AND)
 				.save(consumer, "twilightforest:progress_trophy_pedestal");
 
@@ -146,7 +145,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("knight", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.KNIGHT_PHANTOM)))
 				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.KNIGHT_PHANTOM_TROPHY.get()))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(trophy_pedestal.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, trophy_pedestal.getId()))
 				.requirements(new CountRequirementsStrategy(2, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_knights");
@@ -159,7 +158,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 								new TranslatableComponent(TFBlocks.GHAST_TRAP.get().getDescriptionId()),
 								new TranslatableComponent(TFEntities.UR_GHAST.getDescriptionId())),
 						null, FrameType.TASK, true, true, false)
-				.addCriterion("activate_ghast_trap", ActivateGhastTrapTrigger.Instance.activateTrap())
+				.addCriterion("activate_ghast_trap", new ActivateGhastTrapTrigger.Instance(EntityPredicate.Composite.ANY))
 				.save(consumer, "twilightforest:ghast_trap");
 
 		Advancement ur_ghast = Advancement.Builder.advancement().parent(trap).display(
@@ -171,7 +170,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.addCriterion("ghast", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.UR_GHAST)))
 				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.UR_GHAST_TROPHY.get()))
 				.addCriterion("tear", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.FIERY_TEARS.get()))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(trap.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, trap.getId()))
 				.requirements(new CountRequirementsStrategy(3, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_ur_ghast");
@@ -185,7 +184,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.addCriterion("yeti", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.ALPHA_YETI)))
 				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.ALPHA_YETI_TROPHY.get()))
 				.addCriterion("fur", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.ALPHA_YETI_FUR.get()))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(lich.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, lich.getId()))
 				.requirements(new CountRequirementsStrategy(3, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_yeti");
@@ -199,7 +198,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("queen", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.SNOW_QUEEN)))
 				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.SNOW_QUEEN_TROPHY.get()))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(yeti.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, yeti.getId()))
 				.requirements(new CountRequirementsStrategy(2, 1))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")))
 				.save(consumer, "twilightforest:progress_glacier");
@@ -212,9 +211,9 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 								new TranslatableComponent(TFEntities.UR_GHAST.getDescriptionId()),
 								new TranslatableComponent(TFEntities.SNOW_QUEEN.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
-				.addCriterion("hydra", HasAdvancementTrigger.Instance.hasAdvancement(hydra.getId()))
-				.addCriterion("ur_ghast", HasAdvancementTrigger.Instance.hasAdvancement(ur_ghast.getId()))
-				.addCriterion("snow_queen", HasAdvancementTrigger.Instance.hasAdvancement(snow_queen.getId()))
+				.addCriterion("hydra", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, hydra.getId()))
+				.addCriterion("ur_ghast", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, ur_ghast.getId()))
+				.addCriterion("snow_queen", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, snow_queen.getId()))
 				.save(consumer, "twilightforest:progress_merge");
 
 		Advancement troll = Advancement.Builder.advancement().parent(merge).display(
@@ -254,7 +253,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 								new TranslatableComponent(TFItems.LAMP_OF_CINDERS.get().getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("lamp", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.LAMP_OF_CINDERS.get()))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(merge.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, merge.getId()))
 				.save(consumer, "twilightforest:progress_troll");
 
 		Advancement thornlands = Advancement.Builder.advancement().parent(lamp).display(
@@ -263,7 +262,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.progress_thorns.desc"),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("castle", LocationTrigger.TriggerInstance.located(LocationPredicate.inFeature(TFStructures.FINAL_CASTLE)))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(lamp.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, lamp.getId()))
 				.save(consumer, "twilightforest:progress_thorns");
 
 		Advancement.Builder.advancement().parent(thornlands).display(
@@ -272,7 +271,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.progress_castle.desc"),
 						null, FrameType.GOAL, true, true, false)
 				.addCriterion("castle", LocationTrigger.TriggerInstance.located(LocationPredicate.inFeature(TFStructures.FINAL_CASTLE)))
-				.addCriterion("previous_progression", HasAdvancementTrigger.Instance.hasAdvancement(thornlands.getId()))
+				.addCriterion("previous_progression", new HasAdvancementTrigger.Instance(EntityPredicate.Composite.ANY, thornlands.getId()))
 				.save(consumer, "twilightforest:progress_castle");
 
 		Advancement.Builder.advancement().parent(root).display(
@@ -281,7 +280,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.quest_ram.desc",
 								new TranslatableComponent(TFEntities.QUEST_RAM.getDescriptionId())),
 						null, FrameType.GOAL, true, true, false)
-				.addCriterion("quest_ram_complete", QuestRamCompletionTrigger.Instance.completeRam())
+				.addCriterion("quest_ram_complete", new QuestRamCompletionTrigger.Instance(EntityPredicate.Composite.ANY))
 				.rewards(AdvancementRewards.Builder.function(TwilightForestMod.prefix("give_3_shields")).addExperience(100))
 				.save(consumer, "twilightforest:quest_ram");
 
@@ -419,7 +418,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.full_mettle_alchemist"),
 						new TranslatableComponent("advancement.twilightforest.full_mettle_alchemist.desc"),
 						null, FrameType.CHALLENGE, true, true, true)
-				.addCriterion("drink_4_harming", DrinkFromFlaskTrigger.Instance.drankPotion(4, Potions.STRONG_HARMING))
+				.addCriterion("drink_4_harming", new ImpossibleTrigger.TriggerInstance())
 				.rewards(AdvancementRewards.Builder.experience(100))
 				.save(consumer, "twilightforest:full_mettle_alchemist");
 
@@ -439,7 +438,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.hydra_chop.desc",
 								new TranslatableComponent(TFEntities.HYDRA.getDescriptionId())),
 						null, FrameType.TASK, true, true, false)
-				.addCriterion("hydra_chop", HydraChopTrigger.Instance.eatChop())
+				.addCriterion("hydra_chop", new HydraChopTrigger.Instance(EntityPredicate.Composite.ANY))
 				.save(consumer, "twilightforest:hydra_chop");
 
 		Advancement.Builder.advancement().parent(hydra).display(
@@ -516,14 +515,14 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 
 
 	private ItemStack e115Tag(String nbt) {
-		ItemStack itemstack = new ItemStack(TFItems.EXPERIMENT_115);
+		ItemStack itemstack = new ItemStack(TFItems.EXPERIMENT_115.get());
 		CompoundTag compoundtag = itemstack.getOrCreateTagElement(nbt);
 		compoundtag.putInt(nbt, 1);
 		return itemstack;
 	}
 
 	private ItemStack flaskWithHarming() {
-		ItemStack itemstack = new ItemStack(TFItems.GREATER_FLASK);
+		ItemStack itemstack = new ItemStack(TFItems.GREATER_FLASK.get());
 		CompoundTag compoundtag = itemstack.getOrCreateTag();
 		compoundtag.putInt("Uses", 4);
 		compoundtag.putString("Potion", Registry.POTION.getKey(Potions.STRONG_HARMING).toString());
@@ -546,7 +545,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 							.located(
 									LocationPredicate.inDimension(
 											ResourceKey.create(Registry.DIMENSION_REGISTRY,
-													new ResourceLocation(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID))))));
+													new ResourceLocation(TwilightForestMod.COMMON_CONFIG.DIMENSION.portalDestinationID))))));
 		}
 		return builder;
 	}

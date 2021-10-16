@@ -3,7 +3,6 @@ package twilightforest;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -123,7 +122,7 @@ public class TFTickHandler {
 	private static final TranslatableComponent PORTAL_UNWORTHY = new TranslatableComponent(TwilightForestMod.ID + ".ui.portal.unworthy");
 	private static void checkForPortalCreation(ServerPlayer player, Level world, float rangeToCheck) {
 		if (world.dimension().location().equals(new ResourceLocation(TwilightForestMod.COMMON_CONFIG.originDimension))
-				|| world.dimension().location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID)
+				|| world.dimension().location().toString().equals(TwilightForestMod.COMMON_CONFIG.DIMENSION.portalDestinationID)
 				|| TwilightForestMod.COMMON_CONFIG.allowPortalsInOtherDimensions) {
 
 			List<ItemEntity> itemList = world.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(rangeToCheck));
@@ -157,7 +156,7 @@ public class TFTickHandler {
 
 			BlockPos pos = new BlockPos(qualified.position().subtract(0, -0.1d, 0)); //TODO Quick fix, find if there's a more performant fix than this
 			BlockState state = world.getBlockState(pos);
-			if (TFBlocks.TWILIGHT_PORTAL.canFormPortal(state)) {
+			if (TFBlocks.TWILIGHT_PORTAL.get().canFormPortal(state)) {
 				Random rand = new Random();
 				for (int i = 0; i < 2; i++) {
 					double vx = rand.nextGaussian() * 0.02D;
@@ -167,7 +166,7 @@ public class TFTickHandler {
 					world.addParticle(ParticleTypes.EFFECT, qualified.getX(), qualified.getY() + 0.2, qualified.getZ(), vx, vy, vz);
 				}
 
-				if (TFBlocks.TWILIGHT_PORTAL.tryToCreatePortal(world, pos, qualified, player))
+				if (TFBlocks.TWILIGHT_PORTAL.get().tryToCreatePortal(world, pos, qualified, player))
 					TFAdvancements.MADE_TF_PORTAL.trigger(player);
 			}
 		}

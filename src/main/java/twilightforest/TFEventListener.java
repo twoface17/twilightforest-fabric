@@ -888,7 +888,7 @@ public class TFEventListener {
 	public static void playerPortals(Player player, ResourceKey<Level> to) {
 		TwilightForestMod.LOGGER.debug("Running event In which updates rule status if the destination is the Twilight Forest");
 		if (!player.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-			if (to.location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID)) {
+			if (to.location().toString().equals(TwilightForestMod.COMMON_CONFIG.DIMENSION.portalDestinationID)) {
 				sendEnforcedProgressionStatus(serverPlayer, TFGenerationSettings.isProgressionEnforced(player.level));
 			}
 

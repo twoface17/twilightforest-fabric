@@ -71,9 +71,9 @@ public class PhantomUpdateFormationAndMoveGoal extends Goal {
 			} else {
 				// random weapon switch!
 				switch (boss.getRandom().nextInt(3)) {
-					case 0 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
-					case 1 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE));
-					case 2 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE));
+					case 0 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD.get()));
+					case 1 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE.get()));
+					case 2 -> boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE.get()));
 				}
 
 				boss.switchToFormation(KnightPhantom.Formation.ATTACK_PLAYER_START);

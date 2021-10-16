@@ -50,7 +50,7 @@ public class TFGenTreeOfTime extends TFGenHollowTree {
 		buildBranchRing(world, trunkPlacer, leavesPlacer, random, pos, diameter, 1, 2, 18, 0.9D, 3, 5, 3, false, config);
 
 		// add clock block
-		world.setBlock(pos.offset(-1, 2, 0), TFBlocks.TIME_LOG_CORE.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y), 3);
+		world.setBlock(pos.offset(-1, 2, 0), TFBlocks.TIME_LOG_CORE.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y), 3);
 
 		return true;
 	}

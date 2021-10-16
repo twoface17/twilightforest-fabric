@@ -37,7 +37,7 @@ public class TFGenHugeWaterLily extends Feature<NoneFeatureConfiguration> {
 			);
 
 			if (shouldPlacePadAt(world, pos_)) {
-				world.setBlock(pos_, TFBlocks.HUGE_WATER_LILY.defaultBlockState(), 16 | 2);
+				world.setBlock(pos_, TFBlocks.HUGE_WATER_LILY.get().defaultBlockState(), 16 | 2);
 			}
 		}
 

@@ -85,7 +85,7 @@ public class TFConfigCommon implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     @ConfigEntry.Gui.Tooltip
     @TomlComment("Settings that are not reversible without consequences.")
-    public dimSettings dimension = new dimSettings();
+    public dimSettings DIMENSION = new dimSettings();
 
     public static class dimSettings {
 

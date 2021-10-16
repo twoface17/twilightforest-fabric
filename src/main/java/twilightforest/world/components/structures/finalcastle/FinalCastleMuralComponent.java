@@ -66,7 +66,7 @@ public class FinalCastleMuralComponent extends TFStructureComponentOld {
 			makeStripes(decoRNG, mural);
 		}
 
-		final BlockState castleMagic = TFBlocks.BLUE_CASTLE_RUNE_BRICK.defaultBlockState();
+		final BlockState castleMagic = TFBlocks.BLUE_CASTLE_RUNE_BRICK.get().defaultBlockState();
 
 		// copy mural to world
 		for (int x = 0; x < width; x++) {

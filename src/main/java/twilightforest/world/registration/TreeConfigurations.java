@@ -80,7 +80,7 @@ public final class TreeConfigurations {
                     new TrunkSideDecorator( // A few more Fireflies!
                             4,
                             0.5f,
-                            new SimpleStateProvider(TFBlocks.FIREFLY.defaultBlockState().setValue(FireflyBlock.FACING, Direction.NORTH))
+                            new SimpleStateProvider(TFBlocks.FIREFLY.get().defaultBlockState().setValue(FireflyBlock.FACING, Direction.NORTH))
                     ),
                     new DangleFromTreeDecorator(
                             0,
@@ -88,8 +88,8 @@ public final class TreeConfigurations {
                             2,
                             5,
                             15,
-                            new SimpleStateProvider(TFBlocks.CANOPY_FENCE.defaultBlockState()),
-                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.defaultBlockState())
+                            new SimpleStateProvider(TFBlocks.CANOPY_FENCE.get().defaultBlockState()),
+                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.get().defaultBlockState())
                     ),
                     new DangleFromTreeDecorator(
                             0,
@@ -98,7 +98,7 @@ public final class TreeConfigurations {
                             5,
                             15,
                             new SimpleStateProvider(Blocks.CHAIN.defaultBlockState()),
-                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.defaultBlockState())
+                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.get().defaultBlockState())
                     )
             ))
             .ignoreVines()
@@ -129,7 +129,7 @@ public final class TreeConfigurations {
                     TreeDecorators.FIREFLY,
                     new TreeRootsDecorator(3, 1, 12, new SimpleStateProvider(BlockConstants.MANGROVE_WOOD), (new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(BlockConstants.ROOTS, 4)
-                            .add(TFBlocks.LIVEROOT_BLOCK.defaultBlockState(), 1).build()))),
+                            .add(TFBlocks.LIVEROOT_BLOCK.get().defaultBlockState(), 1).build()))),
                     LeaveVineDecorator.INSTANCE
                     )
             )
@@ -202,7 +202,7 @@ public final class TreeConfigurations {
             new SimpleStateProvider(BlockConstants.TIME_WOOD),
             new SimpleStateProvider(BlockConstants.ROOTS)
     )
-            .setSapling(TFBlocks.TIME_SAPLING)
+            .setSapling(TFBlocks.TIME_SAPLING.get())
             .build();
 
     public static final TreeConfiguration TRANSFORM_TREE = new TreeConfiguration.TreeConfigurationBuilder(
@@ -214,7 +214,7 @@ public final class TreeConfigurations {
             new TwoLayersFeatureSize(4, 1, canopyDistancing)
     )
             .ignoreVines()
-            .decorators(ImmutableList.of(new TreeCorePlacer(3, new SimpleStateProvider(TFBlocks.TRANSFORMATION_LOG_CORE.defaultBlockState().setValue(TFLogBlock.AXIS, Direction.Axis.Y)))))
+            .decorators(ImmutableList.of(new TreeCorePlacer(3, new SimpleStateProvider(TFBlocks.TRANSFORMATION_LOG_CORE.get().defaultBlockState().setValue(TFLogBlock.AXIS, Direction.Axis.Y)))))
             .build();
 
     public static final TFTreeFeatureConfig MINING_TREE = new TFTreeFeatureConfig.Builder(
@@ -223,7 +223,7 @@ public final class TreeConfigurations {
             new SimpleStateProvider(BlockConstants.MINING_WOOD),
             new SimpleStateProvider(BlockConstants.ROOTS)
     )
-            .setSapling(TFBlocks.MINING_SAPLING)
+            .setSapling(TFBlocks.MINING_SAPLING.get())
             .build();
 
     public static final TreeConfiguration SORT_TREE = new TreeConfiguration.TreeConfigurationBuilder(
@@ -235,7 +235,7 @@ public final class TreeConfigurations {
             new TwoLayersFeatureSize(1, 1, 1)
     )
             .ignoreVines()
-            .decorators(ImmutableList.of(new TreeCorePlacer(2, new SimpleStateProvider(TFBlocks.SORTING_LOG_CORE.defaultBlockState().setValue(TFLogBlock.AXIS, Direction.Axis.Y)))))
+            .decorators(ImmutableList.of(new TreeCorePlacer(2, new SimpleStateProvider(TFBlocks.SORTING_LOG_CORE.get().defaultBlockState().setValue(TFLogBlock.AXIS, Direction.Axis.Y)))))
             .build();
 
     public static final TFTreeFeatureConfig LARGE_WINTER = new TFTreeFeatureConfig.Builder(
@@ -253,7 +253,7 @@ public final class TreeConfigurations {
             new SimpleStateProvider(BlockConstants.TOAK_WOOD),
             new SimpleStateProvider(BlockConstants.ROOTS)
     )
-            .setSapling(TFBlocks.TWILIGHT_OAK_SAPLING)
+            .setSapling(TFBlocks.TWILIGHT_OAK_SAPLING.get())
             .build();
 
     public static final TFTreeFeatureConfig HOLLOW_TREE = new TFTreeFeatureConfig.Builder(
@@ -262,7 +262,7 @@ public final class TreeConfigurations {
             new SimpleStateProvider(BlockConstants.TOAK_WOOD),
             new SimpleStateProvider(BlockConstants.ROOTS)
     )
-            .setSapling(TFBlocks.HOLLOW_OAK_SAPLING)
+            .setSapling(TFBlocks.HOLLOW_OAK_SAPLING.get())
             .build();
 
     public static final TreeConfiguration RAINBOAK_TREE = new TreeConfiguration.TreeConfigurationBuilder(

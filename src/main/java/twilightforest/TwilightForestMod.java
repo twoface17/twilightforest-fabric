@@ -94,7 +94,7 @@ public class TwilightForestMod implements ModInitializer {
 		clothConfigSetup();
 
 		registerCommands();
-
+		
 		TFBlocks.registerItemblocks();
 		TFItems.init();
 		//TFPotions.POTIONS.register(modbus);
