@@ -1,17 +1,12 @@
 package twilightforest.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.PlayerAdvancements;
-import net.minecraft.server.ServerAdvancementManager;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -22,11 +17,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import twilightforest.TFSounds;
-import twilightforest.TwilightForestMod;
+import twilightforest.advancements.TFAdvancements;
 import twilightforest.extensions.IItemEx;
 
 import javax.annotation.Nullable;
@@ -34,7 +30,7 @@ import java.util.List;
 
 public class BrittleFlaskItem extends Item implements IItemEx {
 
-	private static String lastUsedPotion;
+	private static Potion lastUsedPotion;
 	private static int timesUsed;
 	private static boolean advancementWindow;
 	public static int seconds;
@@ -127,6 +123,7 @@ public class BrittleFlaskItem extends Item implements IItemEx {
 		CompoundTag tag = stack.getOrCreateTag();
 		if (entity instanceof Player player) {
 			if (!level.isClientSide) {
+				if(!player.isCreative()) addTowardsAdvancement(Potion.byName(tag.getString("Potion")), player);
 				for (MobEffectInstance mobeffectinstance : PotionUtils.getMobEffects(stack)) {
 					if (mobeffectinstance.getEffect().isInstantenous()) {
 						mobeffectinstance.getEffect().applyInstantenousEffect(player, player, player, mobeffectinstance.getAmplifier(), 1.0D);
@@ -134,7 +131,6 @@ public class BrittleFlaskItem extends Item implements IItemEx {
 						player.addEffect(new MobEffectInstance(mobeffectinstance));
 					}
 				}
-				if(!player.isCreative()) addTowardsAdvancement(tag.getString("Potion"), player);
 			}
 			player.awardStat(Stats.ITEM_USED.get(this));
 			if (!player.getAbilities().instabuild) {
@@ -159,9 +155,9 @@ public class BrittleFlaskItem extends Item implements IItemEx {
 		return super.finishUsingItem(stack, level, entity);
 	}
 
-	private void addTowardsAdvancement(String potionDrank, Player drinker) {
+	private void addTowardsAdvancement(Potion potionDrank, Player drinker) {
 		if(lastUsedPotion == null) {
-			lastUsedPotion = Registry.POTION.getKey(Potions.EMPTY).toString();
+			lastUsedPotion = Potions.EMPTY;
 		}
 
 		if (!lastUsedPotion.equals(potionDrank)) {
@@ -172,13 +168,8 @@ public class BrittleFlaskItem extends Item implements IItemEx {
 			timesUsed++;
 		}
 
-		if(timesUsed >= 4 && drinker instanceof ServerPlayer player && drinker.isAlive() && lastUsedPotion.equals(Registry.POTION.getKey(Potions.STRONG_HARMING).toString()) && advancementWindow) {
-			PlayerAdvancements advancements = player.getAdvancements();
-			ServerAdvancementManager manager = ((ServerLevel) player.getCommandSenderWorld()).getServer().getAdvancements();
-			Advancement advancement = manager.getAdvancement(TwilightForestMod.prefix("full_mettle_alchemist"));
-			if (advancement != null) {
-				advancements.award(advancement, "drink_4_harming");
-			}
+		if(drinker instanceof ServerPlayer player && drinker.isAlive() && advancementWindow) {
+			TFAdvancements.DRINK_FROM_FLASK.trigger(player, timesUsed, lastUsedPotion);
 		}
 	}
 

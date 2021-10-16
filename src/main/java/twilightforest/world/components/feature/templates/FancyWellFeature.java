@@ -18,7 +18,9 @@ import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.components.processors.CobblePlankSwizzler;
+import twilightforest.world.components.processors.CobbleVariants;
 import twilightforest.world.components.processors.SmartGrassProcessor;
+import twilightforest.world.components.processors.StoneBricksVariants;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -39,7 +41,7 @@ public class FancyWellFeature extends TemplateFeature<NoneFeatureConfiguration> 
 
     @Override
     protected void modifySettings(StructurePlaceSettings settings, Random random) {
-        settings.addProcessor(new CobblePlankSwizzler(0.0F, random));
+        settings.addProcessor(new CobblePlankSwizzler(random)).addProcessor(CobbleVariants.INSTANCE).addProcessor(StoneBricksVariants.INSTANCE);
     }
 
     @Override

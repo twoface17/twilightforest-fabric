@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -58,8 +57,8 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 			}
 		}
 
-		if (ray instanceof BlockHitResult) {
-			if (((BlockHitResult)ray).getBlockPos() != null && !this.level.isEmptyBlock(((BlockHitResult)ray).getBlockPos())) {
+		if (ray instanceof BlockHitResult raytrace) {
+			if (raytrace.getBlockPos() != null && !this.level.isEmptyBlock(raytrace.getBlockPos())) {
 				this.affectBlocksInAABB(this.getBoundingBox().inflate(0.2F, 0.2F, 0.2F));
 			}
 		}
@@ -80,12 +79,11 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 		for (BlockPos pos : WorldUtil.getAllInBB(box)) {
 			BlockState state = level.getBlockState(pos);
 			if (!state.isAir()) {
-				if (getOwner() instanceof Player) {
-					Player player = (Player) getOwner();
+				if (getOwner() instanceof Player player) {
 					//if (!MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(level, pos, state, player))) {
 						if (canAnnihilate(pos, state)) {
 							this.level.removeBlock(pos, false);
-							this.playSound(SoundEvents.GENERIC_EXTINGUISH_FIRE, 0.125f, this.random.nextFloat() * 0.25F + 0.75F);
+							this.playSound(TFSounds.BLOCK_ANNIHILATED, 0.125f, this.random.nextFloat() * 0.25F + 0.75F);
 							this.annihilateParticles(level, pos);
 						} else {
 							this.hasHitObstacle = true;
@@ -183,10 +181,9 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 	}
 
 	private boolean isReturning() {
-		if (this.hasHitObstacle || this.getOwner() == null || !(this.getOwner() instanceof Player)) {
+		if (this.hasHitObstacle || this.getOwner() == null || !(this.getOwner() instanceof Player player)) {
 			return true;
 		} else {
-			Player player = (Player) this.getOwner();
 			return !player.isUsingItem();
 		}
 	}

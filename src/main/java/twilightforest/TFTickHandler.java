@@ -57,8 +57,8 @@ public class TFTickHandler {
 			}
 		}
 
-		//tick every second for the advancement bit of the flask, but only if we dont have the advancement
-		if(!world.isClientSide && player.tickCount % 20 == 0 && !PlayerHelper.doesPlayerHaveRequiredAdvancements(player, TwilightForestMod.prefix("full_mettle_alchemist"))) {
+		//tick every second for the advancement trigger bit of the flask
+		if(event.phase == TickEvent.Phase.END && player.tickCount % 20 == 0) {
 			BrittleFlaskItem.ticker();
 		}
 
