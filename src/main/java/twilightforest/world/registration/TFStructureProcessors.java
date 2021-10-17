@@ -1,9 +1,14 @@
 package twilightforest.world.registration;
 
 import com.mojang.serialization.Codec;
+
+import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+
+import dev.architectury.registry.registries.DeferredRegister;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.*;
@@ -15,6 +20,9 @@ import twilightforest.world.components.processors.NagastoneVariants;
  * Class for registering IStructureProcessorTypes. These are just used for StructureProcessor.getType()
  */
 public class TFStructureProcessors {
+
+	//public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSERS = DeferredRegister.create(TwilightForestMod.ID, Registry.STRUCTURE_PROCESSOR_REGISTRY);
+
 	public static final StructureProcessorType<CobbleVariants> COBBLE_VARIANTS = registerProcessor("cobble_variants", CobbleVariants.CODEC);
 	public static final StructureProcessorType<SmoothStoneVariants> SMOOTH_STONE_VARIANTS = registerProcessor("smooth_stone_variants", SmoothStoneVariants.CODEC);
 	public static final StructureProcessorType<StoneBricksVariants> STONE_BRICK_VARIANTS = registerProcessor("stone_brick_variants", StoneBricksVariants.CODEC);

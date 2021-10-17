@@ -1,10 +1,8 @@
 package twilightforest.item;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import twilightforest.TwilightForestMod;
 import twilightforest.events.ProjectileHitEvent;
-import twilightforest.extensions.IBowItemEx;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IBowItemEx;
+import twilightforest.api.extensions.IEntityEx;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;

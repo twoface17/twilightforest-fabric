@@ -18,7 +18,7 @@ import twilightforest.TFSounds;
 import twilightforest.entity.ChainBlock;
 import twilightforest.entity.TFEntities;
 import twilightforest.enums.TwilightItemTier;
-import twilightforest.extensions.IItemEx;
+import twilightforest.api.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.UUID;

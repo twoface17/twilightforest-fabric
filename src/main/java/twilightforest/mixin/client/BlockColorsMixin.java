@@ -1,5 +1,6 @@
 package twilightforest.mixin.client;
 
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,6 +15,6 @@ public class BlockColorsMixin {
 
     @Inject(method = "createDefault", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void initBlockColors(CallbackInfoReturnable<BlockColors> cir, BlockColors colors) {
-        ColorHandler.registerBlockColors(colors);
+        DynamicRegistrySetupCallback.EVENT.register((registryManager -> ColorHandler.registerBlockColors(colors)));
     }
 }

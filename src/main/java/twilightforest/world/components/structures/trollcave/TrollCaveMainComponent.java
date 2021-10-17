@@ -45,7 +45,7 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 	protected int height;
 
 	// FIXME Can we just pluck it from the data pack?
-	public static final ConfiguredFeature<?,?> uberousGen = TFBiomeFeatures.MYCELIUM_BLOB.configured(new DiskConfiguration(BlockConstants.UBEROUS_SOIL, UniformInt.of(4, 8), 1, ImmutableList.of(BlockConstants.PODZOL, BlockConstants.COARSE_DIRT, BlockConstants.DIRT)));
+	public static final ConfiguredFeature<?,?> uberousGen = TFBiomeFeatures.MYCELIUM_BLOB.get().configured(new DiskConfiguration(BlockConstants.UBEROUS_SOIL, UniformInt.of(4, 8), 1, ImmutableList.of(BlockConstants.PODZOL, BlockConstants.COARSE_DIRT, BlockConstants.DIRT)));
 
 	public TrollCaveMainComponent(ServerLevel level, CompoundTag nbt) {
 		this(TrollCavePieces.TFTCMai, nbt);

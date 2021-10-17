@@ -2,17 +2,20 @@ package twilightforest;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import com.google.common.collect.Maps;
+import dev.architectury.registry.registries.Registries;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Position;
+import net.minecraft.core.Registry;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
@@ -108,13 +111,21 @@ public class TwilightForestMod implements ModInitializer {
 		//TFContainers.CONTAINERS.register(modbus);
 		//TFEnchantments.ENCHANTMENTS.register(modbus);
 
-		TFStructureProcessors.init();
-		TreeConfigurations.init();
-		TreeDecorators.init();
+		DynamicRegistrySetupCallback.EVENT.register((registryManager -> {
+			TFStructureProcessors.init();
+			TreeConfigurations.init();
+			TreeDecorators.init();
+			ConfiguredFeatures.init();
+			TFEntities.registerEntities();
+			TFEntities.addEntityAttributes();
+			TFEntities.registerSpawnEggs();
+		}));
+
+
 		TFStructures.register();
 		ConfiguredWorldCarvers.register();
 		TwilightFeatures.registerPlacementConfigs();
-		ConfiguredFeatures.init();
+
 		TwilightSurfaceBuilders.register();
 		registerSerializers();
 
@@ -200,12 +211,6 @@ public class TwilightForestMod implements ModInitializer {
 		TFDimensions.init();
 		TFStats.init();
 
-		{
-			TFEntities.registerEntities();
-			TFEntities.addEntityAttributes();
-			TFEntities.registerSpawnEggs();
-		}
-
 		TFEventListener.registerFabricEvents();
 
 		if (TwilightForestMod.COMMON_CONFIG.doCompat) {
@@ -230,7 +235,7 @@ public class TwilightForestMod implements ModInitializer {
 
 		BlockSpikeFeature.loadStalactites();
 
-		{
+		DynamicRegistrySetupCallback.EVENT.register((registryManager -> {
 			TFBlocks.tfCompostables();
 			TFBlocks.TFBurnables();
 			TFBlocks.TFPots();
@@ -320,7 +325,7 @@ public class TwilightForestMod implements ModInitializer {
 			WoodType.register(TFBlocks.TRANSFORMATION);
 			WoodType.register(TFBlocks.MINING);
 			WoodType.register(TFBlocks.SORTING);
-		}
+		}));
 		//DataGenerators.gatherData();
 	}
 

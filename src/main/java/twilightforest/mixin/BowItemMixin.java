@@ -2,19 +2,15 @@ package twilightforest.mixin;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import org.spongepowered.asm.mixin.Debug;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import twilightforest.extensions.IBowItemEx;
+import twilightforest.api.extensions.IBowItemEx;
 
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+
 import twilightforest.item.EnderBowItem;
 import twilightforest.item.IceBowItem;
 import twilightforest.item.SeekerBowItem;

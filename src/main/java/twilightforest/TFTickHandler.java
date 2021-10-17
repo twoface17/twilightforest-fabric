@@ -35,6 +35,7 @@ import java.util.Random;
 
 public class TFTickHandler {
 
+	//TODO: PORT Double check this injection point
 	public static void playerTick(Player player) {
 		if (!(player.level instanceof ServerLevel))
 			return;
@@ -58,9 +59,9 @@ public class TFTickHandler {
 		}
 
 		//tick every second for the advancement trigger bit of the flask
-		if(event.phase == TickEvent.Phase.END && player.tickCount % 20 == 0) {
+//		if(event.phase == TickEvent.Phase.END && player.tickCount % 20 == 0) {
 			BrittleFlaskItem.ticker();
-		}
+//		}
 
 		// check the player for being in a forbidden progression area, only every 20 ticks
 		if (!world.isClientSide && player.tickCount % 20 == 0

@@ -3,7 +3,7 @@ package twilightforest.item;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import twilightforest.entity.projectile.SeekerArrow;
-import twilightforest.extensions.IBowItemEx;
+import twilightforest.api.extensions.IBowItemEx;
 
 public class SeekerBowItem extends BowItem implements IBowItemEx {
 

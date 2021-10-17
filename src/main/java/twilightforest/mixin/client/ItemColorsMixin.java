@@ -1,5 +1,6 @@
 package twilightforest.mixin.client;
 
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,6 +15,6 @@ import net.minecraft.client.color.item.ItemColors;
 public class ItemColorsMixin {
     @Inject(method = "createDefault", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void initItemColors(BlockColors blockColors, CallbackInfoReturnable<ItemColors> cir, ItemColors itemColors) {
-        ColorHandler.registerItemColors(itemColors, blockColors);
+        DynamicRegistrySetupCallback.EVENT.register((registryManager -> ColorHandler.registerItemColors(itemColors, blockColors)));
     }
 }

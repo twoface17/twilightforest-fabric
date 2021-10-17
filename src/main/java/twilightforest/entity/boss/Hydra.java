@@ -29,7 +29,7 @@ import twilightforest.TFSounds;
 import twilightforest.block.TFBlocks;
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFPart;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 import twilightforest.util.EntityUtil;
 import twilightforest.util.WorldUtil;
 import twilightforest.world.registration.TFFeature;

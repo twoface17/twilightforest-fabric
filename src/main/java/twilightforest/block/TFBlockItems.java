@@ -72,17 +72,7 @@ public class TFBlockItems {
 //      blockItem(TFBlocks.LAPIS_BLOCK);
 		blockItem(TFBlocks.TWISTED_STONE);
 		blockItem(TFBlocks.TWISTED_STONE_PILLAR);
-		makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET.get(), TFItems.defaultBuilder()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.KEEPSAKE_CASKET);
-//					}
-//				});
-//			}
-		}, TFBlocks.KEEPSAKE_CASKET);
+		TFItems.ITEMS.register(TFBlocks.KEEPSAKE_CASKET.getId(), () -> new BlockItem(TFBlocks.KEEPSAKE_CASKET.get(), TFItems.defaultBuilder()));
 		blockItem(TFBlocks.CANDELABRA);
 		blockItem(TFBlocks.BOLD_STONE_PILLAR);
 		blockItem(TFBlocks.DEATH_TOME_SPAWNER);
@@ -92,8 +82,8 @@ public class TFBlockItems {
 		skullCandleItem(TFBlocks.WITHER_SKELE_SKULL_CANDLE, TFBlocks.WITHER_SKELE_WALL_SKULL_CANDLE);
 		skullCandleItem(TFBlocks.CREEPER_SKULL_CANDLE, TFBlocks.CREEPER_WALL_SKULL_CANDLE);
 		skullCandleItem(TFBlocks.PLAYER_SKULL_CANDLE, TFBlocks.PLAYER_WALL_SKULL_CANDLE);
-		makeBlockItem(new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_WATER_LILY);
-		makeBlockItem(new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD.get(), TFItems.defaultBuilder()), TFBlocks.HUGE_LILY_PAD);
+		TFItems.ITEMS.register(TFBlocks.HUGE_WATER_LILY.getId(), () -> new HugeWaterLilyItem(TFBlocks.HUGE_WATER_LILY.get(), TFItems.defaultBuilder()));
+		TFItems.ITEMS.register(TFBlocks.HUGE_LILY_PAD.getId(), () -> new HugeLilyPadItem(TFBlocks.HUGE_LILY_PAD.get(), TFItems.defaultBuilder()));
 		blockItem(TFBlocks.MAZESTONE);
 		blockItem(TFBlocks.MAZESTONE_BRICK);
 		blockItem(TFBlocks.CRACKED_MAZESTONE);
@@ -268,7 +258,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.MINING_SAPLING);
 		blockItem(TFBlocks.SORTING_SAPLING);
 		blockItem(TFBlocks.RAINBOW_OAK_SAPLING);
-		r.register(blockItem(TFBlocks.MANGROVE_ROOT));
+		blockItem(TFBlocks.MANGROVE_ROOT);
 
 		blockItem(TFBlocks.OAK_BANISTER);
 		blockItem(TFBlocks.SPRUCE_BANISTER);
@@ -374,66 +364,35 @@ public class TFBlockItems {
 		return new Item.Properties().tab(creativeTab);
 	}
 
-	private static <B extends Block> Item blockItem(RegistrySupplier<B> block) {
-		return makeBlockItem(new BlockItem(block.get(), defaultBuilder()), block);
+	private static <B extends Block> RegistrySupplier<Item> blockItem(RegistrySupplier<B> block) {
+		return TFItems.ITEMS.register(block.getId(), () -> new BlockItem(block.get(), defaultBuilder()));
 	}
 
-	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(RegistrySupplier<B> floor, RegistrySupplier<B> wall) {
-		return makeBlockItem(new SkullCandleItem(floor.get(), wall.get(), defaultBuilder().rarity(Rarity.UNCOMMON)) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId();
-//					}
-//				});
-//			}
-		}, floor);
+	private static <B extends AbstractSkullCandleBlock> RegistrySupplier<Item> skullCandleItem(RegistrySupplier<B> floor, RegistrySupplier<B> wall) {
+		return TFItems.ITEMS.register(floor.getId(), () -> new SkullCandleItem(floor.get(), wall.get(), defaultBuilder().rarity(Rarity.UNCOMMON)));
 	}
 
-	private static <B extends Block> Item burningItem(RegistrySupplier<B> block, int burntime) {
-		return makeBlockItem(new FurnaceFuelItem(block.get(), defaultBuilder(), burntime), block);
+	private static <B extends Block> RegistrySupplier<Item> burningItem(RegistrySupplier<B> block, int burntime) {
+		return TFItems.ITEMS.register(block.getId(), () -> new FurnaceFuelItem(block.get(), defaultBuilder(), burntime));
 	}
 
-	private static <B extends Block, W extends Block> Item trophyBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
-		return makeBlockItem(new TrophyItem(block.get(), wallblock.get(), defaultBuilder().rarity(TwilightForestMod.getRarity())) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.TROPHY.getId());
-//					}
-//				});
-//			}
-		}, block);
+	private static <B extends Block, W extends Block> RegistrySupplier<Item> trophyBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
+		return TFItems.ITEMS.register(block.getId(), () -> new TrophyItem(block.get(), wallblock.get(), defaultBuilder().rarity(TwilightForestMod.getRarity())));
 	}
 
-	private static <T extends Block, E extends BlockEntity> Item wearableBlock(RegistrySupplier<T> block, RegistrySupplier<BlockEntityType<E>> tileentity) {
-		return makeBlockItem(new WearableItem(block.get(), defaultBuilder()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(tileentity.getId());
-//					}
-//				});
-//			}
-		}, block);
+	private static <T extends Block, E extends BlockEntity> RegistrySupplier<Item> wearableBlock(RegistrySupplier<T> block, RegistrySupplier<BlockEntityType<E>> tileentity) {
+		return TFItems.ITEMS.register(block.getId(), () -> new WearableItem(block.get(), defaultBuilder()));
 	}
 
-
-	private static <B extends Block> Item tallBlock(RegistrySupplier<B> block) {
-		return makeBlockItem(new DoubleHighBlockItem(block.get(), defaultBuilder()), block);
+	private static <B extends Block> RegistrySupplier<Item> tallBlock(RegistrySupplier<B> block) {
+		return TFItems.ITEMS.register(block.getId(), () -> new DoubleHighBlockItem(block.get(), defaultBuilder()));
 	}
 
-	private static <B extends Block, W extends Block> Item signBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
-		return makeBlockItem(new SignItem(defaultBuilder().stacksTo(16), block.get(), wallblock.get()), block);
+	private static <B extends Block, W extends Block> RegistrySupplier<Item> signBlock(RegistrySupplier<B> block, RegistrySupplier<W> wallblock) {
+		return TFItems.ITEMS.register(block.getId(), () -> new SignItem(defaultBuilder().stacksTo(16), block.get(), wallblock.get()));
 	}
 
-	private static <B extends Block> Item makeBlockItem(Item blockitem, RegistrySupplier<B> block) {
-		return Registry.register(Registry.ITEM, block.getId(), blockitem);
+	private static <B extends Block> RegistrySupplier<Item> makeBlockItem(RegistrySupplier<Item> blockitem, RegistrySupplier<B> block) {
+		return TFItems.ITEMS.register(block.getId(), blockitem::get);
 	}
 }

@@ -1,4 +1,4 @@
-package twilightforest.extensions;
+package twilightforest.api.extensions;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;

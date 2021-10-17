@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.util.FeatureLogic;
 import twilightforest.util.FeaturePlacers;
 import twilightforest.util.FeatureUtil;

@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
+
+import twilightforest.mixin.BlockRotProcessorAccessor;
 import twilightforest.world.registration.TFStructureProcessors;
 
 import javax.annotation.Nullable;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 public final class TargetedRotProcessor extends BlockRotProcessor {
     public static final Codec<TargetedRotProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.listOf().xmap(ImmutableSet::copyOf, ArrayList::new).fieldOf("blocks_to_rot").forGetter(p -> p.blocksToRot),
-            Codec.FLOAT.fieldOf("integrity").orElse(1.0f).forGetter(p -> p.integrity)
+            Codec.FLOAT.fieldOf("integrity").orElse(1.0f).forGetter(p -> ((BlockRotProcessorAccessor)(Object)p).getIntegrity())
     ).apply(instance, TargetedRotProcessor::new));
 
     private final ImmutableSet<BlockState> blocksToRot;
@@ -27,7 +29,7 @@ public final class TargetedRotProcessor extends BlockRotProcessor {
 
     @Nullable
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings) {
         if (!this.blocksToRot.contains(modifiedBlockInfo.state)) return modifiedBlockInfo;
         return super.processBlock(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings);
     }

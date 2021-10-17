@@ -1,4 +1,4 @@
-package twilightforest.extensions;
+package twilightforest.api.extensions;
 
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.world.TFTeleporter;

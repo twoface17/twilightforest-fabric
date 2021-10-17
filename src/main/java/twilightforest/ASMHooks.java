@@ -33,7 +33,7 @@ import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFEntities;
 import twilightforest.entity.TFPart;
 import twilightforest.entity.boss.Hydra;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 import twilightforest.item.TFItems;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.network.UpdateTFMultipartPacket;

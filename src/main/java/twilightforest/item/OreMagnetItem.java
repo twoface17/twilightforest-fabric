@@ -27,8 +27,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
-import twilightforest.extensions.IItemEx;
-import twilightforest.util.FeatureLogic;
+import twilightforest.api.extensions.IItemEx;
 import twilightforest.util.VoxelBresenhamIterator;
 
 import javax.annotation.Nonnull;

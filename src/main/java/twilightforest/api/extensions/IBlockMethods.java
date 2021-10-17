@@ -1,4 +1,4 @@
-package twilightforest.extensions;
+package twilightforest.api.extensions;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

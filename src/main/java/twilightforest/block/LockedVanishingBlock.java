@@ -13,7 +13,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import twilightforest.TFSounds;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.item.TFItems;
 
 import net.minecraft.sounds.SoundSource;

@@ -33,7 +33,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.enums.BanisterShape;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.List;

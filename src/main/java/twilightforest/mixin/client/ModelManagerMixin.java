@@ -1,5 +1,6 @@
 package twilightforest.mixin.client;
 
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,6 +23,6 @@ public class ModelManagerMixin {
 
     @Inject(method = "apply", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
     public void onModelLoad(ModelBakery modelBakery, ResourceManager resourceManager, ProfilerFiller profilerFiller, CallbackInfo ci) {
-        TFClientEvents.modelBake(this.bakedRegistry);
+        DynamicRegistrySetupCallback.EVENT.register((registryManager -> TFClientEvents.modelBake(this.bakedRegistry)));
     }
 }

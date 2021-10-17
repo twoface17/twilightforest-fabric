@@ -26,7 +26,7 @@ import twilightforest.entity.SpikeBlock;
 import twilightforest.entity.TFPart;
 import twilightforest.entity.ai.AvoidAnyEntityGoal;
 import twilightforest.entity.ai.ThrowSpikeBlockGoal;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 import twilightforest.util.TFDamageSources;
 
 import java.util.List;

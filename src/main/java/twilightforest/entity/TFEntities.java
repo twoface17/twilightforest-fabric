@@ -229,7 +229,7 @@ public class TFEntities {
 	}
 
 	public static void registerEntities() {
-		((TransformPowderItem) TFItems.TRANSFORMATION_POWDER).initTransformations();
+		((TransformPowderItem) TFItems.TRANSFORMATION_POWDER.get()).initTransformations();
 
 		SpawnPlacements.register(BOAR, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(BIGHORN_SHEEP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
