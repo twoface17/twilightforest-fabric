@@ -15,6 +15,7 @@ import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.components.processors.CobblePlankSwizzler;
+import twilightforest.world.components.processors.CobbleVariants;
 import twilightforest.world.components.processors.SmartGrassProcessor;
 
 import javax.annotation.Nullable;
@@ -41,7 +42,7 @@ public class SimpleWellFeature extends TemplateFeature<NoneFeatureConfiguration>
 
     @Override
     protected void modifySettings(StructurePlaceSettings settings, Random random) {
-        settings.addProcessor(new CobblePlankSwizzler(0.0F, random));
+        settings.addProcessor(new CobblePlankSwizzler(random)).addProcessor(CobbleVariants.INSTANCE);
     }
 
     @Override

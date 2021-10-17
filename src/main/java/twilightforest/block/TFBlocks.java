@@ -138,7 +138,7 @@ public class TFBlocks {
 	public static final Block AURORA_BLOCK = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":aurora_block", new AuroraBrickBlock(BlockBehaviour.Properties.of(Material.ICE_SOLID).strength(10.0F, 10.0F)));
 	public static final RotatedPillarBlock AURORA_PILLAR = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":aurora_pillar", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.ICE_SOLID).requiresCorrectToolForDrops().strength(2.0F, 10.0F)));
 	public static final Block AURORA_SLAB = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":aurora_slab", new SlabBlock(BlockBehaviour.Properties.of(Material.ICE_SOLID).requiresCorrectToolForDrops().strength(2.0F, 10.0F)));
-	public static final Block AURORALIZED_GLASS = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":auroralized_glass", new AuroralizedGlassBlock(BlockBehaviour.Properties.of(Material.ICE).noOcclusion()));
+	public static final Block AURORALIZED_GLASS = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":auroralized_glass", new AuroralizedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion()));
 
 	//highlands/thornlands
 	public static final Block BROWN_THORNS = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":brown_thorns", new ThornsBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.PODZOL).strength(50.0F, 2000.0F).sound(SoundType.WOOD).noDrops()));
@@ -301,6 +301,8 @@ public class TFBlocks {
 	public static final RotatedPillarBlock TRANSFORMATION_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":transformation_wood", new TFLogBlock(logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)));
 	public static final RotatedPillarBlock MINING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mining_wood", new TFLogBlock(logProperties(MaterialColor.SAND).strength(2.0F).sound(SoundType.WOOD)));
 	public static final RotatedPillarBlock SORTING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":sorting_wood", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
+
+	public static final RegistryObject<Block> MANGROVE_ROOT = BLOCKS.register("mangrove_root", () -> new Block(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
 
 	public static final RotatedPillarBlock STRIPPED_TWILIGHT_OAK_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_twilight_oak_wood", new TFLogBlock(logProperties(MaterialColor.WOOD, MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)));
 	public static final RotatedPillarBlock STRIPPED_CANOPY_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_canopy_wood", new TFLogBlock(logProperties(MaterialColor.PODZOL, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));

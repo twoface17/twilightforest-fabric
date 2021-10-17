@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
-import twilightforest.world.components.processors.MossyCobbleTemplateProcessor;
+import twilightforest.world.components.processors.CobbleVariants;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -28,6 +28,6 @@ public class StoneCircleFeature extends TemplateFeature<NoneFeatureConfiguration
 
     @Override
     protected void modifySettings(StructurePlaceSettings settings, Random random) {
-        settings.addProcessor(MossyCobbleTemplateProcessor.INSTANCE);
+        settings.addProcessor(CobbleVariants.INSTANCE);
     }
 }

@@ -247,21 +247,29 @@
 //		simpleBlock(TFBlocks.HEDGE.get(), ConfiguredModel.builder()
 //						.weight(10).modelFile(models().cubeAll(TFBlocks.HEDGE.getId().getPath(), blockTexture(TFBlocks.HEDGE.get()))).nextModel()
 //						.weight(1).modelFile(models().cubeAll(TFBlocks.HEDGE.getId().getPath() + "_rose", prefix("block/" + TFBlocks.HEDGE.getId().getPath() + "_rose"))).build());
-//		simpleBlock(TFBlocks.NAGA_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.LICH_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.HYDRA_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.UR_GHAST_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.MINOSHROOM_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.ALPHA_YETI_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
-//		simpleBlock(TFBlocks.FINAL_BOSS_BOSS_SPAWNER.get(), new ConfiguredModel(models().getExistingFile(new ResourceLocation("block/spawner"))));
+//
+//		ModelFile bigSpawner = models().withExistingParent("boss_spawner", "block/block").texture("particle", "#all").texture("all", TwilightForestMod.prefix("block/boss_spawner")).element()
+//				.from(-4, -4, -4)
+//				.to(20, 20, 20)
+//				.allFaces((dir, builder) -> builder/*.cullface(dir)*/.uvs(2, 2, 14, 14).texture("#all"))
+//				.end();
+//
+//		simpleBlock(TFBlocks.NAGA_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.LICH_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.HYDRA_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.UR_GHAST_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.MINOSHROOM_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.ALPHA_YETI_BOSS_SPAWNER.get(), bigSpawner);
+//		simpleBlock(TFBlocks.FINAL_BOSS_BOSS_SPAWNER.get(), bigSpawner);
 //		simpleBlockExisting(TFBlocks.FIREFLY_JAR.get());
 //		simpleBlockExisting(TFBlocks.FIREFLY_SPAWNER.get());
 //		simpleBlockExisting(TFBlocks.CICADA_JAR.get());
 //		registerPlantBlocks();
 //		simpleBlock(TFBlocks.ROOT_BLOCK.get());
 //		simpleBlock(TFBlocks.LIVEROOT_BLOCK.get());
+//		simpleBlock(TFBlocks.MANGROVE_ROOT.get());
 //
 //		ModelFile glowing = models().withExistingParent(TFBlocks.UNCRAFTING_TABLE.getId().getPath() + "_glowing", prefix("block/util/cube_bottom_double_top_and_sides"))
 //				.texture("top", prefix("block/uncrafting_top"))

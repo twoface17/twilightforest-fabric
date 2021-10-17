@@ -11,6 +11,8 @@ public class TFAdvancements {
     public static final ActivateGhastTrapTrigger ACTIVATED_GHAST_TRAP = CriterionRegistry.register(new ActivateGhastTrapTrigger());
     public static final StructureClearedTrigger STRUCTURE_CLEARED = CriterionRegistry.register(new StructureClearedTrigger());
     public static final ArmorInventoryChangedTrigger ARMOR_CHANGED = CriterionRegistry.register(new ArmorInventoryChangedTrigger());
+    public static final DrinkFromFlaskTrigger DRINK_FROM_FLASK = CriterionRegistry.register(new DrinkFromFlaskTrigger());
+    public static final KillBugTrigger KILL_BUG = CriterionRegistry.register(new KillBugTrigger());
 
     public static void init() {}
 }

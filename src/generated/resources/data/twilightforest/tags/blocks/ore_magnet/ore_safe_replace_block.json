@@ -2,6 +2,11 @@
   "replace": false,
   "values": [
     "#twilightforest:ore_magnet/block_replace_ore",
+    "minecraft:granite",
+    "minecraft:andesite",
+    "minecraft:diorite",
+    "minecraft:tuff",
+    "minecraft:calcite"
     "minecraft:dirt",
     "minecraft:gravel",
     "minecraft:sand",
