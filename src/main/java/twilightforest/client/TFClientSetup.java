@@ -26,7 +26,7 @@ import twilightforest.client.renderer.entity.IceLayer;
 import twilightforest.client.renderer.entity.ShieldLayer;
 import twilightforest.inventory.TFContainers;
 import twilightforest.item.TFItems;
-import twilightforest.tileentity.TFTileEntities;
+import twilightforest.block.entity.TFBlockEntities;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -64,7 +64,7 @@ public class TFClientSetup {
 
         MinecraftForge.EVENT_BUS.register(new LoadingScreenListener());
         RenderLayerRegistration.init();
-        TFTileEntities.registerTileEntityRenders();
+        TFBlockEntities.registerTileEntityRenders();
         TFContainers.renderScreens();
 
         TwilightForestRenderInfo renderInfo = new TwilightForestRenderInfo(128.0F, false, DimensionSpecialEffects.SkyType.NONE, false, false);
@@ -81,31 +81,6 @@ public class TFClientSetup {
             Sheets.addWoodType(TFBlocks.SORTING);
         });
        
-    }
-
-    public static void addLegacyPack() {
-        //noinspection ConstantConditions
-        if (Minecraft.getInstance() == null)
-            // Normally Minecraft Client is never null except when generating through runData
-            return;
-
-        Minecraft.getInstance().getResourcePackRepository().addPackFinder(
-                (consumer, iFactory) -> consumer.accept(
-                        Pack.create(
-                                TwilightForestMod.prefix("classic_textures").toString(),
-                                false,
-                                () -> new TwilightLegacyPack(
-                                        ModList
-                                                .get()
-                                                .getModFileById(TwilightForestMod.ID)
-                                                .getFile()
-                                ),
-                                iFactory,
-                                Pack.Position.TOP,
-                                iTextComponent -> iTextComponent
-                        )
-                )
-        );
     }
 
 	private static Field field_EntityRenderersEvent$AddLayers_renderers;

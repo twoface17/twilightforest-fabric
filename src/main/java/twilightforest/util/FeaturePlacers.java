@@ -8,9 +8,11 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import twilightforest.block.TFBlocks;
@@ -42,7 +44,7 @@ public final class FeaturePlacers {
      * This takes all variables for setting Branch
      */
     public static void drawBresenhamBranch(LevelAccessor world, BiConsumer<BlockPos, BlockState> trunkPlacer, Random random, BlockPos start, BlockPos end, BlockStateProvider config) {
-        for (BlockPos pixel : FeatureLogic.getBresenhamArrays(start, end)) {
+        for (BlockPos pixel : new VoxelBresenhamIterator(start, end)) {
             placeIfValidTreePos(world, trunkPlacer, random, pixel, config);
         }
     }
@@ -54,7 +56,7 @@ public final class FeaturePlacers {
         BlockPos dest = FeatureLogic.translate(start.below(b + 2), 5, 0.3 * b + offset, 0.8);
 
         // go through block by block and stop drawing when we head too far into open air
-        for (BlockPos coord : FeatureLogic.getBresenhamArrays(start.below(), dest)) {
+        for (BlockPos coord : new VoxelBresenhamIterator(start.below(), dest)) {
             if (!placeIfValidRootPos(world, placer, rand, coord, config)) return;
         }
     }
@@ -63,20 +65,14 @@ public final class FeaturePlacers {
      * Draws a line from {x1, y1, z1} to {x2, y2, z2}
      * This just takes a BlockState, used to set Trunk
      */
-    public static void drawBresenhamTree(BiConsumer<BlockPos, BlockState> placer, BlockPos from, BlockPos to, BlockStateProvider config, Random random) {
-        for (BlockPos pixel : FeatureLogic.getBresenhamArrays(from, to)) {
-            placeProvidedBlock(placer, pixel, config, random);
+    public static void drawBresenhamTree(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> placer, BiFunction<LevelSimulatedReader, BlockPos, Boolean> predicate, BlockPos from, BlockPos to, BlockStateProvider config, Random random) {
+        for (BlockPos pixel : new VoxelBresenhamIterator(from, to)) {
+            placeProvidedBlock(world, placer, predicate, pixel, config, random);
         }
-    }
-
-    public static void placeProvidedBlock(BiConsumer<BlockPos, BlockState> worldPlacer, BlockPos pos, BlockStateProvider config, Random random) {
-        worldPlacer.accept(pos, config.getState(random, pos));
     }
 
     public static void placeProvidedBlock(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> worldPlacer, BiFunction<LevelSimulatedReader, BlockPos, Boolean> predicate, BlockPos pos, BlockStateProvider config, Random random) {
-        if (predicate.apply(world, pos)) {
-            worldPlacer.accept(pos, config.getState(random, pos));
-        }
+        if (predicate.apply(world, pos)) worldPlacer.accept(pos, config.getState(random, pos));
     }
 
     // Use for trunks with Odd-count widths
@@ -174,37 +170,37 @@ public final class FeaturePlacers {
         float xzRadiusSquared = xzRadius * xzRadius;
         float yRadiusSquared = yRadius * yRadius;
         float superRadiusSquared = xzRadiusSquared * yRadiusSquared;
-        FeaturePlacers.placeProvidedBlock(placer, centerPos, config, random);
+        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos, config, random);
 
         for (int y = 0; y <= yRadius; y++) {
             if (y > yRadius) continue;
 
-            FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( 0,  y, 0), config, random);
-            FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( 0, -y, 0), config, random);
+            FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( 0,  y, 0), config, random);
+            FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( 0, -y, 0), config, random);
         }
 
         for (int x = 0; x <= xzRadius; x++) {
             for (int z = 1; z <= xzRadius; z++) {
                 if (x * x + z * z > xzRadiusSquared) continue;
 
-                FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  x, 0,  z), config, random);
-                FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -x, 0, -z), config, random);
-                FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -z, 0,  x), config, random);
-                FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  z, 0, -x), config, random);
+                FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  x, 0,  z), config, random);
+                FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -x, 0, -z), config, random);
+                FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -z, 0,  x), config, random);
+                FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  z, 0, -x), config, random);
 
                 for (int y = 1; y <= yRadius; y++) {
                     float xzSquare = ((x * x + z * z) * yRadiusSquared);
 
                     if (xzSquare + (y * y) * xzRadiusSquared <= superRadiusSquared) {
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  x,  y,  z), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -x,  y, -z), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -z,  y,  x), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  z,  y, -x), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  x,  y,  z), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -x,  y, -z), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -z,  y,  x), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  z,  y, -x), config, random);
 
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  x, -y,  z), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -x, -y, -z), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset( -z, -y,  x), config, random);
-                        FeaturePlacers.placeProvidedBlock(placer, centerPos.offset(  z, -y, -x), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  x, -y,  z), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -x, -y, -z), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset( -z, -y,  x), config, random);
+                        FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.offset(  z, -y, -x), config, random);
                     }
                 }
             }
@@ -240,13 +236,13 @@ public final class FeaturePlacers {
     public static void addFirefly(LevelAccessor world, BlockPos pos, int height, double angle) {
         int iAngle = (int) (angle * 4.0);
         if (iAngle == 0) {
-            setIfEmpty(world, pos.offset( 1, height,  0), TFBlocks.firefly.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.EAST));
+            setIfEmpty(world, pos.offset( 1, height,  0), TFBlocks.FIREFLY.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.EAST));
         } else if (iAngle == 1) {
-            setIfEmpty(world, pos.offset(-1, height,  0), TFBlocks.firefly.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.WEST));
+            setIfEmpty(world, pos.offset(-1, height,  0), TFBlocks.FIREFLY.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.WEST));
         } else if (iAngle == 2) {
-            setIfEmpty(world, pos.offset( 0, height,  1), TFBlocks.firefly.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.SOUTH));
+            setIfEmpty(world, pos.offset( 0, height,  1), TFBlocks.FIREFLY.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.SOUTH));
         } else if (iAngle == 3) {
-            setIfEmpty(world, pos.offset( 0, height, -1), TFBlocks.firefly.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.NORTH));
+            setIfEmpty(world, pos.offset( 0, height, -1), TFBlocks.FIREFLY.get().defaultBlockState().setValue(DirectionalBlock.FACING, Direction.NORTH));
         }
     }
 
@@ -254,5 +250,20 @@ public final class FeaturePlacers {
         if (world.isEmptyBlock(pos)) {
             world.setBlock(pos, state,3);
         }
+    }
+
+    public static BlockState transferAllStateKeys(BlockState stateIn, Block blockOut) {
+        return transferAllStateKeys(stateIn, blockOut.defaultBlockState());
+    }
+
+    public static BlockState transferAllStateKeys(BlockState stateIn, BlockState stateOut) {
+        for (Property<?> property : stateOut.getProperties()) {
+            stateOut = transferStateKey(stateIn, stateOut, property);
+        }
+        return stateOut;
+    }
+
+    public static <T extends Comparable<T>> BlockState transferStateKey(BlockState stateIn, BlockState stateOut, Property<T> property) {
+        return stateOut.setValue(property, stateIn.getValue(property));
     }
 }

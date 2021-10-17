@@ -1,16 +1,11 @@
 package twilightforest.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.PlayerAdvancements;
-import net.minecraft.server.ServerAdvancementManager;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -21,18 +16,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import twilightforest.TFSounds;
-import twilightforest.TwilightForestMod;
+import twilightforest.advancements.TFAdvancements;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BrittleFlaskItem extends Item {
 
-	private static String lastUsedPotion;
+	private static Potion lastUsedPotion;
 	private static int timesUsed;
 	private static boolean advancementWindow;
 	public static int seconds;
@@ -79,7 +75,7 @@ public class BrittleFlaskItem extends Item {
 						player.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
 					}
 					flaskTag.putInt("Uses", flaskTag.getInt("Uses") + 1);
-					player.level.playSound(null, player.blockPosition(), TFSounds.FLASK_FILL, SoundSource.PLAYERS, flaskTag.getInt("Uses") * 0.33F, player.level.random.nextFloat() * 0.1F + 0.9F);
+					player.level.playSound(null, player, TFSounds.FLASK_FILL, player.getSoundSource(), flaskTag.getInt("Uses") * 0.33F, player.level.random.nextFloat() * 0.1F + 0.9F);
 					return true;
 				} else if(!flaskTag.contains("Potion")) {
 					if(!player.getAbilities().instabuild) {
@@ -88,7 +84,7 @@ public class BrittleFlaskItem extends Item {
 					}
 					flaskTag.putString("Potion", potionTag.getString("Potion"));
 					flaskTag.putInt("Uses", flaskTag.getInt("Uses") + 1);
-					player.level.playSound(null, player.blockPosition(), TFSounds.FLASK_FILL, SoundSource.PLAYERS, flaskTag.getInt("Uses") * 0.33F, player.level.random.nextFloat() * 0.1F + 0.9F);
+					player.level.playSound(null, player, TFSounds.FLASK_FILL, player.getSoundSource(), flaskTag.getInt("Uses") * 0.33F, player.level.random.nextFloat() * 0.1F + 0.9F);
 					return true;
 				}
 			}
@@ -125,6 +121,7 @@ public class BrittleFlaskItem extends Item {
 		CompoundTag tag = stack.getOrCreateTag();
 		if (entity instanceof Player player) {
 			if (!level.isClientSide) {
+				if(!player.isCreative()) addTowardsAdvancement(Potion.byName(tag.getString("Potion")), player);
 				for (MobEffectInstance mobeffectinstance : PotionUtils.getMobEffects(stack)) {
 					if (mobeffectinstance.getEffect().isInstantenous()) {
 						mobeffectinstance.getEffect().applyInstantenousEffect(player, player, player, mobeffectinstance.getAmplifier(), 1.0D);
@@ -132,7 +129,6 @@ public class BrittleFlaskItem extends Item {
 						player.addEffect(new MobEffectInstance(mobeffectinstance));
 					}
 				}
-				addTowardsAdvancement(tag.getString("Potion"), player);
 			}
 			player.awardStat(Stats.ITEM_USED.get(this));
 			if (!player.getAbilities().instabuild) {
@@ -146,20 +142,20 @@ public class BrittleFlaskItem extends Item {
 			if (canBreak() && !player.getAbilities().instabuild) {
 				if (tag.getInt("Uses") <= 0) {
 					stack.shrink(1);
-					level.playSound(null, entity.blockPosition(), TFSounds.BRITTLE_FLASK_BREAK, SoundSource.PLAYERS, 1.5F, 0.7F);
+					level.playSound(null, player, TFSounds.BRITTLE_FLASK_BREAK, player.getSoundSource(), 1.5F, 0.7F);
 				} else {
 					tag.putInt("Breakage", tag.getInt("Breakage") + 1);
 					tag.putBoolean("Refillable", false);
-					level.playSound(null, entity.blockPosition(), TFSounds.BRITTLE_FLASK_CRACK, SoundSource.PLAYERS, 1.5F, 2.0F);
+					level.playSound(null, player, TFSounds.BRITTLE_FLASK_CRACK, player.getSoundSource(), 1.5F, 2.0F);
 				}
 			}
 		}
 		return super.finishUsingItem(stack, level, entity);
 	}
 
-	private void addTowardsAdvancement(String potionDrank, Player drinker) {
+	private void addTowardsAdvancement(Potion potionDrank, Player drinker) {
 		if(lastUsedPotion == null) {
-			lastUsedPotion = Potions.EMPTY.getRegistryName().toString();
+			lastUsedPotion = Potions.EMPTY;
 		}
 
 		if (!lastUsedPotion.equals(potionDrank)) {
@@ -170,13 +166,8 @@ public class BrittleFlaskItem extends Item {
 			timesUsed++;
 		}
 
-		if(timesUsed >= 4 && drinker instanceof ServerPlayer player && drinker.isAlive() && lastUsedPotion.equals(Potions.STRONG_HARMING.getRegistryName().toString()) && advancementWindow) {
-			PlayerAdvancements advancements = player.getAdvancements();
-			ServerAdvancementManager manager = ((ServerLevel) player.getCommandSenderWorld()).getServer().getAdvancements();
-			Advancement advancement = manager.getAdvancement(TwilightForestMod.prefix("full_mettle_alchemist"));
-			if (advancement != null) {
-				advancements.award(advancement, "drink_4_harming");
-			}
+		if(drinker instanceof ServerPlayer player && drinker.isAlive() && advancementWindow) {
+			TFAdvancements.DRINK_FROM_FLASK.trigger(player, timesUsed, lastUsedPotion);
 		}
 	}
 

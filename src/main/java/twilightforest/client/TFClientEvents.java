@@ -24,6 +24,8 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -51,14 +53,14 @@ public class TFClientEvents {
 
 		@SubscribeEvent
 		public static void modelBake(ModelBakeEvent event) {
-			fullbrightItem(event, TFItems.fiery_ingot);
-			fullbrightItem(event, TFItems.fiery_boots);
-			fullbrightItem(event, TFItems.fiery_chestplate);
-			fullbrightItem(event, TFItems.fiery_helmet);
-			fullbrightItem(event, TFItems.fiery_leggings);
-			fullbrightItem(event, TFItems.fiery_pickaxe);
-			fullbrightItem(event, TFItems.fiery_sword);
-			fullbright(event, TFBlocks.fiery_block.getId(), "");
+			fullbrightItem(event, TFItems.FIERY_INGOT);
+			fullbrightItem(event, TFItems.FIERY_BOOTS);
+			fullbrightItem(event, TFItems.FIERY_CHESTPLATE);
+			fullbrightItem(event, TFItems.FIERY_HELMET);
+			fullbrightItem(event, TFItems.FIERY_LEGGINGS);
+			fullbrightItem(event, TFItems.FIERY_PICKAXE);
+			fullbrightItem(event, TFItems.FIERY_SWORD);
+			fullbright(event, TFBlocks.FIERY_BLOCK.getId(), "");
 		}
 
 		private static void fullbrightItem(ModelBakeEvent event, RegistryObject<Item> item) {
@@ -144,8 +146,8 @@ public class TFClientEvents {
 	 * Stop the game from rendering the mount health for unfriendly creatures
 	 */
 	@SubscribeEvent
-	public static void preOverlay(RenderGameOverlayEvent.Pre event) {
-		if (event.getType() == RenderGameOverlayEvent.ElementType.LAYER) {
+	public static void preOverlay(RenderGameOverlayEvent.PreLayer event) {
+		if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
 			if (TFEventListener.isRidingUnfriendly(Minecraft.getInstance().player)) {
 				event.setCanceled(true);
 			}

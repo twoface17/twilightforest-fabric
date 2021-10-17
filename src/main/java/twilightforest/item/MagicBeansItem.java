@@ -27,6 +27,8 @@ import javax.annotation.Nonnull;
 
 public class MagicBeansItem extends Item {
 
+	private int blocksSkipped;
+
 	protected MagicBeansItem(Properties props) {
 		super(props);
 	}
@@ -42,7 +44,7 @@ public class MagicBeansItem extends Item {
 
 		int minY = pos.getY() + 1;
 		int maxY = Math.max(pos.getY() + 100, 175);
-		if (pos.getY() < maxY && blockAt == TFBlocks.uberous_soil.get()) {
+		if (pos.getY() < maxY && blockAt == TFBlocks.UBEROUS_SOIL.get()) {
 			if (!world.isClientSide) {
 				stack.shrink(1);
 				makeHugeStalk(world, pos, minY, maxY);
@@ -106,13 +108,15 @@ public class MagicBeansItem extends Item {
 			int maxZ = Mth.ceil(z + radius + stalkThickness);
 
 			// generate stalk
-			for (int dx = minX; dx < maxX; dx++) {
-				for (int dz = minZ; dz < maxZ; dz++) {
+			for (int dx = minX; dx < maxX && isClear; dx++) {
+				for (int dz = minZ; dz < maxZ && isClear; dz++) {
 					if ((dx - cx) * (dx - cx) + (dz - cz) * (dz - cz) < stalkThickness * stalkThickness) {
-						isClear &= this.tryToPlaceStalk(world, new BlockPos(dx, dy, dz));
+						isClear = this.tryToPlaceStalk(world, new BlockPos(dx, dy, dz));
 					}
 				}
 			}
+			//reset skipped blocks as we're moving on to a new layer
+			blocksSkipped = 0;
 
 			// leaves?
 			if (dy == nextLeafY) {
@@ -130,7 +134,7 @@ public class MagicBeansItem extends Item {
 
 	private void placeLeaves(Level world, BlockPos pos) {
 		// stalk at center
-		world.setBlockAndUpdate(pos, TFBlocks.huge_stalk.get().defaultBlockState());
+		world.setBlockAndUpdate(pos, TFBlocks.HUGE_STALK.get().defaultBlockState());
 
 		// small squares
 		for (int dx = -1; dx <= 1; dx++) {
@@ -150,29 +154,30 @@ public class MagicBeansItem extends Item {
 	}
 
 	/**
-	 * Place the stalk block only if the destination is clear.  Return false if blocked.
+	 * Place the stalk block only if the destination is clear.  Return false if a layer is blocked by 15 or more blocks.
 	 */
 	private boolean tryToPlaceStalk(Level world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		if (state.isAir() || state.getMaterial().isReplaceable() || (state.isAir() || state.is(BlockTags.LEAVES)) || BlockTags.LEAVES.contains(state.getBlock()) || state.getBlock().equals(TFBlocks.fluffy_cloud.get())) {
-			world.setBlockAndUpdate(pos, TFBlocks.huge_stalk.get().defaultBlockState());
-			if(pos.getY() > 150) {
-				for(int i = 0; i < 7; i++) {
-					if(world.getBlockState(pos.relative(Direction.UP, i)).equals(TFBlocks.wispy_cloud.get().defaultBlockState()) || world.getBlockState(pos.relative(Direction.UP, i)).equals(TFBlocks.fluffy_cloud.get().defaultBlockState())) {
-							world.setBlockAndUpdate(pos.relative(Direction.UP, i), Blocks.AIR.defaultBlockState());
+		if (state.isAir() || state.getMaterial().isReplaceable() || (state.isAir() || state.is(BlockTags.LEAVES)) || BlockTags.LEAVES.contains(state.getBlock()) || state.getBlock().equals(TFBlocks.FLUFFY_CLOUD.get())) {
+			world.setBlockAndUpdate(pos, TFBlocks.HUGE_STALK.get().defaultBlockState());
+			if (pos.getY() > 150) {
+				for (int i = 0; i < 7; i++) {
+					if (world.getBlockState(pos.relative(Direction.UP, i)).equals(TFBlocks.WISPY_CLOUD.get().defaultBlockState()) || world.getBlockState(pos.relative(Direction.UP, i)).equals(TFBlocks.FLUFFY_CLOUD.get().defaultBlockState())) {
+						world.setBlockAndUpdate(pos.relative(Direction.UP, i), Blocks.AIR.defaultBlockState());
 					}
 				}
 			}
 			return true;
 		} else {
-			return false;
+			blocksSkipped++;
+			return blocksSkipped < 15;
 		}
 	}
 
 	private void tryToPlaceLeaves(Level world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		if (state.isAir() || state.is(BlockTags.LEAVES)) {
-			world.setBlock(pos, TFBlocks.beanstalk_leaves.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true), 2);
+			world.setBlock(pos, TFBlocks.BEANSTALK_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true), 2);
 		}
 	}
 }

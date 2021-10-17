@@ -2,6 +2,7 @@ package twilightforest.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -18,8 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import twilightforest.TFSounds;
 import twilightforest.enums.PlantVariant;
 import twilightforest.item.TFItems;
+import twilightforest.util.TFStats;
 
 import java.util.Random;
 
@@ -29,16 +32,17 @@ public class TorchberryPlantBlock extends TFPlantBlock implements BonemealableBl
 
 	public TorchberryPlantBlock(PlantVariant plant, Properties props) {
 		super(plant, props);
-		registerDefaultState(getStateDefinition().any().setValue(HAS_BERRIES, true));
+		registerDefaultState(getStateDefinition().any().setValue(HAS_BERRIES, false));
 	}
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if(state.getValue(HAS_BERRIES)) {
 			level.setBlockAndUpdate(pos, state.setValue(HAS_BERRIES, false));
-			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 1.0F);
-			ItemEntity torchberries = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(TFItems.torchberries.get()));
+			level.playSound(null, pos, TFSounds.PICKED_TORCHBERRIES, SoundSource.BLOCKS, 1.0F, 1.0F);
+			ItemEntity torchberries = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(TFItems.TORCHBERRIES.get()));
 			level.addFreshEntity(torchberries);
+			if(player instanceof ServerPlayer) player.awardStat(TFStats.TORCHBERRIES_HARVESTED);
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 		return super.use(state, level, pos, player, hand, result);

@@ -3,7 +3,6 @@ package twilightforest.world.components.structures.lichtowerrevamp;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureMana
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
-import twilightforest.world.registration.TFFeature;
 
 import java.util.List;
 import java.util.Random;
@@ -35,16 +33,16 @@ public final class SideTowerCover extends TwilightTemplateStructurePiece {
     private final int thickness = 2;
 
     public SideTowerCover(ServerLevel serverLevel, CompoundTag compoundTag) {
-        super(LichTowerPieces.CENTRAL_TO_SIDE_TOWER, compoundTag, serverLevel, LichTowerUtil.readSettings(compoundTag));
+        super(LichTowerRevampPieces.CENTRAL_TO_SIDE_TOWER, compoundTag, serverLevel, readSettings(compoundTag));
         this.width = compoundTag.getInt("width");
     }
 
     private SideTowerCover(StructureManager structureManager, Rotation rotation, String name, BlockPos startPosition, int width) {
-        this(structureManager, TwilightForestMod.prefix("lich_tower/side_tower_covers/" + name), LichTowerUtil.makeSettings(rotation), startPosition, width);
+        this(structureManager, TwilightForestMod.prefix("lich_tower/side_tower_covers/" + name), makeSettings(rotation), startPosition, width);
     }
 
     private SideTowerCover(StructureManager structureManager, ResourceLocation templateLocation, StructurePlaceSettings placeSettings, BlockPos startPosition, int width) {
-        super(LichTowerPieces.CENTRAL_TO_SIDE_TOWER, 0, structureManager, templateLocation, placeSettings, startPosition);
+        super(LichTowerRevampPieces.CENTRAL_TO_SIDE_TOWER, 0, structureManager, templateLocation, placeSettings, startPosition);
         this.width = width;
     }
 
@@ -63,11 +61,6 @@ public final class SideTowerCover extends TwilightTemplateStructurePiece {
     @Override
     protected void handleDataMarker(String pFunction, BlockPos pPos, ServerLevelAccessor pLevel, Random pRandom, BoundingBox pSbb) {
 
-    }
-
-    @Override
-    public TFFeature getFeatureType() {
-        return TFFeature.LICH_TOWER;
     }
 
     @Override

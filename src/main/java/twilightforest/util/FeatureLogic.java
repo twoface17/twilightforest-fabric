@@ -1,6 +1,7 @@
 package twilightforest.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -50,17 +51,17 @@ public final class FeatureLogic {
         Block block = state.getBlock();
 
         return /*(state.getDestroySpeed() >= 0) // TODO Starting to sound like we should have a generalized no-replace tag list
-                &&*/ block != TFBlocks.stronghold_shield.get()
-                && block != TFBlocks.trophy_pedestal.get()
-                && block != TFBlocks.boss_spawner_naga.get()
-                && block != TFBlocks.boss_spawner_lich.get()
-                && block != TFBlocks.boss_spawner_hydra.get()
-                && block != TFBlocks.boss_spawner_ur_ghast.get()
-                && block != TFBlocks.boss_spawner_knight_phantom.get()
-                && block != TFBlocks.boss_spawner_snow_queen.get()
-                && block != TFBlocks.boss_spawner_minoshroom.get()
-                && block != TFBlocks.boss_spawner_alpha_yeti.get()
-                && (state.getMaterial() == Material.GRASS || state.getMaterial() == Material.DIRT || state.getMaterial() == Material.STONE || state.getMaterial() == Material.WATER);
+                &&*/ block != TFBlocks.STRONGHOLD_SHIELD.get()
+                && block != TFBlocks.TROPHY_PEDESTAL.get()
+                && block != TFBlocks.NAGA_BOSS_SPAWNER.get()
+                && block != TFBlocks.LICH_BOSS_SPAWNER.get()
+                && block != TFBlocks.HYDRA_BOSS_SPAWNER.get()
+                && block != TFBlocks.UR_GHAST_BOSS_SPAWNER.get()
+                && block != TFBlocks.KNIGHT_PHANTOM_BOSS_SPAWNER.get()
+                && block != TFBlocks.SNOW_QUEEN_BOSS_SPAWNER.get()
+                && block != TFBlocks.MINOSHROOM_BOSS_SPAWNER.get()
+                && block != TFBlocks.ALPHA_YETI_BOSS_SPAWNER.get()
+                && (state.getMaterial() == Material.GRASS || state.getMaterial() == Material.DIRT || state.getMaterial() == Material.STONE || state.getMaterial().isReplaceable() || state.getBlock() == TFBlocks.ROOT_BLOCK.get() || state.getBlock() == TFBlocks.MANGROVE_ROOT.get());
     }
 
     /**
@@ -83,14 +84,15 @@ public final class FeatureLogic {
     /**
      * Get an array of values that represent a line from point A to point B
      */
+    @Deprecated // Use VoxelBresenhamIterator directly instead
     public static BlockPos[] getBresenhamArrays(BlockPos src, BlockPos dest) {
         return getBresenhamArrays(src.getX(), src.getY(), src.getZ(), dest.getX(), dest.getY(), dest.getZ());
     }
 
     /**
      * Get an array of values that represent a line from point A to point B
-     * todo 1.9 lazify this into an iterable?
      */
+    @Deprecated // Use VoxelBresenhamIterator directly instead
     public static BlockPos[] getBresenhamArrays(int x1, int y1, int z1, int x2, int y2, int z2) {
         int i, dx, dy, dz, absDx, absDy, absDz, x_inc, y_inc, z_inc, err_1, err_2, doubleAbsDx, doubleAbsDy, doubleAbsDz;
 

@@ -1,6 +1,10 @@
 package twilightforest.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
 import net.minecraft.resources.ResourceKey;
@@ -11,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -22,10 +27,12 @@ import twilightforest.world.registration.TFFeature;
 import twilightforest.TFMagicMapData;
 import twilightforest.network.MagicMapPacket;
 import twilightforest.network.TFPacketHandler;
+import twilightforest.world.registration.TFGenerationSettings;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // [VanillaCopy] super everything, but with appropriate redirections to our own datastructures. finer details noted
@@ -55,7 +62,7 @@ public class MagicMapItem extends MapItem {
 	}
 
 	public static ItemStack setupNewMap(Level world, int worldX, int worldZ, byte scale, boolean trackingPosition, boolean unlimitedTracking) {
-		ItemStack itemstack = new ItemStack(TFItems.magic_map.get());
+		ItemStack itemstack = new ItemStack(TFItems.FILLED_MAGIC_MAP.get());
 		createMapData(itemstack, world, worldX, worldZ, scale, trackingPosition, unlimitedTracking, world.dimension());
 		return itemstack;
 	}
@@ -101,7 +108,7 @@ public class MagicMapItem extends MapItem {
 
 	@Override
 	public void update(Level world, Entity viewer, MapItemSavedData data) {
-		if (world.dimension() == data.dimension && viewer instanceof Player) {
+		if (world.dimension() == data.dimension && viewer instanceof Player && world instanceof ServerLevel serverLevel && TFGenerationSettings.usesTwilightChunkGenerator(serverLevel)) {
 			int biomesPerPixel = 4;
 			int blocksPerPixel = 16; // don't even bother with the scale, just hardcode it
 			int centerX = data.x;
@@ -158,7 +165,7 @@ public class MagicMapItem extends MapItem {
 								byte mapZ = (byte) ((worldZ - centerZ) / (float) blocksPerPixel * 2F);
 								TFFeature feature = TFFeature.getFeatureAt(worldX, worldZ, (ServerLevel) world);
 								TFMagicMapData tfData = (TFMagicMapData) data;
-								tfData.tfDecorations.add(new TFMagicMapData.TFMapDecoration(feature.ordinal(), mapX, mapZ, (byte) 8));
+								tfData.tfDecorations.add(new TFMagicMapData.TFMapDecoration(feature, mapX, mapZ, (byte) 8));
 								//TwilightForestMod.LOGGER.info("Found feature at {}, {}. Placing it on the map at {}, {}", worldX, worldZ, mapX, mapZ);
 							}
 						}
@@ -252,5 +259,25 @@ public class MagicMapItem extends MapItem {
 		TFMagicMapData mapdata = getCustomMapData(stack, world);
 		Packet<?> p = id == null || mapdata == null ? null : mapdata.getUpdatePacket(id, player);
 		return p instanceof ClientboundMapItemDataPacket ? TFPacketHandler.CHANNEL.toVanillaPacket(new MagicMapPacket(mapdata, (ClientboundMapItemDataPacket) p), NetworkDirection.PLAY_TO_CLIENT) : p;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+		Integer integer = getMapId(stack);
+		TFMagicMapData mapitemsaveddata = pLevel == null ? null : getData(stack, pLevel);
+		if (pFlag.isAdvanced()) {
+			if (mapitemsaveddata != null) {
+				pTooltip.add((new TranslatableComponent("filled_map.id", integer)).withStyle(ChatFormatting.GRAY));
+				pTooltip.add((new TranslatableComponent("filled_map.scale", 1 << mapitemsaveddata.scale)).withStyle(ChatFormatting.GRAY));
+				pTooltip.add((new TranslatableComponent("filled_map.level", mapitemsaveddata.scale, 4)).withStyle(ChatFormatting.GRAY));
+			} else {
+				pTooltip.add((new TranslatableComponent("filled_map.unknown")).withStyle(ChatFormatting.GRAY));
+			}
+		} else {
+			if (integer != null) {
+				pTooltip.add((new TextComponent("#" + integer)).withStyle(ChatFormatting.GRAY));
+			}
+		}
+
 	}
 }

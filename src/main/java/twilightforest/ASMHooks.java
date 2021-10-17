@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
@@ -33,7 +34,7 @@ import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import twilightforest.entity.TFEntities;
-import twilightforest.entity.TFPartEntity;
+import twilightforest.entity.TFPart;
 import twilightforest.item.TFItems;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.network.UpdateTFMultipartPacket;
@@ -64,7 +65,7 @@ public class ASMHooks {
 	}
 
 	private static boolean isOurMap(ItemStack stack) {
-		return stack.is(TFItems.magic_map.get()) || stack.is(TFItems.maze_map.get()) || stack.is(TFItems.ore_map.get());
+		return stack.is(TFItems.FILLED_MAGIC_MAP.get()) || stack.is(TFItems.FILLED_MAZE_MAP.get()) || stack.is(TFItems.FILLED_ORE_MAP.get());
 	}
 
 	/**
@@ -101,8 +102,8 @@ public class ASMHooks {
 		return music;
 	}
 
-	private static final WeakHashMap<Level, List<TFPartEntity<?>>> cache = new WeakHashMap<>();
-	private static final Int2ObjectMap<TFPartEntity<?>> multiparts = new Int2ObjectOpenHashMap<>();
+	private static final WeakHashMap<Level, List<TFPart<?>>> cache = new WeakHashMap<>();
+	private static final Int2ObjectMap<TFPart<?>> multiparts = new Int2ObjectOpenHashMap<>();
 
 	// This only works on the client side in 1.17...
 	public static void registerMultipartEvents(IEventBus bus) {
@@ -111,7 +112,7 @@ public class ASMHooks {
 			synchronized (cache) {
 				cache.computeIfAbsent(event.getWorld(), (w) -> new ArrayList<>());
 				cache.get(event.getWorld()).addAll(Arrays.stream(Objects.requireNonNull(event.getEntity().getParts())).
-						filter(TFPartEntity.class::isInstance).map(obj -> (TFPartEntity<?>) obj).
+						filter(TFPart.class::isInstance).map(obj -> (TFPart<?>) obj).
 						collect(Collectors.toList()));
 
 			}
@@ -121,7 +122,7 @@ public class ASMHooks {
 			synchronized (cache) {
 				cache.computeIfPresent(event.getWorld(), (world, list) -> {
 					list.removeAll(Arrays.stream(Objects.requireNonNull(event.getEntity().getParts())).
-							filter(TFPartEntity.class::isInstance).map(obj -> (TFPartEntity<?>) obj).
+							filter(TFPart.class::isInstance).map(obj -> (TFPart<?>) obj).
 							collect(Collectors.toList()));
 					return list;
 				});
@@ -136,8 +137,8 @@ public class ASMHooks {
 	 */
 	public static void trackingStart(Entity entity) {
 		if (entity.isMultipartEntity()) {
-			List<TFPartEntity<?>> list = Arrays.stream(Objects.requireNonNull(entity.getParts())).
-					filter(TFPartEntity.class::isInstance).map(obj -> (TFPartEntity<?>) obj).
+			List<TFPart<?>> list = Arrays.stream(Objects.requireNonNull(entity.getParts())).
+					filter(TFPart.class::isInstance).map(obj -> (TFPart<?>) obj).
 					collect(Collectors.toList());
 			list.forEach(part -> multiparts.put(part.getId(), part));
 			synchronized (cache) {
@@ -154,8 +155,8 @@ public class ASMHooks {
 	 */
 	public static void trackingEnd(Entity entity) {
 		if (entity.isMultipartEntity()) {
-			List<TFPartEntity<?>> list = Arrays.stream(Objects.requireNonNull(entity.getParts())).
-					filter(TFPartEntity.class::isInstance).map(obj -> (TFPartEntity<?>) obj).
+			List<TFPart<?>> list = Arrays.stream(Objects.requireNonNull(entity.getParts())).
+					filter(TFPart.class::isInstance).map(obj -> (TFPart<?>) obj).
 					collect(Collectors.toList());
 			list.forEach(part -> multiparts.remove(part.getId()));
 			synchronized (cache) {
@@ -174,9 +175,9 @@ public class ASMHooks {
 	 */
 	public static synchronized List<Entity> multipartHitbox(List<Entity> list, Level world, @Nullable Entity entityIn, AABB boundingBox, @Nullable Predicate<? super Entity> predicate) {
 		synchronized (cache) {
-			List<TFPartEntity<?>> parts = cache.get(world);
+			List<TFPart<?>> parts = cache.get(world);
 			if(parts != null) {
-				for (TFPartEntity<?> part : parts) {
+				for (TFPart<?> part : parts) {
 					if (part != entityIn &&
 
 							part.getBoundingBox().intersects(boundingBox) &&
@@ -219,8 +220,8 @@ public class ASMHooks {
 	@Nullable
 	@OnlyIn(Dist.CLIENT)
 	public static EntityRenderer<?> getMultipartRenderer(@Nullable EntityRenderer<?> renderer, Entity entity) {
-		if(entity instanceof TFPartEntity<?>)
-			return TFEntities.BakedMultiPartRenderers.lookup(((TFPartEntity<?>) entity).renderer());
+		if(entity instanceof TFPart<?>)
+			return TFEntities.BakedMultiPartRenderers.lookup(((TFPart<?>) entity).renderer());
 		return renderer;
 	}
 
@@ -246,7 +247,7 @@ public class ASMHooks {
 			list.add(entity);
 			if(entity.isMultipartEntity() && entity.getParts() != null) {
 				for (PartEntity<?> part : entity.getParts()) {
-					if(part instanceof TFPartEntity)
+					if(part instanceof TFPart)
 						list.add(part);
 				}
 			}
@@ -261,6 +262,15 @@ public class ASMHooks {
 	 */
 	public static Minecraft.ExperimentalDialogType dragons(Minecraft.ExperimentalDialogType type) {
 		return TFConfig.CLIENT_CONFIG.disableHereBeDragons.get() ? Minecraft.ExperimentalDialogType.NONE : type;
+	}
+
+	/**
+	 * Injection Point:<br>
+	 * {@link net.minecraft.client.renderer.BiomeColors#FOLIAGE_COLOR_RESOLVER}<br>
+	 * [BEFORE IRETURN]
+	 */
+	public static int foliage(int o, Biome biome, double x, double z) {
+		return FoliageColorHandler.get(o, biome, x, z);
 	}
 
 }

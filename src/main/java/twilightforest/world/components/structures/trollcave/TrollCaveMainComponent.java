@@ -3,6 +3,7 @@ package twilightforest.world.components.structures.trollcave;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -11,17 +12,20 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.NoiseEffect;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
-import twilightforest.world.components.feature.TFGenCaveStalactite;
+import twilightforest.util.WorldUtil;
+import twilightforest.world.components.feature.BlockSpikeFeature;
+import twilightforest.world.components.feature.config.SpikeConfig;
 import twilightforest.world.registration.BlockConstants;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.block.TFBlocks;
@@ -34,12 +38,14 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class TrollCaveMainComponent extends TFStructureComponentOld {
+	protected static final SpikeConfig STONE_STALACTITE = new SpikeConfig(new SimpleStateProvider(Blocks.STONE.defaultBlockState()), UniformInt.of(6, 9), UniformInt.of(3, 4), true);
+	protected static final SpikeConfig STONE_STALAGMITE = new SpikeConfig(new SimpleStateProvider(Blocks.STONE.defaultBlockState()), UniformInt.of(4, 7), UniformInt.of(3, 4), false);
 
 	protected int size;
 	protected int height;
 
 	// FIXME Can we just pluck it from the data pack?
-	public static final ConfiguredFeature<?,?> uberousGen = TFBiomeFeatures.MYCELIUM_BLOB.get().configured(new DiskConfiguration(BlockConstants.UBEROUS_SOIL, UniformInt.of(5, 11), 1, ImmutableList.of(BlockConstants.PODZOL, BlockConstants.COARSE_DIRT, BlockConstants.DIRT)));
+	public static final ConfiguredFeature<?,?> uberousGen = TFBiomeFeatures.MYCELIUM_BLOB.get().configured(new DiskConfiguration(BlockConstants.UBEROUS_SOIL, UniformInt.of(4, 8), 1, ImmutableList.of(BlockConstants.PODZOL, BlockConstants.COARSE_DIRT, BlockConstants.DIRT)));
 
 	public TrollCaveMainComponent(ServerLevel level, CompoundTag nbt) {
 		this(TrollCavePieces.TFTCMai, nbt);
@@ -117,12 +123,12 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 		// stone stalactites!
 		for (int i = 0; i < 128; i++) {
 			BlockPos dest = getCoordsInCave(decoRNG);
-			generateBlockStalactite(world, generator, decoRNG, Blocks.STONE, 0.7F, true, dest.getX(), this.height, dest.getZ(), sbb);
+			generateBlockSpike(world, STONE_STALACTITE, dest.atY(this.height), sbb);
 		}
 		// stone stalagmites!
 		for (int i = 0; i < 32; i++) {
 			BlockPos dest = getCoordsInCave(decoRNG);
-			generateBlockStalactite(world, generator, decoRNG, Blocks.STONE, 0.5F, false, dest.getX(), this.height, dest.getZ(), sbb);
+			generateBlockSpike(world, STONE_STALAGMITE, dest.atY(0), sbb);
 		}
 
 		// uberous!
@@ -158,7 +164,7 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 					if (dist > threshold) {
 						this.placeBlock(world, Blocks.AIR.defaultBlockState(), x, y, z, boundingBox);
 					} else if (dist == threshold && rand.nextInt(4) == 0 && this.getBlock(world, x, y, z, boundingBox).is(BlockTags.BASE_STONE_OVERWORLD)) {
-						this.placeBlock(world, TFBlocks.trollsteinn.get().defaultBlockState(), x, y, z, boundingBox);
+						this.placeBlock(world, TFBlocks.TROLLSTEINN.get().defaultBlockState(), x, y, z, boundingBox);
 					}
 				}
 			}
@@ -220,18 +226,24 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 
 	protected static final Predicate<Biome> highlands = biome -> false; // FIXME biome == TFBiomes.highlands.get();
 
-	/**
-	 * Make a random stone stalactite
-	 */
-	protected void generateBlockStalactite(WorldGenLevel world, ChunkGenerator generator, Random rand, Block blockToGenerate, float length, boolean up, int x, int y, int z, BoundingBox sbb) {
+
+	protected void generateBlockSpike(WorldGenLevel world, SpikeConfig config, Vec3i pos, BoundingBox sbb) {
+		generateBlockSpike(world, config, pos.getX(), pos.getY(), pos.getZ(), sbb);
+	}
+
+	protected void generateBlockSpike(WorldGenLevel world, SpikeConfig config, int x, int y, int z, BoundingBox sbb) {
 		// are the coordinates in our bounding box?
 		int dx = getWorldX(x, z);
 		int dy = getWorldY(y);
 		int dz = getWorldZ(x, z);
-
 		BlockPos pos = new BlockPos(dx, dy, dz);
 		if (sbb.isInside(pos)) {
-			TFGenCaveStalactite.startStalactite(world, pos, rand, blockToGenerate.defaultBlockState(), length, 128, -1, up, dy);
+			// generate an RNG for this stalactite
+			//TODO: MOAR RANDOM!
+			Random stalRNG = new Random(world.getSeed() + (long) dx * dz);
+
+			// make the actual stalactite
+			BlockSpikeFeature.startSpike(world, pos, config, stalRNG);
 		}
 	}
 
@@ -243,9 +255,15 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 		int dx = getWorldX(x, z);
 		int dz = getWorldZ(x, z);
 
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(dx, world.getHeight(), dz);
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(dx, WorldUtil.getSeaLevel(world.getLevel()) + 25, dz);
 
-		if (sbb.isInside(pos)) feature.place(world, generator, rand, pos);
+		for(int i = 0; i < 15; i++) {
+			pos.move(0, 1, 0);
+			if (sbb.isInside(pos) && world.getBlockState(pos.above()).isAir()) {
+				feature.place(world, generator, rand, pos);
+				break;
+			}
+		}
 	}
 
 	protected void makeTreasureCrate(WorldGenLevel world, BoundingBox sbb) {
@@ -253,6 +271,11 @@ public class TrollCaveMainComponent extends TFStructureComponentOld {
 		int mid = this.size / 2;
 		this.generateBox(world, sbb, mid - 2, 0, mid - 2, mid + 1, 3, mid + 1, Blocks.OBSIDIAN.defaultBlockState(), Blocks.OBSIDIAN.defaultBlockState(), false);
 		this.generateAirBox(world, sbb, mid - 1, 1, mid - 1, mid, 2, mid);
-		this.placeTreasureAtCurrentPosition(world, mid, 1, mid, TFTreasure.troll_garden, false, sbb);
+		this.placeTreasureAtCurrentPosition(world, mid, 1, mid, TFTreasure.TROLL_GARDEN, false, sbb);
+	}
+
+	@Override
+	public NoiseEffect getNoiseEffect() {
+		return NoiseEffect.BURY;
 	}
 }

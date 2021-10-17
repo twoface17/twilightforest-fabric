@@ -84,14 +84,14 @@ public class TrollCaveGardenComponent extends TrollCaveMainComponent {
 		}
 
 		// mushglooms first
-		for (int i = 0; i < 32; i++) {
+		for (int i = 0; i < 16; i++) {
 			BlockPos.MutableBlockPos dest = getCoordsInCave(decoRNG);
 			setBlockStateRotated(world, Blocks.MYCELIUM.defaultBlockState(), dest.getX(), dest.setY(0).getY(), dest.getZ(), this.rotation, sbb);
 			generate(world, generator, bigMushgloomGen, decoRNG, dest.getX(), dest.setY(1).getY(), dest.getZ(), sbb);
 		}
 
 		// mushrooms!
-		for (int i = 0; i < 64; i++) {
+		for (int i = 0; i < 32; i++) {
 			BlockPos.MutableBlockPos dest = getCoordsInCave(decoRNG);
 			setBlockStateRotated(world, Blocks.MYCELIUM.defaultBlockState(), dest.getX(), dest.setY(0).getY(), dest.getZ(), this.rotation, sbb);
 			generate(world, generator, rand.nextBoolean() ? bigBrownMushroomGen : bigRedMushroomGen, decoRNG, dest.getX(), dest.setY(1).getY(), dest.getZ(), sbb);
@@ -99,8 +99,8 @@ public class TrollCaveGardenComponent extends TrollCaveMainComponent {
 
 		// stone stalactites!
 		for (int i = 0; i < 128; i++) {
-			BlockPos.MutableBlockPos dest = getCoordsInCave(decoRNG);
-			generateBlockStalactite(world, generator, decoRNG, Blocks.STONE, 0.7F, true, dest.getX(), this.height, dest.getZ(), sbb);
+			BlockPos dest = getCoordsInCave(decoRNG);
+			generateBlockSpike(world, STONE_STALACTITE, dest.atY(this.height), sbb);
 		}
 
 		return true;

@@ -5,9 +5,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import twilightforest.world.components.feature.TFGenCaveStalactite;
+import twilightforest.world.components.feature.BlockSpikeFeature;
 
 import java.util.*;
 
@@ -28,6 +30,10 @@ public class TFConfig {
 						translation(config + "spawn_in_tf").
 						comment("If true, players spawning for the first time will spawn in the Twilight Forest.").
 						define("newPlayersSpawnInTF", false);
+				DIMENSION.portalForNewPlayerSpawn = builder.
+						translation(config + "portal_for_new_player").
+						comment("If true, the return portal will spawn for new players that were sent to the TF if `spawn_in_tf` is true.").
+						define("portalForNewPlayer", true);
 				DIMENSION.skylightForest = builder.
 						translation(config + "skylight_forest").
 						worldRestart().
@@ -112,6 +118,10 @@ public class TFConfig {
 					translation(config + "portal_return").
 					comment("If false, the return portal will require the activation item.").
 					define("shouldReturnPortalBeUsable", true);
+			portalAdvancementLock = builder.
+					translation(config + "portal_unlocked_by_advancement").
+					comment("Use a valid advancement resource location as a string, with default String \"minecraft:story/mine_diamond\". Invalid/Empty Advancement resource IDs will leave the portal entirely unlocked.").
+					define("portalUnlockedByAdvancement", "minecraft:story/mine_diamond");
 			disableUncrafting = builder.
 					worldRestart().
 					translation(config + "uncrafting").
@@ -158,6 +168,7 @@ public class TFConfig {
 		public static class Dimension {
 
 			public ForgeConfigSpec.BooleanValue newPlayersSpawnInTF;
+			public ForgeConfigSpec.BooleanValue portalForNewPlayerSpawn;
 			public ForgeConfigSpec.BooleanValue skylightForest;
 			public ForgeConfigSpec.BooleanValue skylightOaks;
 
@@ -193,10 +204,10 @@ public class TFConfig {
 					if (split.length != 5) return false;
 
 					Optional<Block> block = parseBlock(split[0]);
-					if (!block.isPresent()) return false;
+					if (block.isEmpty()) return false;
 
 					try {
-						TFGenCaveStalactite.registerStalactite(tier, block.get().defaultBlockState(),
+						BlockSpikeFeature.registerStalactite(tier, block.get().defaultBlockState(),
 								Float.parseFloat(split[1]),
 								Integer.parseInt(split[2]),
 								Integer.parseInt(split[3]),
@@ -219,11 +230,13 @@ public class TFConfig {
 		public ForgeConfigSpec.BooleanValue checkPortalDestination;
 		public ForgeConfigSpec.BooleanValue portalLightning;
 		public ForgeConfigSpec.BooleanValue shouldReturnPortalBeUsable;
+		public ForgeConfigSpec.ConfigValue<String> portalAdvancementLock;
 		public ForgeConfigSpec.BooleanValue disableUncrafting;
 		public ForgeConfigSpec.BooleanValue casketUUIDLocking;
 		public ForgeConfigSpec.BooleanValue disableSkullCandles;
 
 		public ShieldInteractions SHIELD_INTERACTIONS = new ShieldInteractions();
+		public ResourceLocation portalLockingAdvancement;
 
 		public static class ShieldInteractions {
 
@@ -259,6 +272,10 @@ public class TFConfig {
 					translation(config + "dragons").
 					comment("Disable the Here Be Dragons experimental warning screen.").
 					define("disableHereBeDragons", false);
+			disableLockedBiomeToasts = builder.
+					translation(config + "locked_toasts").
+					comment("Disables the toasts that appear when a biome is locked. Not recommended if you're not familiar with progression.").
+					define("disableLockedBiomeToasts", false);
 			builder.
 					comment("Client only: Controls for the Loading screen").
 					push("Loading Screen");
@@ -308,7 +325,6 @@ public class TFConfig {
 								"twilightforest:magic_beans",
 								"twilightforest:ironwood_raw",
 								"twilightforest:naga_scale",
-								"twilightforest:experiment_115{think:1}",
 								"twilightforest:twilight_portal_miniature_structure",
 								"twilightforest:lich_tower_miniature_structure",
 								"twilightforest:knightmetal_block",
@@ -329,6 +345,7 @@ public class TFConfig {
 		public ForgeConfigSpec.BooleanValue rotateTrophyHeadsGui;
 		public ForgeConfigSpec.BooleanValue disableOptifineNagScreen;
 		public ForgeConfigSpec.BooleanValue disableHereBeDragons;
+		public ForgeConfigSpec.BooleanValue disableLockedBiomeToasts;
 
 		public final LoadingScreen LOADING_SCREEN = new LoadingScreen();
 
@@ -366,13 +383,25 @@ public class TFConfig {
 
 	private static final String config = TwilightForestMod.ID + ".config.";
 
-	/*@SubscribeEvent //FIXME Replace
-	public static void onConfigChanged(ModConfig.Reloading event) {
+	@SubscribeEvent // FIXME Not Firing
+	public static void onConfigChanged(ModConfigEvent.Reloading event) {
 		if (event.getConfig().getModId().equals(TwilightForestMod.ID)) {
-//			TFDimensions.checkOriginDimension();
+			COMMON_CONFIG.portalLockingAdvancement = new ResourceLocation(TFConfig.COMMON_CONFIG.portalAdvancementLock.get());
+
 			build();
 		}
-	}*/
+	}
+
+	// FIXME Remove once the top works again
+	//  This lets us have a RL without inserting RL creation into ticking code
+	@Deprecated
+	public static ResourceLocation getPortalLockingAdvancement() {
+		if (COMMON_CONFIG.portalLockingAdvancement == null) {
+			COMMON_CONFIG.portalLockingAdvancement = new ResourceLocation(TFConfig.COMMON_CONFIG.portalAdvancementLock.get());
+		}
+
+		return COMMON_CONFIG.portalLockingAdvancement;
+	}
 
 	public static void build() {
 		CLIENT_CONFIG.LOADING_SCREEN.loadLoadingScreenIcons();
@@ -392,7 +421,7 @@ public class TFConfig {
 		if (id == null || !ForgeRegistries.BLOCKS.containsKey(id)) {
 			return Optional.empty();
 		} else {
-			return Optional.of(ForgeRegistries.BLOCKS.getValue(id));
+			return Optional.ofNullable(ForgeRegistries.BLOCKS.getValue(id));
 		}
 	}
 }

@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.ArmorStand;
@@ -12,32 +11,28 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.NoiseEffect;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
-import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.processors.BoxCuttingProcessor;
-import twilightforest.world.components.structures.TwilightFeature;
 import twilightforest.world.components.structures.TwilightTemplateStructurePiece;
-import twilightforest.world.registration.TFFeature;
 
 import java.util.*;
 
 public final class TowerFoyer extends TwilightTemplateStructurePiece {
     public TowerFoyer(ServerLevel serverLevel, CompoundTag compoundTag) {
-        super(LichTowerPieces.TOWER_FOYER, compoundTag, serverLevel, LichTowerUtil.readSettings(compoundTag));
+        super(LichTowerRevampPieces.TOWER_FOYER, compoundTag, serverLevel, readSettings(compoundTag));
     }
 
     public TowerFoyer(StructureManager structureManager, BlockPos startPosition) {
-        super(LichTowerPieces.TOWER_FOYER, 0, structureManager, TwilightForestMod.prefix("lich_tower/foyer"), LichTowerUtil.makeSettings(Rotation.NONE), startPosition);
+        super(LichTowerRevampPieces.TOWER_FOYER, 0, structureManager, TwilightForestMod.prefix("lich_tower/foyer"), makeSettings(Rotation.NONE), startPosition.above(3));
     }
 
     @Override
@@ -104,13 +99,13 @@ public final class TowerFoyer extends TwilightTemplateStructurePiece {
     }
 
     @Override
-    public boolean postProcess(WorldGenLevel pLevel, StructureFeatureManager pStructureManager, ChunkGenerator pChunkGenerator, Random pRandom, BoundingBox pBox, ChunkPos pChunkPos, BlockPos pPos) {
-        boolean result = super.postProcess(pLevel, pStructureManager, pChunkGenerator, pRandom, pBox, pChunkPos, pPos);
+    public boolean postProcess(WorldGenLevel level, StructureFeatureManager structureFeatureManager, ChunkGenerator chunkGenerator, Random random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        boolean result = this.placePieceAdjusted(level, structureFeatureManager, chunkGenerator, random, boundingBox, chunkPos, pos, -3);
 
         BlockPos placement = new BlockPos(this.boundingBox.getCenter().getX() + 1, this.boundingBox.minY() + 7, this.boundingBox.minZ() + 16);
 
-        if (pBox.isInside(placement)) {
-            final ArmorStand armorStand = new ArmorStand(EntityType.ARMOR_STAND, pLevel.getLevel());
+        if (boundingBox.isInside(placement)) {
+            final ArmorStand armorStand = new ArmorStand(EntityType.ARMOR_STAND, level.getLevel());
             armorStand.setCustomName(new TextComponent("Welcome to the new Lich Tower! The design is heavily WIP and will be fleshed out significantly in later development builds"));
             armorStand.moveTo(placement.getX(), placement.getY() + 0.5, placement.getZ() + 0.5, 0, 0);
             armorStand.setInvulnerable(true);
@@ -120,7 +115,7 @@ public final class TowerFoyer extends TwilightTemplateStructurePiece {
             armorStand.setNoGravity(true);
             // set marker flag
             armorStand.getEntityData().set(ArmorStand.DATA_CLIENT_FLAGS, (byte) (armorStand.getEntityData().get(ArmorStand.DATA_CLIENT_FLAGS) | 16));
-            pLevel.addFreshEntity(armorStand);
+            level.addFreshEntity(armorStand);
         }
 
         return result;
@@ -132,7 +127,7 @@ public final class TowerFoyer extends TwilightTemplateStructurePiece {
     }
 
     @Override
-    public TFFeature getFeatureType() {
-        return TFFeature.LICH_TOWER;
+    public NoiseEffect getNoiseEffect() {
+        return NoiseEffect.BEARD;
     }
 }

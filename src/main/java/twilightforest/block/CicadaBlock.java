@@ -1,8 +1,11 @@
 package twilightforest.block;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,9 +20,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
+import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
-import twilightforest.tileentity.CicadaTileEntity;
-import twilightforest.tileentity.TFTileEntities;
+import twilightforest.block.entity.CicadaBlockEntity;
+import twilightforest.block.entity.TFBlockEntities;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -36,18 +40,24 @@ public class CicadaBlock extends CritterBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new CicadaTileEntity(pos, state);
+		return new CicadaBlockEntity(pos, state);
 	}
 
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFTileEntities.CICADA.get(), CicadaTileEntity::tick);
+		return createTickerHelper(type, TFBlockEntities.CICADA.get(), CicadaBlockEntity::tick);
 	}
 
 	@Override
 	public ItemStack getSquishResult() {
 		return new ItemStack(Items.GRAY_DYE, 1);
+	}
+
+	@Override
+	public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
+		super.destroy(pLevel, pPos, pState);
+		if(pLevel.isClientSide()) Minecraft.getInstance().getSoundManager().stop(TFSounds.CICADA.getLocation(), SoundSource.NEUTRAL);
 	}
 
 	@Override
