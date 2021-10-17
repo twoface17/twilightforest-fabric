@@ -266,7 +266,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.MINING_SAPLING);
 		blockItem(TFBlocks.SORTING_SAPLING);
 		blockItem(TFBlocks.RAINBOW_OAK_SAPLING);
-		r.register(blockItem(TFBlocks.MANGROVE_ROOT));
+		blockItem(TFBlocks.MANGROVE_ROOT);
 
 		blockItem(TFBlocks.OAK_BANISTER);
 		blockItem(TFBlocks.SPRUCE_BANISTER);

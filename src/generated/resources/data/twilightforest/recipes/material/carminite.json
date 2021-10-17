@@ -5,13 +5,13 @@
       "item": "twilightforest:borer_essence"
     },
     {
-      "item": "twilightforest:borer_essence"
+      "item": "minecraft:redstone"
     },
     {
       "item": "twilightforest:borer_essence"
     },
     {
-      "item": "twilightforest:borer_essence"
+      "item": "minecraft:redstone"
     },
     {
       "item": "minecraft:ghast_tear"
@@ -20,13 +20,13 @@
       "item": "minecraft:redstone"
     },
     {
-      "item": "minecraft:redstone"
+      "item": "twilightforest:borer_essence"
     },
     {
       "item": "minecraft:redstone"
     },
     {
-      "item": "minecraft:redstone"
+      "item": "twilightforest:borer_essence"
     }
   ],
   "result": {

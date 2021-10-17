@@ -61,7 +61,7 @@ public final class FeatureLogic {
                 && block != TFBlocks.SNOW_QUEEN_BOSS_SPAWNER
                 && block != TFBlocks.MINOSHROOM_BOSS_SPAWNER
                 && block != TFBlocks.ALPHA_YETI_BOSS_SPAWNER
-                && (state.getMaterial() == Material.GRASS || state.getMaterial() == Material.DIRT || state.getMaterial() == Material.STONE || state.getMaterial().isReplaceable() || state.getBlock() == TFBlocks.ROOT_BLOCK.get() || state.getBlock() == TFBlocks.MANGROVE_ROOT.get());
+                && (state.getMaterial() == Material.GRASS || state.getMaterial() == Material.DIRT || state.getMaterial() == Material.STONE || state.getMaterial().isReplaceable() || state.getBlock() == TFBlocks.ROOT_BLOCK || state.getBlock() == TFBlocks.MANGROVE_ROOT);
     }
 
     /**

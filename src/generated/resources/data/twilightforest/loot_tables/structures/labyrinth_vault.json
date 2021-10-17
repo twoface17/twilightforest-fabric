@@ -275,8 +275,8 @@
               "function": "twilightforest:enchant",
               "enchantments": {
                 "minecraft:unbreaking": 3,
-                "minecraft:fortune": 2,
-                "minecraft:efficiency": 4
+                "minecraft:efficiency": 4,
+                "minecraft:fortune": 2
               }
             }
           ],

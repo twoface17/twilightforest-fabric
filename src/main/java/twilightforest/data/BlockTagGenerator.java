@@ -324,8 +324,9 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 .addTag(BlockTags.BUTTONS).add(Blocks.CHEST).add(Blocks.TRAPPED_CHEST).add(Blocks.ENDER_CHEST).add(Blocks.LEVER)
                 .add(TFBlocks.ANTIBUILDER);
 
+        tag(BlockTags.SAND);
         tag(ORE_MAGNET_SAFE_REPLACE_BLOCK)
-                .addTags(ORE_MAGNET_BLOCK_REPLACE_ORE, Tags.Blocks.DIRT, Tags.Blocks.GRAVEL, Tags.Blocks.SAND)
+                .addTag(ORE_MAGNET_BLOCK_REPLACE_ORE).addTag(BlockTags.DIRT).add(Blocks.GRAVEL).addTag(BlockTags.SAND)
                 .add(Blocks.GRANITE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.TUFF, Blocks.CALCITE);
 
         tag(ORE_MAGNET_BLOCK_REPLACE_ORE)
@@ -365,7 +366,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 TFBlocks.HEDGE,
                 TFBlocks.ROOT_BLOCK,
                 TFBlocks.LIVEROOT_BLOCK,
-                TFBlocks.MANGROVE_ROOT.get(),
+                TFBlocks.MANGROVE_ROOT,
                 TFBlocks.UNCRAFTING_TABLE,
                 TFBlocks.ENCASED_SMOKER,
                 TFBlocks.ENCASED_FIRE_JET,

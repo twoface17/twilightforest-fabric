@@ -42,7 +42,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 			TFBlocks.TRANSFORMATION_LOG, TFBlocks.TRANSFORMATION_WOOD, TFBlocks.STRIPPED_TRANSFORMATION_LOG, TFBlocks.STRIPPED_TRANSFORMATION_WOOD, TFBlocks.TRANSFORMATION_LEAVES, TFBlocks.TRANSFORMATION_SAPLING, TFBlocks.TRANSFORMATION_PLANKS, TFBlocks.TRANSFORMATION_SLAB, TFBlocks.TRANSFORMATION_STAIRS, TFBlocks.TRANSFORMATION_BUTTON, TFBlocks.TRANSFORMATION_FENCE, TFBlocks.TRANSFORMATION_GATE, TFBlocks.TRANSFORMATION_PLATE, TFBlocks.TRANSFORMATION_DOOR, TFBlocks.TRANSFORMATION_TRAPDOOR, TFBlocks.TRANSFORMATION_SIGN,
 			TFBlocks.MINING_LOG, TFBlocks.MINING_WOOD, TFBlocks.STRIPPED_MINING_LOG, TFBlocks.STRIPPED_MINING_WOOD, TFBlocks.MINING_LEAVES, TFBlocks.MINING_SAPLING, TFBlocks.MINING_PLANKS, TFBlocks.MINING_SLAB, TFBlocks.MINING_STAIRS, TFBlocks.MINING_BUTTON, TFBlocks.MINING_FENCE, TFBlocks.MINING_GATE, TFBlocks.MINING_PLATE, TFBlocks.MINING_DOOR, TFBlocks.MINING_TRAPDOOR, TFBlocks.MINING_SIGN,
 			TFBlocks.SORTING_LOG, TFBlocks.SORTING_WOOD, TFBlocks.STRIPPED_SORTING_LOG, TFBlocks.STRIPPED_SORTING_WOOD, TFBlocks.SORTING_LEAVES, TFBlocks.SORTING_SAPLING, TFBlocks.SORTING_PLANKS, TFBlocks.SORTING_SLAB, TFBlocks.SORTING_STAIRS, TFBlocks.SORTING_BUTTON, TFBlocks.SORTING_FENCE, TFBlocks.SORTING_GATE, TFBlocks.SORTING_PLATE, TFBlocks.SORTING_DOOR, TFBlocks.SORTING_TRAPDOOR, TFBlocks.SORTING_SIGN,
-			TFBlocks.ROOT_BLOCK, TFBlocks.ROOT_STRAND, TFBlocks.LIVEROOT_BLOCK, TFBlocks.HOLLOW_OAK_SAPLING, TFBlocks.RAINBOW_OAK_SAPLING, TFBlocks.RAINBOW_OAK_LEAVES, TFBlocks.TOWERWOOD, TFBlocks.GIANT_LOG, TFBlocks.GIANT_LEAVES, TFBlocks.HUGE_STALK, TFBlocks.BEANSTALK_LEAVES, TFBlocks.THORN_LEAVES, TFBlocks.THORN_ROSE, TFBlocks.HEDGE, TFBlocks.FALLEN_LEAVES, TFBlocks.MANGROVE_ROOT.get(),
+			TFBlocks.ROOT_BLOCK, TFBlocks.ROOT_STRAND, TFBlocks.LIVEROOT_BLOCK, TFBlocks.HOLLOW_OAK_SAPLING, TFBlocks.RAINBOW_OAK_SAPLING, TFBlocks.RAINBOW_OAK_LEAVES, TFBlocks.TOWERWOOD, TFBlocks.GIANT_LOG, TFBlocks.GIANT_LEAVES, TFBlocks.HUGE_STALK, TFBlocks.BEANSTALK_LEAVES, TFBlocks.THORN_LEAVES, TFBlocks.THORN_ROSE, TFBlocks.HEDGE, TFBlocks.FALLEN_LEAVES, TFBlocks.MANGROVE_ROOT,
 			// TFBlocks.OAK_BANISTER, TFBlocks.SPRUCE_BANISTER, TFBlocks.BIRCH_BANISTER, TFBlocks.JUNGLE_BANISTER, TFBlocks.ACACIA_BANISTER, TFBlocks.DARK_OAK_BANISTER, TFBlocks.CRIMSON_BANISTER, TFBlocks.WARPED_BANISTER,
 			TFBlocks.TWILIGHT_OAK_BANISTER, TFBlocks.CANOPY_BANISTER, TFBlocks.MANGROVE_BANISTER, TFBlocks.DARKWOOD_BANISTER, TFBlocks.TIME_BANISTER, TFBlocks.TRANSFORMATION_BANISTER, TFBlocks.MINING_BANISTER, TFBlocks.SORTING_BANISTER
 	};
@@ -286,12 +286,12 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.save(consumer, "twilightforest:quest_ram");
 
 		Advancement.Builder.advancement().parent(root).display(
-						TFBlocks.CICADA.get(),
+						TFBlocks.CICADA,
 						new TranslatableComponent("advancement.twilightforest.kill_cicada"),
 						new TranslatableComponent("advancement.twilightforest.kill_cicada.desc",
-								new TranslatableComponent(TFBlocks.CICADA.get().getDescriptionId())),
+								new TranslatableComponent(TFBlocks.CICADA.getDescriptionId())),
 						null, FrameType.TASK, true, true, true)
-				.addCriterion("kill_cicada", KillBugTrigger.Instance.killBug(TFBlocks.CICADA.get()))
+				.addCriterion("kill_cicada", KillBugTrigger.Instance.killBug(TFBlocks.CICADA))
 				.save(consumer, "twilightforest:kill_cicada");
 
 		Advancement focus = Advancement.Builder.advancement().parent(silence).display(

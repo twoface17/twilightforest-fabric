@@ -35,6 +35,7 @@ import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfig;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
+import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.CrumbleDispenseBehavior;
 import twilightforest.dispenser.FeatherFanDispenseBehavior;
 import twilightforest.dispenser.MoonwormDispenseBehavior;
