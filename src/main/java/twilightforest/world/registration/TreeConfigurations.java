@@ -31,6 +31,10 @@ import java.util.OptionalInt;
 public final class TreeConfigurations {
     private static final int canopyDistancing = 5;
 
+    static SimpleWeightedRandomList.Builder<BlockState> createBlockList() {
+        return SimpleWeightedRandomList.builder();
+    }
+
     public static final TreeConfiguration TWILIGHT_OAK = new TreeConfiguration.TreeConfigurationBuilder(
             new SimpleStateProvider(BlockConstants.TOAK_LOG),
             new StraightTrunkPlacer(4, 2, 0),
@@ -83,22 +87,17 @@ public final class TreeConfigurations {
                             new SimpleStateProvider(TFBlocks.FIREFLY.defaultBlockState().setValue(FireflyBlock.FACING, Direction.NORTH))
                     ),
                     new DangleFromTreeDecorator(
-                            0,
+                            1,
                             1,
                             2,
                             5,
                             15,
-                            new SimpleStateProvider(TFBlocks.CANOPY_FENCE.defaultBlockState()),
-                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.defaultBlockState())
-                    ),
-                    new DangleFromTreeDecorator(
-                            0,
-                            1,
-                            2,
-                            5,
-                            15,
-                            new SimpleStateProvider(Blocks.CHAIN.defaultBlockState()),
-                            new SimpleStateProvider(TFBlocks.FIREFLY_JAR.defaultBlockState())
+                            new WeightedStateProvider(createBlockList()
+                                    .add(TFBlocks.CANOPY_FENCE.defaultBlockState(), 3)
+                                    .add(Blocks.CHAIN.defaultBlockState(), 1)),
+                            new WeightedStateProvider(createBlockList()
+                                    .add(TFBlocks.FIREFLY_JAR.defaultBlockState(), 10)
+                                    .add(TFBlocks.CICADA_JAR.defaultBlockState(), 1))
                     )
             ))
             .ignoreVines()
@@ -175,8 +174,8 @@ public final class TreeConfigurations {
                             2,
                             4,
                             2,
-                            new SimpleStateProvider(Blocks.CHAIN.defaultBlockState()),
-                            new SimpleStateProvider(Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true))
+                            new WeightedStateProvider(createBlockList().add(Blocks.CHAIN.defaultBlockState(), 1)),
+                            new WeightedStateProvider(createBlockList().add(Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 1))
                     )
             ))
             .ignoreVines()
