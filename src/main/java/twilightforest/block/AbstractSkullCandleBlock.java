@@ -41,7 +41,7 @@ import java.util.Random;
 import java.util.function.ToIntFunction;
 
 //The nastiest mash-up of AbstractSkullBlock and AbstractCandleBlock you will ever see. Oh yeah, some things in here are mine too. I dont copy everything.
-public abstract class AbstractSkullCandleBlock extends AbstractLightableBlock {
+public abstract class AbstractSkullCandleBlock extends AbstractLightableBlock implements IBlockMethods {
 
 	private final SkullBlock.Type type;
 

@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import com.mojang.math.Vector3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
@@ -83,13 +84,14 @@ public class LoadingScreenGui extends Screen {
 
 		String loadTitle = I18n.get(TwilightForestMod.ID + ".loading.title." + (isEntering ? "enter" : "leave"));
 		ms.pushPose();
-		ms.translate(
-				(resolution.getGuiScaledWidth() / 2f) - (fontRenderer.width(loadTitle) / 4f),
-				(resolution.getGuiScaledHeight() / 3f),
-				0f
-		);
-		ms.translate(-(fontRenderer.width(loadTitle) / 4f), 0f, 0f);
-		fontRenderer.drawShadow(ms, loadTitle, 0, 0, 0xEEEEEE); //eeeeeeeeeeeeeeeeee
+
+//		ms.translate(
+//				(resolution.getGuiScaledWidth() / 2f) - (fontRenderer.width(loadTitle) / 4f),
+//				(resolution.getGuiScaledHeight() / 3f),
+//				1f
+//		);
+//		ms.translate(-(fontRenderer.width(loadTitle) / 4f), 0f, 0f);
+//		fontRenderer.drawShadow(ms, loadTitle, 0, 0, 0xEEEEEE); //eeeeeeeeeeeeeeeeee
 		ms.popPose();
 		RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 	}
@@ -121,7 +123,7 @@ public class LoadingScreenGui extends Screen {
 
 		if (LOADING_SCREEN.enable) {
 			// Wobble it!
-			//stack.mulPose(Vector3f.XP.rotation(Mth.sin(sineTicker / LOADING_SCREEN.tiltRange.get().floatValue()) * LOADING_SCREEN.tiltConstant.get().floatValue()));
+			stack.mulPose(Vector3f.ZP.rotationDegrees(Mth.sin(sineTicker / LOADING_SCREEN.tiltRange) * LOADING_SCREEN.tiltConstant));
 
 			// Bounce it!
 			stack.scale(((Mth.sin(((sineTicker2 + 180F) / LOADING_SCREEN.tiltRange) * 2F) / (float) LOADING_SCREEN.scaleDeviation) + 2F) * (LOADING_SCREEN.scale / 2F), ((Mth.sin(((sineTicker + 180F) / LOADING_SCREEN.tiltRange) * 2F) / LOADING_SCREEN.scaleDeviation) + 2F) * (LOADING_SCREEN.scale / 2F), 1F);
