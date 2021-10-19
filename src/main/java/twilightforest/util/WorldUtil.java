@@ -26,7 +26,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import twilightforest.client.model.entity.PartEntity;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 import twilightforest.world.components.chunkgenerators.ChunkGeneratorTwilight;
 import twilightforest.world.registration.TFGenerationSettings;
 

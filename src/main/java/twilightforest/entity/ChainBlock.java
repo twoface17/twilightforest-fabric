@@ -20,7 +20,7 @@ import net.minecraft.world.phys.*;
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import twilightforest.TFSounds;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.entity.monster.BlockChainGoblin;
 import twilightforest.item.TFItems;
 import twilightforest.util.TFDamageSources;

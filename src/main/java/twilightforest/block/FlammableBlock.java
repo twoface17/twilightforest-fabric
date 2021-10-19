@@ -1,7 +1,7 @@
 package twilightforest.block;
 
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

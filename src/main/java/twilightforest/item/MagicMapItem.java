@@ -25,7 +25,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
-import twilightforest.extensions.IMapItemEx;
+import twilightforest.api.extensions.IMapItemEx;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TFMagicMapData;
 import twilightforest.network.MagicMapPacket;

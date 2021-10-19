@@ -1,4 +1,4 @@
-package twilightforest.extensions;
+package twilightforest.api.extensions;
 
 public interface IMapDecorationEx {
     /**

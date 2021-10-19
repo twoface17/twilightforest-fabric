@@ -41,7 +41,7 @@ import twilightforest.TFSounds;
 import twilightforest.block.entity.KeepsakeCasketBlockEntity;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.enums.BlockLoggingEnum;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.item.TFItems;
 
 import javax.annotation.Nullable;

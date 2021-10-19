@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
-import twilightforest.extensions.IItemEx;
+import twilightforest.api.extensions.IItemEx;
 import twilightforest.util.TFStats;
 import twilightforest.util.WorldUtil;
 import java.util.ArrayList;

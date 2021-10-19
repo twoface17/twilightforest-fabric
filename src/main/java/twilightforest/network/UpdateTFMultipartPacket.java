@@ -7,10 +7,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFPart;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 
 import java.util.List;
 

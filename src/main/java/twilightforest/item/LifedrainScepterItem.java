@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Optional;
 
 import twilightforest.entity.boss.AlphaYeti;
-import twilightforest.extensions.IItemEx;
+import twilightforest.api.extensions.IItemEx;
 
 public class LifedrainScepterItem extends Item implements IItemEx {
 

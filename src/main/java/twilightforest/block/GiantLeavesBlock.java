@@ -1,6 +1,6 @@
 package twilightforest.block;
 
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;

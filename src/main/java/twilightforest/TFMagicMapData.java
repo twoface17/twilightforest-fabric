@@ -18,7 +18,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import twilightforest.extensions.IMapDecorationEx;
+import twilightforest.api.extensions.IMapDecorationEx;
 import twilightforest.world.registration.TFFeature;
 
 import javax.annotation.Nullable;

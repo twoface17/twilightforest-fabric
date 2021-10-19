@@ -49,7 +49,7 @@ public interface IPlantable {
          *
          * <p>If your new plant grows on blocks like any one of them above, never create a new {@link PlantType}.
          * This Type is only functioning in
-         * {@link twilightforest.extensions.IBlockMethods#canSustainPlant(BlockState, BlockGetter, BlockPos, net.minecraft.core.Direction, IPlantable)},
+         * {@link twilightforest.api.extensions.IBlockMethods#canSustainPlant(BlockState, BlockGetter, BlockPos, net.minecraft.core.Direction, IPlantable)},
          * which you are supposed to override this function in your new block and create a new plant type to grow on that block.
          *
          * This method can be called during parallel loading

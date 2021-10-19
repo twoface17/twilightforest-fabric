@@ -9,15 +9,13 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import twilightforest.entity.IBreathAttacker;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import net.minecraft.world.entity.ai.goal.Goal.Flag;
 
 public class BreathAttackGoal<T extends Mob & IBreathAttacker> extends Goal {
 

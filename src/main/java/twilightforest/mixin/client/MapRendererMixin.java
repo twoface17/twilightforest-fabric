@@ -11,10 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import twilightforest.ASMHooks;
-import twilightforest.TwilightForestMod;
-import twilightforest.extensions.IMapDecorationEx;
-
-import java.util.Iterator;
+import twilightforest.api.extensions.IMapDecorationEx;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

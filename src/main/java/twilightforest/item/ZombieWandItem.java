@@ -22,7 +22,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.entity.monster.LoyalZombie;
 import twilightforest.entity.TFEntities;
-import twilightforest.extensions.IItemEx;
+import twilightforest.api.extensions.IItemEx;
 import twilightforest.util.EntityUtil;
 
 import javax.annotation.Nonnull;

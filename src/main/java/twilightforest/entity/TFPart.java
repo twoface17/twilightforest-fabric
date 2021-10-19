@@ -11,9 +11,8 @@ import net.minecraft.world.phys.Vec3;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
-import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.PartEntity;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 
 import java.util.Objects;
 

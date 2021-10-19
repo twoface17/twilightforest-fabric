@@ -4,8 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -30,10 +28,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.client.particle.data.LeafParticleData;
 import twilightforest.enums.PlantVariant;
-import twilightforest.extensions.IBlockMethods;
-import twilightforest.extensions.IBlockStateEx;
+import twilightforest.api.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockStateEx;
 import twilightforest.network.SpawnFallenLeafFromPacket;
-import twilightforest.network.TFPacketHandler;
 
 import java.util.Random;
 

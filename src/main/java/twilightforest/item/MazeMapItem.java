@@ -23,12 +23,11 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import twilightforest.TFMazeMapData;
-import twilightforest.extensions.IMapItemEx;
+import twilightforest.api.extensions.IMapItemEx;
 import twilightforest.network.MazeMapPacket;
 import twilightforest.network.TFPacketHandler;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 // [VanillaCopy] super everything, but with appropriate redirections to our own datastructures. finer details noted
 // FIXME: Map does not display data. Investigate

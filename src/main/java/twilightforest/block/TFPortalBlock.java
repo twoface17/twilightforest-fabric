@@ -46,7 +46,7 @@ import twilightforest.data.BlockTagGenerator;
 //import twilightforest.network.MissingAdvancementToastPacket;
 import twilightforest.util.PlayerHelper;
 import twilightforest.world.NoReturnTeleporter;
-import twilightforest.extensions.IEntityEx;
+import twilightforest.api.extensions.IEntityEx;
 import twilightforest.world.registration.TFGenerationSettings;
 import twilightforest.world.TFTeleporter;
 

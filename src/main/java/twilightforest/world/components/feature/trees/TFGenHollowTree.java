@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import twilightforest.entity.TFEntities;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.loot.TFTreasure;
 import twilightforest.block.TFBlocks;
 import twilightforest.util.FeatureLogic;

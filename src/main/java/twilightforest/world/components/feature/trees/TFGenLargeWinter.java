@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 
-import twilightforest.extensions.IBlockMethods;
 import twilightforest.util.FeaturePlacers;
 import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
 import twilightforest.world.components.feature.trees.growers.SnowTreePlacer;

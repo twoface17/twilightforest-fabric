@@ -21,7 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TFSounds;
-import twilightforest.extensions.IBlockMethods;
+import twilightforest.api.extensions.IBlockMethods;
 
 import java.util.*;
 

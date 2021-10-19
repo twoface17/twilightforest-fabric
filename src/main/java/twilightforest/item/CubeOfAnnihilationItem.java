@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import twilightforest.entity.CubeOfAnnihilation;
 import twilightforest.entity.TFEntities;
-import twilightforest.extensions.IItemEx;
+import twilightforest.api.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
