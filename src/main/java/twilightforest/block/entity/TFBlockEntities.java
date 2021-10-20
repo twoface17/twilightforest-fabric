@@ -1,12 +1,12 @@
 package twilightforest.block.entity;
 
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
@@ -99,13 +99,14 @@ public class TFBlockEntities {
 	@Environment(EnvType.CLIENT)
 	public static void registerTileEntityRenders() {
 		// tile entities
-		BlockEntityRendererRegistry.register(FIREFLY, FireflyTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(CICADA, CicadaTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(MOONWORM, MoonwormTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(TROPHY, TrophyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(FIREFLY, FireflyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(FIREFLY, FireflyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(CICADA, CicadaTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(MOONWORM, MoonwormTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(TROPHY, TrophyTileEntityRenderer::new);
 		BlockEntityRenderers.register(TF_SIGN, SignRenderer::new);
-		BlockEntityRendererRegistry.register(KEEPSAKE_CASKET, CasketTileEntityRenderer::new);
-		BlockEntityRendererRegistry.register(SKULL_CANDLE, SkullCandleTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(KEEPSAKE_CASKET, CasketTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(SKULL_CANDLE, SkullCandleTileEntityRenderer::new);
 
 		registerTileEntitysItemRenders();
 	}
