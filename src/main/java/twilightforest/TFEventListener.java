@@ -684,6 +684,7 @@ public class TFEventListener {
 		CapabilityList.SHIELD_CAPABILITY_COMPONENT_KEY.maybeGet(living).ifPresent(IShieldCapability::update);
 
 		// Stop the player from sneaking while riding an unfriendly creature
+		//FIXME keep an eye on https://github.com/MinecraftForge/MinecraftForge/pull/8114, switch to the MountEvent to properly fix dismounting
 		if (living instanceof Player && living.isShiftKeyDown() && isRidingUnfriendly(living)) {
 			living.setShiftKeyDown(false);
 		}
@@ -699,7 +700,8 @@ public class TFEventListener {
 	 */
 	public static boolean breakBlock(Level world, Player player, BlockPos pos, BlockState state) {
 		boolean cancelled = false;
-		if (world.isClientSide) return true;
+
+		if (!(world instanceof Level world) || ((Level) world).isClientSide) return true;
 
 		if (isBlockProtectedFromBreaking(world, pos) && isAreaProtected(world, player, pos)) {
 			cancelled = true;
@@ -735,10 +737,9 @@ public class TFEventListener {
 			}
 
 			// break all nearby blocks
-			if (player instanceof ServerPlayer) {
-				ServerPlayer playerMP = (ServerPlayer) player;
+			if (player instanceof ServerPlayer playerMP) {
 				for (BlockPos dPos : GiantBlock.getVolume(pos)) {
-					if (!dPos.equals(pos) && state == world.getBlockState(dPos)) {
+					if (!dPos.equals(pos) && state.getBlock() == world.getBlockState(dPos).getBlock()) {
 						// try to break that block too!
 						playerMP.gameMode.destroyBlock(dPos);
 					}
@@ -753,7 +754,7 @@ public class TFEventListener {
 	private static boolean canHarvestWithGiantPick(Player player, BlockState state) {
 		ItemStack heldStack = player.getMainHandItem();
 		Item heldItem = heldStack.getItem();
-		return heldItem == TFItems.GIANT_PICKAXE/* && heldItem.canHarvestBlock(heldStack, state)*/;
+		return heldItem == TFItems.GIANT_PICKAXE && heldItem.isCorrectToolForDrops(state);
 	}
 
 	public static InteractionResult onPlayerRightClick(Player player, BlockPos pos) {
