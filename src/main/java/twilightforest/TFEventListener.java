@@ -701,7 +701,7 @@ public class TFEventListener {
 	public static boolean breakBlock(Level world, Player player, BlockPos pos, BlockState state) {
 		boolean cancelled = false;
 
-		if (!(world instanceof Level world) || ((Level) world).isClientSide) return true;
+		if (world.isClientSide) return true;
 
 		if (isBlockProtectedFromBreaking(world, pos) && isAreaProtected(world, player, pos)) {
 			cancelled = true;

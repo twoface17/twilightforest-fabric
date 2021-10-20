@@ -22,13 +22,11 @@ public class EnchantmentMenuPatch implements Patch {
 
     @Override
     public String getMethodName() {
-        System.out.println(FabricLoader.getInstance().getMappingResolver().mapMethodName("intermediary", "net.minecraft.class_898", "method_7609", "(Lnet/minecraft/class_1263;)V"));
         return FabricLoader.getInstance().getMappingResolver().mapMethodName("intermediary", "net.minecraft.class_898", "method_7609", "(Lnet/minecraft/class_1263;)V");
     }
 
     @Override
     public String getMethodDesc() {
-        System.out.println(FabricLoader.getInstance().isDevelopmentEnvironment() ? "(Lnet/minecraft/world/Container;)V" : "(Lnet/minecraft/class_1263;)V");
         return FabricLoader.getInstance().isDevelopmentEnvironment() ? "(Lnet/minecraft/world/Container;)V" : "(Lnet/minecraft/class_1263;)V";
     }
 }

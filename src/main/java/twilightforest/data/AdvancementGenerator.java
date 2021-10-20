@@ -387,7 +387,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 				.addCriterion("hydra_chop", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.HYDRA_CHOP))
 				.addCriterion("maze_wafer", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.MAZE_WAFER))
 				.addCriterion("experiment_115", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.EXPERIMENT_115))
-				.addCriterion("torchberries", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.TORCHBERRIES.get()))
+				.addCriterion("torchberries", ConsumeItemTrigger.TriggerInstance.usedItem(TFItems.TORCHBERRIES))
 				.requirements(new CountRequirementsStrategy(2, 2, 1, 1, 1, 1, 1))
 				.rewards(AdvancementRewards.Builder.experience(75))
 				.save(consumer, "twilightforest:twilight_dinner");
