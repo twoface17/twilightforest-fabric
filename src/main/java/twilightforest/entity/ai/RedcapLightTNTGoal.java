@@ -3,13 +3,11 @@ package twilightforest.entity.ai;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.phys.Vec3;
 import twilightforest.entity.monster.Redcap;
-import twilightforest.mixin.TntBlockAccessor;
+import twilightforest.api.mixin.TntBlockAccessor;
 
 import java.util.EnumSet;
 

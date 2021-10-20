@@ -72,7 +72,7 @@ import twilightforest.entity.passive.TinyBird;
 import twilightforest.enums.BlockLoggingEnum;
 import twilightforest.item.PhantomArmorItem;
 import twilightforest.item.TFItems;
-import twilightforest.mixin.MobAccessor;
+import twilightforest.api.mixin.MobAccessor;
 import twilightforest.network.AreaProtectionPacket;
 import twilightforest.network.EnforceProgressionStatusPacket;
 import twilightforest.network.TFPacketHandler;

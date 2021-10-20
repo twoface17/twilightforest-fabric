@@ -8,7 +8,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
-import twilightforest.mixin.BlockRotProcessorAccessor;
+import twilightforest.api.mixin.BlockRotProcessorAccessor;
 import twilightforest.world.registration.TFStructureProcessors;
 
 import javax.annotation.Nullable;

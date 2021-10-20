@@ -31,7 +31,7 @@
 
     ],
     "mm:early_risers": [
-      "twilightforest.mixin.plugin.TFEarlyRiser"
+      "twilightforest.api.mixin.plugin.TFEarlyRiser"
     ],
     "cardinal-components": [
       "twilightforest.capabilities.CapabilityList"

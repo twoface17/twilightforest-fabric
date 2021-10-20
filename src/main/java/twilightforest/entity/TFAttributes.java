@@ -3,7 +3,6 @@ package twilightforest.entity;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import twilightforest.mixin.ServerPlayerGameModeMixin;
 
 public class TFAttributes {
 

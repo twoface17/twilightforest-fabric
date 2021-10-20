@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "twilightforest.mixin",
+  "package": "twilightforest.api.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AbstractArrowMixin",
@@ -32,7 +32,8 @@
     "ServerPlayerMixin",
     "SpawnPlacementsMixin",
     "TntBlockAccessor",
-    "WorldGenRegionMixin"
+    "WorldGenRegionMixin",
+    "EnchantmentMenuMixin"
   ],
   "client": [
     "client.BlockColorsMixin",
@@ -49,7 +50,7 @@
     "client.MultiPlayerGameModeMixin",
     "client.ScreenMixin"
   ],
-  "plugin": "twilightforest.mixin.plugin.TwilightForestMixinPlugin",
+  "plugin": "twilightforest.api.mixin.plugin.TwilightForestMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }
