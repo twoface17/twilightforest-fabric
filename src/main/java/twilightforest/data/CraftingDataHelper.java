@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
+import twilightforest.block.TwilightChest;
 
 import java.util.function.Consumer;
 
@@ -304,6 +305,17 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.define('|', Items.STICK)
 				.unlockedBy("has_item", has(material))
 				.save(consumer, locWood(name + "_banister"));
+	}
+
+	protected final void chestBlock(Consumer<FinishedRecipe> consumer, String name, Supplier<? extends TwilightChest> result, Supplier<? extends Block> material) {
+		ShapedRecipeBuilder.shaped(result.get(), 2)
+				.pattern("###")
+				.pattern("#C#")
+				.pattern("###")
+				.define('#', material.get())
+				.define('C', Tags.Items.CHESTS_WOODEN)
+				.unlockedBy("has_item", has(material.get()))
+				.save(consumer, locWood(name + "_chest"));
 	}
 
 	protected final void fieryConversion(Consumer<FinishedRecipe> consumer, Item result, Item armor, int vials) {

@@ -1,25 +1,25 @@
 package twilightforest.entity.projectile;
 
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.Level;
+
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.entity.boss.Lich;
 import twilightforest.util.TFDamageSources;
 
-public class LichBolt extends TFThrowable implements ItemSupplier {
+public class LichBolt extends TFThrowable {
 
 	@SuppressWarnings("unused")
 	public LichBolt(EntityType<? extends LichBolt> type, Level world) {
@@ -98,8 +98,8 @@ public class LichBolt extends TFThrowable implements ItemSupplier {
 
 	@Override
 	protected void onHit(HitResult result) {
-		if (result instanceof EntityHitResult) {
-			Entity entityHit = ((EntityHitResult)result).getEntity();
+		if (result instanceof EntityHitResult hit) {
+			Entity entityHit = hit.getEntity();
 			if (entityHit instanceof LichBolt
 					|| entityHit instanceof LichBomb
 					|| (entityHit instanceof Lich && ((Lich) entityHit).isShadowClone())) {
@@ -114,10 +114,5 @@ public class LichBolt extends TFThrowable implements ItemSupplier {
 				this.discard();
 			}
 		}
-	}
-
-	@Override
-	public ItemStack getItem() {
-		return new ItemStack(Items.ENDER_PEARL);
 	}
 }

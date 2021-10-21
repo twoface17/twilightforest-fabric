@@ -427,8 +427,8 @@ public class TFEntities {
 
 			// projectiles
 			EntityRendererRegistry.register(NATURE_BOLT, ThrownItemRenderer::new);
-			EntityRendererRegistry.register(LICH_BOLT, ThrownItemRenderer::new);
-			EntityRendererRegistry.register(WAND_BOLT, ThrownItemRenderer::new);
+			EntityRendererRegistry.register(LICH_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
+			EntityRendererRegistry.register(WAND_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
 			EntityRendererRegistry.register(TOME_BOLT, ThrownItemRenderer::new);
 			EntityRendererRegistry.register(HYDRA_MORTAR, HydraMortarRenderer::new);
 			EntityRendererRegistry.register(SLIME_BLOB, ThrownItemRenderer::new);

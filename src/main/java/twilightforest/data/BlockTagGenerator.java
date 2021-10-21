@@ -164,6 +164,10 @@ public class BlockTagGenerator extends BlockTagsProvider {
         tag(BlockTags.WOODEN_DOORS)
                 .add(TFBlocks.TWILIGHT_OAK_DOOR, TFBlocks.CANOPY_DOOR, TFBlocks.MANGROVE_DOOR, TFBlocks.DARK_DOOR)
                 .add(TFBlocks.TIME_DOOR, TFBlocks.TRANSFORMATION_DOOR, TFBlocks.MINING_DOOR, TFBlocks.SORTING_DOOR);
+
+        tag(Tags.Blocks.CHESTS_WOODEN)
+                .add(TFBlocks.TWILIGHT_OAK_CHEST.get(), TFBlocks.CANOPY_CHEST.get(), TFBlocks.MANGROVE_CHEST.get(), TFBlocks.DARKWOOD_CHEST.get())
+                .add(TFBlocks.TIME_CHEST.get(), TFBlocks.TRANSFORMATION_CHEST.get(), TFBlocks.MINING_CHEST.get(), TFBlocks.SORTING_CHEST.get());
         tag(BlockTags.FLOWER_POTS)
                 .add(TFBlocks.POTTED_TWILIGHT_OAK_SAPLING, TFBlocks.POTTED_CANOPY_SAPLING, TFBlocks.POTTED_MANGROVE_SAPLING, TFBlocks.POTTED_DARKWOOD_SAPLING, TFBlocks.POTTED_RAINBOW_OAK_SAPLING)
                 .add(TFBlocks.POTTED_HOLLOW_OAK_SAPLING, TFBlocks.POTTED_TIME_SAPLING, TFBlocks.POTTED_TRANSFORMATION_SAPLING, TFBlocks.POTTED_MINING_SAPLING, TFBlocks.POTTED_SORTING_SAPLING)

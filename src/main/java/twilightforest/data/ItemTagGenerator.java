@@ -113,6 +113,8 @@ public class ItemTagGenerator extends ItemTagsProvider {
 				TFBlocks.TIME_SIGN.asItem(), TFBlocks.TRANSFORMATION_SIGN.asItem(),
 				TFBlocks.MINING_SIGN.asItem(), TFBlocks.SORTING_SIGN.asItem());
 
+		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
+
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_ARCTIC_FUR, STORAGE_BLOCKS_ARCTIC_FUR);
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_CARMINITE, STORAGE_BLOCKS_CARMINITE);
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_FIERY, STORAGE_BLOCKS_FIERY);

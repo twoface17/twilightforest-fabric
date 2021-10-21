@@ -1,5 +1,6 @@
 package twilightforest.entity.projectile;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +14,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import twilightforest.entity.boss.UrGhast;
 import twilightforest.entity.projectile.ITFProjectile;
+
+import javax.annotation.Nullable;
 
 public class UrGhastFireball extends LargeFireball implements ITFProjectile {
 

@@ -2,7 +2,7 @@ package twilightforest.block.entity;
 
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererRegistry.INSTANCE;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -83,6 +83,12 @@ public class TFBlockEntities {
 					TFBlocks.MINING_SIGN, TFBlocks.MINING_WALL_SIGN,
 					TFBlocks.SORTING_SIGN, TFBlocks.SORTING_WALL_SIGN).build(null));
 
+	public static final RegistryObject<BlockEntityType<TwilightChestEntity>> TF_CHEST = TILE_ENTITIES.register("tf_chest", () ->
+			BlockEntityType.Builder.of(TwilightChestEntity::new,
+					TFBlocks.TWILIGHT_OAK_CHEST.get(), TFBlocks.CANOPY_CHEST.get(), TFBlocks.MANGROVE_CHEST.get(),
+					TFBlocks.DARKWOOD_CHEST.get(), TFBlocks.TIME_CHEST.get(), TFBlocks.TRANSFORMATION_CHEST.get(),
+					TFBlocks.MINING_CHEST.get(), TFBlocks.SORTING_CHEST.get()).build(null));
+
 	public static final BlockEntityType<SkullCandleBlockEntity> SKULL_CANDLE = Registry.register(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID + ":skull_candle",
 			BlockEntityType.Builder.of(SkullCandleBlockEntity::new,
 					TFBlocks.ZOMBIE_SKULL_CANDLE, TFBlocks.ZOMBIE_WALL_SKULL_CANDLE,
@@ -99,16 +105,14 @@ public class TFBlockEntities {
 	@Environment(EnvType.CLIENT)
 	public static void registerTileEntityRenders() {
 		// tile entities
-		BlockEntityRendererRegistry.INSTANCE.register(FIREFLY, FireflyTileEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(FIREFLY, FireflyTileEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(CICADA, CicadaTileEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(MOONWORM, MoonwormTileEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(TROPHY, TrophyTileEntityRenderer::new);
-		BlockEntityRenderers.register(TF_SIGN, SignRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(KEEPSAKE_CASKET, CasketTileEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE.register(SKULL_CANDLE, SkullCandleTileEntityRenderer::new);
-
-		registerTileEntitysItemRenders();
+		BlockEntityRendererRegistry.INSTANCE.register(FIREFLY.get(), FireflyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(CICADA.get(), CicadaTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(MOONWORM.get(), MoonwormTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(TROPHY.get(), TrophyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(TF_SIGN.get(), SignRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(TF_CHEST.get(), TwilightChestRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(KEEPSAKE_CASKET.get(), CasketTileEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(SKULL_CANDLE.get(), SkullCandleTileEntityRenderer::new);
 	}
 
 	public static void registerTileEntitysItemRenders(){

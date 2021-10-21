@@ -1,5 +1,6 @@
 package twilightforest.entity.projectile;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,9 +16,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFEntities;
 
-public class TwilightWandBolt extends TFThrowable implements ItemSupplier {
+import javax.annotation.Nullable;
+
+public class TwilightWandBolt extends TFThrowable {
 
 	public TwilightWandBolt(EntityType<? extends TwilightWandBolt> type, Level world) {
 		super(type, world);
@@ -73,9 +77,9 @@ public class TwilightWandBolt extends TFThrowable implements ItemSupplier {
 	@Override
 	protected void onHit(HitResult result) {
 		if (!this.level.isClientSide) {
-			if (result instanceof EntityHitResult) {
-				if (((EntityHitResult)result).getEntity() instanceof LivingEntity) {
-					((EntityHitResult)result).getEntity().hurt(DamageSource.indirectMagic(this, this.getOwner()), 6);
+			if (result instanceof EntityHitResult hit) {
+				if (hit.getEntity() instanceof LivingEntity entity) {
+					entity.hurt(DamageSource.indirectMagic(this, this.getOwner()), 6);
 				}
 			}
 
@@ -100,10 +104,5 @@ public class TwilightWandBolt extends TFThrowable implements ItemSupplier {
 		}
 
 		return false;
-	}
-
-	@Override
-	public ItemStack getItem() {
-		return new ItemStack(Items.ENDER_PEARL);
 	}
 }
