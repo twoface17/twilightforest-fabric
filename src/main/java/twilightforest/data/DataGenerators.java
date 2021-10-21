@@ -3,6 +3,7 @@ package twilightforest.data;
 import com.mojang.brigadier.Command;
 import twilightforest.TwilightForestMod;
 
+import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.server.Bootstrap;
@@ -16,14 +17,14 @@ public class DataGenerators {
 		DataGenerator generator = new DataGenerator(Paths.get("../src/generated/resources"), Collections.emptyList());
 
 		generator.addProvider(new AdvancementProvider(generator));
-		//generator.addProvider(new BlockstateGenerator(generator));
-		//generator.addProvider(new ItemModelGenerator(generator));
+//		generator.addProvider(new BlockstateGenerator(generator));
+//		generator.addProvider(new ItemModelGenerator(generator));
 		BlockTagsProvider blocktags = new BlockTagGenerator(generator);
 		generator.addProvider(blocktags);
 		generator.addProvider(new FluidTagGenerator(generator));
 		generator.addProvider(new ItemTagGenerator(generator, blocktags));
 		generator.addProvider(new EntityTagGenerator(generator));
-		//generator.addProvider(new CustomTagGenerator.EnchantmentTagGenerator(generator));
+		generator.addProvider(new CustomTagGenerator.EnchantmentTagGenerator(generator));
 		generator.addProvider(new LootGenerator(generator));
 		generator.addProvider(new StonecuttingGenerator(generator));
 		generator.addProvider(new CraftingGenerator(generator));

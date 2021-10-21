@@ -12,15 +12,19 @@
     "BoundingBoxMixin",
     "BowItemMixin",
     "BushBlockMixin",
+    "ChestRendererAccessor",
     "ChunkMapMixin",
+    "EnchantmentMenuMixin",
     "EntityMixin",
     "FireBlockMixin",
+    "HangingEntityAccessor",
     "ItemMixin",
     "LevelMixinPatch",
     "LivingEntityMixin",
     "MapDecorationMixin",
     "MapItemMixin",
     "MobAccessor",
+    "ModelBakeryAccessor",
     "PlayerAdvancementsMixin",
     "PlayerMixin",
     "RarityMixin",
@@ -32,8 +36,7 @@
     "ServerPlayerMixin",
     "SpawnPlacementsMixin",
     "TntBlockAccessor",
-    "WorldGenRegionMixin",
-    "EnchantmentMenuMixin"
+    "WorldGenRegionMixin"
   ],
   "client": [
     "client.BlockColorsMixin",
@@ -48,7 +51,7 @@
     "client.MapRendererMixin",
     "client.ModelManagerMixin",
     "client.MultiPlayerGameModeMixin",
-    "client.ScreenMixin"
+    "client.TextureAtlasMixin"
   ],
   "plugin": "twilightforest.api.mixin.plugin.TwilightForestMixinPlugin",
   "injectors": {

@@ -35,6 +35,7 @@ import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 
 import net.fabricmc.loader.api.FabricLoader;
+import twilightforest.api.mixin.HangingEntityAccessor;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.CastleBlock;
@@ -54,32 +55,6 @@ import java.util.List;
 import java.util.Random;
 
 public class TowerWingComponent extends TFStructureComponentOld {
-
-	private static Method getHangingEntity_updateFacingWithBoundingBox() {
-		try {
-			if(FabricLoader.getInstance().isDevelopmentEnvironment()) {
-				return HangingEntity.class.getDeclaredMethod("setDirection", Direction.class);
-			}
-			return HangingEntity.class.getDeclaredMethod("method_6892", Direction.class);
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
-	private static final Method HangingEntity_updateFacingWithBoundingBox = getHangingEntity_updateFacingWithBoundingBox();
-	private static final MethodHandle handle_HangingEntity_updateFacingWithBoundingBox;
-
-	static {
-		MethodHandle tmp_handle_HangingEntity_updateFacingWithBoundingBox = null;
-		try {
-			tmp_handle_HangingEntity_updateFacingWithBoundingBox = LOOKUP.unreflect(HangingEntity_updateFacingWithBoundingBox);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		handle_HangingEntity_updateFacingWithBoundingBox = tmp_handle_HangingEntity_updateFacingWithBoundingBox;
-	}
 
 	public TowerWingComponent(ServerLevel level, CompoundTag nbt) {
 		this(LichTowerPieces.TFLTWin, nbt);
@@ -1907,11 +1882,7 @@ public class TowerWingComponent extends TFStructureComponentOld {
 			// initialize a painting object
 			Motive art = getPaintingOfSize(rand, minSize);
 			Painting painting = new Painting(EntityType.PAINTING, world.getLevel());
-			try {
-				handle_HangingEntity_updateFacingWithBoundingBox.invoke(painting, direction);
-			} catch (Throwable throwable) {
-				throwable.printStackTrace();
-			}
+			((HangingEntityAccessor)painting).callSetDirection(direction);
 			painting.motive = art;
 			painting.setPos(pCoords.getX(), pCoords.getY(), pCoords.getZ()); // this is done to refresh the bounding box after changing the art
 

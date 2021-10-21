@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
@@ -20,13 +20,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
-import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.*;
 import twilightforest.block.entity.TwilightChestEntity;
@@ -42,7 +38,7 @@ import java.util.Map;
 public class ISTER extends BlockEntityWithoutLevelRenderer {
 	private final ResourceLocation typeId;
 	private BlockEntity dummy;
-	private final KeepsakeCasketBlockEntity keepsakeCasketBlockEntity = new KeepsakeCasketBlockEntity(BlockPos.ZERO, TFBlocks.KEEPSAKE_CASKET.get().defaultBlockState());
+	private final KeepsakeCasketBlockEntity keepsakeCasketBlockEntity = new KeepsakeCasketBlockEntity(BlockPos.ZERO, TFBlocks.KEEPSAKE_CASKET.defaultBlockState());
 	private final Map<Block, TwilightChestEntity> chestEntities = Util.make(new HashMap<>(), map -> {
 		makeInstance(map, TFBlocks.TWILIGHT_OAK_CHEST);
 		makeInstance(map, TFBlocks.CANOPY_CHEST);
@@ -128,9 +124,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer {
 		}
 	}
 
-	public static void makeInstance(Map<Block, TwilightChestEntity> map, RegistryObject<? extends ChestBlock> registryObject) {
-		ChestBlock block = registryObject.get();
-
+	public static void makeInstance(Map<Block, TwilightChestEntity> map, ChestBlock block) {
 		map.put(block, new TwilightChestEntity(BlockPos.ZERO, block.defaultBlockState()));
 	}
 }

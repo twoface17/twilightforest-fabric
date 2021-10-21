@@ -46,6 +46,8 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> ORES_IRONWOOD = TagFactory.BLOCK.create(new ResourceLocation("c:ironwood_ores"));
     public static final Tag.Named<Block> ORES_KNIGHTMETAL = TagFactory.BLOCK.create(new ResourceLocation("c:knightmetal_ores"));
 
+    public static final Tag.Named<Block> CHESTS_WOODEN = TagFactory.BLOCK.create(new ResourceLocation("c:wooden_chests"));
+
     public static final Tag.Named<Block> PORTAL_EDGE = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/edge"));
     public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/fluid"));
     public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/decoration"));
@@ -165,9 +167,10 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 .add(TFBlocks.TWILIGHT_OAK_DOOR, TFBlocks.CANOPY_DOOR, TFBlocks.MANGROVE_DOOR, TFBlocks.DARK_DOOR)
                 .add(TFBlocks.TIME_DOOR, TFBlocks.TRANSFORMATION_DOOR, TFBlocks.MINING_DOOR, TFBlocks.SORTING_DOOR);
 
-        tag(Tags.Blocks.CHESTS_WOODEN)
-                .add(TFBlocks.TWILIGHT_OAK_CHEST.get(), TFBlocks.CANOPY_CHEST.get(), TFBlocks.MANGROVE_CHEST.get(), TFBlocks.DARKWOOD_CHEST.get())
-                .add(TFBlocks.TIME_CHEST.get(), TFBlocks.TRANSFORMATION_CHEST.get(), TFBlocks.MINING_CHEST.get(), TFBlocks.SORTING_CHEST.get());
+        tag(CHESTS_WOODEN)
+                .add(Blocks.CHEST).add(Blocks.TRAPPED_CHEST)
+                .add(TFBlocks.TWILIGHT_OAK_CHEST, TFBlocks.CANOPY_CHEST, TFBlocks.MANGROVE_CHEST, TFBlocks.DARKWOOD_CHEST)
+                .add(TFBlocks.TIME_CHEST, TFBlocks.TRANSFORMATION_CHEST, TFBlocks.MINING_CHEST, TFBlocks.SORTING_CHEST);
         tag(BlockTags.FLOWER_POTS)
                 .add(TFBlocks.POTTED_TWILIGHT_OAK_SAPLING, TFBlocks.POTTED_CANOPY_SAPLING, TFBlocks.POTTED_MANGROVE_SAPLING, TFBlocks.POTTED_DARKWOOD_SAPLING, TFBlocks.POTTED_RAINBOW_OAK_SAPLING)
                 .add(TFBlocks.POTTED_HOLLOW_OAK_SAPLING, TFBlocks.POTTED_TIME_SAPLING, TFBlocks.POTTED_TRANSFORMATION_SAPLING, TFBlocks.POTTED_MINING_SAPLING, TFBlocks.POTTED_SORTING_SAPLING)

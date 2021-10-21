@@ -19,6 +19,7 @@ import twilightforest.block.TFBlocks;
 import twilightforest.block.TwilightChest;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class CraftingDataHelper extends RecipeProvider {
 	public CraftingDataHelper(DataGenerator generator) {
@@ -307,14 +308,14 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.save(consumer, locWood(name + "_banister"));
 	}
 
-	protected final void chestBlock(Consumer<FinishedRecipe> consumer, String name, Supplier<? extends TwilightChest> result, Supplier<? extends Block> material) {
-		ShapedRecipeBuilder.shaped(result.get(), 2)
+	protected final void chestBlock(Consumer<FinishedRecipe> consumer, String name, TwilightChest result, Block material) {
+		ShapedRecipeBuilder.shaped(result, 2)
 				.pattern("###")
 				.pattern("#C#")
 				.pattern("###")
-				.define('#', material.get())
-				.define('C', Tags.Items.CHESTS_WOODEN)
-				.unlockedBy("has_item", has(material.get()))
+				.define('#', material)
+				.define('C', ItemTagGenerator.CHESTS_WOODEN)
+				.unlockedBy("has_item", has(material))
 				.save(consumer, locWood(name + "_chest"));
 	}
 

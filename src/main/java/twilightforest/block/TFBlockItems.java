@@ -6,7 +6,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import twilightforest.TwilightForestMod;
+import twilightforest.client.ISTER;
 import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
 
@@ -367,19 +370,19 @@ public class TFBlockItems {
 		tallBlock(TFBlocks.SORTING_DOOR);
 		signBlock(TFBlocks.SORTING_SIGN, TFBlocks.SORTING_WALL_SIGN);
 		blockItem(TFBlocks.SORTING_BANISTER);
+
+		makeBEWLRItem(TFBlocks.TWILIGHT_OAK_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.CANOPY_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.MANGROVE_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.DARKWOOD_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.TIME_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.TRANSFORMATION_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.MINING_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
+		makeBEWLRItem(TFBlocks.SORTING_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
 	}
 
 	public static Item.Properties defaultBuilder() {
 		return new Item.Properties().tab(creativeTab);
-
-		makeBEWLRItem(r, TFBlocks.TWILIGHT_OAK_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.CANOPY_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.MANGROVE_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.DARKWOOD_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.TIME_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.TRANSFORMATION_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.MINING_CHEST, TFBlockEntities.TF_CHEST.getId());
-		makeBEWLRItem(r, TFBlocks.SORTING_CHEST, TFBlockEntities.TF_CHEST.getId());
 	}
 
 	private static <B extends Block> Item blockItem(B block) {
@@ -387,17 +390,9 @@ public class TFBlockItems {
 	}
 
 	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(B floor, B wall) {
-		return makeBlockItem(new SkullCandleItem(floor, wall, defaultBuilder().rarity(Rarity.UNCOMMON)) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId();
-//					}
-//				});
-//			}
-		}, floor);
+		Item item = makeBlockItem(new SkullCandleItem(floor, wall, defaultBuilder().rarity(Rarity.UNCOMMON)), floor);
+		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE))::renderByItem);
+		return item;
 	}
 
 	private static <B extends Block> Item burningItem(B block, int burntime) {
@@ -405,31 +400,15 @@ public class TFBlockItems {
 	}
 
 	private static <B extends Block, W extends Block> Item trophyBlock(B block, W wallblock) {
-		return makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TwilightForestMod.getRarity())) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.TROPHY.getId());
-//					}
-//				});
-//			}
-		}, block);
+		Item item = makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TwilightForestMod.getRarity())), block);
+		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TROPHY))::renderByItem);
+		return item;
 	}
 
 	private static <T extends Block, E extends BlockEntity> Item wearableBlock(T block, BlockEntityType<E> tileentity) {
-		return makeBlockItem(new WearableItem(block, defaultBuilder()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(tileentity.getId());
-//					}
-//				});
-//			}
-		}, block);
+		Item item = makeBlockItem(new WearableItem(block, defaultBuilder()), block);
+		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(tileentity))::renderByItem);
+		return item;
 	}
 
 
@@ -445,17 +424,8 @@ public class TFBlockItems {
 		return Registry.register(Registry.ITEM, Registry.BLOCK.getKey(block), blockitem);
 	}
 
-	private static void makeBEWLRItem(IForgeRegistry<Item> r, RegistryObject<? extends Block> block, ResourceLocation rl) {
-		r.register(makeBlockItem(new BlockItem(block.get(), TFItems.defaultBuilder()) {
-			@Override
-			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-				consumer.accept(new IItemRenderProperties() {
-					@Override
-					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-						return new ISTER(rl);
-					}
-				});
-			}
-		}, block));
+	private static void makeBEWLRItem(Block block, ResourceLocation rl) {
+		makeBlockItem(new BlockItem(block, TFItems.defaultBuilder()), block);
+		BuiltinItemRendererRegistry.INSTANCE.register(block, new ISTER(rl)::renderByItem);
 	}
 }

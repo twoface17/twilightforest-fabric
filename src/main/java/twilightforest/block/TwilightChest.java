@@ -9,7 +9,7 @@ import twilightforest.block.entity.TwilightChestEntity;
 
 public class TwilightChest extends ChestBlock {
     public TwilightChest(Properties properties) {
-        super(properties, TFBlockEntities.TF_CHEST::get);
+        super(properties, () -> TFBlockEntities.TF_CHEST);
     }
 
     @Override

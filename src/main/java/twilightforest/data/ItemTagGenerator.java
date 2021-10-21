@@ -12,7 +12,6 @@ import net.minecraft.tags.ItemTags;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TwilightForestMod;
-import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;
 
@@ -42,6 +41,8 @@ public class ItemTagGenerator extends ItemTagsProvider {
 	public static final Tag.Named<Item> IRONWOOD_INGOTS = TagFactory.ITEM.create(new ResourceLocation("c:ironwood_ingots"));
 	public static final Tag.Named<Item> KNIGHTMETAL_INGOTS = TagFactory.ITEM.create(new ResourceLocation("c:knightmetal_ingots"));
 	public static final Tag.Named<Item> STEELEAF_INGOTS = TagFactory.ITEM.create(new ResourceLocation("c:steeleaf_ingots"));
+
+	public static final Tag.Named<Item> CHESTS_WOODEN = TagFactory.ITEM.create(new ResourceLocation("c:wooden_chests"));
 
 	public static final Tag.Named<Item> DIADMOND = TagFactory.ITEM.create(new ResourceLocation("c:diamonds"));
 
@@ -113,7 +114,8 @@ public class ItemTagGenerator extends ItemTagsProvider {
 				TFBlocks.TIME_SIGN.asItem(), TFBlocks.TRANSFORMATION_SIGN.asItem(),
 				TFBlocks.MINING_SIGN.asItem(), TFBlocks.SORTING_SIGN.asItem());
 
-		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
+		//this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
+		tag(CHESTS_WOODEN).add(Items.CHEST).add(Items.TRAPPED_CHEST);
 
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_ARCTIC_FUR, STORAGE_BLOCKS_ARCTIC_FUR);
 		this.copy(BlockTagGenerator.STORAGE_BLOCKS_CARMINITE, STORAGE_BLOCKS_CARMINITE);
