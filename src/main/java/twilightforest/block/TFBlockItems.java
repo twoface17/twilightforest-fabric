@@ -7,6 +7,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.ISTER;
@@ -14,6 +16,9 @@ import twilightforest.item.*;
 import twilightforest.block.entity.TFBlockEntities;
 
 import static twilightforest.TwilightForestMod.creativeTab;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TFBlockItems {
 
@@ -385,13 +390,22 @@ public class TFBlockItems {
 		return new Item.Properties().tab(creativeTab);
 	}
 
+	private static final Map<Item, ResourceLocation> UNMAPPED = new HashMap<>();
+
+	@Environment(EnvType.CLIENT)
+	public static void registerRenderers() {
+		for(Map.Entry<Item, ResourceLocation> info : UNMAPPED.entrySet()) {
+			BuiltinItemRendererRegistry.INSTANCE.register(info.getKey(), new ISTER(info.getValue())::renderByItem);
+		}
+	}
+
 	private static <B extends Block> Item blockItem(B block) {
 		return makeBlockItem(new BlockItem(block, defaultBuilder()), block);
 	}
 
 	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(B floor, B wall) {
 		Item item = makeBlockItem(new SkullCandleItem(floor, wall, defaultBuilder().rarity(Rarity.UNCOMMON)), floor);
-		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE))::renderByItem);
+		UNMAPPED.put(item, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE));
 		return item;
 	}
 
@@ -401,13 +415,13 @@ public class TFBlockItems {
 
 	private static <B extends Block, W extends Block> Item trophyBlock(B block, W wallblock) {
 		Item item = makeBlockItem(new TrophyItem(block, wallblock, defaultBuilder().rarity(TwilightForestMod.getRarity())), block);
-		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TROPHY))::renderByItem);
+		UNMAPPED.put(item, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TROPHY));
 		return item;
 	}
 
 	private static <T extends Block, E extends BlockEntity> Item wearableBlock(T block, BlockEntityType<E> tileentity) {
 		Item item = makeBlockItem(new WearableItem(block, defaultBuilder()), block);
-		BuiltinItemRendererRegistry.INSTANCE.register(item, new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(tileentity))::renderByItem);
+		UNMAPPED.put(item, Registry.BLOCK_ENTITY_TYPE.getKey(tileentity));
 		return item;
 	}
 
@@ -425,7 +439,7 @@ public class TFBlockItems {
 	}
 
 	private static void makeBEWLRItem(Block block, ResourceLocation rl) {
-		makeBlockItem(new BlockItem(block, TFItems.defaultBuilder()), block);
-		BuiltinItemRendererRegistry.INSTANCE.register(block, new ISTER(rl)::renderByItem);
+		Item item = makeBlockItem(new BlockItem(block, TFItems.defaultBuilder()), block);
+		UNMAPPED.put(item, rl);
 	}
 }

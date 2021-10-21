@@ -27,6 +27,7 @@ import net.minecraft.world.entity.LivingEntity;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
 import twilightforest.ASMHooks;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.TFBlockItems;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.model.TFLayerDefinitions;
@@ -81,6 +82,7 @@ public class TFClientSetup implements ClientModInitializer {
         ScreenEvents.BEFORE_INIT.register(((client, screen, scaledWidth, scaledHeight) -> LoadingScreenListener.onOpenGui(screen))); //MinecraftForge.EVENT_BUS.register(new LoadingScreenListener());
         RenderLayerRegistration.init();
 		TFBlockEntities.registerTileEntityRenders();
+        TFBlockItems.registerRenderers();
         TFContainers.renderScreens();
 
         TwilightForestRenderInfo renderInfo = new TwilightForestRenderInfo(128.0F, false, DimensionSpecialEffects.SkyType.NONE, false, false);
