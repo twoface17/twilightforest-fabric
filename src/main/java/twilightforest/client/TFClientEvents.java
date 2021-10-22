@@ -9,6 +9,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import twilightforest.TFConfig;
 import twilightforest.TFEventListener;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
@@ -47,7 +48,7 @@ import net.minecraft.world.item.ItemStack;
 public class TFClientEvents {
 
 	public static void showOptifineWarning(Screen screen) {
-		if (TFClientSetup.optifinePresent && !TFClientSetup.optifineWarningShown && !TFClientSetup.CLIENT_CONFIG.disableOptifineNagScreen && screen instanceof TitleScreen) {
+		if (TFClientSetup.optifinePresent && !TFClientSetup.optifineWarningShown && !TFConfig.CLIENT_CONFIG.disableOptifineNagScreen && screen instanceof TitleScreen) {
 			TFClientSetup.optifineWarningShown = true;
 			Minecraft.getInstance().setScreen(new OptifineWarningScreen(screen));
 		}
@@ -171,7 +172,7 @@ public class TFClientEvents {
 	 */
 	public static void renderWorldLast(float partialTicks) {
 
-		if (!TFClientSetup.CLIENT_CONFIG.firstPersonEffects) return;
+		if (!TFConfig.CLIENT_CONFIG.firstPersonEffects) return;
 
 		Options settings = Minecraft.getInstance().options;
 		if (settings.getCameraType() != CameraType.FIRST_PERSON || settings.hideGui) return;

@@ -16,6 +16,7 @@ import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
 
@@ -33,7 +34,7 @@ public class LoadingScreenGui extends Screen {
 
 	private static final Random random = new Random();
 	private static final float backgroundScale = 32.0F;
-	private static final TFConfigClient.LoadingScreen LOADING_SCREEN = TFClientSetup.CLIENT_CONFIG.loading_screen;
+	private static final TFConfigClient.LoadingScreen LOADING_SCREEN = TFConfig.CLIENT_CONFIG.loading_screen;
 
 	LoadingScreenGui() {
 	    super(NarratorChatListener.NO_TITLE);

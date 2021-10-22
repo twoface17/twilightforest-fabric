@@ -45,9 +45,9 @@ public class TFTickHandler {
 		ServerLevel world = (ServerLevel) player.level;
 
 		// check for portal creation, at least if it's not disabled
-		if (!world.isClientSide && !TwilightForestMod.COMMON_CONFIG.disablePortalCreation && player.tickCount % (TwilightForestMod.COMMON_CONFIG.checkPortalDestination ? 100 : 20) == 0) {
+		if (!world.isClientSide && !TFConfig.COMMON_CONFIG.disablePortalCreation && player.tickCount % (TFConfig.COMMON_CONFIG.checkPortalDestination ? 100 : 20) == 0) {
 			// skip non admin players when the option is on
-			if (TwilightForestMod.COMMON_CONFIG.adminOnlyPortals) {
+			if (TFConfig.COMMON_CONFIG.adminOnlyPortals) {
 				if (world.getServer().getProfilePermissions(player.getGameProfile()) != 0) {
 					// reduce range to 4.0 when the option is on
 					checkForPortalCreation(serverPlayer, world, 4.0F);
@@ -122,9 +122,9 @@ public class TFTickHandler {
 
 	private static final TranslatableComponent PORTAL_UNWORTHY = new TranslatableComponent(TwilightForestMod.ID + ".ui.portal.unworthy");
 	private static void checkForPortalCreation(ServerPlayer player, Level world, float rangeToCheck) {
-		if (world.dimension().location().equals(new ResourceLocation(TwilightForestMod.COMMON_CONFIG.originDimension))
-				|| world.dimension().location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID)
-				|| TwilightForestMod.COMMON_CONFIG.allowPortalsInOtherDimensions) {
+		if (world.dimension().location().equals(new ResourceLocation(TFConfig.COMMON_CONFIG.originDimension))
+				|| world.dimension().location().toString().equals(TFConfig.COMMON_CONFIG.dimension.portalDestinationID)
+				|| TFConfig.COMMON_CONFIG.allowPortalsInOtherDimensions) {
 
 			List<ItemEntity> itemList = world.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(rangeToCheck));
 			ItemEntity qualified = null;
@@ -139,7 +139,7 @@ public class TFTickHandler {
 			if (qualified == null) return;
 
 			if (!player.isCreative() && !player.isSpectator()) {
-				Advancement requirement = PlayerHelper.getAdvancement(player, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.portalAdvancementLock));
+				Advancement requirement = PlayerHelper.getAdvancement(player, new ResourceLocation(TFConfig.COMMON_CONFIG.portalAdvancementLock));
 				if (requirement != null && !PlayerHelper.doesPlayerHaveRequiredAdvancement(player, requirement)) {
 					player.displayClientMessage(PORTAL_UNWORTHY, true);
 

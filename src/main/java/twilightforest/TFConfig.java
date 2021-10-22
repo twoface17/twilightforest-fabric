@@ -1,24 +1,25 @@
-//package twilightforest;
-//
-//import com.google.common.collect.ImmutableList;
-//import net.minecraft.world.level.block.Block;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraftforge.common.ForgeConfigSpec;
-//import net.minecraftforge.eventbus.api.SubscribeEvent;
-//import net.minecraftforge.fml.common.Mod;
-//import net.minecraftforge.fml.event.config.ModConfigEvent;
-//import net.minecraftforge.registries.ForgeRegistries;
-//import twilightforest.world.components.feature.BlockSpikeFeature;
-//
-//import java.util.*;
-//
-//@Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
-//public class TFConfig {
-//
+package twilightforest;
+
+import me.shedaniel.autoconfig.AutoConfig;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
+import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
+
+public class TFConfig {
+
+    public static TFConfigCommon COMMON_CONFIG;
+    @Environment(EnvType.CLIENT)
+    public static TFConfigClient CLIENT_CONFIG;
+
+    @Environment(EnvType.CLIENT)
+    public static void initClientConfig() {
+        CLIENT_CONFIG = AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).getConfig().tfConfigClient;
+    }
+
 //	public static Common COMMON_CONFIG;
 //	public static Client CLIENT_CONFIG;
-//
+
 //	public static class Common {
 //
 //		public Common(ForgeConfigSpec.Builder builder) {
@@ -424,4 +425,4 @@
 //			return Optional.ofNullable(ForgeRegistries.BLOCKS.getValue(id));
 //		}
 //	}
-//}
+}

@@ -40,6 +40,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 //import net.minecraftforge.fmllegacy.network.PacketDistributor;
 import org.apache.commons.lang3.mutable.MutableInt;
+import twilightforest.TFConfig;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
@@ -107,7 +108,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 
 			if (recursivelyValidatePortal(world, pos, blocksChecked, size, state) && size.intValue() >= MIN_PORTAL_SIZE) {
 
-				if (TwilightForestMod.COMMON_CONFIG.checkPortalDestination) {
+				if (TFConfig.COMMON_CONFIG.checkPortalDestination) {
 					boolean checkProgression = TFGenerationSettings.isProgressionEnforced(catalyst.level);
 					if (!TFTeleporter.isSafeAround(world, pos, catalyst, checkProgression)) {
 						// TODO: "failure" effect - particles?
@@ -119,7 +120,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 				}
 
 				catalyst.getItem().shrink(1);
-				causeLightning(world, pos, TwilightForestMod.COMMON_CONFIG.portalLightning);
+				causeLightning(world, pos, TFConfig.COMMON_CONFIG.portalLightning);
 
 				for (Map.Entry<BlockPos, Boolean> checkedPos : blocksChecked.entrySet()) {
 					if (checkedPos.getValue()) {
@@ -215,7 +216,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
 		if (state == this.defaultBlockState()) {
 			if (entity instanceof ServerPlayer player && !player.isCreative() && !player.isSpectator()) {
-				Advancement requirement = PlayerHelper.getAdvancement(player, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.portalAdvancementLock));
+				Advancement requirement = PlayerHelper.getAdvancement(player, new ResourceLocation(TFConfig.COMMON_CONFIG.portalAdvancementLock));
 
 				if (requirement != null && !PlayerHelper.doesPlayerHaveRequiredAdvancement(player, requirement)) {
 					player.displayClientMessage(PORTAL_UNWORTHY, true);
@@ -246,10 +247,10 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 	}
 
 	private static ResourceKey<Level> getDestination(Entity entity) {
-		ResourceKey<Level> twilightForest = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID));
+		ResourceKey<Level> twilightForest = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TFConfig.COMMON_CONFIG.dimension.portalDestinationID));
 
 		return !entity.getCommandSenderWorld().dimension().location().equals(twilightForest.location())
-				? twilightForest : ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.originDimension)); // FIXME: cache this for gods sake
+				? twilightForest : ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TFConfig.COMMON_CONFIG.originDimension)); // FIXME: cache this for gods sake
 	}
 
 	public static void attemptSendEntity(Entity entity, boolean forcedEntry, boolean makeReturnPortal) {
@@ -276,7 +277,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 
 		((IEntityEx)entity).changeDimension(serverWorld, makeReturnPortal ? new TFTeleporter(forcedEntry) : new NoReturnTeleporter());
 
-		if (destination ==  ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID)) && entity instanceof ServerPlayer && forcedEntry) {
+		if (destination ==  ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TFConfig.COMMON_CONFIG.dimension.portalDestinationID)) && entity instanceof ServerPlayer && forcedEntry) {
 			ServerPlayer playerMP = (ServerPlayer) entity;
 			// set respawn point for TF dimension to near the arrival portal, only if we spawn here on world creation
 			playerMP.setRespawnPosition(destination, playerMP.blockPosition(), playerMP.getYRot(), true, false);

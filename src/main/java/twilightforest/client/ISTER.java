@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Vector3f;
+import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.*;
 import twilightforest.block.entity.TwilightChestEntity;
@@ -90,7 +91,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer {
 					ms.translate(0.5F, 0.5F, 0.5F);
 					if(((AbstractTrophyBlock) block).getVariant() == BossVariant.HYDRA || ((AbstractTrophyBlock) block).getVariant() == BossVariant.QUEST_RAM) ms.scale(0.9F, 0.9F, 0.9F);
 					ms.mulPose(Vector3f.XP.rotationDegrees(30));
-					ms.mulPose(Vector3f.YN.rotationDegrees(TFClientSetup.CLIENT_CONFIG.rotateTrophyHeadsGui ? TFClientEvents.rotationTicker : -45));
+					ms.mulPose(Vector3f.YN.rotationDegrees(TFConfig.CLIENT_CONFIG.rotateTrophyHeadsGui ? TFClientEvents.rotationTicker : -45));
 					ms.translate(-0.5F, -0.5F, -0.5F);
 					ms.translate(0.0F, 0.25F, 0.0F);
 					if(((AbstractTrophyBlock) block).getVariant() == BossVariant.UR_GHAST) ms.translate(0.0F, 0.5F, 0.0F);

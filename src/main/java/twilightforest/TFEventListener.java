@@ -271,7 +271,7 @@ public class TFEventListener {
 		ItemStack stack = player.getItemInHand(hand);
 		BlockPos pos = hitResult.getBlockPos();
 		BlockState state = world.getBlockState(pos);
-		if(!TwilightForestMod.COMMON_CONFIG.skull_candles) {
+		if(!TFConfig.COMMON_CONFIG.skull_candles) {
 			if (stack.is(ItemTags.CANDLES) && Registry.ITEM.getKey(stack.getItem()).getNamespace().equals("minecraft") && !player.isShiftKeyDown()) {
 				if (state.getBlock() instanceof AbstractSkullBlock && Registry.BLOCK.getKey(state.getBlock()).getNamespace().equals("minecraft")) {
 					SkullBlock.Types type = (SkullBlock.Types) ((AbstractSkullBlock) state.getBlock()).getType();
@@ -377,7 +377,7 @@ public class TFEventListener {
 				if (te instanceof KeepsakeCasketBlockEntity) {
 					KeepsakeCasketBlockEntity casket = (KeepsakeCasketBlockEntity) te;
 
-					if (TwilightForestMod.COMMON_CONFIG.uuid_locking) {
+					if (TFConfig.COMMON_CONFIG.uuid_locking) {
 						//make it so only the player who died can open the chest if our config allows us
 						casket.playeruuid = player.getGameProfile().getId();
 					} else {
@@ -876,7 +876,7 @@ public class TFEventListener {
 	public static void playerPortals(Player player, ResourceKey<Level> to) {
 		TwilightForestMod.LOGGER.debug("Running event In which updates rule status if the destination is the Twilight Forest");
 		if (!player.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-			if (to.location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID)) {
+			if (to.location().toString().equals(TFConfig.COMMON_CONFIG.dimension.portalDestinationID)) {
 				sendEnforcedProgressionStatus(serverPlayer, TFGenerationSettings.isProgressionEnforced(player.level));
 			}
 

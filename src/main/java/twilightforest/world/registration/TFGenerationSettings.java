@@ -20,6 +20,8 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
+
+import twilightforest.TFConfig;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.potions.TFPotions;
@@ -146,7 +148,7 @@ public class TFGenerationSettings /*extends GenerationSettings*/ {
 	public static final int SEALEVEL = 0;
 
 	public static boolean isStrictlyTwilightForest(Level world) {
-		return world.dimension().location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID);
+		return world.dimension().location().toString().equals(TFConfig.COMMON_CONFIG.dimension.portalDestinationID);
 	}
 
 	public static boolean usesTwilightChunkGenerator(ServerLevel world) {

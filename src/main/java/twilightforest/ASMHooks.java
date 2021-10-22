@@ -92,7 +92,7 @@ public class ASMHooks {
 	 * [AFTER FIRST INVOKEVIRTUAL]
 	 */
 	public static Music music(Music music) {
-		if (Minecraft.getInstance().level != null && Minecraft.getInstance().player != null && (music == Musics.CREATIVE || music == Musics.UNDER_WATER) && Minecraft.getInstance().level.dimension().location().toString().equals(TwilightForestMod.COMMON_CONFIG.dimension.portalDestinationID))
+		if (Minecraft.getInstance().level != null && Minecraft.getInstance().player != null && (music == Musics.CREATIVE || music == Musics.UNDER_WATER) && Minecraft.getInstance().level.dimension().location().toString().equals(TFConfig.COMMON_CONFIG.dimension.portalDestinationID))
 			return Minecraft.getInstance().level.getBiomeManager().getNoiseBiomeAtPosition(Minecraft.getInstance().player.blockPosition()).getBackgroundMusic().orElse(Musics.GAME);
 		return music;
 	}
@@ -261,7 +261,7 @@ public class ASMHooks {
 	 * [AFTER ALL ALOAD 6]
 	 */
 	public static Minecraft.ExperimentalDialogType dragons(Minecraft.ExperimentalDialogType type) {
-		return TFClientSetup.CLIENT_CONFIG.disableHereBeDragons ? Minecraft.ExperimentalDialogType.NONE : type;
+		return TFConfig.CLIENT_CONFIG.disableHereBeDragons ? Minecraft.ExperimentalDialogType.NONE : type;
 	}
 
 	/**

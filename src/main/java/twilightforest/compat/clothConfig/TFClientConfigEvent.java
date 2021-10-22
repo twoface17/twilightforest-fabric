@@ -9,10 +9,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
 import shadow.cloth.autoconfig.serializer.Toml4jConfigSerializerExtended;
+import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
-import twilightforest.client.TFClientSetup;
 import twilightforest.compat.clothConfig.configEntry.ExtendedConfigEntry;
-import twilightforest.compat.clothConfig.configFiles.TFConfig;
 
 import java.util.Collections;
 
@@ -26,34 +25,34 @@ public class TFClientConfigEvent {
     private static void clientConfigEvent(){
         //Move this to event class as this is the event in case the player changes anything within cloth config
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
-            AutoConfig.register(TFConfig.class, PartitioningSerializer.wrap(Toml4jConfigSerializerExtended::new));
+            AutoConfig.register(twilightforest.compat.clothConfig.configFiles.TFConfig.class, PartitioningSerializer.wrap(Toml4jConfigSerializerExtended::new));
 
-            TFClientSetup.clientConfigInit();
+            twilightforest.TFConfig.initClientConfig();
             TwilightForestMod.commonConfigInit();
 
-            AutoConfig.getConfigHolder(TFConfig.class).registerLoadListener((manager, newData) -> {
-                TwilightForestMod.COMMON_CONFIG = newData.tfConfigCommon;
+            AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).registerLoadListener((manager, newData) -> {
+                TFConfig.COMMON_CONFIG = newData.tfConfigCommon;
                 //COMMON_CONFIG = AutoConfig.getConfigHolder(newData.getClass()).getConfig();
                 TwilightForestMod.LOGGER.debug("Test: The TFConfigCommon has be reload after a load event!");
                 return InteractionResult.SUCCESS;
             });
 
-            AutoConfig.getConfigHolder(TFConfig.class).registerSaveListener((manager, newData) -> {
-                TwilightForestMod.COMMON_CONFIG = newData.tfConfigCommon;
+            AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).registerSaveListener((manager, newData) -> {
+                TFConfig.COMMON_CONFIG = newData.tfConfigCommon;
                 TwilightForestMod.LOGGER.debug("Test: The TFConfigCommon has be reload after a save event!");
                 //COMMON_CONFIG = AutoConfig.getConfigHolder(newData.getClass()).getConfig();
                 return InteractionResult.SUCCESS;
             });
 
             //Client Config File
-            AutoConfig.getConfigHolder(TFConfig.class).registerLoadListener((manager, newData) -> {
-                TFClientSetup.CLIENT_CONFIG = newData.tfConfigClient;
+            AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).registerLoadListener((manager, newData) -> {
+                twilightforest.TFConfig.CLIENT_CONFIG = newData.tfConfigClient;
                 //CLIENT_CONFIG = AutoConfig.getConfigHolder(newData.tfConfigClient.getClass()).getConfig();
                 return InteractionResult.SUCCESS;
             });
 
-            AutoConfig.getConfigHolder(TFConfig.class).registerSaveListener((manager, newData) -> {
-                TFClientSetup.CLIENT_CONFIG = newData.tfConfigClient;
+            AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).registerSaveListener((manager, newData) -> {
+                twilightforest.TFConfig.CLIENT_CONFIG = newData.tfConfigClient;
                 //CLIENT_CONFIG = AutoConfig.getConfigHolder(newData.tfConfigClient.getClass()).getConfig();
                 return InteractionResult.SUCCESS;
             });
@@ -63,7 +62,7 @@ public class TFClientConfigEvent {
     }
 
     private static void registerCustomAnnotations(){
-        GuiRegistry registry = AutoConfig.getGuiRegistry(TFConfig.class);
+        GuiRegistry registry = AutoConfig.getGuiRegistry(twilightforest.compat.clothConfig.configFiles.TFConfig.class);
         ConfigEntryBuilder ENTRY_BUILDER = ConfigEntryBuilder.create();
 
         registry.registerAnnotationProvider(

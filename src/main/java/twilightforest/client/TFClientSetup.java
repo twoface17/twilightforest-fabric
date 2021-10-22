@@ -1,29 +1,10 @@
 package twilightforest.client;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.SilverfishModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.WolfRenderer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.world.entity.LivingEntity;
 import shadow.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
 import twilightforest.ASMHooks;
 import twilightforest.TwilightForestMod;
@@ -32,26 +13,21 @@ import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.model.TFLayerDefinitions;
 import twilightforest.client.model.TFModelLayers;
-import twilightforest.client.model.entity.*;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.client.providers.*;
-import twilightforest.client.renderer.entity.*;
-import twilightforest.client.shader.ShaderManager;
 import twilightforest.compat.clothConfig.TFClientConfigEvent;
-import twilightforest.compat.clothConfig.configFiles.TFConfig;
-import twilightforest.compat.clothConfig.configFiles.TFConfigClient;
-import twilightforest.dispenser.CrumbleDispenseBehavior;
-import twilightforest.dispenser.FeatherFanDispenseBehavior;
-import twilightforest.dispenser.MoonwormDispenseBehavior;
-import twilightforest.dispenser.TransformationDispenseBehavior;
 import twilightforest.entity.TFEntities;
-import twilightforest.entity.projectile.MoonwormShot;
-import twilightforest.entity.projectile.TwilightWandBolt;
 import twilightforest.inventory.TFContainers;
 import twilightforest.item.TFItems;
 import twilightforest.network.TFPacketHandler;
-
 import java.lang.reflect.Field;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
 public class TFClientSetup implements ClientModInitializer {
@@ -60,13 +36,6 @@ public class TFClientSetup implements ClientModInitializer {
 
     protected static boolean optifineWarningShown = false;
 
-	public static TFConfigClient CLIENT_CONFIG;
-
-    public static void clientConfigInit(){
-        CLIENT_CONFIG = AutoConfig.getConfigHolder(TFConfig.class).getConfig().tfConfigClient;
-    }
-
-    @Environment(EnvType.CLIENT)
 	@Override
 	public void onInitializeClient() {
         TwilightForestMod.LOGGER.debug(FabricLoader.getInstance().isModLoaded("optifabric") + ": Optifine loaded?");
@@ -133,7 +102,6 @@ public class TFClientSetup implements ClientModInitializer {
 //		renderer.addLayer(new IceLayer<>(renderer));
 	}
 
-    @Environment(EnvType.CLIENT)
     public static void armorRegistry() {
         ArcticArmorProvider arcticArmorProvider = new ArcticArmorProvider();
         ArmorRenderingRegistry.registerModel(arcticArmorProvider, TFItems.ARCTIC_BOOTS, TFItems.ARCTIC_LEGGINGS, TFItems.ARCTIC_CHESTPLATE, TFItems.ARCTIC_HELMET);

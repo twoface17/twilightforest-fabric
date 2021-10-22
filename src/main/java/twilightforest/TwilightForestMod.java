@@ -33,9 +33,7 @@ import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
-import twilightforest.compat.clothConfig.configFiles.TFConfig;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
-import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.CrumbleDispenseBehavior;
 import twilightforest.dispenser.FeatherFanDispenseBehavior;
 import twilightforest.dispenser.MoonwormDispenseBehavior;
@@ -56,6 +54,7 @@ import twilightforest.world.registration.biomes.BiomeKeys;
 import java.util.Locale;
 
 import net.minecraft.world.item.Rarity;
+
 public class TwilightForestMod implements ModInitializer {
 
 	// TODO: might be a good idea to find proper spots for all of these? also remove redundants
@@ -77,7 +76,7 @@ public class TwilightForestMod implements ModInitializer {
 
 	public static final Rarity rarity = ClassTinkerers.getEnum(Rarity.class, "TWILIGHT");
 
-	public static TFConfigCommon COMMON_CONFIG;
+
 	public static boolean SERVER_SIDE_ONLY = true;
 
     @Override
@@ -123,11 +122,11 @@ public class TwilightForestMod implements ModInitializer {
 		new TwilightFeatures();
 		new BiomeGrassColors();
 
-		if (TwilightForestMod.COMMON_CONFIG.doCompat) {
+		if (TFConfig.COMMON_CONFIG.doCompat) {
 			try {
 				TFCompat.preInitCompat();
 			} catch (Exception e) {
-				TwilightForestMod.COMMON_CONFIG.doCompat = false;
+				TFConfig.COMMON_CONFIG.doCompat = false;
 				LOGGER.error("Had an error loading preInit compatibility!");
 				LOGGER.catching(e.fillInStackTrace());
 			}
@@ -209,21 +208,21 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFEventListener.registerFabricEvents();
 
-		if (TwilightForestMod.COMMON_CONFIG.doCompat) {
+		if (TFConfig.COMMON_CONFIG.doCompat) {
 			try {
 				TFCompat.initCompat();
 			} catch (Exception e) {
-				TwilightForestMod.COMMON_CONFIG.doCompat = false;
+				TFConfig.COMMON_CONFIG.doCompat = false;
 				LOGGER.error("Had an error loading init compatibility!");
 				LOGGER.catching(e.fillInStackTrace());
 			}
 		}
 
-		if (TwilightForestMod.COMMON_CONFIG.doCompat) {
+		if (TFConfig.COMMON_CONFIG.doCompat) {
 			try {
 				TFCompat.postInitCompat();
 			} catch (Exception e) {
-				TwilightForestMod.COMMON_CONFIG.doCompat = false;
+				TFConfig.COMMON_CONFIG.doCompat = false;
 				LOGGER.error("Had an error loading postInit compatibility!");
 				LOGGER.catching(e.fillInStackTrace());
 			}
@@ -352,11 +351,11 @@ public class TwilightForestMod implements ModInitializer {
 	//-----FABRIC ONLY METHODS-----
 	public static void commonConfigInit() {
 		if(SERVER_SIDE_ONLY){
-			COMMON_CONFIG = AutoConfig.getConfigHolder(TFConfigCommon.class).getConfig();
+			TFConfig.COMMON_CONFIG = AutoConfig.getConfigHolder(TFConfigCommon.class).getConfig();
 		}
 
 		else{
-			COMMON_CONFIG = AutoConfig.getConfigHolder(TFConfig.class).getConfig().tfConfigCommon;
+			TFConfig.COMMON_CONFIG = AutoConfig.getConfigHolder(twilightforest.compat.clothConfig.configFiles.TFConfig.class).getConfig().tfConfigCommon;
 		}
 	}
 
@@ -367,14 +366,14 @@ public class TwilightForestMod implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register((server) -> {
 			if(SERVER_SIDE_ONLY) {
 				AutoConfig.getConfigHolder(TFConfigCommon.class).registerLoadListener((manager, newData) -> {
-					COMMON_CONFIG = newData;
+					TFConfig.COMMON_CONFIG = newData;
 					//COMMON_CONFIG = AutoConfig.getConfigHolder(newData.getClass()).getConfig();
 					LOGGER.debug("Test: The TFConfigCommon has be reload after a load event!");
 					return InteractionResult.SUCCESS;
 				});
 
 				AutoConfig.getConfigHolder(TFConfigCommon.class).registerSaveListener((manager, newData) -> {
-					COMMON_CONFIG = newData;
+					TFConfig.COMMON_CONFIG = newData;
 					LOGGER.debug("Test: The TFConfigCommon has be reload after a save event!");
 					//COMMON_CONFIG = AutoConfig.getConfigHolder(newData.getClass()).getConfig();
 					return InteractionResult.SUCCESS;
