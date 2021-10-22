@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#C#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "twilightforest:mining_planks"
+    },
+    "C": {
+      "tag": "c:wooden_chests"
+    }
+  },
+  "result": {
+    "item": "twilightforest:mining_chest",
+    "count": 2
+  }
+}
