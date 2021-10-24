@@ -13,7 +13,7 @@
       "item": "twilightforest:encased_towerwood"
     },
     "%": {
-      "item": "minecraft:redstone_ore"
+      "tag": "c:redstone_ores"
     }
   },
   "result": {

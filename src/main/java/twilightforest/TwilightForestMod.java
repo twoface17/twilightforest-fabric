@@ -28,12 +28,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import shadow.cloth.autoconfig.serializer.Toml4jConfigSerializerExtended;
 import twilightforest.advancements.TFAdvancements;
+import twilightforest.api.TFInternalApi;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
+import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.CrumbleDispenseBehavior;
 import twilightforest.dispenser.FeatherFanDispenseBehavior;
 import twilightforest.dispenser.MoonwormDispenseBehavior;
@@ -321,6 +323,7 @@ public class TwilightForestMod implements ModInitializer {
 			WoodType.register(TFBlocks.MINING);
 			WoodType.register(TFBlocks.SORTING);
 		}
+		TFInternalApi.init();
 		//DataGenerators.gatherData();
 	}
 

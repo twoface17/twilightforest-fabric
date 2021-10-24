@@ -14,10 +14,10 @@
       "tag": "twilightforest:fiery_vial"
     },
     {
-      "item": "minecraft:blaze_rod"
+      "tag": "c:blaze_rods"
     },
     {
-      "item": "minecraft:blaze_rod"
+      "tag": "c:blaze_rods"
     }
   ],
   "result": {

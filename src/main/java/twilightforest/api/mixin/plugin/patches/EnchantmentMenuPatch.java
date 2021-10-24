@@ -11,7 +11,7 @@ public class EnchantmentMenuPatch implements Patch {
     @Override
     public void applyMethod(MethodNode node) {
         for(AbstractInsnNode insnNode : node.instructions) {
-            System.out.println(insnNode);
+            //System.out.println(insnNode);
         }
     }
 

@@ -49,6 +49,10 @@ repositories {
         url 'https://jitpack.io'
     }
     mavenLocal()
+    maven {
+        url 'https://repo.maven.apache.org/maven2'
+        name 'Maven Central'
+    }
 }
 
 dependencies {
@@ -66,7 +70,7 @@ dependencies {
     implementation group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
-    implementation 'com.electronwill.night-config:toml:3.6.2'
+    implementation 'com.electronwill.night-config:toml:3.6.4'
     //modImplementation "com.telepathicgrunt:Blame-Fabric:1.17-4.2.0-fabric"
     modImplementation 'com.github.Chocohead:Fabric-ASM:v2.3'
 

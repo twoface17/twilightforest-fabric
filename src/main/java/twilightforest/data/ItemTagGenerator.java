@@ -44,6 +44,19 @@ public class ItemTagGenerator extends ItemTagsProvider {
 
 	public static final Tag.Named<Item> CHESTS_WOODEN = TagFactory.ITEM.create(new ResourceLocation("c:wooden_chests"));
 
+	public static final Tag.Named<Item> ENDER_PEARLS = TagFactory.ITEM.create(new ResourceLocation("c:ender_pearls"));
+	public static final Tag.Named<Item> BLAZE_RODS = TagFactory.ITEM.create(new ResourceLocation("c:blaze_rods"));
+	public static final Tag.Named<Item> WOODEN_STICKS = TagFactory.ITEM.create(new ResourceLocation("c:wood_sticks"));
+	public static final Tag.Named<Item> REDSTONE_ORES = TagFactory.ITEM.create(new ResourceLocation("c:redstone_ores"));
+	public static final Tag.Named<Item> REDSTONE_DUSTS = TagFactory.ITEM.create(new ResourceLocation("c:redstone_dusts"));
+	public static final Tag.Named<Item> DIAMOND_BLOCKS = TagFactory.ITEM.create(new ResourceLocation("c:diamond_blocks"));
+	public static final Tag.Named<Item> GOLD_BLOCKS = TagFactory.ITEM.create(new ResourceLocation("c:gold_blocks"));
+	public static final Tag.Named<Item> IRON_BLOCKS = TagFactory.ITEM.create(new ResourceLocation("c:iron_blocks"));
+	public static final Tag.Named<Item> GOLD_NUGGETS = TagFactory.ITEM.create(new ResourceLocation("c:gold_nuggets"));
+	public static final Tag.Named<Item> IRON_NUGGETS = TagFactory.ITEM.create(new ResourceLocation("c:iron_nuggets"));
+	public static final Tag.Named<Item> GLOWSTONE_DUSTS = TagFactory.ITEM.create(new ResourceLocation("c:glowstone_dusts"));
+	public static final Tag.Named<Item> IRON_INGOTS = TagFactory.ITEM.create(new ResourceLocation("c:iron_ingots"));
+
 	public static final Tag.Named<Item> DIADMOND = TagFactory.ITEM.create(new ResourceLocation("c:diamonds"));
 
 	public static final Tag.Named<Item> STORAGE_BLOCKS_ARCTIC_FUR = TagFactory.ITEM.create(new ResourceLocation("c:arctic_fur_storage_block"));
@@ -159,6 +172,19 @@ public class ItemTagGenerator extends ItemTagsProvider {
 
 		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD);
 		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER);
+
+		tag(ENDER_PEARLS).add(Items.ENDER_PEARL);
+		tag(BLAZE_RODS).add(Items.BLAZE_ROD);
+		tag(WOODEN_STICKS).add(Items.STICK);
+		tag(REDSTONE_ORES).add(Items.REDSTONE_ORE);
+		tag(REDSTONE_DUSTS).add(Items.REDSTONE);
+		tag(DIAMOND_BLOCKS).add(Items.DIAMOND_BLOCK);
+		tag(GOLD_BLOCKS).add(Items.GOLD_BLOCK);
+		tag(IRON_BLOCKS).add(Items.IRON_BLOCK);
+		tag(GOLD_NUGGETS).add(Items.GOLD_NUGGET);
+		tag(IRON_NUGGETS).add(Items.IRON_NUGGET);
+		tag(GLOWSTONE_DUSTS).add(Items.GLOWSTONE_DUST);
+		tag(IRON_INGOTS).add(Items.IRON_INGOT);
 
 		tag(DIADMOND).add(Items.DIAMOND);
 

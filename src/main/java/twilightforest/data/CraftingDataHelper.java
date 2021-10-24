@@ -6,20 +6,30 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+
+import com.google.common.collect.ImmutableList;
 import twilightforest.TwilightForestMod;
 import twilightforest.TwilightForestMod;
+import twilightforest.api.crafting.CompoundIngredient;
+import twilightforest.api.crafting.CraftingHelper;
+import twilightforest.api.crafting.NBTIngredient;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.TwilightChest;
 
+import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public abstract class CraftingDataHelper extends RecipeProvider {
 	public CraftingDataHelper(DataGenerator generator) {
@@ -27,45 +37,45 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 	}
 
 	//TODO: PORT
-//	protected final Ingredient itemWithNBT(ItemLike item, Consumer<CompoundTag> nbtSetter) {
-//		ItemStack stack = new ItemStack(item);
-//
-//		CompoundTag nbt = new CompoundTag();
-//		nbtSetter.accept(nbt);
-//		stack.setTag(nbt);
-//
-//		try {
-//			Constructor<Ingredient> constructor = Ingredient.class.getDeclaredConstructor(Stream.class);
-//
-//			constructor.setAccessible(true);
-//
-//			return constructor.newInstance(stack);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
-//
-//		// This will just defer to the regular Ingredient method instead of some overridden thing, but whatever.
-//		// Forge PRs are too slow to even feel motivated about fixing it on the Forge end.
-//		return Ingredient.of(stack);
-//	}
+	protected final Ingredient itemWithNBT(ItemLike item, Consumer<CompoundTag> nbtSetter) {
+		ItemStack stack = new ItemStack(item);
 
-//	protected final Ingredient multipleIngredients(Ingredient... ingredientArray) {
-//		List<Ingredient> ingredientList = ImmutableList.copyOf(ingredientArray);
-//
-//		try {
-//			Constructor<CompoundIngredient> constructor = CompoundIngredient.class.getDeclaredConstructor(List.class);
-//
-//			constructor.setAccessible(true);
-//
-//			return constructor.newInstance(ingredientList);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
-//
-//		// This will just defer to the regular Ingredient method instead of some overridden thing, but whatever.
-//		// Forge PRs are too slow to even feel motivated about fixing it on the Forge end.
-//		return Ingredient.merge(ingredientList);
-//	}
+		CompoundTag nbt = new CompoundTag();
+		nbtSetter.accept(nbt);
+		stack.setTag(nbt);
+
+		try {
+			Constructor<NBTIngredient> constructor = NBTIngredient.class.getDeclaredConstructor(ItemStack.class);
+
+			constructor.setAccessible(true);
+
+			return constructor.newInstance(stack);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+
+		// This will just defer to the regular Ingredient method instead of some overridden thing, but whatever.
+		// Forge PRs are too slow to even feel motivated about fixing it on the Forge end.
+		return Ingredient.of(stack);
+	}
+
+	protected final Ingredient multipleIngredients(Ingredient... ingredientArray) {
+		List<Ingredient> ingredientList = ImmutableList.copyOf(ingredientArray);
+
+		try {
+			Constructor<CompoundIngredient> constructor = CompoundIngredient.class.getDeclaredConstructor(List.class);
+
+			constructor.setAccessible(true);
+
+			return constructor.newInstance(ingredientList);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+
+		// This will just defer to the regular Ingredient method instead of some overridden thing, but whatever.
+		// Forge PRs are too slow to even feel motivated about fixing it on the Forge end.
+		return CraftingHelper.merge(ingredientList);
+	}
 
 	protected final void charmRecipe(Consumer<FinishedRecipe> consumer, String name, Item result, Item item) {
 		ShapelessRecipeBuilder.shapeless(result)
@@ -159,7 +169,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.save(consumer, locEquip(name));
 	}
 
-	protected final void pickaxeItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Item handle) {
+	protected final void pickaxeItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Tag.Named<Item> handle) {
 		ShapedRecipeBuilder.shaped(result)
 				.pattern("###")
 				.pattern(" X ")
@@ -170,7 +180,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.save(consumer, locEquip(name));
 	}
 
-	protected final void swordItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Item handle) {
+	protected final void swordItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Tag.Named<Item> handle) {
 		ShapedRecipeBuilder.shaped(result)
 				.pattern("#")
 				.pattern("#")
@@ -181,7 +191,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.save(consumer, locEquip(name));
 	}
 
-	protected final void axeItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Item handle) {
+	protected final void axeItem(Consumer<FinishedRecipe> consumer, String name, Item result, Tag.Named<Item> material, Tag.Named<Item> handle) {
 		ShapedRecipeBuilder.shaped(result)
 				.pattern("##")
 				.pattern("#X")

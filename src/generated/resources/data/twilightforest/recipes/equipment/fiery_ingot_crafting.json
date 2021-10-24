@@ -5,7 +5,7 @@
       "tag": "twilightforest:fiery_vial"
     },
     {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     }
   ],
   "result": {

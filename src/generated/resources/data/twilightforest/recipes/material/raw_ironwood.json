@@ -8,7 +8,7 @@
       "item": "minecraft:raw_iron"
     },
     {
-      "item": "minecraft:gold_nugget"
+      "tag": "c:gold_nuggets"
     }
   ],
   "result": {

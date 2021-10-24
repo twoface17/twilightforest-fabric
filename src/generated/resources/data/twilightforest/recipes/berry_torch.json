@@ -9,7 +9,7 @@
       "item": "twilightforest:torchberries"
     },
     "|": {
-      "item": "minecraft:stick"
+      "tag": "c:wood_sticks"
     }
   },
   "result": {

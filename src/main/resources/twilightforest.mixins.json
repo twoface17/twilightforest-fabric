@@ -18,6 +18,7 @@
     "EntityMixin",
     "FireBlockMixin",
     "HangingEntityAccessor",
+    "IngredientAccessor",
     "ItemMixin",
     "LevelMixinPatch",
     "LivingEntityMixin",
@@ -36,7 +37,8 @@
     "ServerPlayerMixin",
     "SpawnPlacementsMixin",
     "TntBlockAccessor",
-    "WorldGenRegionMixin"
+    "WorldGenRegionMixin",
+    "IngredientMixin"
   ],
   "client": [
     "client.BlockColorsMixin",

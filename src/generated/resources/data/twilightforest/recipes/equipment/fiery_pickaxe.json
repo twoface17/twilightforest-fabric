@@ -10,7 +10,7 @@
       "tag": "c:fiery_ingots"
     },
     "X": {
-      "item": "minecraft:blaze_rod"
+      "tag": "c:blaze_rods"
     }
   },
   "result": {
