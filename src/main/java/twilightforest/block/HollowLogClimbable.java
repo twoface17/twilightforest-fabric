@@ -1,11 +1,15 @@
 package twilightforest.block;
 
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,9 +31,9 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import twilightforest.enums.HollowLogVariants;
+
+import java.util.function.Supplier;
 
 public class HollowLogClimbable extends HorizontalDirectionalBlock implements WaterloggedBlock {
     public static final EnumProperty<HollowLogVariants.Climbable> VARIANT = EnumProperty.create("variant", HollowLogVariants.Climbable.class);
@@ -51,9 +55,9 @@ public class HollowLogClimbable extends HorizontalDirectionalBlock implements Wa
     private static final VoxelShape COLLISION_SHAPE_EAST = Shapes.or(COLLISION_SHAPE, LADDER_EAST);
     private static final VoxelShape COLLISION_SHAPE_WEST = Shapes.or(COLLISION_SHAPE, LADDER_WEST);
 
-    private final RegistryObject<HollowLogVertical> vertical;
+    private final Supplier<HollowLogVertical> vertical;
 
-    public HollowLogClimbable(Properties props, RegistryObject<HollowLogVertical> vertical) {
+    public HollowLogClimbable(Properties props, Supplier<HollowLogVertical> vertical) {
         super(props);
         this.vertical = vertical;
 
@@ -118,8 +122,8 @@ public class HollowLogClimbable extends HorizontalDirectionalBlock implements Wa
         if (!isInside(hit, pos)) return super.use(state, level, pos, player, hand, hit);
 
         ItemStack stack = player.getItemInHand(hand);
-
-        if (stack.canPerformAction(ToolActions.SHEARS_HARVEST)) {
+        //TODO: Confirm that this is working
+        if (stack.is(FabricToolTags.SHEARS)) {
             HollowLogVariants.Climbable variant = state.getValue(VARIANT);
             level.setBlock(pos, this.vertical.get().defaultBlockState().setValue(HollowLogVertical.WATERLOGGED, variant == HollowLogVariants.Climbable.LADDER_WATERLOGGED), 3);
             level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);

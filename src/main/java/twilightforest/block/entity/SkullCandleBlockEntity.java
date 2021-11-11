@@ -7,16 +7,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class SkullCandleBlockEntity2 extends SkullBlockEntity {
+public class SkullCandleBlockEntity extends SkullBlockEntity {
 
 	public int candleColor;
 	public int candleAmount;
 
-	public SkullCandleBlockEntity2(BlockPos pos, BlockState state) {
+	public SkullCandleBlockEntity(BlockPos pos, BlockState state) {
 		super(pos, state);
 	}
 
-	public SkullCandleBlockEntity2(BlockPos pos, BlockState state, int color, int amount) {
+	public SkullCandleBlockEntity(BlockPos pos, BlockState state, int color, int amount) {
 		super(pos, state);
 		this.candleColor = color;
 		this.candleAmount = amount;

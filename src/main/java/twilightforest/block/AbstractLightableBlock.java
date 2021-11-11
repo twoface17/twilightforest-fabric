@@ -28,11 +28,11 @@ import java.util.Random;
 
 //all the common lighting/extinguishing methods for the candelabra and skull candles are here to reduce clutter
 //it may also be handy if we decide to add more candle-based blocks in the future
-public abstract class AbstractLightableBlock2 extends BaseEntityBlock {
+public abstract class AbstractLightableBlock extends BaseEntityBlock {
 
 	public static final EnumProperty<Lighting> LIGHTING = EnumProperty.create("lighting", Lighting.class);
 
-	public AbstractLightableBlock2(Properties properties) {
+	public AbstractLightableBlock(Properties properties) {
 		super(properties);
 		registerDefaultState(getStateDefinition().any().setValue(LIGHTING, Lighting.NONE));
 	}
@@ -105,7 +105,7 @@ public abstract class AbstractLightableBlock2 extends BaseEntityBlock {
 	public static void extinguish(@Nullable Player player, BlockState state, Level accessor, BlockPos pos) {
 		setLit(accessor, state, pos, false);
 		//TODO add an extinguish effect for the candelabra. The system is too wack for me
-		if(state.getBlock() instanceof AbstractSkullCandleBlock2 skull) {
+		if(state.getBlock() instanceof AbstractSkullCandleBlock skull) {
 			skull.getParticleOffsets(state, accessor, pos).forEach((p_151926_) ->
 					accessor.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + p_151926_.x(), (double) pos.getY() + p_151926_.y(), (double) pos.getZ() + p_151926_.z(), 0.0D, 0.025D, 0.0D));
 		}

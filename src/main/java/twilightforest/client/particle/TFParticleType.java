@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.client.particle.FlameParticle;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.particle.data.LeafParticleData;
 import twilightforest.client.particle.data.PinnedFireflyData;
@@ -43,7 +44,7 @@ public class TFParticleType {
 			return LeafParticleData.codecLeaf();
 		}
 	});
-	public static final RegistryObject<SimpleParticleType> OMINOUS_FLAME = PARTICLE_TYPES.register("ominous_flame", () -> new SimpleParticleType(false));
+	public static final SimpleParticleType OMINOUS_FLAME = Registry.register(Registry.PARTICLE_TYPE, TwilightForestMod.ID + ":ominous_flame", new SimpleParticleType(false));
 
 	public static void init() {}
 
@@ -65,6 +66,6 @@ public class TFParticleType {
 		ParticleFactoryRegistry.getInstance().register(TFParticleType.JAR_WANDERING_FIREFLY, WanderingFireflyParticle.FromJarFactory::new);
 		ParticleFactoryRegistry.getInstance().register(TFParticleType.FIREFLY_PINNED, PinnedFireflyParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(TFParticleType.FALLEN_LEAF, LeafParticle.Factory::new);
-		particles.register(TFParticleType.OMINOUS_FLAME.get(), FlameParticle.SmallFlameProvider::new);
+		ParticleFactoryRegistry.getInstance().register(TFParticleType.OMINOUS_FLAME, FlameParticle.SmallFlameProvider::new);
 	}
 }

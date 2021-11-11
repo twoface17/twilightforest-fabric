@@ -2,12 +2,17 @@ package twilightforest;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
+import com.mojang.authlib.GameProfile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
@@ -50,12 +55,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.BlockHitResult;
-
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import twilightforest.advancements.TFAdvancements;
+import twilightforest.api.mixin.MobAccessor;
 import twilightforest.block.*;
 import twilightforest.block.entity.KeepsakeCasketBlockEntity;
 import twilightforest.block.entity.SkullCandleBlockEntity;
@@ -74,7 +75,6 @@ import twilightforest.entity.passive.TinyBird;
 import twilightforest.enums.BlockLoggingEnum;
 import twilightforest.item.PhantomArmorItem;
 import twilightforest.item.TFItems;
-import twilightforest.api.mixin.MobAccessor;
 import twilightforest.network.AreaProtectionPacket;
 import twilightforest.network.EnforceProgressionStatusPacket;
 import twilightforest.network.TFPacketHandler;
@@ -316,7 +316,7 @@ public class TFEventListener {
 
 	private static void makeFloorSkull(Level world, BlockPos pos, Item item, Block newBlock) {
 		GameProfile profile = null;
-		if(world.getBlockEntity(event.pos) instanceof SkullBlockEntity skull) profile = skull.getOwnerProfile();
+		if(world.getBlockEntity(pos) instanceof SkullBlockEntity skull) profile = skull.getOwnerProfile();
 		world.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 		world.setBlockAndUpdate(pos, newBlock.defaultBlockState()
 				.setValue(AbstractSkullCandleBlock.LIGHTING, AbstractLightableBlock.Lighting.NONE)

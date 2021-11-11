@@ -263,56 +263,56 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		dropSelf(TFBlocks.CRIMSON_BANISTER);
 		dropSelf(TFBlocks.WARPED_BANISTER);
 
-		add(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL.get()));
-		add(TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL.get(), hollowLog(TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL.get()));
+		add(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL));
+		add(TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL));
+		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL));
+		add(TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL, hollowLog(TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL));
 
-		add(TFBlocks.HOLLOW_OAK_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_OAK_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_WARPED_STEM_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_WARPED_STEM_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_DARK_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_DARK_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_TIME_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_TIME_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_MINING_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_MINING_LOG_VERTICAL.get()));
-		add(TFBlocks.HOLLOW_SORTING_LOG_VERTICAL.get(), verticalHollowLog(TFBlocks.HOLLOW_SORTING_LOG_VERTICAL.get()));
+		add(TFBlocks.HOLLOW_OAK_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_OAK_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL));
+		add(TFBlocks.HOLLOW_WARPED_STEM_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_WARPED_STEM_VERTICAL));
+		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_DARK_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_DARK_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_TIME_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_TIME_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_MINING_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_MINING_LOG_VERTICAL));
+		add(TFBlocks.HOLLOW_SORTING_LOG_VERTICAL, verticalHollowLog(TFBlocks.HOLLOW_SORTING_LOG_VERTICAL));
 
-		add(TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE.get()));
-		add(TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE.get(), hollowLog(TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE.get()));
+		add(TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE));
+		add(TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE));
+		add(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE));
+		add(TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE, hollowLog(TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE));
 
 
 		dropSelf(TFBlocks.TWILIGHT_OAK_LOG);
@@ -486,16 +486,16 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 	}
 
 	private LootTable.Builder hollowLog(Block log) {
-		LootItemCondition.Builder HAS_SILK_TOUCH = ObfuscationReflectionHelper.getPrivateValue(net.minecraft.data.loot.BlockLoot.class, null, "f_124062_");
+		LootItemCondition.Builder HAS_SILK_TOUCH = BlockLoot.HAS_SILK_TOUCH;
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(log.asItem()).when(HAS_SILK_TOUCH).otherwise(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))))
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(Blocks.GRASS).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.MOSS_AND_GRASS)))))
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(TFBlocks.MOSS_PATCH.get()).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.MOSS_AND_GRASS)))))
+						.add(LootItem.lootTableItem(TFBlocks.MOSS_PATCH).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.MOSS_AND_GRASS)))))
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(TFBlocks.MOSS_PATCH.get()).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.MOSS)))))
+						.add(LootItem.lootTableItem(TFBlocks.MOSS_PATCH).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.MOSS)))))
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(Items.SNOWBALL).when(HAS_SILK_TOUCH).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(log).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(HollowLogHorizontal.VARIANT, HollowLogVariants.Horizontal.SNOW)))))
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
@@ -507,7 +507,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 	}
 
 	private LootTable.Builder verticalHollowLog(Block log) {
-		LootItemCondition.Builder HAS_SILK_TOUCH = ObfuscationReflectionHelper.getPrivateValue(net.minecraft.data.loot.BlockLoot.class, null, "f_124062_");
+		LootItemCondition.Builder HAS_SILK_TOUCH = BlockLoot.HAS_SILK_TOUCH;
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 						.add(LootItem.lootTableItem(log.asItem()).when(HAS_SILK_TOUCH).otherwise(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));

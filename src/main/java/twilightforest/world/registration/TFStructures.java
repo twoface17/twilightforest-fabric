@@ -16,7 +16,6 @@ import net.minecraft.server.level.ServerLevel;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import twilightforest.TwilightForestMod;
-import twilightforest.TwilightForestMod;
 import twilightforest.world.components.structures.courtyard.NagaCourtyardPieces;
 import twilightforest.world.components.structures.darktower.DarkTowerPieces;
 import twilightforest.world.components.structures.finalcastle.FinalCastlePieces;

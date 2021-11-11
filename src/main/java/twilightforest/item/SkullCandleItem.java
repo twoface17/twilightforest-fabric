@@ -11,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import twilightforest.block.AbstractSkullCandleBlock;
@@ -20,7 +19,6 @@ import twilightforest.block.entity.SkullCandleBlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class SkullCandleItem extends StandingAndWallBlockItem {
 
@@ -49,7 +47,7 @@ public class SkullCandleItem extends StandingAndWallBlockItem {
 
 	//@Override
 	public Component getName(ItemStack pStack) {
-		if (pStack.is(TFBlocks.PLAYER_SKULL_CANDLE.get().asItem()) && pStack.hasTag()) {
+		if (pStack.is(TFBlocks.PLAYER_SKULL_CANDLE.asItem()) && pStack.hasTag()) {
 			String s = null;
 			CompoundTag compoundtag = pStack.getTag();
 			if (compoundtag.contains("SkullOwner", 8)) {
@@ -81,11 +79,13 @@ public class SkullCandleItem extends StandingAndWallBlockItem {
 
 	}
 
-	@Override
+	//TODO: PORT
+	//@Override
 	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 		return armorType == EquipmentSlot.HEAD;
 	}
 
+	//TODO: PORT
 	//@Override
 	@Nullable
 	public EquipmentSlot getEquipmentSlot(ItemStack stack) {

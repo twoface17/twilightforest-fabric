@@ -167,3 +167,4 @@ accessible class net/minecraft/world/item/crafting/Ingredient$Value
 accessible method net/minecraft/world/item/crafting/Ingredient$ItemValue <init> (Lnet/minecraft/world/item/ItemStack;)V
 accessible method net/minecraft/data/recipes/RecipeProvider has (Lnet/minecraft/tags/Tag;)Lnet/minecraft/advancements/critereon/InventoryChangeTrigger$TriggerInstance;
 accessible method net/minecraft/data/recipes/RecipeProvider has (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/advancements/critereon/InventoryChangeTrigger$TriggerInstance;
+accessible field net/minecraft/server/level/ServerChunkCache generator Lnet/minecraft/world/level/chunk/ChunkGenerator;

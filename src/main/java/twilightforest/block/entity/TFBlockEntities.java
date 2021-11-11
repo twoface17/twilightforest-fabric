@@ -1,7 +1,6 @@
 package twilightforest.block.entity;
 
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -11,14 +10,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
-import twilightforest.block.AbstractSkullCandleBlock;
-import twilightforest.block.AbstractTrophyBlock;
 import twilightforest.block.TFBlocks;
-import twilightforest.client.ISTER;
 import twilightforest.client.renderer.tileentity.*;
 import twilightforest.block.entity.spawner.*;
-
-import java.util.List;
 
 public class TFBlockEntities {
 

@@ -1,5 +1,6 @@
 package twilightforest.block;
 
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -29,7 +30,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.util.AxisUtil;
 
@@ -122,7 +122,7 @@ public class HollowLogHorizontal extends Block implements WaterloggedBlock {
 
         HollowLogVariants.Horizontal variant = state.getValue(VARIANT);
 
-        if (stack.is(TFBlocks.MOSS_PATCH.get().asItem())) {
+        if (stack.is(TFBlocks.MOSS_PATCH.asItem())) {
             if (canChangeVariant(variant, level, pos, stateAxis)) {
                 level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.MOSS), 3);
                 level.playSound(null, pos, SoundEvents.MOSS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -152,7 +152,7 @@ public class HollowLogHorizontal extends Block implements WaterloggedBlock {
 
                 return InteractionResult.CONSUME;
             }
-        } else if (stack.canPerformAction(ToolActions.SHOVEL_DIG)) {
+        } else if (stack.is(FabricToolTags.SHOVELS)) {
             if (variant == HollowLogVariants.Horizontal.SNOW) {
                 level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), 3);
                 level.playSound(null, pos, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -165,14 +165,14 @@ public class HollowLogHorizontal extends Block implements WaterloggedBlock {
 
                 return InteractionResult.CONSUME;
             }
-        } else if (stack.canPerformAction(ToolActions.SHEARS_HARVEST)) {
+        } else if (stack.is(FabricToolTags.SHEARS)) {
             if (variant == HollowLogVariants.Horizontal.MOSS || variant == HollowLogVariants.Horizontal.MOSS_AND_GRASS) {
                 level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), 3);
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
 
                 if (!player.isCreative()) {
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
-                    level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(TFBlocks.MOSS_PATCH.get())));
+                    level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(TFBlocks.MOSS_PATCH)));
                     if (variant == HollowLogVariants.Horizontal.MOSS_AND_GRASS)
                         level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(Blocks.GRASS)));
                 }

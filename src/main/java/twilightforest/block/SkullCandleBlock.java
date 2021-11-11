@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -50,7 +51,7 @@ public class SkullCandleBlock extends AbstractSkullCandleBlock {
 		return Int2ObjectMaps.unmodifiable(var0);
 	});
 
-	public SkullCandleBlock(SkullBlock.Type type, Properties properties) {
+	public SkullCandleBlock(SkullBlock.Type type, BlockBehaviour.Properties properties) {
 		super(type, properties);
 		registerDefaultState(getStateDefinition().any().setValue(ROTATION, 0));
 	}

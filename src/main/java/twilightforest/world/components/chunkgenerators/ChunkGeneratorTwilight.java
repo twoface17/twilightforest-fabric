@@ -32,14 +32,14 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 // TODO override getBaseHeight and getBaseColumn for our advanced structure terraforming
-public class ChunkGeneratorTwilight2 extends ChunkGeneratorWrapper {
-	public static final Codec<ChunkGeneratorTwilight2> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
+	public static final Codec<ChunkGeneratorTwilight> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			ChunkGenerator.CODEC.fieldOf("wrapped_generator").forGetter(o -> o.delegate),
 			Codec.BOOL.fieldOf("generate_dark_forest_canopy").forGetter(o -> o.genDarkForestCanopy),
 			Codec.BOOL.fieldOf("monster_spawns_below_sealevel").forGetter(o -> o.monsterSpawnsBelowSeaLevel),
 			Codec.INT.optionalFieldOf("dark_forest_canopy_height").forGetter(o -> o.darkForestCanopyHeight),
 			Codec.BOOL.fieldOf("use_overworld_seed").forGetter(o -> o.useOverworldSeed)
-	).apply(instance, instance.stable(ChunkGeneratorTwilight2::new)));
+	).apply(instance, instance.stable(ChunkGeneratorTwilight::new)));
 
 	private final boolean genDarkForestCanopy;
 	private final boolean monsterSpawnsBelowSeaLevel;
@@ -51,7 +51,7 @@ public class ChunkGeneratorTwilight2 extends ChunkGeneratorWrapper {
 
 	public final ConcurrentHashMap<ChunkPos, TFFeature> featureCache = new ConcurrentHashMap<>();
 
-	public ChunkGeneratorTwilight2(ChunkGenerator delegate, boolean genDarkForestCanopy, boolean monsterSpawnsBelowSeaLevel, Optional<Integer> darkForestCanopyHeight, boolean owSeed) {
+	public ChunkGeneratorTwilight(ChunkGenerator delegate, boolean genDarkForestCanopy, boolean monsterSpawnsBelowSeaLevel, Optional<Integer> darkForestCanopyHeight, boolean owSeed) {
 		//super(delegate.getBiomeSource(), delegate.getBiomeSource(), delegate.getSettings(), delegate instanceof NoiseBasedChunkGenerator noiseGen ? noiseGen.seed : delegate.strongholdSeed);
 		super(owSeed ? delegate = delegate.withSeed(TFDimensions.seed) : delegate);
 		this.genDarkForestCanopy = genDarkForestCanopy;
@@ -64,7 +64,7 @@ public class ChunkGeneratorTwilight2 extends ChunkGeneratorWrapper {
 			this.surfaceNoiseGetter = noiseGen.surfaceNoise;
 		} else {
 			this.defaultBlock = Blocks.STONE.defaultBlockState();
-			this.surfaceNoiseGetter = (x, y, yScale, yMax) -> ChunkGeneratorTwilight2.this.getSeaLevel();
+			this.surfaceNoiseGetter = (x, y, yScale, yMax) -> ChunkGeneratorTwilight.this.getSeaLevel();
 		}
 	}
 
@@ -75,7 +75,7 @@ public class ChunkGeneratorTwilight2 extends ChunkGeneratorWrapper {
 
 	@Override
 	public ChunkGenerator withSeed(long newSeed) {
-		return new ChunkGeneratorTwilight2(this.delegate.withSeed(newSeed), this.genDarkForestCanopy, this.monsterSpawnsBelowSeaLevel, this.darkForestCanopyHeight, false);
+		return new ChunkGeneratorTwilight(this.delegate.withSeed(newSeed), this.genDarkForestCanopy, this.monsterSpawnsBelowSeaLevel, this.darkForestCanopyHeight, false);
 	}
 
 	@Override

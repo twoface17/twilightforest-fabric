@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -37,7 +38,7 @@ public class CandelabraBlock extends AbstractLightableBlock {
     public static final VoxelShape CANDLES_X = Shapes.or(Block.box(6, 7, 1, 10, 15, 15), Block.box(7.5, 1, 1, 8.5, 7,15), Block.box(5, 1, 7.5, 11, 7,8.5), Block.box(6, 0, 6, 10, 1, 10));
     public static final VoxelShape CANDLES_Z = Shapes.or(Block.box(1, 7, 6, 15, 15, 10), Block.box(1, 1, 7.5, 15, 7,8.5), Block.box(7.5, 1, 5, 8.5, 7,11), Block.box(6, 0, 6, 10, 1, 10));
 
-    protected CandelabraBlock(Properties properties) {
+    protected CandelabraBlock(BlockBehaviour.Properties properties) {
         super(properties);
 
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(ON_WALL, false).setValue(LIGHTING, Lighting.NONE));

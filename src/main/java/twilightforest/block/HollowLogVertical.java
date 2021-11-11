@@ -30,7 +30,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.item.HollowLogItem;
 import twilightforest.util.DirectionUtil;
@@ -44,9 +43,9 @@ public class HollowLogVertical extends Block implements SimpleWaterloggedBlock {
     private static final VoxelShape HOLLOW_SHAPE = Shapes.join(Shapes.block(), Block.box(2, 0, 2, 14, 16, 14), BooleanOp.ONLY_FIRST);
     private static final VoxelShape COLLISION_SHAPE = Shapes.join(Shapes.block(), Block.box(1, 0, 1, 15, 16, 15), BooleanOp.ONLY_FIRST);
 
-    private final RegistryObject<HollowLogClimbable> climbable;
+    private final Supplier<HollowLogClimbable> climbable;
 
-    public HollowLogVertical(Properties props, RegistryObject<HollowLogClimbable> climbable) {
+    public HollowLogVertical(Properties props, Supplier<HollowLogClimbable> climbable) {
         super(props);
         this.climbable = climbable;
 

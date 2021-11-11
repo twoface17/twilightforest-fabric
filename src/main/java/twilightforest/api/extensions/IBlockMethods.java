@@ -172,6 +172,10 @@ public interface IBlockMethods {
         return null;
     }
 
+    default ItemStack getPickBlock(Level world, BlockPos pos) {
+        return null;
+    }
+
     @Nullable
     default BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
         return state.getBlock() == Blocks.LAVA ? BlockPathTypes.LAVA : (this == Blocks.FIRE || this == Blocks.LAVA) ? BlockPathTypes.DAMAGE_FIRE : null;

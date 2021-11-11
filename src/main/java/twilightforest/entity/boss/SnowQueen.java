@@ -28,6 +28,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerBossEvent;
 
+import twilightforest.advancements.TFAdvancements;
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFPart;
 import twilightforest.entity.monster.IceCrystal;

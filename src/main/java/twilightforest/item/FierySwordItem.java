@@ -13,9 +13,6 @@ import net.minecraft.world.level.Level;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import twilightforest.TwilightForestMod;
 
 import javax.annotation.Nullable;

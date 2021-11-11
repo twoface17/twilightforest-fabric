@@ -35,10 +35,10 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> TF_FENCES = TagFactory.BLOCK.create(TwilightForestMod.prefix("fences"));
     public static final Tag.Named<Block> TF_FENCE_GATES = TagFactory.BLOCK.create(TwilightForestMod.prefix("fence_gates"));
     public static final Tag.Named<Block> BANISTERS = TagFactory.BLOCK.create(TwilightForestMod.prefix("banisters"));
-    public static final Tag.Named<Block> HOLLOW_LOGS_HORIZONTAL = BlockTags.bind(TwilightForestMod.prefix("hollow_logs_horizontal").toString());
-    public static final Tag.Named<Block> HOLLOW_LOGS_VERTICAL = BlockTags.bind(TwilightForestMod.prefix("hollow_logs_vertical").toString());
-    public static final Tag.Named<Block> HOLLOW_LOGS_CLIMBABLE = BlockTags.bind(TwilightForestMod.prefix("hollow_logs_climbable").toString());
-    public static final Tag.Named<Block> HOLLOW_LOGS = BlockTags.bind(TwilightForestMod.prefix("hollow_logs").toString());
+    public static final Tag.Named<Block> HOLLOW_LOGS_HORIZONTAL = TagFactory.BLOCK.create(TwilightForestMod.prefix("hollow_logs_horizontal"));
+    public static final Tag.Named<Block> HOLLOW_LOGS_VERTICAL = TagFactory.BLOCK.create(TwilightForestMod.prefix("hollow_logs_vertical"));
+    public static final Tag.Named<Block> HOLLOW_LOGS_CLIMBABLE = TagFactory.BLOCK.create(TwilightForestMod.prefix("hollow_logs_climbable"));
+    public static final Tag.Named<Block> HOLLOW_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("hollow_logs"));
 
     public static final Tag.Named<Block> STORAGE_BLOCKS_ARCTIC_FUR = TagFactory.BLOCK.create(new ResourceLocation("c:arctic_fur_storage_block"));
     public static final Tag.Named<Block> STORAGE_BLOCKS_CARMINITE = TagFactory.BLOCK.create(new ResourceLocation("c:carminite_storage_block"));
@@ -56,12 +56,12 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/fluid"));
     public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/decoration"));
 
-    public static final Tag.Named<Block> SPECIAL_POTS = TagFactory.BLOCK.create(TwilightForestMod.prefix("dark_tower_excluded_pots"));
+    public static final Tag.Named<Block> DARK_TOWER_ALLOWED_POTS = TagFactory.BLOCK.create(TwilightForestMod.prefix("dark_tower_excluded_pots"));
     public static final Tag.Named<Block> TROPHIES = TagFactory.BLOCK.create(TwilightForestMod.prefix("trophies"));
     public static final Tag.Named<Block> FIRE_JET_FUEL = TagFactory.BLOCK.create(TwilightForestMod.prefix("fire_jet_fuel"));
 
-    public static final Tag.Named<Block> WORLDGEN_SKIPPABLES = BlockTags.bind(TwilightForestMod.prefix("worldgen_skippables").toString());
-    public static final Tag.Named<Block> WORLDGEN_REPLACEABLES = BlockTags.bind(TwilightForestMod.prefix("worldgen_replaceables").toString());
+    public static final Tag.Named<Block> WORLDGEN_SKIPPABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_skippables"));
+    public static final Tag.Named<Block> WORLDGEN_REPLACEABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_replaceables"));
 
     public static final Tag.Named<Block> COMMON_PROTECTIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("common_protections"));
     public static final Tag.Named<Block> ANNIHILATION_INCLUSIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("annihilation_inclusions"));
@@ -204,65 +204,65 @@ public class BlockTagGenerator extends BlockTagsProvider {
         );
 
         tag(HOLLOW_LOGS_HORIZONTAL).add(
-                TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL.get(),
-                TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL.get()
+                TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL,
+                TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL,
+                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL,
+                TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL
         );
 
         tag(HOLLOW_LOGS_VERTICAL).add(
-                TFBlocks.HOLLOW_OAK_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL.get(),
-                TFBlocks.HOLLOW_WARPED_STEM_VERTICAL.get(),
+                TFBlocks.HOLLOW_OAK_LOG_VERTICAL,
+                TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL,
+                TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL,
+                TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL,
+                TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL,
+                TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL,
+                TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL,
+                TFBlocks.HOLLOW_WARPED_STEM_VERTICAL,
 
-                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_DARK_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_TIME_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_MINING_LOG_VERTICAL.get(),
-                TFBlocks.HOLLOW_SORTING_LOG_VERTICAL.get()
+                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL,
+                TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL,
+                TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL,
+                TFBlocks.HOLLOW_DARK_LOG_VERTICAL,
+                TFBlocks.HOLLOW_TIME_LOG_VERTICAL,
+                TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL,
+                TFBlocks.HOLLOW_MINING_LOG_VERTICAL,
+                TFBlocks.HOLLOW_SORTING_LOG_VERTICAL
         );
 
         tag(HOLLOW_LOGS_CLIMBABLE).add(
-                TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE.get(),
+                TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE,
+                TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE,
 
-                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE.get(),
-                TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE.get()
+                TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE,
+                TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE
         );
 
-        tag(HOLLOW_LOGS).addTags(HOLLOW_LOGS_HORIZONTAL, HOLLOW_LOGS_VERTICAL, HOLLOW_LOGS_CLIMBABLE);
+        tag(HOLLOW_LOGS).addTag(HOLLOW_LOGS_HORIZONTAL).addTag(HOLLOW_LOGS_VERTICAL).addTag(HOLLOW_LOGS_CLIMBABLE);
 
         tag(BlockTags.STRIDER_WARM_BLOCKS).add(TFBlocks.FIERY_BLOCK);
         tag(BlockTags.PORTALS).add(TFBlocks.TWILIGHT_PORTAL);
@@ -448,14 +448,14 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
         tag(ORE_MAGNET_ROOT).add(TFBlocks.LIVEROOT_BLOCK);
 
-        tag(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(TFBlocks.ARCTIC_FUR_BLOCK.get());
+        tag(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(TFBlocks.ARCTIC_FUR_BLOCK);
 
         // For anything that you consider okay for placer systems to pass through during Worldgen
-        tag(WORLDGEN_SKIPPABLES).addTags(BlockTags.LOGS, COMMON_PROTECTIONS).add(TFBlocks.LIVEROOT_BLOCK.get(), TFBlocks.MANGROVE_ROOT.get());
+        tag(WORLDGEN_SKIPPABLES).addTag(BlockTags.LOGS).addTag(COMMON_PROTECTIONS).add(TFBlocks.LIVEROOT_BLOCK, TFBlocks.MANGROVE_ROOT);
         // For anything that permits replacement during Worldgen
-        tag(WORLDGEN_REPLACEABLES).addTags(BlockTags.LUSH_GROUND_REPLACEABLE);
+        tag(WORLDGEN_REPLACEABLES);//.addTag(BlockTags.LUSH_GROUND_REPLACEABLE);
 
-        tag(BlockTags.MINEABLE_WITH_AXE).addTags(BANISTERS, HOLLOW_LOGS).add(
+        tag(BlockTags.MINEABLE_WITH_AXE).addTag(BANISTERS).addTag(HOLLOW_LOGS).add(
                 TFBlocks.HEDGE,
                 TFBlocks.ROOT_BLOCK,
                 TFBlocks.LIVEROOT_BLOCK,

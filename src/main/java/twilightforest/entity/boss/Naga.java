@@ -42,6 +42,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import twilightforest.advancements.TFAdvancements;
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFPart;
 import twilightforest.api.extensions.IEntityEx;

@@ -35,13 +35,13 @@ import net.minecraft.server.level.ServerBossEvent;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.block.AbstractLightableBlock;
 import twilightforest.TwilightForestMod;
+import twilightforest.data.EntityTagGenerator;
 import twilightforest.entity.monster.LichMinion;
 import twilightforest.entity.projectile.LichBolt;
 import twilightforest.entity.projectile.LichBomb;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TFSounds;
 import twilightforest.block.TFBlocks;
-import twilightforest.entity.monster.SwarmSpider;
 import twilightforest.entity.TFEntities;
 import twilightforest.entity.ai.LichMinionsGoal;
 import twilightforest.entity.ai.LichShadowsGoal;
@@ -50,19 +50,13 @@ import twilightforest.world.registration.TFGenerationSettings;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.world.entity.monster.Zombie;
 
 public class Lich extends Monster {
 

@@ -33,12 +33,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.StringUtils;
 import twilightforest.api.extensions.IBlockMethods;
-import twilightforest.block.entity.SkullCandleBlockEntity2;
+import twilightforest.block.entity.SkullCandleBlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 implements IBlockMethods {
+public abstract class AbstractSkullCandleBlock extends AbstractLightableBlock implements IBlockMethods {
 
 	private final SkullBlock.Type type;
 	private int candleCount;
@@ -46,7 +46,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 	@Nullable
 	private GameProfile owner;
 
-	public AbstractSkullCandleBlock2(SkullBlock.Type type, BlockBehaviour.Properties properties) {
+	public AbstractSkullCandleBlock(SkullBlock.Type type, BlockBehaviour.Properties properties) {
 		super(properties);
 		this.type = type;
 	}
@@ -72,7 +72,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 	}
 	//@Override
 	public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity2 sc) {
+		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) {
 			switch (state.getValue(LIGHTING)) {
 				case NONE -> {
 					return 0;
@@ -91,7 +91,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-		return new SkullCandleBlockEntity2(blockPos, blockState, getColor(), getCandleCount());
+		return new SkullCandleBlockEntity(blockPos, blockState, getColor(), getCandleCount());
 	}
 
 	//input one of the enum names to convert it into a candle block
@@ -118,7 +118,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(level, pos, state, placer, stack);
 		BlockEntity blockentity = level.getBlockEntity(pos);
-		if (blockentity instanceof SkullCandleBlockEntity2 sc) {
+		if (blockentity instanceof SkullCandleBlockEntity sc) {
 			if(stack.hasTag() && stack.getTag() != null) {
 					CompoundTag tag = stack.getTagElement("BlockEntityTag");
 					if(tag != null) {
@@ -141,7 +141,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 
 	@Override
 	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-		if(!world.isClientSide && !player.isCreative() && world.getBlockEntity(pos) instanceof SkullCandleBlockEntity2 sc) {
+		if(!world.isClientSide && !player.isCreative() && world.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) {
 			color = sc.candleColor;
 			candleCount = sc.candleAmount;
 			owner = sc.getOwnerProfile();
@@ -179,7 +179,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 	public ItemStack getPickBlock(Level world, BlockPos pos) {
 		ItemStack newStack = new ItemStack(this);
 		CompoundTag tag = new CompoundTag();
-		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity2 sc) {
+		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) {
 			if(sc.getOwnerProfile() != null) newStack.getOrCreateTag().put("SkullOwner", NbtUtils.writeGameProfile(new CompoundTag(), sc.getOwnerProfile()));
 			tag.putInt("CandleColor", sc.candleColor);
 			tag.putInt("CandleAmount", sc.candleAmount);
@@ -190,7 +190,7 @@ public abstract class AbstractSkullCandleBlock2 extends AbstractLightableBlock2 
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if(level.getBlockEntity(pos) instanceof SkullCandleBlockEntity2 sc) {
+		if(level.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) {
 			if (player.getItemInHand(hand).is(ItemTags.CANDLES)
 					&& player.getItemInHand(hand).is(candleColorToCandle(CandleColors.colorFromInt(sc.candleColor).getSerializedName()).asItem())
 					&& !player.isShiftKeyDown()) {

@@ -2,10 +2,10 @@ package twilightforest.item;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.HollowLogVertical;
@@ -18,11 +18,11 @@ public class HollowLogItem extends BlockItem {
     private final HollowLogVertical verticalLog;
     private final HollowLogClimbable climbable;
 
-    public HollowLogItem(RegistryObject<HollowLogHorizontal> horizontalLog, RegistryObject<HollowLogVertical> verticalLog, RegistryObject<HollowLogClimbable> climbable, Properties properties) {
-        super(verticalLog.get(), properties);
-        this.horizontalLog = horizontalLog.get();
-        this.verticalLog = verticalLog.get();
-        this.climbable = climbable.get();
+    public HollowLogItem(HollowLogHorizontal horizontalLog, HollowLogVertical verticalLog, HollowLogClimbable climbable, Properties properties) {
+        super(verticalLog, properties);
+        this.horizontalLog = horizontalLog;
+        this.verticalLog = verticalLog;
+        this.climbable = climbable;
     }
 
     @Nullable
@@ -42,9 +42,11 @@ public class HollowLogItem extends BlockItem {
         pBlockToItemMap.put(this.climbable, pItem);
     }
 
-    @Override
+
+    //TODO: PORT
+    //@Override
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
-        super.removeFromBlockToItemMap(blockToItemMap, itemIn);
+        //super.removeFromBlockToItemMap(blockToItemMap, itemIn);
         blockToItemMap.remove(this.horizontalLog);
         blockToItemMap.remove(this.verticalLog);
         blockToItemMap.remove(this.climbable);

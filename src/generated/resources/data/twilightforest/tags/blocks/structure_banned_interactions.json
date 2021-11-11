@@ -2,7 +2,8 @@
   "replace": false,
   "values": [
     "#minecraft:buttons",
-    "#forge:chests",
+    "#c:wooden_chests",
+    "minecraft:ender_chest",
     "minecraft:lever",
     "twilightforest:antibuilder"
   ]

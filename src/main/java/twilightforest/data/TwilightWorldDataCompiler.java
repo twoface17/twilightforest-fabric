@@ -29,7 +29,6 @@ import twilightforest.world.components.TFBiomeProvider;
 import twilightforest.world.components.chunkgenerators.ChunkGeneratorTwilight;
 import twilightforest.world.registration.ConfiguredSurfaceBuilders;
 import twilightforest.world.registration.ConfiguredWorldCarvers;
-import twilightforest.world.registration.ConfiguredSurfaceBuilders;
 import twilightforest.world.registration.biomes.BiomeMaker;
 
 import java.util.Map;

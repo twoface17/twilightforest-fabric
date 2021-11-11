@@ -1,4 +1,5 @@
 {
+  "scale": 0.1,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -49,11 +50,9 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": false,
-  "forge:registry_name": "twilightforest:thornlands",
   "precipitation": "rain",
   "temperature": 0.3,
   "downfall": 0.2,
   "category": "none",
-  "depth": 3.0,
-  "scale": 0.1
+  "depth": 3.0
 }

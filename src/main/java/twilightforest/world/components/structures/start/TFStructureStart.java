@@ -58,7 +58,8 @@ public class TFStructureStart<C extends FeatureConfiguration> extends StructureF
 		return feature;
 	}
 
-	@Override
+	//TODO: PORT
+	//@Override
 	public boolean getDefaultRestrictsSpawnsToInside() {
 		return true;
 	}

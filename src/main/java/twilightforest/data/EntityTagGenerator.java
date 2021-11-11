@@ -13,7 +13,7 @@ import twilightforest.entity.TFEntities;
 
 public class EntityTagGenerator extends EntityTypeTagsProvider {
     public static final Tag.Named<EntityType<?>> BOSSES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("bosses"));
-    public static final Tag.Named<EntityType<?>> LICH_POPPABLES = EntityTypeTags.bind(TwilightForestMod.prefix("lich_poppables").toString());
+    public static final Tag.Named<EntityType<?>> LICH_POPPABLES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("lich_poppables"));
 
     public EntityTagGenerator(DataGenerator dataGenerator) {
         super(dataGenerator);
