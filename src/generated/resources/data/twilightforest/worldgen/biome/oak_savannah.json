@@ -1,5 +1,4 @@
 {
-  "scale": 0.1,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -67,8 +66,8 @@
       "twilightforest:monolith",
       "twilightforest:hollow_stump",
       "twilightforest:hollow_log",
-      "twilightforest:small_log",
       "twilightforest:tree/savannah_oak_trees",
+      "twilightforest:default_fallen_logs",
       "twilightforest:tree/hollow_placer",
       "twilightforest:forest_grass_placer",
       "twilightforest:flower_placer"
@@ -197,9 +196,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": true,
+  "forge:registry_name": "twilightforest:oak_savannah",
   "precipitation": "rain",
   "temperature": 0.9,
   "downfall": 0.0,
   "category": "savanna",
-  "depth": 0.05
+  "depth": 0.05,
+  "scale": 0.1
 }

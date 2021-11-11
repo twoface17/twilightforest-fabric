@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "c:carminite_storage_block"
+      "tag": "forge:storage_blocks/carminite"
     }
   ],
   "result": {

@@ -74,3 +74,5 @@ body:
           required: true
         - label: I have confirmed this does not happen on the forge version (If it does please report to **[here](https://github.com/TeamTwilight/twilightforest/issues)** instead).
           required: true
+        - label: I have confirmed this issue is unique and has not been reported already.
+          required: true

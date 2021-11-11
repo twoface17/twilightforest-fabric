@@ -45,6 +45,7 @@ import twilightforest.util.WorldUtil;
 import twilightforest.world.registration.TFGenerationSettings;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -70,6 +71,8 @@ public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 	private int successfulDrops;
 	private int maxDrops;
 	private int damageWhileBeaming;
+
+	private final List<ServerPlayer> hurtBy = new ArrayList<>();
 
 	public SnowQueen(EntityType<? extends SnowQueen> type, Level world) {
 		super(type, world);
@@ -207,7 +210,7 @@ public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 				// last block beneath
 				this.iceArray[i].setPos(this.getX(), this.getY() - 1, this.getZ());
 			}
-			this.iceArray[i].yRot = this.getIceShieldAngle(i);
+			this.iceArray[i].setYRot(this.getIceShieldAngle(i));
 
 			// collide things with the block
 			if (!level.isClientSide) {
@@ -249,6 +252,9 @@ public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 		// mark the tower as defeated
 		if (!level.isClientSide) {
 			TFGenerationSettings.markStructureConquered(level, this.blockPosition(), TFFeature.ICE_TOWER);
+			for(ServerPlayer player : hurtBy) {
+				TFAdvancements.HURT_BOSS.trigger(player, this);
+			}
 		}
 	}
 
@@ -300,6 +306,9 @@ public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 			this.damageWhileBeaming += damage;
 		}
 
+		if(source.getEntity() instanceof ServerPlayer player && !hurtBy.contains(player)) {
+			hurtBy.add(player);
+		}
 		return result;
 
 	}

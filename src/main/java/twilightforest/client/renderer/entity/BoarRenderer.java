@@ -14,7 +14,7 @@ public class BoarRenderer extends MobRenderer<Boar, BoarModel<Boar>> {
 	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("wildboar.png");
 
 	public BoarRenderer(EntityRendererProvider.Context manager, BoarModel<Boar> model) {
-		super(manager, new BoarModel<>(manager.bakeLayer(TFModelLayers.BOAR)), 0.7F);
+		super(manager, model, 0.7F);
 	}
 
 	@Override

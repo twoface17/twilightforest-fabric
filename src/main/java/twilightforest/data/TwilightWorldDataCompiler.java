@@ -6,27 +6,28 @@ import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.Lifecycle;
 
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.Registry;
-import net.minecraft.core.MappedRegistry;
-import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.FuzzyOffsetBiomeZoomer;
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
-import net.minecraft.world.level.levelgen.StructureSettings;
-import net.minecraft.world.level.levelgen.NoiseSettings;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.NoiseSamplingSettings;
+import net.minecraft.world.level.levelgen.NoiseSettings;
 import net.minecraft.world.level.levelgen.NoiseSlideSettings;
+import net.minecraft.world.level.levelgen.StructureSettings;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.TFBiomeProvider;
 import twilightforest.world.components.chunkgenerators.ChunkGeneratorTwilight;
+import twilightforest.world.registration.ConfiguredSurfaceBuilders;
 import twilightforest.world.registration.ConfiguredWorldCarvers;
 import twilightforest.world.registration.ConfiguredSurfaceBuilders;
 import twilightforest.world.registration.biomes.BiomeMaker;
@@ -51,6 +52,17 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 		biomes.forEach((rl, biome) -> this.serialize(Registry.BIOME_REGISTRY, rl, biome, Biome.DIRECT_CODEC));
 
 		this.getDimensions().forEach((rl, dimension) -> this.serialize(Registry.LEVEL_STEM_REGISTRY, rl, dimension, LevelStem.CODEC));
+	}
+
+	@Override
+	protected JsonElement intercept(ResourceKey<?> key, JsonElement json) {
+		if (key == Registry.LEVEL_STEM_REGISTRY)
+			json.getAsJsonObject().
+					get("generator").getAsJsonObject().
+					get("wrapped_generator").getAsJsonObject().
+					get("biome_source").getAsJsonObject().
+					remove("seed");
+		return super.intercept(key, json);
 	}
 
 	private Map<ResourceLocation, LevelStem> getDimensions() {
@@ -159,7 +171,7 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 		this.getOrCreateInRegistry(this.dynamicRegistries.registryOrThrow(Registry.DIMENSION_TYPE_REGISTRY), ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(TwilightForestMod.ID, "forest_type")), () -> twilightType);
 
 		return ImmutableMap.of(
-				TwilightForestMod.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true, Optional.of(12)))//,
+				TwilightForestMod.prefix("twilight_forest"), new LevelStem(() -> twilightType, new ChunkGeneratorTwilight(forestChunkGen, true, true, Optional.of(12), true))//,
 				//TwilightForestMod.prefix("skylight_forest"), new LevelStem(() -> twilightType, skyChunkGen)
 				// TODO add *actual* twilightforest:void world without islands
 		);

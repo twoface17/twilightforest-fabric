@@ -4,16 +4,7 @@
     {
       "rolls": 1.0,
       "bonus_rolls": 0.0,
-      "entries": [],
-      "functions": [
-        {
-          "function": "minecraft:copy_state",
-          "block": "twilightforest:keepsake_casket",
-          "properties": [
-            "damage"
-          ]
-        }
-      ]
+      "entries": []
     }
   ]
 }

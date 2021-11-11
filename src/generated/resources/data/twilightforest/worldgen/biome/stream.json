@@ -1,5 +1,4 @@
 {
-  "scale": 0.0,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -161,9 +160,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": false,
+  "forge:registry_name": "twilightforest:stream",
   "precipitation": "rain",
   "temperature": 0.5,
   "downfall": 0.1,
   "category": "river",
-  "depth": -0.8
+  "depth": -0.8,
+  "scale": 0.0
 }

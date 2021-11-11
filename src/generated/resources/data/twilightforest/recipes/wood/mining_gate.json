@@ -9,7 +9,7 @@
       "item": "twilightforest:mining_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

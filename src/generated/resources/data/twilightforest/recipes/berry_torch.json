@@ -9,7 +9,7 @@
       "item": "twilightforest:torchberries"
     },
     "|": {
-      "tag": "c:wood_sticks"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

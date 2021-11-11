@@ -7,7 +7,7 @@
   ],
   "key": {
     "∴": {
-      "tag": "c:redstone_dusts"
+      "tag": "forge:dusts/redstone"
     },
     "#": {
       "item": "twilightforest:encased_towerwood"

@@ -24,6 +24,7 @@ import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.enums.TowerDeviceVariant;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Random;
 
 public class BuilderBlock extends BaseEntityBlock {
@@ -91,6 +92,7 @@ public class BuilderBlock extends BaseEntityBlock {
 		}
 
 		if (variant == TowerDeviceVariant.BUILDER_INACTIVE || variant == TowerDeviceVariant.BUILDER_TIMEOUT) {
+			((CarminiteBuilderBlockEntity) Objects.requireNonNull(world.getBlockEntity(pos))).resetStats();
 			for (Direction e : Direction.values()) {
 				activateBuiltBlocks(world, pos.relative(e));
 			}
@@ -165,13 +167,9 @@ public class BuilderBlock extends BaseEntityBlock {
 		if (state.getBlock() == TFBlocks.BUILT_BLOCK && !state.getValue(TranslucentBuiltBlock.ACTIVE)) {
 			world.setBlockAndUpdate(pos, state.setValue(TranslucentBuiltBlock.ACTIVE, true));
 			world.playSound(null, pos, TFSounds.BUILDER_REPLACE, SoundSource.BLOCKS, 0.3F, 0.6F);
-			world.getBlockTicks().scheduleTick(pos, state.getBlock(), /*state.getBlock().tickRate(world)*/ 15); //TODO: Potentially incorrect, but we aren't allowed block tick rates
+			world.getBlockTicks().scheduleTick(pos, state.getBlock(), 10);
 		}
 	}
-
-	/**
-	 * We need variable, metadata-based tick rates
-	 */
 
 	@Nullable
 	@Override
@@ -182,6 +180,6 @@ public class BuilderBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, TFBlockEntities.TOWER_BUILDER, CarminiteBuilderBlockEntity::tick);
+		return state.getValue(STATE) == TowerDeviceVariant.BUILDER_ACTIVE ? createTickerHelper(type, TFBlockEntities.TOWER_BUILDER, CarminiteBuilderBlockEntity::tick) : null;
 	}
 }

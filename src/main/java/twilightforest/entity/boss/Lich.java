@@ -1,6 +1,5 @@
 package twilightforest.entity.boss;
 
-import com.google.common.collect.ImmutableSet;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -33,6 +32,7 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerBossEvent;
+import twilightforest.advancements.TFAdvancements;
 import twilightforest.block.AbstractLightableBlock;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.monster.LichMinion;
@@ -48,6 +48,7 @@ import twilightforest.entity.ai.LichShadowsGoal;
 import twilightforest.world.registration.TFGenerationSettings;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -66,8 +67,6 @@ import net.minecraft.world.entity.monster.Zombie;
 public class Lich extends Monster {
 
 	public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/lich");
-	//TODO: Think these could be EntityType?
-	private static final Set<Class<? extends Entity>> POPPABLE = ImmutableSet.of(Skeleton.class, Zombie.class, EnderMan.class, Spider.class, Creeper.class, SwarmSpider.class);
 
 	private static final EntityDataAccessor<Boolean> DATA_ISCLONE = SynchedEntityData.defineId(Lich.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> DATA_SHIELDSTRENGTH = SynchedEntityData.defineId(Lich.class, EntityDataSerializers.BYTE);
@@ -84,6 +83,7 @@ public class Lich extends Monster {
 	private int attackCooldown;
 	private int spawnTime;
 	private final ServerBossEvent bossInfo = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6);
+	private final List<ServerPlayer> hurtBy = new ArrayList<>();
 
 	public Lich(EntityType<? extends Lich> type, Level world) {
 		super(type, world);
@@ -310,6 +310,10 @@ public class Lich extends Monster {
 				this.teleportToSightOfEntity(getTarget());
 			}
 
+			if(src.getEntity() instanceof ServerPlayer player && !hurtBy.contains(player)) {
+				hurtBy.add(player);
+			}
+
 			return true;
 		} else {
 			return false;
@@ -348,10 +352,12 @@ public class Lich extends Monster {
 	private void extinguishNearbyCandles() {
 		AABB box = this.getBoundingBox().inflate(10.0D);
 		for(BlockPos pos : BlockPos.betweenClosed(Mth.floor(box.minX), Mth.floor(box.minY), Mth.floor(box.minZ), Mth.floor(box.maxX), Mth.floor(box.maxY), Mth.floor(box.maxZ))) {
-			if((level.getBlockState(pos).getBlock() instanceof AbstractLightableBlock || level.getBlockState(pos).getBlock() instanceof AbstractCandleBlock)
-					&& level.getBlockState(pos).getValue(BlockStateProperties.LIT)) {
+			if(level.getBlockState(pos).getBlock() instanceof AbstractCandleBlock && level.getBlockState(pos).getValue(BlockStateProperties.LIT)) {
 				level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(BlockStateProperties.LIT, false));
 				level.playSound(null, pos, SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 2.0F, 1.0F);
+			} else if(level.getBlockState(pos).getBlock() instanceof AbstractLightableBlock && level.getBlockState(pos).getValue(AbstractLightableBlock.LIGHTING) == AbstractLightableBlock.Lighting.NORMAL) {
+				level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(AbstractLightableBlock.LIGHTING, AbstractLightableBlock.Lighting.OMINOUS));
+				level.playSound(null, pos, SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 2.0F, 0.75F);
 			}
 		}
 	}
@@ -395,7 +401,7 @@ public class Lich extends Monster {
 	}
 
 	private void popNearbyMob() {
-		List<Mob> nearbyMobs = level.getEntitiesOfClass(Mob.class, new AABB(getX(), getY(), getZ(), getX() + 1, getY() + 1, getZ() + 1).inflate(32.0D, 16.0D, 32.0D), e -> POPPABLE.contains(e.getClass()));
+		List<Mob> nearbyMobs = level.getEntitiesOfClass(Mob.class, new AABB(getX(), getY(), getZ(), getX() + 1, getY() + 1, getZ() + 1).inflate(32.0D, 16.0D, 32.0D), e -> EntityTagGenerator.LICH_POPPABLES.contains(e.getType()));
 
 		for (Mob mob : nearbyMobs) {
 			if (getSensing().hasLineOfSight(mob)) {
@@ -637,6 +643,9 @@ public class Lich extends Monster {
 		// mark the tower as defeated
 		if (!level.isClientSide && !this.isShadowClone()) {
 			TFGenerationSettings.markStructureConquered(level, new BlockPos(this.blockPosition()), TFFeature.LICH_TOWER);
+			for(ServerPlayer player : hurtBy) {
+				TFAdvancements.HURT_BOSS.trigger(player, this);
+			}
 		}
 	}
 

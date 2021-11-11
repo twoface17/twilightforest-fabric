@@ -27,6 +27,20 @@
             }
           }
         }
+      ],
+      "functions": []
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:copy_nbt",
+      "source": "block_entity",
+      "ops": [
+        {
+          "source": "SkullOwner",
+          "target": "SkullOwner",
+          "op": "replace"
+        }
       ]
     }
   ]

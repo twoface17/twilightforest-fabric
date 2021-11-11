@@ -5,9 +5,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.feature.*;
-import twilightforest.world.components.feature.config.SpikeConfig;
-import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
-import twilightforest.world.components.feature.config.ThornsConfig;
+import twilightforest.world.components.feature.config.*;
 import twilightforest.world.components.feature.templates.*;
 import twilightforest.world.components.feature.trees.*;
 import twilightforest.world.components.feature.trees.growers.SnowTreePlacer;
@@ -33,8 +31,8 @@ public class TFBiomeFeatures {
 			new TFGenFallenHollowLog(NoneFeatureConfiguration.CODEC));
 	public static final Feature<NoneFeatureConfiguration> FALLEN_LEAVES = Registry.register(Registry.FEATURE, TwilightForestMod.ID + ":fallen_leaves",
 			new TFGenFallenLeaves(NoneFeatureConfiguration.CODEC));
-	public static final Feature<NoneFeatureConfiguration> FALLEN_SMALL_LOG = Registry.register(Registry.FEATURE, TwilightForestMod.ID + ":fallen_small_log",
-			new TFGenFallenSmallLog(NoneFeatureConfiguration.CODEC));
+	public static final Feature<HollowLogConfig> FALLEN_SMALL_LOG = Registry.register(Registry.FEATURE, TwilightForestMod.ID + ":fallen_small_log",
+			new TFGenFallenSmallLog(HollowLogConfig.CODEC));
 	public static final Feature<BlockStateConfiguration> FIRE_JET = Registry.register(Registry.FEATURE, TwilightForestMod.ID + ":fire_jet",
 			new TFGenFireJet(BlockStateConfiguration.CODEC));
 	public static final Feature<NoneFeatureConfiguration> FOUNDATION = Registry.register(Registry.FEATURE, TwilightForestMod.ID + ":foundation",

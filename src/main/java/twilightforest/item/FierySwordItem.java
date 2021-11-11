@@ -13,6 +13,10 @@ import net.minecraft.world.level.Level;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import twilightforest.TwilightForestMod;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -40,6 +44,14 @@ public class FierySwordItem extends SwordItem {
 
 		return result;
 	}
+	//TODO:PORT???
+//	//we have to set the entity on fire early in order to actually cook the food
+//	@SubscribeEvent
+//	public static void setFireBeforeDeath(LivingAttackEvent event) {
+//		if(event.getSource().getEntity() instanceof LivingEntity living && living.getMainHandItem().is(TFItems.FIERY_SWORD.get())) {
+//			event.getEntityLiving().setSecondsOnFire(1);
+//		}
+//	}
 
 	@Override
 	@Environment(EnvType.CLIENT)

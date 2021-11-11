@@ -9,7 +9,7 @@
       "item": "twilightforest:time_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

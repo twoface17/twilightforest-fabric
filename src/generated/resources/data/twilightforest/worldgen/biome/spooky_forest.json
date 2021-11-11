@@ -1,5 +1,4 @@
 {
-  "scale": 0.05,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -13,6 +12,7 @@
       "max_delay": 12000,
       "replace_current_music": true
     },
+    "grass_color_modifier": "twilightforest:spooky_forest",
     "sky_color": 2105930,
     "foliage_color": 16745729,
     "grass_color": 12865827,
@@ -65,7 +65,8 @@
       "twilightforest:tree/dead_canopy_trees",
       "twilightforest:pumpkin_lamppost",
       "twilightforest:grass_placer",
-      "twilightforest:small_log",
+      "twilightforest:tf_oak_fallen_log",
+      "twilightforest:canopy_fallen_log",
       "twilightforest:webs",
       "twilightforest:fallen_leaves",
       "minecraft:patch_pumpkin",
@@ -117,9 +118,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": false,
+  "forge:registry_name": "twilightforest:spooky_forest",
   "precipitation": "rain",
   "temperature": 0.5,
   "downfall": 1.0,
   "category": "forest",
-  "depth": 0.025
+  "depth": 0.025,
+  "scale": 0.05
 }

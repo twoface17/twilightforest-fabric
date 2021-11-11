@@ -1,5 +1,4 @@
 {
-  "scale": 0.15,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -56,7 +55,7 @@
     ],
     [
       "twilightforest:tree/snowy_forest_trees",
-      "twilightforest:small_log"
+      "twilightforest:spruce_fallen_log"
     ],
     [
       "twilightforest:snow_under_trees",
@@ -90,9 +89,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": false,
+  "forge:registry_name": "twilightforest:snowy_forest",
   "precipitation": "snow",
   "temperature": 0.09,
   "downfall": 0.9,
   "category": "forest",
-  "depth": 0.05
+  "depth": 0.05,
+  "scale": 0.15
 }

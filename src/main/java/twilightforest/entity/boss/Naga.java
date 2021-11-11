@@ -54,7 +54,9 @@ import twilightforest.util.EntityUtil;
 import twilightforest.world.registration.TFGenerationSettings;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 public class Naga extends Monster implements IEntityEx {
 
@@ -70,6 +72,7 @@ public class Naga extends Monster implements IEntityEx {
 	private final NagaSegment[] bodySegments = new NagaSegment[MAX_SEGMENTS];
 	private AIMovementPattern movementAI;
 	private int ticksSinceDamaged = 0;
+	private final List<ServerPlayer> hurtBy = new ArrayList<>();
 
 	private final ServerBossEvent bossInfo = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.GREEN, BossEvent.BossBarOverlay.NOTCHED_10);
 
@@ -666,6 +669,9 @@ public class Naga extends Monster implements IEntityEx {
 	public boolean hurt(DamageSource source, float amount) {
 		if (source != DamageSource.FALL && super.hurt(source, amount)) {
 			this.ticksSinceDamaged = 0;
+			if(source.getEntity() instanceof ServerPlayer player && !hurtBy.contains(player)) {
+				hurtBy.add(player);
+			}
 			return true;
 		} else {
 			return false;
@@ -843,6 +849,9 @@ public class Naga extends Monster implements IEntityEx {
 		// mark the courtyard as defeated
 		if (!level.isClientSide) {
 			TFGenerationSettings.markStructureConquered(level, new BlockPos(this.blockPosition()), TFFeature.NAGA_COURTYARD);
+			for(ServerPlayer player : hurtBy) {
+				TFAdvancements.HURT_BOSS.trigger(player, this);
+			}
 		}
 	}
 

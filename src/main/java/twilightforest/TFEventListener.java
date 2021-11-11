@@ -42,6 +42,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
@@ -57,6 +58,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.block.*;
 import twilightforest.block.entity.KeepsakeCasketBlockEntity;
+import twilightforest.block.entity.SkullCandleBlockEntity;
 import twilightforest.capabilities.CapabilityList;
 import twilightforest.capabilities.shield.IShieldCapability;
 import twilightforest.data.BlockTagGenerator;
@@ -313,21 +315,33 @@ public class TFEventListener {
 	}
 
 	private static void makeFloorSkull(Level world, BlockPos pos, Item item, Block newBlock) {
+		GameProfile profile = null;
+		if(world.getBlockEntity(event.pos) instanceof SkullBlockEntity skull) profile = skull.getOwnerProfile();
 		world.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 		world.setBlockAndUpdate(pos, newBlock.defaultBlockState()
-				.setValue(AbstractSkullCandleBlock.LIT, false)
-				.setValue(AbstractSkullCandleBlock.CANDLES, 1)
-				.setValue(AbstractSkullCandleBlock.COLOR, AbstractSkullCandleBlock.candleToCandleColor(item))
+				.setValue(AbstractSkullCandleBlock.LIGHTING, AbstractLightableBlock.Lighting.NONE)
 				.setValue(SkullCandleBlock.ROTATION, world.getBlockState(pos).getValue(SkullBlock.ROTATION)));
+		world.setBlockEntity(new SkullCandleBlockEntity(pos,
+				newBlock.defaultBlockState()
+						.setValue(AbstractSkullCandleBlock.LIGHTING, AbstractLightableBlock.Lighting.NONE)
+						.setValue(SkullCandleBlock.ROTATION, world.getBlockState(pos).getValue(SkullBlock.ROTATION)),
+				AbstractSkullCandleBlock.candleToCandleColor(item).getValue(), 1));
+		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) sc.setOwner(profile);
 	}
 
 	private static void makeWallSkull(Level world, BlockPos pos, Item item, Block newBlock) {
+		GameProfile profile = null;
+		if(world.getBlockEntity(pos) instanceof SkullBlockEntity skull) profile = skull.getOwnerProfile();
 		world.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 		world.setBlockAndUpdate(pos, newBlock.defaultBlockState()
-				.setValue(AbstractSkullCandleBlock.LIT, false)
-				.setValue(AbstractSkullCandleBlock.CANDLES, 1)
-				.setValue(AbstractSkullCandleBlock.COLOR, AbstractSkullCandleBlock.candleToCandleColor(item))
+				.setValue(AbstractSkullCandleBlock.LIGHTING, AbstractLightableBlock.Lighting.NONE)
 				.setValue(WallSkullCandleBlock.FACING, world.getBlockState(pos).getValue(WallSkullBlock.FACING)));
+		world.setBlockEntity(new SkullCandleBlockEntity(pos,
+				newBlock.defaultBlockState()
+						.setValue(AbstractSkullCandleBlock.LIGHTING, AbstractLightableBlock.Lighting.NONE)
+						.setValue(WallSkullCandleBlock.FACING, world.getBlockState(pos).getValue(WallSkullBlock.FACING)),
+				AbstractSkullCandleBlock.candleToCandleColor(item).getValue(), 1));
+		if(world.getBlockEntity(pos) instanceof SkullCandleBlockEntity sc) sc.setOwner(profile);
 	}
 
 	// For when the boolean  dies

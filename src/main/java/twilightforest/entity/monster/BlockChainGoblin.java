@@ -215,7 +215,7 @@ public class BlockChainGoblin extends Monster implements IEntityEx {
 			// set block position
 			Vec3 blockPos = this.getChainPosition();
 			this.block.setPos(blockPos.x, blockPos.y, blockPos.z);
-			this.block.yRot = getChainAngle();
+			this.block.setYRot(getChainAngle());
 
 			// interpolate chain position
 			double sx = this.getX();

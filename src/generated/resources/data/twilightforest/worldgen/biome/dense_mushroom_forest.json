@@ -1,5 +1,4 @@
 {
-  "scale": 0.05,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -73,7 +72,6 @@
       "twilightforest:monolith",
       "twilightforest:hollow_stump",
       "twilightforest:hollow_log",
-      "twilightforest:small_log",
       "twilightforest:mycelium_blob",
       "twilightforest:tree/vanilla_tf_trees",
       "twilightforest:tree/twilight_oak_trees",
@@ -85,6 +83,7 @@
       "twilightforest:mushroom/canopy_mushrooms_dense",
       "twilightforest:big_mushgloom",
       "twilightforest:tree/canopy_trees",
+      "twilightforest:default_fallen_logs",
       "twilightforest:tree/hollow_placer",
       "twilightforest:forest_grass_placer",
       "twilightforest:flower_placer"
@@ -213,9 +212,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": true,
+  "forge:registry_name": "twilightforest:dense_mushroom_forest",
   "precipitation": "rain",
   "temperature": 0.8,
   "downfall": 1.0,
   "category": "forest",
-  "depth": 0.05
+  "depth": 0.05,
+  "scale": 0.05
 }

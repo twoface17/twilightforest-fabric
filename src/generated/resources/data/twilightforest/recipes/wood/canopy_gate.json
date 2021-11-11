@@ -9,7 +9,7 @@
       "item": "twilightforest:canopy_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "c:paper"
+      "tag": "forge:paper"
     },
     "•": {
       "item": "twilightforest:maze_map_focus"

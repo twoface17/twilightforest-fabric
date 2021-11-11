@@ -9,7 +9,7 @@
       "item": "minecraft:iron_bars"
     },
     "-": {
-      "tag": "c:iron_nuggets"
+      "tag": "forge:nuggets/iron"
     }
   },
   "result": {

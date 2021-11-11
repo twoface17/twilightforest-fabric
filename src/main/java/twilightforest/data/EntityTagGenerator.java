@@ -13,6 +13,7 @@ import twilightforest.entity.TFEntities;
 
 public class EntityTagGenerator extends EntityTypeTagsProvider {
     public static final Tag.Named<EntityType<?>> BOSSES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("bosses"));
+    public static final Tag.Named<EntityType<?>> LICH_POPPABLES = EntityTypeTags.bind(TwilightForestMod.prefix("lich_poppables").toString());
 
     public EntityTagGenerator(DataGenerator dataGenerator) {
         super(dataGenerator);
@@ -81,5 +82,7 @@ public class EntityTagGenerator extends EntityTypeTagsProvider {
                 TFEntities.ALPHA_YETI,
                 TFEntities.SNOW_QUEEN
         );
+
+        tag(LICH_POPPABLES).addTag(EntityTypeTags.SKELETONS).add(EntityType.ZOMBIE, EntityType.ENDERMAN, EntityType.SPIDER, EntityType.CREEPER, TFEntities.SWARM_SPIDER);
     }
 }

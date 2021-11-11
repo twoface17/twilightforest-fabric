@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.ChunkSource;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 
@@ -86,68 +87,11 @@ public final class WorldUtil {
 		} else return TFGenerationSettings.SEALEVEL;
 	}
 
-	public static void removeEntityComplete(ServerLevel level, Entity entity, boolean keepData) {
-		if(((IEntityEx)entity).isMultipartEntity()) {
-			for(PartEntity<?> parts : Objects.requireNonNull(((IEntityEx) entity).getParts())) {
-				parts.discard();
-			}
+	public static int getBaseHeight(LevelAccessor level, int x, int z, Heightmap.Types type) {
+		if (level.getChunkSource() instanceof ServerChunkCache chunkSource) {
+			return chunkSource.generator.getBaseHeight(x, z, type, level);
+		} else {
+			return level.getHeight(type, x, z);
 		}
-
-		level.getChunkSource().removeEntity(entity);
-		if (entity instanceof ServerPlayer) {
-			ServerPlayer serverplayerentity = (ServerPlayer)entity;
-			level.players.remove(serverplayerentity);
-		}
-
-		level.getScoreboard().entityRemoved(entity);
-		if (entity instanceof Mob) {
-			level.navigatingMobs.remove(((Mob)entity).getNavigation());
-		}
-
-		entity.discard();
-		//net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityLeaveWorldEvent(p_8865_, this));
-	}
-
-	public static boolean isAreaLoaded(LevelReader world, BlockPos center, int range) {
-		return world.hasChunksAt(center.offset(-range, -range, -range), center.offset(range, range, range));
-	}
-
-	// Not much of a world util but its fine here for now
-	public static ItemStack getItemStack(JsonObject json, boolean readNBT)
-	{
-		String itemName = GsonHelper.getAsString(json, "item");
-
-		Item item = Registry.ITEM.get(new ResourceLocation(itemName));
-
-		if (item == null)
-			throw new JsonSyntaxException("Unknown item '" + itemName + "'");
-
-		if (readNBT && json.has("nbt"))
-		{
-			// Lets hope this works? Needs test
-			try
-			{
-				JsonElement element = json.get("nbt");
-				CompoundTag nbt;
-				if(element.isJsonObject())
-					nbt = TagParser.parseTag(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(element));
-				else
-					nbt = TagParser.parseTag(GsonHelper.convertToString(element, "nbt"));
-
-				CompoundTag tmp = new CompoundTag();
-
-				tmp.put("tag", nbt);
-				tmp.putString("id", itemName);
-				tmp.putInt("Count", GsonHelper.getAsInt(json, "count", 1));
-
-				return ItemStack.of(tmp);
-			}
-			catch (CommandSyntaxException e)
-			{
-				throw new JsonSyntaxException("Invalid NBT Entry: " + e.toString());
-			}
-		}
-
-		return new ItemStack(item, GsonHelper.getAsInt(json, "count", 1));
 	}
 }

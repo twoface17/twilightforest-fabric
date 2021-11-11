@@ -22,6 +22,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.HollowLogHorizontal;
+import twilightforest.block.HollowLogVertical;
 import twilightforest.block.TFBlocks;
 import twilightforest.enums.TwilightArmorMaterial;
 import twilightforest.enums.TwilightItemTier;

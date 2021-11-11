@@ -2,7 +2,6 @@ package twilightforest.client;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import twilightforest.block.TFBlocks;
 
@@ -22,6 +21,38 @@ public class RenderLayerRegistration {
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.TIME_DOOR, cutout);
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.TRANSFORMATION_DOOR, cutout);
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.SORTING_DOOR, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_JUNGLE_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_DARK_OAK_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_CRIMSON_STEM_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_WARPED_STEM_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_CANOPY_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_MANGROVE_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_DARK_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TIME_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TRANSFORMATION_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_MINING_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_SORTING_LOG_HORIZONTAL, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE, cutout);
+		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE, cutout);
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.TIME_TRAPDOOR, cutout);
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.SORTING_TRAPDOOR, cutout);
 		BlockRenderLayerMap.INSTANCE.putBlock(TFBlocks.TWILIGHT_PORTAL, translucent);

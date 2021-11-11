@@ -1,5 +1,4 @@
 {
-  "scale": 0.025,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -43,9 +42,11 @@
   },
   "spawn_costs": {},
   "player_spawn_friendly": false,
+  "forge:registry_name": "twilightforest:final_plateau",
   "precipitation": "rain",
   "temperature": 1.0,
   "downfall": 0.2,
   "category": "mesa",
-  "depth": 5.25
+  "depth": 5.25,
+  "scale": 0.025
 }

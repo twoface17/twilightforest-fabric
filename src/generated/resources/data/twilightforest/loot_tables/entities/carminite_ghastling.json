@@ -15,7 +15,8 @@
           "condition": "twilightforest:is_minion",
           "inverse": true
         }
-      ]
+      ],
+      "functions": []
     }
   ]
 }

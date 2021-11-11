@@ -1,12 +1,7 @@
 package twilightforest.client.model.item;
 
 import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -14,33 +9,41 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class FullbrightBakedModel implements BakedModel {
 
-	private final BakedModel delegate;
-	private Map<Direction, List<BakedQuad>> cachedQuads = Maps.newHashMap();
+	protected final BakedModel delegate;
+	protected final Map<Direction, List<BakedQuad>> cachedQuads = Maps.newHashMap();
+	protected boolean cache = true;
 
 	public FullbrightBakedModel(BakedModel delegate) {
 		this.delegate = delegate;
 	}
 
-	public static void setLightData(BakedQuad q, int light)
-	{
-		int[] data = q.getVertices();
-		for (int i = 0; i < 4; i++)
-		{
-			data[(i * 8) + 6] = light;
-		}
+	public final FullbrightBakedModel disableCache() {
+		cache = false;
+		return this;
+	}
+
+	@Nonnull
+	@Override
+	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
+		return getQuads(state, side, rand);
 	}
 
 	@Override
 	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-		return cachedQuads.computeIfAbsent(side, (face) -> {
+		return cache ? cachedQuads.computeIfAbsent(side, (face) -> {
 			List<BakedQuad> quads = delegate.getQuads(state, side, rand);
-			for (BakedQuad quad : quads)
-				setLightData(quad, 0xF000F0);
-			return quads;
-		});
+			return getQuads(face, quads);
+		}) : getQuads(side, delegate.getQuads(state, side, rand));
+	}
+
+	protected List<BakedQuad> getQuads(@Nullable Direction face, List<BakedQuad> quads) {
+		for (BakedQuad quad : quads)
+			LightUtil.setLightData(quad, 0xF000F0);
+		return quads;
 	}
 
 	@Override

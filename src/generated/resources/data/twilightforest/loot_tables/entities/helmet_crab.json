@@ -78,7 +78,8 @@
           "chance": 0.5,
           "looting_multiplier": 0.1
         }
-      ]
+      ],
+      "functions": []
     }
   ]
 }

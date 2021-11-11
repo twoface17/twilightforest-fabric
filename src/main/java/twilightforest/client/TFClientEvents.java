@@ -41,6 +41,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.StaticTagHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -61,7 +62,10 @@ public class TFClientEvents {
 		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> showOptifineWarning(screen));
 	}
 
+	@Deprecated // tterrag said this would become deprecated soon in favor of above method
+	@SubscribeEvent
 	public static void modelBake(Map<ResourceLocation, BakedModel> event) {
+		// TODO Unhardcode, into using Model Deserializers and load from JSON instead
 		fullbrightItem(event, TFItems.FIERY_INGOT);
 		fullbrightItem(event, TFItems.FIERY_BOOTS);
 		fullbrightItem(event, TFItems.FIERY_CHESTPLATE);
@@ -70,15 +74,55 @@ public class TFClientEvents {
 		fullbrightItem(event, TFItems.FIERY_PICKAXE);
 		fullbrightItem(event, TFItems.FIERY_SWORD);
 		fullbright(event, Registry.BLOCK.getKey(TFBlocks.FIERY_BLOCK), "");
+
+		tintedFullbrightBlock(event, TFBlocks.PINK_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.BLUE_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.YELLOW_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.VIOLET_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
 	}
 
 	private static void fullbrightItem(Map<ResourceLocation, BakedModel> event, Item item) {
-		fullbright(event, Objects.requireNonNull(Registry.ITEM.getKey(item)), "inventory");
+		fullbrightItem(event, item, f -> f);
+		}
+
+		private static void fullbrightItem(ModelBakeEvent event, RegistryObject<Item> item, UnaryOperator<FullbrightBakedModel> process) {
+			fullbright(event, Objects.requireNonNull(Registry.ITEM.getKey(item)), "inventory", process);
+		}
+
+		private static void fullbrightBlock(ModelBakeEvent event, RegistryObject<Block> block) {
+			fullbrightBlock(event, block, f -> f);
 	}
 
-		private static void fullbright(Map<ResourceLocation, BakedModel> event, ResourceLocation rl, String state) {
+		private static void fullbrightBlock(ModelBakeEvent event, RegistryObject<Block> block, UnaryOperator<FullbrightBakedModel> process) {
+			fullbright(event, Objects.requireNonNull(block.getId()), "inventory", process);
+			fullbright(event, Objects.requireNonNull(block.getId()), "", process);
+		}
+
+		private static void fullbright(Map<ResourceLocation, BakedModel> event, ResourceLocation rl, String state, UnaryOperator<FullbrightBakedModel> process) {
 			ModelResourceLocation mrl = new ModelResourceLocation(rl, state);
-			event.put(mrl, new FullbrightBakedModel(event.get(mrl)));
+			event.put(mrl, process.apply(new FullbrightBakedModel(event.get(mrl))));
+		}
+
+		private static void tintedFullbrightItem(ModelBakeEvent event, RegistryObject<Item> item) {
+			tintedFullbrightItem(event, item, f -> f);
+		}
+
+		private static void tintedFullbrightItem(ModelBakeEvent event, RegistryObject<Item> item, UnaryOperator<FullbrightBakedModel> process) {
+			tintedFullbright(event, Objects.requireNonNull(item.getId()), "inventory", process);
+		}
+
+		private static void tintedFullbrightBlock(ModelBakeEvent event, RegistryObject<Block> block) {
+			tintedFullbrightBlock(event, block, f -> f);
+		}
+
+		private static void tintedFullbrightBlock(ModelBakeEvent event, RegistryObject<Block> block, UnaryOperator<FullbrightBakedModel> process) {
+			tintedFullbright(event, Objects.requireNonNull(block.getId()), "inventory", process);
+			tintedFullbright(event, Objects.requireNonNull(block.getId()), "", process);
+		}
+
+		private static void tintedFullbright(ModelBakeEvent event, ResourceLocation rl, String state, UnaryOperator<FullbrightBakedModel> process) {
+			ModelResourceLocation mrl = new ModelResourceLocation(rl, state);
+			event.getModelRegistry().put(mrl, process.apply(new TintIndexAwareFullbrightBakedModel(event.getModelRegistry().get(mrl))));
 		}
 
 		public static void texStitch(TextureAtlas map, Set<ResourceLocation> textures) {
@@ -87,6 +131,8 @@ public class TFClientEvents {
 						.flatMap(e -> e.values().stream())
 						.map(Material::texture)
 						.forEach(textures::add);
+
+			evt.addSprite(TwilightForestMod.prefix("block/mosspatch"));
 
 		//FIXME bring back if you can get GradientMappedTexture working
 		/*if (TFCompat.IMMERSIVEENGINEERING.isActivated()) {

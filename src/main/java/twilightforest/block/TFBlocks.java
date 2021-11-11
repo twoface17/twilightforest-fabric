@@ -33,9 +33,9 @@ public class TFBlocks {
 	public static final Block FIREFLY_JAR = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":firefly_jar", new JarBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(0.3F, 0.0F).sound(SoundType.WOOD).lightLevel((state) -> 15).noOcclusion()));
 	public static final Block FIREFLY_SPAWNER = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":firefly_particle_spawner", new FireflySpawnerBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(1.0F, 0.0F).sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion()));
 	public static final Block CICADA_JAR = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":cicada_jar", new JarBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(0.3F, 0.0F).sound(SoundType.WOOD).noOcclusion().randomTicks()));
-	public static final Block MOSS_PATCH = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":moss_patch", new TFPlantBlock(PlantVariant.MOSSPATCH, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.MOSS).noCollission().noOcclusion()));
+	public static final Block MOSS_PATCH = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":moss_patch", new PatchBlock(PlantVariant.MOSSPATCH, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.MOSS).noCollission().noOcclusion()));
 	public static final Block MAYAPPLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mayapple", new TFPlantBlock(PlantVariant.MAYAPPLE, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.GRASS).noCollission().noOcclusion()));
-	public static final Block CLOVER_PATCH = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":clover_patch", new TFPlantBlock(PlantVariant.CLOVERPATCH, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.GRASS).noCollission().noOcclusion()));
+	public static final Block CLOVER_PATCH = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":clover_patch", new PatchBlock(PlantVariant.CLOVERPATCH, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.GRASS).noCollission().noOcclusion()));
 	public static final Block FIDDLEHEAD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":fiddlehead", new TFPlantBlock(PlantVariant.FIDDLEHEAD, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.GRASS).noCollission().noOcclusion()));
 	public static final Block MUSHGLOOM = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mushgloom", new TFPlantBlock(PlantVariant.MUSHGLOOM, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.FUNGUS).noCollission().noOcclusion().lightLevel((state) -> 3)));
 	public static final Block TORCHBERRY_PLANT = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":torchberry_plant", new TorchberryPlantBlock(PlantVariant.TORCHBERRY, BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).sound(SoundType.HANGING_ROOTS).noCollission().noOcclusion().lightLevel((state) -> (state.getValue(TorchberryPlantBlock.HAS_BERRIES) ? 8 : 0))));
@@ -83,17 +83,17 @@ public class TFBlocks {
 	public static final RotatedPillarBlock BOLD_STONE_PILLAR = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":bold_stone_pillar", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)));
 	public static final Block DEATH_TOME_SPAWNER = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":death_tome_spawner", new TomeSpawnerBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)));
 	public static final Block EMPTY_CANOPY_BOOKSHELF = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":empty_canopy_bookshelf", new Block(BlockBehaviour.Properties.of(Material.WOOD).strength(1.5F).sound(SoundType.WOOD)));
-	public static final CandelabraBlock CANDELABRA = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":candelabra", new CandelabraBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.STONE).lightLevel(state -> state.getValue(CandelabraBlock.LIT) ? 15 : 0)));
-	public static final AbstractSkullCandleBlock ZOMBIE_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":zombie_skull_candle", new SkullCandleBlock(SkullBlock.Types.ZOMBIE, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock ZOMBIE_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":zombie_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.ZOMBIE, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock SKELETON_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":skeleton_skull_candle", new SkullCandleBlock(SkullBlock.Types.SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock SKELETON_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":skeleton_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock WITHER_SKELE_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":wither_skeleton_skull_candle", new SkullCandleBlock(SkullBlock.Types.WITHER_SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock WITHER_SKELE_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":wither_skeleton_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.WITHER_SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock CREEPER_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":creeper_skull_candle", new SkullCandleBlock(SkullBlock.Types.CREEPER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock CREEPER_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":creeper_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.CREEPER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock PLAYER_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":player_skull_candle", new SkullCandleBlock(SkullBlock.Types.PLAYER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
-	public static final AbstractSkullCandleBlock PLAYER_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":player_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.PLAYER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD).lightLevel(AbstractSkullCandleBlock.LIGHT_EMISSION)));
+	public static final CandelabraBlock CANDELABRA = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":candelabra", new CandelabraBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.STONE).lightLevel(state -> state.getValue(AbstractLightableBlock.LIGHTING) == AbstractLightableBlock.Lighting.NORMAL ? 15 : state.getValue(AbstractLightableBlock.LIGHTING) == AbstractLightableBlock.Lighting.OMINOUS ? 7 : 0)));
+	public static final AbstractSkullCandleBlock ZOMBIE_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":zombie_skull_candle", new SkullCandleBlock(SkullBlock.Types.ZOMBIE, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock ZOMBIE_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":zombie_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.ZOMBIE, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock SKELETON_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":skeleton_skull_candle", new SkullCandleBlock(SkullBlock.Types.SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock SKELETON_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":skeleton_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock WITHER_SKELE_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":wither_skeleton_skull_candle", new SkullCandleBlock(SkullBlock.Types.WITHER_SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock WITHER_SKELE_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":wither_skeleton_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.WITHER_SKELETON, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock CREEPER_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":creeper_skull_candle", new SkullCandleBlock(SkullBlock.Types.CREEPER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock CREEPER_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":creeper_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.CREEPER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock PLAYER_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":player_skull_candle", new SkullCandleBlock(SkullBlock.Types.PLAYER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
+	public static final AbstractSkullCandleBlock PLAYER_WALL_SKULL_CANDLE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":player_wall_skull_candle", new WallSkullCandleBlock(SkullBlock.Types.PLAYER, BlockBehaviour.Properties.copy(Blocks.ZOMBIE_HEAD)));
 
 	//labyrinth
 	public static final Block MAZESTONE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mazestone", new MazestoneBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(100.0F, 5.0F).sound(SoundType.STONE)));
@@ -251,6 +251,8 @@ public class TFBlocks {
 	public static final TrophyWallBlock ALPHA_YETI_WALL_TROPHY = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":alpha_yeti_wall_trophy", new TrophyWallBlock(BossVariant.ALPHA_YETI));
 	public static final TrophyWallBlock QUEST_RAM_WALL_TROPHY = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":quest_ram_wall_trophy", new TrophyWallBlock(BossVariant.QUEST_RAM));
 
+	// TODO Enumify all of the dang tree stuff
+
 	//all tree related stuff
 	public static final BanisterBlock OAK_BANISTER = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":oak_banister", new BanisterBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 	public static final BanisterBlock SPRUCE_BANISTER = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":spruce_banister", new BanisterBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)));
@@ -270,37 +272,127 @@ public class TFBlocks {
 	public static final WoodType MINING = WoodType.register(new WoodType("mining"));
 	public static final WoodType SORTING = WoodType.register(new WoodType("sorting"));
 
-	public static final RotatedPillarBlock TWILIGHT_OAK_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":twilight_oak_log", new TFLogBlock(logProperties(MaterialColor.WOOD, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock CANOPY_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":canopy_log", new TFLogBlock(logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock MANGROVE_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mangrove_log", new TFLogBlock(logProperties(MaterialColor.DIRT, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock DARK_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":dark_log", new TFLogBlock(logProperties(MaterialColor.COLOR_BROWN, MaterialColor.STONE).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock TIME_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":time_log", new TFLogBlock(logProperties(MaterialColor.DIRT, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock TRANSFORMATION_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":transformation_log", new TFLogBlock(logProperties(MaterialColor.WOOD, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock MINING_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mining_log", new TFLogBlock(logProperties(MaterialColor.SAND, MaterialColor.QUARTZ).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock SORTING_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":sorting_log", new TFLogBlock(logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD)));
+	public static final BlockBehaviour.Properties TWILIGHT_OAK_LOG_PROPS = logProperties(MaterialColor.WOOD, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties CANOPY_LOG_PROPS = logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MANGROVE_LOG_PROPS = logProperties(MaterialColor.DIRT, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties DARK_LOG_PROPS = logProperties(MaterialColor.COLOR_BROWN, MaterialColor.STONE).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TIME_LOG_PROPS = logProperties(MaterialColor.DIRT, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TRANSFORMATION_LOG_PROPS = logProperties(MaterialColor.WOOD, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MINING_LOG_PROPS = logProperties(MaterialColor.SAND, MaterialColor.QUARTZ).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties SORTING_LOG_PROPS = logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
 
-	public static final Block TIME_LOG_CORE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":time_log_core", new SpecialMagicLogBlock(logProperties(MaterialColor.DIRT, MaterialColor.PODZOL), MagicWoodVariant.TIME));
-	public static final Block TRANSFORMATION_LOG_CORE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":transformation_log_core", new SpecialMagicLogBlock(logProperties(MaterialColor.WOOD, MaterialColor.PODZOL), MagicWoodVariant.TRANS));
-	public static final Block MINING_LOG_CORE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mining_log_core", new SpecialMagicLogBlock(logProperties(MaterialColor.SAND, MaterialColor.QUARTZ), MagicWoodVariant.MINE));
-	public static final Block SORTING_LOG_CORE = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":sorting_log_core", new SpecialMagicLogBlock(logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN), MagicWoodVariant.SORT));
+	public static final BlockBehaviour.Properties TWILIGHT_OAK_BARK_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties CANOPY_BARK_PROPS = logProperties(MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MANGROVE_BARK_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties DARK_BARK_PROPS = logProperties(MaterialColor.STONE).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TIME_BARK_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TRANSFORMATION_BARK_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MINING_BARK_PROPS = logProperties(MaterialColor.QUARTZ).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties SORTING_BARK_PROPS = logProperties(MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
 
-	public static final RotatedPillarBlock STRIPPED_TWILIGHT_OAK_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_twilight_oak_log", new TFLogBlock(logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_CANOPY_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_canopy_log", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_MANGROVE_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_mangrove_log", new TFLogBlock(logProperties(MaterialColor.DIRT).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_DARK_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_dark_log", new TFLogBlock(logProperties(MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_TIME_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_time_log", new TFLogBlock(logProperties(MaterialColor.DIRT).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_TRANSFORMATION_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_transformation_log", new TFLogBlock(logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_MINING_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_mining_log", new TFLogBlock(logProperties(MaterialColor.SAND).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock STRIPPED_SORTING_LOG = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":stripped_sorting_log", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
+	public static final BlockBehaviour.Properties TWILIGHT_OAK_STRIPPED_PROPS = logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties CANOPY_STRIPPED_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MANGROVE_STRIPPED_PROPS = logProperties(MaterialColor.DIRT).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties DARK_STRIPPED_PROPS = logProperties(MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TIME_STRIPPED_PROPS = logProperties(MaterialColor.DIRT).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties TRANSFORMATION_STRIPPED_PROPS = logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties MINING_STRIPPED_PROPS = logProperties(MaterialColor.SAND).strength(2.0F).sound(SoundType.WOOD);
+	public static final BlockBehaviour.Properties SORTING_STRIPPED_PROPS = logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
 
-	public static final RotatedPillarBlock TWILIGHT_OAK_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":twilight_oak_wood", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock CANOPY_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":canopy_wood", new TFLogBlock(logProperties(MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock MANGROVE_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mangrove_wood", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock DARK_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":dark_wood", new TFLogBlock(logProperties(MaterialColor.STONE).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock TIME_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":time_wood", new TFLogBlock(logProperties(MaterialColor.DIRT).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock TRANSFORMATION_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":transformation_wood", new TFLogBlock(logProperties(MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock MINING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mining_wood", new TFLogBlock(logProperties(MaterialColor.SAND).strength(2.0F).sound(SoundType.WOOD)));
-	public static final RotatedPillarBlock SORTING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":sorting_wood", new TFLogBlock(logProperties(MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD)));
+	public static final RegistryObject<RotatedPillarBlock> TWILIGHT_OAK_LOG = BLOCKS.register("twilight_oak_log", () -> new TFLogBlock(TWILIGHT_OAK_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> CANOPY_LOG = BLOCKS.register("canopy_log", () -> new TFLogBlock(CANOPY_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> MANGROVE_LOG = BLOCKS.register("mangrove_log", () -> new TFLogBlock(MANGROVE_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> DARK_LOG = BLOCKS.register("dark_log", () -> new TFLogBlock(DARK_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> TIME_LOG = BLOCKS.register("time_log", () -> new TFLogBlock(TIME_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> TRANSFORMATION_LOG = BLOCKS.register("transformation_log", () -> new TFLogBlock(TRANSFORMATION_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> MINING_LOG = BLOCKS.register("mining_log", () -> new TFLogBlock(MINING_LOG_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> SORTING_LOG = BLOCKS.register("sorting_log", () -> new TFLogBlock(SORTING_LOG_PROPS));
+
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_TWILIGHT_OAK_LOG_HORIZONTAL = BLOCKS.register("hollow_twilight_oak_log_horizontal", () -> new HollowLogHorizontal(TWILIGHT_OAK_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_CANOPY_LOG_HORIZONTAL = BLOCKS.register("hollow_canopy_log_horizontal", () -> new HollowLogHorizontal(CANOPY_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_MANGROVE_LOG_HORIZONTAL = BLOCKS.register("hollow_mangrove_log_horizontal", () -> new HollowLogHorizontal(MANGROVE_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_DARK_LOG_HORIZONTAL = BLOCKS.register("hollow_dark_log_horizontal", () -> new HollowLogHorizontal(DARK_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_TIME_LOG_HORIZONTAL = BLOCKS.register("hollow_time_log_horizontal", () -> new HollowLogHorizontal(TIME_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_TRANSFORMATION_LOG_HORIZONTAL = BLOCKS.register("hollow_transformation_log_horizontal", () -> new HollowLogHorizontal(TRANSFORMATION_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_MINING_LOG_HORIZONTAL = BLOCKS.register("hollow_mining_log_horizontal", () -> new HollowLogHorizontal(MINING_BARK_PROPS));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_SORTING_LOG_HORIZONTAL = BLOCKS.register("hollow_sorting_log_horizontal", () -> new HollowLogHorizontal(SORTING_BARK_PROPS));
+
+	public static final RegistryObject<HollowLogVertical> HOLLOW_TWILIGHT_OAK_LOG_VERTICAL = BLOCKS.register("hollow_twilight_oak_log_vertical", () -> new HollowLogVertical(TWILIGHT_OAK_STRIPPED_PROPS, TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_CANOPY_LOG_VERTICAL = BLOCKS.register("hollow_canopy_log_vertical", () -> new HollowLogVertical(CANOPY_STRIPPED_PROPS, TFBlocks.HOLLOW_CANOPY_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_MANGROVE_LOG_VERTICAL = BLOCKS.register("hollow_mangrove_log_vertical", () -> new HollowLogVertical(MANGROVE_STRIPPED_PROPS, TFBlocks.HOLLOW_MANGROVE_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_DARK_LOG_VERTICAL = BLOCKS.register("hollow_dark_log_vertical", () -> new HollowLogVertical(DARK_STRIPPED_PROPS, TFBlocks.HOLLOW_DARK_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_TIME_LOG_VERTICAL = BLOCKS.register("hollow_time_log_vertical", () -> new HollowLogVertical(TIME_STRIPPED_PROPS, TFBlocks.HOLLOW_TIME_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_TRANSFORMATION_LOG_VERTICAL = BLOCKS.register("hollow_transformation_log_vertical", () -> new HollowLogVertical(TRANSFORMATION_STRIPPED_PROPS, TFBlocks.HOLLOW_TRANSFORMATION_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_MINING_LOG_VERTICAL = BLOCKS.register("hollow_mining_log_vertical", () -> new HollowLogVertical(MINING_STRIPPED_PROPS, TFBlocks.HOLLOW_MINING_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_SORTING_LOG_VERTICAL = BLOCKS.register("hollow_sorting_log_vertical", () -> new HollowLogVertical(SORTING_STRIPPED_PROPS, TFBlocks.HOLLOW_SORTING_LOG_CLIMBABLE));
+
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_TWILIGHT_OAK_LOG_CLIMBABLE = BLOCKS.register("hollow_twilight_oak_log_climbable", () -> new HollowLogClimbable(TWILIGHT_OAK_STRIPPED_PROPS, TFBlocks.HOLLOW_TWILIGHT_OAK_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_CANOPY_LOG_CLIMBABLE = BLOCKS.register("hollow_canopy_log_climbable", () -> new HollowLogClimbable(CANOPY_STRIPPED_PROPS, TFBlocks.HOLLOW_CANOPY_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_MANGROVE_LOG_CLIMBABLE = BLOCKS.register("hollow_mangrove_log_climbable", () -> new HollowLogClimbable(MANGROVE_STRIPPED_PROPS, TFBlocks.HOLLOW_MANGROVE_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_DARK_LOG_CLIMBABLE = BLOCKS.register("hollow_dark_log_climbable", () -> new HollowLogClimbable(DARK_STRIPPED_PROPS, TFBlocks.HOLLOW_DARK_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_TIME_LOG_CLIMBABLE = BLOCKS.register("hollow_time_log_climbable", () -> new HollowLogClimbable(TIME_STRIPPED_PROPS, TFBlocks.HOLLOW_TIME_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_TRANSFORMATION_LOG_CLIMBABLE = BLOCKS.register("hollow_transformation_log_climbable", () -> new HollowLogClimbable(TRANSFORMATION_STRIPPED_PROPS, TFBlocks.HOLLOW_TRANSFORMATION_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_MINING_LOG_CLIMBABLE = BLOCKS.register("hollow_mining_log_climbable", () -> new HollowLogClimbable(MINING_STRIPPED_PROPS, TFBlocks.HOLLOW_MINING_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_SORTING_LOG_CLIMBABLE = BLOCKS.register("hollow_sorting_log_climbable", () -> new HollowLogClimbable(SORTING_STRIPPED_PROPS, TFBlocks.HOLLOW_SORTING_LOG_VERTICAL));
+
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_OAK_LOG_HORIZONTAL = BLOCKS.register("hollow_oak_log_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_SPRUCE_LOG_HORIZONTAL = BLOCKS.register("hollow_spruce_log_horizontal", () -> new HollowLogHorizontal((BlockBehaviour.Properties.copy(Blocks.SPRUCE_WOOD))));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_BIRCH_LOG_HORIZONTAL = BLOCKS.register("hollow_birch_log_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.BIRCH_WOOD)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_JUNGLE_LOG_HORIZONTAL = BLOCKS.register("hollow_jungle_log_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.JUNGLE_WOOD)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_ACACIA_LOG_HORIZONTAL = BLOCKS.register("hollow_acacia_log_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.ACACIA_WOOD)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_DARK_OAK_LOG_HORIZONTAL = BLOCKS.register("hollow_dark_oak_log_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_WOOD)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_CRIMSON_STEM_HORIZONTAL = BLOCKS.register("hollow_crimson_stem_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HYPHAE)));
+	public static final RegistryObject<HollowLogHorizontal> HOLLOW_WARPED_STEM_HORIZONTAL = BLOCKS.register("hollow_warped_stem_horizontal", () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(Blocks.WARPED_HYPHAE)));
+
+	public static final RegistryObject<HollowLogVertical> HOLLOW_OAK_LOG_VERTICAL = BLOCKS.register("hollow_oak_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD), TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_SPRUCE_LOG_VERTICAL = BLOCKS.register("hollow_spruce_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_SPRUCE_WOOD), TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_BIRCH_LOG_VERTICAL = BLOCKS.register("hollow_birch_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_BIRCH_WOOD), TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_JUNGLE_LOG_VERTICAL = BLOCKS.register("hollow_jungle_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_JUNGLE_WOOD), TFBlocks.HOLLOW_JUNGLE_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_ACACIA_LOG_VERTICAL = BLOCKS.register("hollow_acacia_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD), TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_DARK_OAK_LOG_VERTICAL = BLOCKS.register("hollow_dark_oak_log_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_DARK_OAK_WOOD), TFBlocks.HOLLOW_DARK_OAK_LOG_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_CRIMSON_STEM_VERTICAL = BLOCKS.register("hollow_crimson_stem_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CRIMSON_HYPHAE), TFBlocks.HOLLOW_CRIMSON_STEM_CLIMBABLE));
+	public static final RegistryObject<HollowLogVertical> HOLLOW_WARPED_STEM_VERTICAL = BLOCKS.register("hollow_warped_stem_vertical", () -> new HollowLogVertical(BlockBehaviour.Properties.copy(Blocks.STRIPPED_WARPED_HYPHAE), TFBlocks.HOLLOW_WARPED_STEM_CLIMBABLE));
+
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_OAK_LOG_CLIMBABLE = BLOCKS.register("hollow_oak_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD), TFBlocks.HOLLOW_OAK_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_SPRUCE_LOG_CLIMBABLE = BLOCKS.register("hollow_spruce_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_SPRUCE_WOOD), TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_BIRCH_LOG_CLIMBABLE = BLOCKS.register("hollow_birch_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_BIRCH_WOOD), TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_JUNGLE_LOG_CLIMBABLE = BLOCKS.register("hollow_jungle_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_JUNGLE_WOOD), TFBlocks.HOLLOW_JUNGLE_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_ACACIA_LOG_CLIMBABLE = BLOCKS.register("hollow_acacia_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD), TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_DARK_OAK_LOG_CLIMBABLE = BLOCKS.register("hollow_dark_oak_log_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_DARK_OAK_WOOD), TFBlocks.HOLLOW_DARK_OAK_LOG_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_CRIMSON_STEM_CLIMBABLE = BLOCKS.register("hollow_crimson_stem_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_CRIMSON_HYPHAE), TFBlocks.HOLLOW_CRIMSON_STEM_VERTICAL));
+	public static final RegistryObject<HollowLogClimbable> HOLLOW_WARPED_STEM_CLIMBABLE = BLOCKS.register("hollow_warped_stem_climbable", () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(Blocks.STRIPPED_WARPED_HYPHAE), TFBlocks.HOLLOW_WARPED_STEM_VERTICAL));
+
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TWILIGHT_OAK_LOG = BLOCKS.register("stripped_twilight_oak_log", () -> new TFLogBlock(TWILIGHT_OAK_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANOPY_LOG = BLOCKS.register("stripped_canopy_log", () -> new TFLogBlock(CANOPY_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_MANGROVE_LOG = BLOCKS.register("stripped_mangrove_log", () -> new TFLogBlock(MANGROVE_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_DARK_LOG = BLOCKS.register("stripped_dark_log", () -> new TFLogBlock(DARK_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TIME_LOG = BLOCKS.register("stripped_time_log", () -> new TFLogBlock(TIME_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TRANSFORMATION_LOG = BLOCKS.register("stripped_transformation_log", () -> new TFLogBlock(TRANSFORMATION_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_MINING_LOG = BLOCKS.register("stripped_mining_log", () -> new TFLogBlock(MINING_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_SORTING_LOG = BLOCKS.register("stripped_sorting_log", () -> new TFLogBlock(SORTING_STRIPPED_PROPS));
+
+	public static final RotatedPillarBlock TWILIGHT_OAK_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":twilight_oak_wood", new TFLogBlock(TWILIGHT_OAK_BARK_PROPS));
+	public static final RotatedPillarBlock CANOPY_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":canopy_wood", new TFLogBlock(CANOPY_BARK_PROPS));
+	public static final RotatedPillarBlock MANGROVE_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mangrove_wood", new TFLogBlock(MANGROVE_BARK_PROPS));
+	public static final RotatedPillarBlock DARK_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":dark_wood", new TFLogBlock(DARK_BARK_PROPS));
+	public static final RotatedPillarBlock TIME_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":time_wood", new TFLogBlock(TIME_BARK_PROPS));
+	public static final RotatedPillarBlock TRANSFORMATION_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":transformation_wood", new TFLogBlock(TRANSFORMATION_BARK_PROPS));
+	public static final RotatedPillarBlock MINING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mining_wood", new TFLogBlock(MINING_BARK_PROPS));
+	public static final RotatedPillarBlock SORTING_WOOD = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":sorting_wood", new TFLogBlock(SORTING_BARK_PROPS));
+
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TWILIGHT_OAK_WOOD = BLOCKS.register("stripped_twilight_oak_wood", () -> new TFLogBlock(TWILIGHT_OAK_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_CANOPY_WOOD = BLOCKS.register("stripped_canopy_wood", () -> new TFLogBlock(CANOPY_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_MANGROVE_WOOD = BLOCKS.register("stripped_mangrove_wood", () -> new TFLogBlock(MANGROVE_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_DARK_WOOD = BLOCKS.register("stripped_dark_wood", () -> new TFLogBlock(DARK_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TIME_WOOD = BLOCKS.register("stripped_time_wood", () -> new TFLogBlock(TIME_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_TRANSFORMATION_WOOD = BLOCKS.register("stripped_transformation_wood", () -> new TFLogBlock(TRANSFORMATION_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_MINING_WOOD = BLOCKS.register("stripped_mining_wood", () -> new TFLogBlock(MINING_STRIPPED_PROPS));
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_SORTING_WOOD = BLOCKS.register("stripped_sorting_wood", () -> new TFLogBlock(SORTING_STRIPPED_PROPS));
+
+	public static final RegistryObject<Block> TIME_LOG_CORE = BLOCKS.register("time_log_core", () -> new SpecialMagicLogBlock(TIME_LOG_PROPS, MagicWoodVariant.TIME));
+	public static final RegistryObject<Block> TRANSFORMATION_LOG_CORE = BLOCKS.register("transformation_log_core", () -> new SpecialMagicLogBlock(TRANSFORMATION_LOG_PROPS, MagicWoodVariant.TRANS));
+	public static final RegistryObject<Block> MINING_LOG_CORE = BLOCKS.register("mining_log_core", () -> new SpecialMagicLogBlock(MINING_LOG_PROPS, MagicWoodVariant.MINE));
+	public static final RegistryObject<Block> SORTING_LOG_CORE = BLOCKS.register("sorting_log_core", () -> new SpecialMagicLogBlock(SORTING_LOG_PROPS, MagicWoodVariant.SORT));
 
 	public static final Block MANGROVE_ROOT = Registry.register(Registry.BLOCK, TwilightForestMod.ID + ":mangrove_root", new Block(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
 
@@ -466,12 +558,11 @@ public class TFBlocks {
 	}
 
 	private static BlockBehaviour.Properties logProperties(MaterialColor color) {
-		return logProperties(color, color);
+		return BlockBehaviour.Properties.of(Material.WOOD, color);
 	}
 
 	private static BlockBehaviour.Properties logProperties(MaterialColor top, MaterialColor side) {
-		return BlockBehaviour.Properties.of(Material.WOOD, (state) ->
-				state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? top : side);
+		return BlockBehaviour.Properties.of(Material.WOOD, (state) -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? top : side);
 	}
 
 	public static void registerCompostor(float chance, ItemLike item) {

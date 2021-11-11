@@ -107,6 +107,7 @@ public class TFLayerDefinitions {
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SKELETON_DRUID_INNER_ARMOR, () -> SkeletonDruidModel.create(LayerDefinitions.INNER_ARMOR_DEFORMATION));
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SKELETON_DRUID_OUTER_ARMOR, () -> SkeletonDruidModel.create(LayerDefinitions.OUTER_ARMOR_DEFORMATION));
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SLIME_BEETLE, SlimeBeetleModel::create);
+		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SLIME_BEETLE_TAIL, SlimeBeetleModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SNOW_QUEEN, SnowQueenModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.CHAIN_BLOCK, SpikeBlockModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.SQUIRREL, SquirrelModel::create);
@@ -136,11 +137,13 @@ public class TFLayerDefinitions {
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_MINOSHROOM, MinoshroomLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_MINOTAUR, MinotaurLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_NAGA, NagaLegacyModel::create);
+		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_NAGA_BODY, NagaLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_PINCH_BEETLE, PinchBeetleLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_QUEST_RAM, QuestRamLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_RAVEN, RavenLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_REDCAP, RedcapLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SLIME_BEETLE, SlimeBeetleLegacyModel::create);
+		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SLIME_BEETLE_TAIL, SlimeBeetleLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SNOW_QUEEN, SnowQueenLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_SQUIRREL, SquirrelLegacyModel::create);
 		EntityModelLayerRegistry.registerModelLayer(TFModelLayers.LEGACY_TINY_BIRD, TinyBirdLegacyModel::create);
