@@ -47,6 +47,7 @@ import twilightforest.entity.projectile.TwilightWandBolt;
 import twilightforest.item.TFItems;
 import twilightforest.loot.TFTreasure;
 import twilightforest.network.TFPacketHandler;
+import twilightforest.potions.TFPotions;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.util.TFStats;
 import twilightforest.world.components.feature.BlockSpikeFeature;
@@ -99,7 +100,7 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFBlocks.registerItemblocks();
 		TFItems.init();
-		//TFPotions.POTIONS.register(modbus);
+		TFPotions.init();  //TFPotions.POTIONS.register(modbus);
 		BiomeKeys.init();
 		//modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
 		TFBlockEntities.init();
