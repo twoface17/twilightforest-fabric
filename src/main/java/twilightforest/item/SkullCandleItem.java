@@ -11,8 +11,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import twilightforest.api.extensions.IItemEx;
 import twilightforest.block.AbstractSkullCandleBlock;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.SkullCandleBlockEntity;
@@ -20,10 +23,10 @@ import twilightforest.block.entity.SkullCandleBlockEntity;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SkullCandleItem extends StandingAndWallBlockItem {
+public class SkullCandleItem extends StandingAndWallBlockItem implements IItemEx {
 
-	public SkullCandleItem(AbstractSkullCandleBlock floor, AbstractSkullCandleBlock wall, Properties properties) {
-		super(floor, wall, properties);
+	public SkullCandleItem(AbstractSkullCandleBlock floor, AbstractSkullCandleBlock wall, FabricItemSettings properties) {
+		super(floor, wall, properties.equipmentSlot(SkullCandleItem::getEquipmentSlot));
 	}
 
 	@Override
@@ -79,16 +82,13 @@ public class SkullCandleItem extends StandingAndWallBlockItem {
 
 	}
 
-	//TODO: PORT
-	//@Override
+	@Override
 	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 		return armorType == EquipmentSlot.HEAD;
 	}
 
-	//TODO: PORT
-	//@Override
 	@Nullable
-	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+	public static EquipmentSlot getEquipmentSlot(ItemStack stack) {
 		return EquipmentSlot.HEAD;
 	}
 

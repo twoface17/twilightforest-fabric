@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.ISTER;
 import twilightforest.item.*;
@@ -465,7 +466,7 @@ public class TFBlockItems {
 		UNMAPPED.put(item, rl);
 	}
 
-	public static Item.Properties defaultBuilder() {
-		return new Item.Properties().tab(creativeTab);
+	public static FabricItemSettings defaultBuilder() {
+		return (FabricItemSettings) new FabricItemSettings().tab(creativeTab);
 	}
 }

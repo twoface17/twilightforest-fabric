@@ -1,11 +1,11 @@
 plugins {
-    id 'fabric-loom' version '0.10.27'
-    id 'io.github.juuxel.loom-quiltflower' version '1.3.0'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
+    id("io.github.juuxel.loom-quiltflower-mini") version "1.1.0"
     id 'maven-publish'
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/twilight.aw")
+    accessWidenerPath.set(file("src/main/resources/twilight.aw"))
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
@@ -60,7 +60,7 @@ dependencies {
 
     mappings loom.layered() {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.17.1:BLEEDING-SNAPSHOT")
+        parchment("org.parchmentmc.data:parchment-1.17.1:2021.10.31@zip")
     }
 
     //Dev Environment Only

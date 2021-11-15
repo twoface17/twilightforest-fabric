@@ -1,5 +1,6 @@
 package twilightforest.api.mixin;
 
+import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,12 +9,15 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import twilightforest.api.crafting.CraftingHelper;
 import twilightforest.api.crafting.IIngredientSerializer;
 import twilightforest.api.crafting.VanillaIngredientSerializer;
 import twilightforest.api.extensions.IIngredientEx;
 
 import java.util.stream.Stream;
 
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -33,6 +37,20 @@ public class IngredientMixin implements IIngredientEx {
     @Inject(method = "<init>", at = @At("TAIL"))
     public void init(Stream stream, CallbackInfo ci) {
         //INSTANCES.add((Ingredient) (Object) this);
+    }
+
+    @Inject(method = "toNetwork", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/Ingredient;dissolve()V"))
+    private void toNetwork(FriendlyByteBuf buffer, CallbackInfo ci) {
+        if (!this.isVanilla()) {
+            CraftingHelper.write(buffer, (Ingredient) (Object) this);
+            return;
+        }
+    }
+
+    @Inject(method = "fromNetwork", at = @At("HEAD"), cancellable = true)
+    private static void fromNetwork(FriendlyByteBuf buffer, CallbackInfoReturnable<Ingredient> cir) {
+        int size = buffer.readVarInt();
+        if (size == -1) cir.setReturnValue(CraftingHelper.getIngredient(buffer.readResourceLocation(), buffer));
     }
 
     @Override

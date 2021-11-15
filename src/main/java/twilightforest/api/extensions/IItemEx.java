@@ -1,7 +1,10 @@
 package twilightforest.api.extensions;
 
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 
@@ -29,5 +32,9 @@ public interface IItemEx {
 
     default boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return true;
+    }
+
+    default boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
+        return Mob.getEquipmentSlotForItem(stack) == armorType;
     }
 }
