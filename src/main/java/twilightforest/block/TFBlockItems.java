@@ -467,6 +467,6 @@ public class TFBlockItems {
 	}
 
 	public static FabricItemSettings defaultBuilder() {
-		return (FabricItemSettings) new FabricItemSettings().tab(creativeTab);
+		return new FabricItemSettings().group(creativeTab);
 	}
 }

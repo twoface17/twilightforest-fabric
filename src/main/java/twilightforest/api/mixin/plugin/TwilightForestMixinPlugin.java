@@ -18,7 +18,6 @@ public class TwilightForestMixinPlugin implements IMixinConfigPlugin {
         patches.add(new EntityRenderDispatcherPatch());
         patches.add(new MapItemPatch());
 //        patches.add(new BiomeColorsPatch());
-        patches.add(new EnchantmentMenuPatch());
     }
 
     @Override

@@ -92,7 +92,6 @@ accessible field net/minecraft/world/level/BaseSpawner spawnCount I
 accessible class net/minecraft/data/worldgen/Features$Decorators
 accessible method net/minecraft/world/level/levelgen/carver/WorldCarver getCarveState (Lnet/minecraft/world/level/levelgen/carver/CarvingContext;Lnet/minecraft/world/level/levelgen/carver/CarverConfiguration;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/levelgen/Aquifer;)Lnet/minecraft/world/level/block/state/BlockState;
 accessible method net/minecraft/world/level/levelgen/carver/WorldCarver isDebugEnabled (Lnet/minecraft/world/level/levelgen/carver/CarverConfiguration;)Z
-accessible method net/minecraft/world/level/levelgen/carver/CaveCarverConfiguration floorLevel Lnet/minecraft/util/valueproviders/FloatProvider;
 accessible method net/minecraft/world/level/levelgen/Heightmap setHeight (III)V
 accessible field net/minecraft/world/level/chunk/ChunkGenerator biomeSource Lnet/minecraft/world/level/biome/BiomeSource;
 accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator seed J

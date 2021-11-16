@@ -180,4 +180,8 @@ public interface IBlockMethods {
     default BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
         return state.getBlock() == Blocks.LAVA ? BlockPathTypes.LAVA : (this == Blocks.FIRE || this == Blocks.LAVA) ? BlockPathTypes.DAMAGE_FIRE : null;
     }
+
+    default boolean tf$isBookshelf() {
+        return false;
+    }
 }
