@@ -16,7 +16,13 @@ import net.minecraft.world.level.block.state.BlockState;
 @Mixin(EnchantmentMenu.class)
 public class EnchantmentMenuMixin {
 
-    @ModifyVariable(method = "lambda$slotsChanged$0", at = @At(value = "STORE", ordinal = 0), ordinal = 0)
+    @SuppressWarnings("target")
+    @ModifyVariable(
+            method = "lambda$slotsChanged$0(Lnet/minecraft/world/item/ItemStack;" +
+                    "Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V",
+            at = @At(value = "STORE", ordinal = 0),
+            ordinal = 0
+    )
     private int tfBookshelfEnchanting(int obj, ItemStack stack, Level level, BlockPos pos) {
         for (int x = -1; x <= 1; ++x) {
             for (int z = -1; z <= 1; ++z) {
