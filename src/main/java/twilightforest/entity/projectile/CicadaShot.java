@@ -1,5 +1,9 @@
 package twilightforest.entity.projectile;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +23,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import twilightforest.TFConfig;
+import twilightforest.TFSounds;
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFEntities;
 
@@ -91,8 +97,7 @@ public class CicadaShot extends TFThrowable {
                 BlockPos pos = blockray.getBlockPos().relative(blockray.getDirection());
                 BlockState currentState = level.getBlockState(pos);
 
-                DirectionalPlaceContext context = new DirectionalPlaceContext(level, pos, blockray.getDirection(), ItemStack.EMPTY, blockray.getDirection().getOpposite());
-                if (currentState.canBeReplaced(context)) {
+                if (currentState.getMaterial().isReplaceable() && !currentState.is(BlockTags.FIRE) && !currentState.is(Blocks.LAVA)) {
                     level.setBlockAndUpdate(pos, TFBlocks.CICADA.defaultBlockState().setValue(DirectionalBlock.FACING, ((BlockHitResult) ray).getDirection()));
                 } else {
                     ItemEntity squish = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), Items.GRAY_DYE.getDefaultInstance());
@@ -100,9 +105,14 @@ public class CicadaShot extends TFThrowable {
                 }
             }
 
-            if (ray instanceof EntityHitResult) {
-                if (((EntityHitResult)ray).getEntity() != null) {
-                    ((EntityHitResult)ray).getEntity().hurt(new IndirectEntityDamageSource("cicada", this, null), 2);
+            if (ray instanceof EntityHitResult entity) {
+                if (entity.getEntity() != null) {
+                    if(entity.getEntity() instanceof Player player && !player.hasItemInSlot(EquipmentSlot.HEAD)) {
+                        player.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TFBlocks.CICADA.get()));
+                        if(!TFConfig.CLIENT_CONFIG.silentCicadas.get()) player.playSound(TFSounds.CICADA, 1.0F, 1.0F);
+                    } else {
+                        entity.getEntity().hurt(new IndirectEntityDamageSource("cicada", this, null), 2);
+                    }
                 }
             }
 

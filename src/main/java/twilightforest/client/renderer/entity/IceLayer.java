@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import com.mojang.math.Vector3f;
-import twilightforest.potions.FrostedPotion;
+import twilightforest.potions.FrostedEffect;
 
 import java.util.Random;
 
@@ -24,7 +24,7 @@ public class IceLayer<T extends LivingEntity, M extends EntityModel<T>> extends 
 
 	@Override
 	public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (entity.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(FrostedPotion.MODIFIER_UUID) == null) { //Movement speed
+		if (entity.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(FrostedEffect.MODIFIER_UUID) == null) { //Movement speed
 			return;
 		}
 

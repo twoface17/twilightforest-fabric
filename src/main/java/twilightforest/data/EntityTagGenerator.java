@@ -14,6 +14,7 @@ import twilightforest.entity.TFEntities;
 public class EntityTagGenerator extends EntityTypeTagsProvider {
     public static final Tag.Named<EntityType<?>> BOSSES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("bosses"));
     public static final Tag.Named<EntityType<?>> LICH_POPPABLES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("lich_poppables"));
+    public static final Tag.Named<EntityType<?>> RIDES_OBSTRUCT_SNATCHING = EntityTypeTags.bind(TwilightForestMod.prefix("rides_obstruct_snatching").toString());
 
     public EntityTagGenerator(DataGenerator dataGenerator) {
         super(dataGenerator);
@@ -78,11 +79,12 @@ public class EntityTagGenerator extends EntityTypeTagsProvider {
                 TFEntities.WRAITH,
                 TFEntities.KNIGHT_PHANTOM,
                 TFEntities.WINTER_WOLF,
-                TFEntities.YETI,
-                TFEntities.ALPHA_YETI,
-                TFEntities.SNOW_QUEEN
-        );
+                TFEntities.YETI
+        ).addTag(BOSSES);
 
         tag(LICH_POPPABLES).addTag(EntityTypeTags.SKELETONS).add(EntityType.ZOMBIE, EntityType.ENDERMAN, EntityType.SPIDER, EntityType.CREEPER, TFEntities.SWARM_SPIDER);
+
+        // These entities forcefully take players from the entity they're riding
+        tag(RIDES_OBSTRUCT_SNATCHING).add(TFEntities.PINCH_BEETLE, TFEntities.YETI, TFEntities.ALPHA_YETI);
     }
 }

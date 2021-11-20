@@ -11,7 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.level.Level;
 import twilightforest.entity.monster.Yeti;
-import twilightforest.potions.TFPotions;
+import twilightforest.potions.TFMobEffects;
 import twilightforest.util.TFDamageSources;
 
 import java.util.List;
@@ -142,7 +142,7 @@ public class IceBomb extends TFThrowable {
 					entity.discard();
 				} else {
 					entity.hurt(TFDamageSources.frozen(this, (LivingEntity)this.getOwner()), 1);
-					entity.addEffect(new MobEffectInstance(TFPotions.frosty, 20 * 5, 2));
+					entity.addEffect(new MobEffectInstance(TFMobEffects.FROSTY, 20 * 5, 2));
 				}
 			}
 		}

@@ -38,6 +38,11 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 	}
 
 	@Override
+	public boolean canChangeDimensions() {
+		return false;
+	}
+
+	@Override
 	protected void defineSynchedData() {
 	}
 

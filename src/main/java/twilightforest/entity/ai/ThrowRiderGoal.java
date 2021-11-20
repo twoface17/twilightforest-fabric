@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.phys.Vec3;
+import twilightforest.data.EntityTagGenerator;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.network.ThrowPlayerPacket;
 
@@ -42,14 +43,21 @@ public class ThrowRiderGoal extends MeleeAttackGoal {
 
 	// Vanilla Copy with edits
 	@Override
-	protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
-		double d0 = this.getAttackReachSqr(p_190102_1_);
+	protected void checkAndPerformAttack(LivingEntity victim, double p_190102_2_) {
+		double d0 = this.getAttackReachSqr(victim);
 
 		if (p_190102_2_ <= d0 && this.getTicksUntilNextAttack() <= 0) {
 			this.resetAttackCooldown();
 			this.mob.swing(InteractionHand.MAIN_HAND);
-			if (mob.getPassengers().isEmpty() && p_190102_1_.getVehicle() == null) {
-				p_190102_1_.startRiding(mob);
+			if (mob.getPassengers().isEmpty()) {
+				var v = victim.getVehicle();
+
+				if (v == null || !v.getType().is(EntityTagGenerator.RIDES_OBSTRUCT_SNATCHING)) {
+					// Pluck them from the boat, minecart, donkey, or whatever
+					victim.stopRiding();
+
+					victim.startRiding(mob);
+				}
 			}
 		}
 	}

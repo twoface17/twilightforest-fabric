@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -20,6 +21,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.item.TFItems;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class UberousSoilBlock extends Block implements BonemealableBlock, IBlockMethods {
@@ -32,6 +34,12 @@ public class UberousSoilBlock extends Block implements BonemealableBlock, IBlock
 
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		return SHAPE;
+	}
+
+	@Nullable
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		return ctx.getLevel().getBlockState(ctx.getClickedPos().above()).getMaterial().isSolid() ? Blocks.DIRT.defaultBlockState() : super.getStateForPlacement(ctx);
 	}
 
 	@Override

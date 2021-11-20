@@ -3,11 +3,13 @@ package twilightforest.inventory;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
+import twilightforest.data.ItemTagGenerator;
 import twilightforest.inventory.slot.AssemblySlot;
 import twilightforest.inventory.slot.UncraftingResultSlot;
 import twilightforest.inventory.slot.UncraftingSlot;
 import twilightforest.util.TFItemStackUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -107,15 +109,15 @@ public class UncraftingContainer extends AbstractContainerMenu {
 
 			int size = recipes.length;
 
-			if (size > 0) {
+			if (size > 0 && !inputStack.is(ItemTagGenerator.BANNED_UNCRAFTABLES)) {
 
 				CraftingRecipe recipe = recipes[Math.floorMod(this.unrecipeInCycle, size)];
 				ItemStack[] recipeItems = getIngredients(recipe);
 				//TODO
-//				if (recipe instanceof IShapedRecipe) {
+//				if (recipe instanceof IShapedRecipe rec) {
 //
-//					int recipeWidth  = ((IShapedRecipe) recipe).getRecipeWidth();
-//					int recipeHeight = ((IShapedRecipe) recipe).getRecipeHeight();
+//					int recipeWidth = rec.getRecipeWidth();
+//					int recipeHeight = rec.getRecipeHeight();
 //
 //					// set uncrafting grid
 //					for (int invY = 0; invY < recipeHeight; invY++) {
@@ -136,6 +138,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 						}
 					}
 				//}
+
 
 				// mark the appropriate number of damaged components
 				if (inputStack.isDamaged()) {
@@ -288,8 +291,12 @@ public class UncraftingContainer extends AbstractContainerMenu {
 
 		if (!inputStack.isEmpty()) {
 			for (Recipe<?> recipe : world.getRecipeManager().getRecipes()) {
-				if (recipe instanceof CraftingRecipe && recipe.canCraftInDimensions(3, 3) && !recipe.getIngredients().isEmpty() && matches(inputStack, recipe.getResultItem())) {
-					recipes.add((CraftingRecipe) recipe);
+				if (recipe instanceof CraftingRecipe rec &&
+						recipe.canCraftInDimensions(3, 3) &&
+						!recipe.getIngredients().isEmpty() &&
+						matches(inputStack, recipe.getResultItem()) &&
+						!TFConfig.COMMON_CONFIG.disableUncraftingRecipes.get().contains(recipe.getId().toString())) {
+					recipes.add(rec);
 				}
 			}
 		}
@@ -577,7 +584,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 		ItemStack[] stacks = new ItemStack[recipe.getIngredients().size()];
 
 		for (int i = 0; i < recipe.getIngredients().size(); i++) {
-			ItemStack[] matchingStacks = recipe.getIngredients().get(i).getItems();
+			ItemStack[] matchingStacks = Arrays.stream(recipe.getIngredients().get(i).getItems()).filter(s -> !s.is(ItemTagGenerator.BANNED_UNCRAFTING_INGREDIENTS)).toArray(ItemStack[]::new);
 			stacks[i] = matchingStacks.length > 0 ? matchingStacks[Math.floorMod(this.ingredientsInCycle, matchingStacks.length)] : ItemStack.EMPTY;
 		}
 

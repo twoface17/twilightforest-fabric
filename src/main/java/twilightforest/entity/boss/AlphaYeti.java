@@ -31,6 +31,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import twilightforest.entity.projectile.FallingIce;
@@ -50,6 +51,7 @@ import twilightforest.entity.ai.YetiTiredGoal;
 import twilightforest.entity.projectile.FallingIce;
 import twilightforest.entity.projectile.IceBomb;
 import twilightforest.entity.projectile.TwilightWandBolt;
+import twilightforest.loot.TFTreasure;
 import twilightforest.util.EntityUtil;
 import twilightforest.util.WorldUtil;
 import twilightforest.world.registration.TFFeature;
@@ -87,8 +89,8 @@ public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount
 		});
 		this.goalSelector.addGoal(4, new ThrowRiderGoal(this, 1.0D, false) {
 			@Override
-			protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
-				super.checkAndPerformAttack(p_190102_1_, p_190102_2_);
+			protected void checkAndPerformAttack(LivingEntity victim, double p_190102_2_) {
+				super.checkAndPerformAttack(victim, p_190102_2_);
 				if (!getPassengers().isEmpty())
 					playSound(TFSounds.ALPHAYETI_GRAB, 4F, 0.75F + getRandom().nextFloat() * 0.25F);
 			}
@@ -396,7 +398,15 @@ public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount
 			for(ServerPlayer player : hurtBy) {
 				TFAdvancements.HURT_BOSS.trigger(player, this);
 			}
+
+			TFTreasure.entityDropsIntoContainer(this, this.createLootContext(true, cause).create(LootContextParamSets.ENTITY), TFBlocks.CANOPY_CHEST.get().defaultBlockState(), new BlockPos(this.position()));
 		}
+	}
+
+	@Override
+	protected boolean shouldDropLoot() {
+		// Invoked the mob's loot during die, this will avoid duplicating during the actual drop phase
+		return false;
 	}
 
 	@Override

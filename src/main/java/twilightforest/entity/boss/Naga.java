@@ -39,12 +39,14 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.client.model.entity.PartEntity;
 import twilightforest.entity.TFPart;
+import twilightforest.loot.TFTreasure;
 import twilightforest.api.extensions.IEntityEx;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TFSounds;
@@ -121,15 +123,11 @@ public class Naga extends Monster implements IEntityEx {
 	}
 
 	private float getMaxHealthPerDifficulty() {
-		switch (level.getDifficulty()) {
-			case EASY:
-				return 120;
-			default:
-			case NORMAL:
-				return 200;
-			case HARD:
-				return 250;
-		}
+		return switch (level.getDifficulty()) {
+			case EASY -> 120;
+			case HARD -> 250;
+			default -> 200;
+		};
 	}
 
 	@Override
@@ -292,26 +290,23 @@ public class Naga extends Monster implements IEntityEx {
 			}
 
 			switch (movementState) {
-				case INTIMIDATE: {
+				case INTIMIDATE -> {
 					taskOwner.getNavigation().stop();
 					taskOwner.getLookControl().setLookAt(taskOwner.getTarget(), 30F, 30F);
 					taskOwner.lookAt(taskOwner.getTarget(), 30F, 30F);
 					taskOwner.zza = 0.1f;
-					break;
 				}
-				case CRUMBLE: {
+				case CRUMBLE -> {
 					taskOwner.getNavigation().stop();
 					taskOwner.crumbleBelowTarget(2);
 					taskOwner.crumbleBelowTarget(3);
-					break;
 				}
-				case CHARGE: {
+				case CHARGE -> {
 					BlockPos tpoint = taskOwner.findCirclePoint(clockwise, 14, Math.PI);
 					taskOwner.getNavigation().moveTo(tpoint.getX(), tpoint.getY(), tpoint.getZ(), 1); // todo 1.10 check speed
 					taskOwner.setCharging(true);
-					break;
 				}
-				case CIRCLE: {
+				case CIRCLE -> {
 					// normal radius is 13
 					double radius = stateCounter % 2 == 0 ? 12.0 : 14.0;
 					double rotation = 1; // in radians
@@ -328,12 +323,10 @@ public class Naga extends Monster implements IEntityEx {
 
 					BlockPos tpoint = taskOwner.findCirclePoint(clockwise, radius, rotation);
 					taskOwner.getNavigation().moveTo(tpoint.getX(), tpoint.getY(), tpoint.getZ(), 1); // todo 1.10 check speed
-					break;
 				}
-				case DAZE: {
+				case DAZE -> {
 					taskOwner.setDazed(true);
 					taskOwner.setCharging(false);
-					break;
 				}
 			}
 
@@ -347,7 +340,7 @@ public class Naga extends Monster implements IEntityEx {
 			taskOwner.setDazed(false);
 			taskOwner.setCharging(false);
 			switch (movementState) {
-				case INTIMIDATE: {
+				case INTIMIDATE -> {
 					clockwise = !clockwise;
 
 					if (taskOwner.getTarget().getBoundingBox().minY > taskOwner.getBoundingBox().maxY) {
@@ -355,19 +348,10 @@ public class Naga extends Monster implements IEntityEx {
 					} else {
 						doCharge();
 					}
-
-					break;
 				}
-				case CRUMBLE:
-					doCharge();
-					break;
-				case CHARGE:
-				case DAZE:
-					doCircle();
-					break;
-				case CIRCLE:
-					doIntimidate();
-					break;
+				case CRUMBLE -> doCharge();
+				case CHARGE, DAZE -> doCircle();
+				case CIRCLE -> doIntimidate();
 			}
 		}
 
@@ -853,7 +837,15 @@ public class Naga extends Monster implements IEntityEx {
 			for(ServerPlayer player : hurtBy) {
 				TFAdvancements.HURT_BOSS.trigger(player, this);
 			}
+
+			TFTreasure.entityDropsIntoContainer(this, this.createLootContext(true, cause).create(LootContextParamSets.ENTITY), this.random.nextBoolean() ? TFBlocks.TWILIGHT_OAK_CHEST.get().defaultBlockState() : TFBlocks.CANOPY_CHEST.get().defaultBlockState(), new BlockPos(this.position()));
 		}
+	}
+
+	@Override
+	protected boolean shouldDropLoot() {
+		// Invoked the mob's loot during die, this will avoid duplicating during the actual drop phase
+		return false;
 	}
 
 	@Override

@@ -90,12 +90,12 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 	private static TFMagicMapData createMapData(ItemStack stack, Level world, int x, int z, int scale, boolean trackingPosition, boolean unlimitedTracking, ResourceKey<Level> dimension) {
 		int i = world.getFreeMapId();
 
-		// magic maps are offset by 1024 from normal maps so that 0,0 is in the middle of the map containing those coords
-		int mapSize = 128 * (1 << scale);
+		// magic maps are aligned to the key biome grid so that 0,0 -> 2048,2048 is the covered area
+		int mapSize = 2048;
 		int roundX = (int) Math.round((double) x / mapSize);
 		int roundZ = (int) Math.round((double) z / mapSize);
-		int scaledX = roundX * mapSize;
-		int scaledZ = roundZ * mapSize;
+		int scaledX = roundX * mapSize + 1024;
+		int scaledZ = roundZ * mapSize + 1024;
 
 		TFMagicMapData mapdata = new TFMagicMapData(scaledX, scaledZ, (byte)scale, trackingPosition, unlimitedTracking, false, dimension);
 		TFMagicMapData.registerMagicMapData(world, mapdata, getMapName(i)); // call our own register method
@@ -230,19 +230,12 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 	}
 
 	public static int getMapColor(MapColorBrightness mcb) {
-		int i = 220;
-
-		switch (mcb.color.id) {
-			case 3:
-				i = 135;
-				break;
-			case 2:
-				i = 255;
-				break;
-			case 0:
-				i = 180;
-				break;
-		}
+		int i = switch (mcb.color.id) {
+			case 3 -> 135;
+			case 2 -> 255;
+			case 0 -> 180;
+			default -> 220;
+		};
 
 		int j = (mcb.color.col >> 16 & 255) * i / 255;
 		int k = (mcb.color.col >> 8 & 255) * i / 255;

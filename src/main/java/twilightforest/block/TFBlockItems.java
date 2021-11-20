@@ -197,7 +197,7 @@ public class TFBlockItems {
 
 		blockItem(TFBlocks.IRONWOOD_BLOCK);
 		blockItem(TFBlocks.STEELEAF_BLOCK);
-		blockItem(TFBlocks.FIERY_BLOCK);
+		fireImmuneBlock(TFBlocks.FIERY_BLOCK);
 		blockItem(TFBlocks.KNIGHTMETAL_BLOCK);
 		blockItem(TFBlocks.CARMINITE_BLOCK);
 		blockItem(TFBlocks.ARCTIC_FUR_BLOCK);
@@ -278,14 +278,14 @@ public class TFBlockItems {
 		blockItem(TFBlocks.RAINBOW_OAK_SAPLING);
 		blockItem(TFBlocks.MANGROVE_ROOT);
 
-		blockItem(TFBlocks.OAK_BANISTER);
-		blockItem(TFBlocks.SPRUCE_BANISTER);
-		blockItem(TFBlocks.BIRCH_BANISTER);
-		blockItem(TFBlocks.JUNGLE_BANISTER);
-		blockItem(TFBlocks.ACACIA_BANISTER);
-		blockItem(TFBlocks.DARK_OAK_BANISTER);
-		blockItem(TFBlocks.CRIMSON_BANISTER);
-		blockItem(TFBlocks.WARPED_BANISTER);
+		burningItem(TFBlocks.OAK_BANISTER, 300);
+		burningItem(TFBlocks.SPRUCE_BANISTER, 300);
+		burningItem(TFBlocks.BIRCH_BANISTER, 300);
+		burningItem(TFBlocks.JUNGLE_BANISTER, 300);
+		burningItem(TFBlocks.ACACIA_BANISTER, 300);
+		burningItem(TFBlocks.DARK_OAK_BANISTER, 300);
+		burningItem(TFBlocks.CRIMSON_BANISTER, 300);
+		burningItem(TFBlocks.WARPED_BANISTER, 300);
 
 		hollowLog(TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, TFBlocks.HOLLOW_OAK_LOG_VERTICAL, TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, "hollow_oak_log");
 		hollowLog(TFBlocks.HOLLOW_SPRUCE_LOG_HORIZONTAL, TFBlocks.HOLLOW_SPRUCE_LOG_VERTICAL, TFBlocks.HOLLOW_SPRUCE_LOG_CLIMBABLE, "hollow_spruce_log");
@@ -315,7 +315,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.TWILIGHT_OAK_TRAPDOOR);
 		tallBlock(TFBlocks.TWILIGHT_OAK_DOOR);
 		signBlock(TFBlocks.TWILIGHT_OAK_SIGN, TFBlocks.TWILIGHT_WALL_SIGN);
-		blockItem(TFBlocks.TWILIGHT_OAK_BANISTER);
+		burningItem(TFBlocks.TWILIGHT_OAK_BANISTER, 300);
 		blockItem(TFBlocks.CANOPY_PLANKS);
 		blockItem(TFBlocks.CANOPY_STAIRS);
 		blockItem(TFBlocks.CANOPY_SLAB);
@@ -326,7 +326,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.CANOPY_TRAPDOOR);
 		tallBlock(TFBlocks.CANOPY_DOOR);
 		signBlock(TFBlocks.CANOPY_SIGN, TFBlocks.CANOPY_WALL_SIGN);
-		blockItem(TFBlocks.CANOPY_BANISTER);
+		burningItem(TFBlocks.CANOPY_BANISTER, 300);
 		blockItem(TFBlocks.CANOPY_BOOKSHELF);
 		blockItem(TFBlocks.MANGROVE_PLANKS);
 		blockItem(TFBlocks.MANGROVE_STAIRS);
@@ -338,7 +338,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.MANGROVE_TRAPDOOR);
 		tallBlock(TFBlocks.MANGROVE_DOOR);
 		signBlock(TFBlocks.MANGROVE_SIGN, TFBlocks.MANGROVE_WALL_SIGN);
-		blockItem(TFBlocks.MANGROVE_BANISTER);
+		burningItem(TFBlocks.MANGROVE_BANISTER, 300);
 		blockItem(TFBlocks.DARK_PLANKS);
 		blockItem(TFBlocks.DARK_STAIRS);
 		blockItem(TFBlocks.DARK_SLAB);
@@ -349,7 +349,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.DARK_TRAPDOOR);
 		tallBlock(TFBlocks.DARK_DOOR);
 		signBlock(TFBlocks.DARKWOOD_SIGN, TFBlocks.DARKWOOD_WALL_SIGN);
-		blockItem(TFBlocks.DARKWOOD_BANISTER);
+		burningItem(TFBlocks.DARKWOOD_BANISTER, 300);
 		blockItem(TFBlocks.TIME_PLANKS);
 		blockItem(TFBlocks.TIME_STAIRS);
 		blockItem(TFBlocks.TIME_SLAB);
@@ -360,7 +360,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.TIME_TRAPDOOR);
 		tallBlock(TFBlocks.TIME_DOOR);
 		signBlock(TFBlocks.TIME_SIGN, TFBlocks.TIME_WALL_SIGN);
-		blockItem(TFBlocks.TIME_BANISTER);
+		burningItem(TFBlocks.TIME_BANISTER, 300);
 		blockItem(TFBlocks.TRANSFORMATION_PLANKS);
 		blockItem(TFBlocks.TRANSFORMATION_STAIRS);
 		blockItem(TFBlocks.TRANSFORMATION_SLAB);
@@ -371,7 +371,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.TRANSFORMATION_TRAPDOOR);
 		tallBlock(TFBlocks.TRANSFORMATION_DOOR);
 		signBlock(TFBlocks.TRANSFORMATION_SIGN, TFBlocks.TRANSFORMATION_WALL_SIGN);
-		blockItem(TFBlocks.TRANSFORMATION_BANISTER);
+		burningItem(TFBlocks.TRANSFORMATION_BANISTER, 300);
 		blockItem(TFBlocks.MINING_PLANKS);
 		blockItem(TFBlocks.MINING_STAIRS);
 		blockItem(TFBlocks.MINING_SLAB);
@@ -382,7 +382,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.MINING_TRAPDOOR);
 		tallBlock(TFBlocks.MINING_DOOR);
 		signBlock(TFBlocks.MINING_SIGN, TFBlocks.MINING_WALL_SIGN);
-		blockItem(TFBlocks.MINING_BANISTER);
+		burningItem(TFBlocks.MINING_BANISTER, 300);
 		blockItem(TFBlocks.SORTING_PLANKS);
 		blockItem(TFBlocks.SORTING_STAIRS);
 		blockItem(TFBlocks.SORTING_SLAB);
@@ -393,7 +393,7 @@ public class TFBlockItems {
 		blockItem(TFBlocks.SORTING_TRAPDOOR);
 		tallBlock(TFBlocks.SORTING_DOOR);
 		signBlock(TFBlocks.SORTING_SIGN, TFBlocks.SORTING_WALL_SIGN);
-		blockItem(TFBlocks.SORTING_BANISTER);
+		burningItem(TFBlocks.SORTING_BANISTER, 300);
 
 		makeBEWLRItem(TFBlocks.TWILIGHT_OAK_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
 		makeBEWLRItem(TFBlocks.CANOPY_CHEST, Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.TF_CHEST));
@@ -411,15 +411,22 @@ public class TFBlockItems {
 
 	private static final Map<Item, ResourceLocation> UNMAPPED = new HashMap<>();
 
-	@Environment(EnvType.CLIENT)
-	public static void registerRenderers() {
-		for(Map.Entry<Item, ResourceLocation> info : UNMAPPED.entrySet()) {
-			BuiltinItemRendererRegistry.INSTANCE.register(info.getKey(), new ISTER(info.getValue())::renderByItem);
-		}
+	private static <B extends Block> Item fireImmuneBlock(RegistryObject<B> block) {
+		return makeBlockItem(new BlockItem(block.get(), TFItems.defaultBuilder().fireResistant()), block);
 	}
 
-	private static <B extends Block> Item blockItem(B block) {
-		return makeBlockItem(new BlockItem(block, defaultBuilder()), block);
+	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(RegistryObject<B> floor, RegistryObject<B> wall) {
+		return makeBlockItem(new SkullCandleItem(floor.get(), wall.get(), TFItems.defaultBuilder().rarity(Rarity.UNCOMMON)) {
+//			@Override
+//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+//				consumer.accept(new IItemRenderProperties() {
+//					@Override
+//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+//						return new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE));
+//					}
+//				});
+//			}
+		}, floor);
 	}
 
 	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(B floor, B wall) {

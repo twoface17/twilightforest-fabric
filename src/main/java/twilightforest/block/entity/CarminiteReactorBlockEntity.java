@@ -1,5 +1,7 @@
 package twilightforest.block.entity;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -132,15 +134,15 @@ public class CarminiteReactorBlockEntity extends BlockEntity {
 
 
 				if (te.counter >= 350) {
+					// deactivate & explode
+					level.explode(null, TFDamageSources.REACTOR, null, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.BlockInteraction.BREAK);
+					level.removeBlock(pos, false);
+
 					// spawn mini ghasts near the secondary & tertiary points
 					for (int i = 0; i < 3; i++) {
 						te.spawnGhastNear(pos.getX() + te.secX, pos.getY() + te.secY, pos.getZ() + te.secZ);
 						te.spawnGhastNear(pos.getX() + te.terX, pos.getY() + te.terY, pos.getZ() + te.terZ);
 					}
-
-					// deactivate & explode
-					level.explode(null, TFDamageSources.REACTOR, (ExplosionDamageCalculator) null, pos.getX(), pos.getY(), pos.getZ(), 2.0F, true, Explosion.BlockInteraction.BREAK);
-					level.removeBlock(pos, false);
 				}
 
 			} else {
@@ -155,6 +157,7 @@ public class CarminiteReactorBlockEntity extends BlockEntity {
 	private void spawnGhastNear(int x, int y, int z) {
 		CarminiteGhastling ghast = new CarminiteGhastling(TFEntities.CARMINITE_GHASTLING, level);
 		ghast.moveTo(x - 1.5 + level.random.nextFloat() * 3.0, y - 1.5 + level.random.nextFloat() * 3.0, z - 1.5 + level.random.nextFloat() * 3.0, level.random.nextFloat() * 360F, 0.0F);
+		ghast.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200));
 		level.addFreshEntity(ghast);
 	}
 
@@ -182,30 +185,14 @@ public class CarminiteReactorBlockEntity extends BlockEntity {
 					if (dist == rad && !(dx == 0 && dy == 0 && dz == 0)) {
 						// do eight at a time for easiness!
 						switch (fuzzX) {
-							case 0:
-								transformBlock(pos.offset(dx, dy, dz), state, fuzzY, netherTransform);
-								break;
-							case 1:
-								transformBlock(pos.offset(dx, dy, -dz), state, fuzzY, netherTransform);
-								break;
-							case 2:
-								transformBlock(pos.offset(-dx, dy, dz), state, fuzzY, netherTransform);
-								break;
-							case 3:
-								transformBlock(pos.offset(-dx, dy, -dz), state, fuzzY, netherTransform);
-								break;
-							case 4:
-								transformBlock(pos.offset(dx, -dy, dz), state, fuzzY, netherTransform);
-								break;
-							case 5:
-								transformBlock(pos.offset(dx, -dy, -dz), state, fuzzY, netherTransform);
-								break;
-							case 6:
-								transformBlock(pos.offset(-dx, -dy, dz), state, fuzzY, netherTransform);
-								break;
-							case 7:
-								transformBlock(pos.offset(-dx, -dy, -dz), state, fuzzY, netherTransform);
-								break;
+							case 0 -> transformBlock(pos.offset(dx, dy, dz), state, fuzzY, netherTransform);
+							case 1 -> transformBlock(pos.offset(dx, dy, -dz), state, fuzzY, netherTransform);
+							case 2 -> transformBlock(pos.offset(-dx, dy, dz), state, fuzzY, netherTransform);
+							case 3 -> transformBlock(pos.offset(-dx, dy, -dz), state, fuzzY, netherTransform);
+							case 4 -> transformBlock(pos.offset(dx, -dy, dz), state, fuzzY, netherTransform);
+							case 5 -> transformBlock(pos.offset(dx, -dy, -dz), state, fuzzY, netherTransform);
+							case 6 -> transformBlock(pos.offset(-dx, -dy, dz), state, fuzzY, netherTransform);
+							case 7 -> transformBlock(pos.offset(-dx, -dy, -dz), state, fuzzY, netherTransform);
 						}
 					}
 				}
@@ -227,7 +214,7 @@ public class CarminiteReactorBlockEntity extends BlockEntity {
 		}
 
 		if (netherTransform && stateThere.getBlock() != Blocks.AIR) {
-			level.setBlock(pos, (level.random.nextInt(8) == 0 ? Blocks.NETHER_QUARTZ_ORE.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState()), 3);
+			level.setBlock(pos, (level.random.nextInt(8) == 0 ? BlockTagGenerator.CARMINITE_REACTOR_ORES.getRandomElement(level.random).defaultBlockState() : Blocks.NETHERRACK.defaultBlockState()), 3);
 			// fire on top?
 			if (level.isEmptyBlock(pos.above()) && fuzz % 3 == 0) {
 				level.setBlock(pos.above(), Blocks.FIRE.defaultBlockState(), 3);

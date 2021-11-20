@@ -191,6 +191,7 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 			BlockPos treasurePos = hasHome() ? getRestrictCenter().below() : new BlockPos(this.blockPosition());
 
 			// make treasure for killing the last knight
+			// This one won't receive the same loot treatment like the other bosses because this chest is supposed to reward for all of them instead of just the last one killed
 			TFTreasure.STRONGHOLD_BOSS.generateChest(serverLevel, treasurePos, Direction.NORTH, false);
 
 			// mark the stronghold as defeated
@@ -405,15 +406,9 @@ public class KnightPhantom extends FlyingMob implements Enemy {
 
 		// set weapon per number
 		switch (number % 3) {
-			case 0:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
-				break;
-			case 1:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE));
-				break;
-			case 2:
-				setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE));
-				break;
+			case 0 -> setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_SWORD));
+			case 1 -> setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_AXE));
+			case 2 -> setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TFItems.KNIGHTMETAL_PICKAXE));
 		}
 	}
 

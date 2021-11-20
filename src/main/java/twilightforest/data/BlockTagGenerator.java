@@ -56,9 +56,12 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/fluid"));
     public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/decoration"));
 
-    public static final Tag.Named<Block> DARK_TOWER_ALLOWED_POTS = TagFactory.BLOCK.create(TwilightForestMod.prefix("dark_tower_excluded_pots"));
-    public static final Tag.Named<Block> TROPHIES = TagFactory.BLOCK.create(TwilightForestMod.prefix("trophies"));
-    public static final Tag.Named<Block> FIRE_JET_FUEL = TagFactory.BLOCK.create(TwilightForestMod.prefix("fire_jet_fuel"));
+    public static final Tag.Named<Block> COMMON_PROTECTIONS = BlockTags.bind(TwilightForestMod.prefix("common_protections").toString());
+    public static final Tag.Named<Block> ANNIHILATION_INCLUSIONS = BlockTags.bind(TwilightForestMod.prefix("annihilation_inclusions").toString());
+    public static final Tag.Named<Block> ANTIBUILDER_IGNORES = BlockTags.bind(TwilightForestMod.prefix("antibuilder_ignores").toString());
+    public static final Tag.Named<Block> CARMINITE_REACTOR_IMMUNE = BlockTags.bind(TwilightForestMod.prefix("carminite_reactor_immune").toString());
+    public static final Tag.Named<Block> CARMINITE_REACTOR_ORES = BlockTags.bind(TwilightForestMod.prefix("carminite_reactor_ores").toString());
+    public static final Tag.Named<Block> STRUCTURE_BANNED_INTERACTIONS = BlockTags.bind(TwilightForestMod.prefix("structure_banned_interactions").toString());
 
     public static final Tag.Named<Block> WORLDGEN_SKIPPABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_skippables"));
     public static final Tag.Named<Block> WORLDGEN_REPLACEABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_replaceables"));
@@ -327,7 +330,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
                         Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM, Blocks.POTTED_DEAD_BUSH, Blocks.POTTED_FERN,
                         Blocks.POTTED_CACTUS, Blocks.POTTED_CORNFLOWER, Blocks.POTTED_LILY_OF_THE_VALLEY, Blocks.POTTED_WITHER_ROSE,
                         Blocks.POTTED_BAMBOO, Blocks.POTTED_CRIMSON_FUNGUS, Blocks.POTTED_WARPED_FUNGUS, Blocks.POTTED_CRIMSON_ROOTS,
-                        Blocks.POTTED_WARPED_ROOTS, Blocks.POTTED_AZALEA, Blocks.POTTED_FLOWERING_AZALEA);;
+                        Blocks.POTTED_WARPED_ROOTS, Blocks.POTTED_AZALEA, Blocks.POTTED_FLOWERING_AZALEA);
 
         tag(TROPHIES)
                 .add(TFBlocks.NAGA_TROPHY, TFBlocks.NAGA_WALL_TROPHY)
@@ -383,7 +386,10 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
         tag(CARMINITE_REACTOR_IMMUNE).addTag(COMMON_PROTECTIONS);
 
+        tag(CARMINITE_REACTOR_ORES).add(Blocks.NETHER_QUARTZ_ORE, Blocks.NETHER_GOLD_ORE);
+
         tag(ANNIHILATION_INCLUSIONS) // This is NOT a blacklist! This is a whitelist
+                .add(Blocks.NETHER_PORTAL)
                 .add(TFBlocks.DEADROCK, TFBlocks.CRACKED_DEADROCK, TFBlocks.WEATHERED_DEADROCK)
                 .add(TFBlocks.CASTLE_BRICK, TFBlocks.CRACKED_DEADROCK, TFBlocks.THICK_CASTLE_BRICK, TFBlocks.MOSSY_CASTLE_BRICK, TFBlocks.CASTLE_ROOF_TILE, TFBlocks.WORN_CASTLE_BRICK)
                 .add(TFBlocks.BLUE_CASTLE_RUNE_BRICK, TFBlocks.VIOLET_CASTLE_RUNE_BRICK, TFBlocks.YELLOW_CASTLE_RUNE_BRICK, TFBlocks.PINK_CASTLE_RUNE_BRICK)
@@ -455,37 +461,45 @@ public class BlockTagGenerator extends BlockTagsProvider {
         // For anything that permits replacement during Worldgen
         tag(WORLDGEN_REPLACEABLES);//.addTag(BlockTags.LUSH_GROUND_REPLACEABLE);
 
-        tag(BlockTags.MINEABLE_WITH_AXE).addTag(BANISTERS).addTag(HOLLOW_LOGS).add(
-                TFBlocks.HEDGE,
-                TFBlocks.ROOT_BLOCK,
-                TFBlocks.LIVEROOT_BLOCK,
-                TFBlocks.MANGROVE_ROOT,
-                TFBlocks.UNCRAFTING_TABLE,
-                TFBlocks.ENCASED_SMOKER,
-                TFBlocks.ENCASED_FIRE_JET,
-                TFBlocks.TIME_LOG_CORE,
-                TFBlocks.TRANSFORMATION_LOG_CORE,
-                TFBlocks.MINING_LOG_CORE,
-                TFBlocks.SORTING_LOG_CORE,
-                TFBlocks.TOWERWOOD,
-                TFBlocks.MOSSY_TOWERWOOD,
-                TFBlocks.CRACKED_TOWERWOOD,
-                TFBlocks.INFESTED_TOWERWOOD,
-                TFBlocks.ENCASED_TOWERWOOD,
-                TFBlocks.REAPPEARING_BLOCK,
-                TFBlocks.ANTIBUILDER,
-                TFBlocks.CARMINITE_REACTOR,
-                TFBlocks.CARMINITE_BUILDER,
-                TFBlocks.GHAST_TRAP,
-                TFBlocks.HUGE_STALK,
-                TFBlocks.HUGE_MUSHGLOOM,
-                TFBlocks.HUGE_MUSHGLOOM_STEM,
-                TFBlocks.CINDER_LOG,
-                TFBlocks.CINDER_WOOD,
-                TFBlocks.IRONWOOD_BLOCK,
-                TFBlocks.DEATH_TOME_SPAWNER,
-                TFBlocks.EMPTY_CANOPY_BOOKSHELF,
-                TFBlocks.CANOPY_BOOKSHELF
+        tag(BlockTags.MINEABLE_WITH_AXE).addTags(BANISTERS, HOLLOW_LOGS).add(
+                TFBlocks.HEDGE.get(),
+                TFBlocks.ROOT_BLOCK.get(),
+                TFBlocks.LIVEROOT_BLOCK.get(),
+                TFBlocks.MANGROVE_ROOT.get(),
+                TFBlocks.UNCRAFTING_TABLE.get(),
+                TFBlocks.ENCASED_SMOKER.get(),
+                TFBlocks.ENCASED_FIRE_JET.get(),
+                TFBlocks.TIME_LOG_CORE.get(),
+                TFBlocks.TRANSFORMATION_LOG_CORE.get(),
+                TFBlocks.MINING_LOG_CORE.get(),
+                TFBlocks.SORTING_LOG_CORE.get(),
+                TFBlocks.TOWERWOOD.get(),
+                TFBlocks.MOSSY_TOWERWOOD.get(),
+                TFBlocks.CRACKED_TOWERWOOD.get(),
+                TFBlocks.INFESTED_TOWERWOOD.get(),
+                TFBlocks.ENCASED_TOWERWOOD.get(),
+                TFBlocks.REAPPEARING_BLOCK.get(),
+                TFBlocks.ANTIBUILDER.get(),
+                TFBlocks.CARMINITE_REACTOR.get(),
+                TFBlocks.CARMINITE_BUILDER.get(),
+                TFBlocks.GHAST_TRAP.get(),
+                TFBlocks.HUGE_STALK.get(),
+                TFBlocks.HUGE_MUSHGLOOM.get(),
+                TFBlocks.HUGE_MUSHGLOOM_STEM.get(),
+                TFBlocks.CINDER_LOG.get(),
+                TFBlocks.CINDER_WOOD.get(),
+                TFBlocks.IRONWOOD_BLOCK.get(),
+                TFBlocks.DEATH_TOME_SPAWNER.get(),
+                TFBlocks.EMPTY_CANOPY_BOOKSHELF.get(),
+                TFBlocks.CANOPY_BOOKSHELF.get(),
+                TFBlocks.TWILIGHT_OAK_CHEST.get(),
+                TFBlocks.CANOPY_CHEST.get(),
+                TFBlocks.MANGROVE_CHEST.get(),
+                TFBlocks.DARKWOOD_CHEST.get(),
+                TFBlocks.TIME_CHEST.get(),
+                TFBlocks.TRANSFORMATION_CHEST.get(),
+                TFBlocks.MINING_CHEST.get(),
+                TFBlocks.SORTING_CHEST.get()
         );
 
         tag(BlockTags.MINEABLE_WITH_HOE).add(

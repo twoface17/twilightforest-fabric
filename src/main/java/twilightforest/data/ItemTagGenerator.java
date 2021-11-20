@@ -74,12 +74,11 @@ public class ItemTagGenerator extends ItemTagsProvider {
 	public static final Tag.Named<Item> WIP = TagFactory.ITEM.create(TwilightForestMod.prefix("wip"));
 	public static final Tag.Named<Item> NYI = TagFactory.ITEM.create(TwilightForestMod.prefix("nyi"));
 
-	public static final Tag.Named<Item> KOBOLD_PACIFICATION_BREADS = TagFactory.ITEM.create(TwilightForestMod.prefix("kobold_pacification_breads"));
-
-	public static final Tag.Named<Item> TF_MUSIC_DISCS = TagFactory.ITEM.create(TwilightForestMod.prefix("tf_music_discs"));
+	public static final Tag.Named<Item> BANNED_UNCRAFTING_INGREDIENTS = ItemTags.bind(TwilightForestMod.prefix("banned_uncrafting_ingredients").toString());
+	public static final Tag.Named<Item> BANNED_UNCRAFTABLES = ItemTags.bind(TwilightForestMod.prefix("banned_uncraftables").toString());
 
 	public ItemTagGenerator(DataGenerator generator, BlockTagsProvider blockprovider) {
-		super(generator, blockprovider);
+		super(generator, blockprovider;
 	}
 
 	@Override
@@ -239,5 +238,17 @@ public class ItemTagGenerator extends ItemTagsProvider {
 				TFItems.MUSIC_DISC_WAYFARER);
 
 		tag(ItemTags.MUSIC_DISCS).addTag(TF_MUSIC_DISCS);
+
+		tag(BANNED_UNCRAFTING_INGREDIENTS).add(
+				TFBlocks.INFESTED_TOWERWOOD.get().asItem(),
+				TFBlocks.HOLLOW_OAK_SAPLING.get().asItem(),
+				TFBlocks.TIME_SAPLING.get().asItem(),
+				TFBlocks.TRANSFORMATION_SAPLING.get().asItem(),
+				TFBlocks.MINING_SAPLING.get().asItem(),
+				TFBlocks.SORTING_SAPLING.get().asItem());
+
+		tag(BANNED_UNCRAFTABLES).add(TFItems.MOONWORM_QUEEN.get());
+
+		tag(ItemTags.PIGLIN_LOVED).add(TFItems.GOLDEN_MINOTAUR_AXE.get(), TFItems.CHARM_OF_KEEPING_3.get(), TFItems.CHARM_OF_LIFE_2.get(), TFItems.LAMP_OF_CINDERS.get());
 	}
 }

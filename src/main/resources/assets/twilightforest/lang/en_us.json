@@ -162,7 +162,15 @@
 
   // Enchantments
   "enchantment.twilightforest.fire_react": "Fire React",
+  "enchantment.twilightforest.fire_react.desc": "Adds a chance for the attacker to be set on fire after hitting the wearer.",
   "enchantment.twilightforest.chill_aura": "Chill Aura",
+  "enchantment.twilightforest.chill_aura.desc": "Adds a chance for the attacker to gain the frosted effect after hitting the wearer.",
+  "enchantment.twilightforest.preservation": "Preservation",
+  "enchantment.twilightforest.preservation.desc": "Makes the block and chain not break blocks when hitting them.",
+  "enchantment.twilightforest.block_strength": "Block Strength",
+  "enchantment.twilightforest.block_strength.desc": "Allows the block and chain to break stronger blocks.",
+  "enchantment.twilightforest.destruction": "Destruction",
+  "enchantment.twilightforest.destruction.desc": "Makes the block and chain destruction area bigger.",
 
   // Effects
   "effect.twilightforest.frosted": "Frosted",
@@ -229,6 +237,7 @@
   "block.twilightforest.mangrove_root": "Mangrove Roots",
   "block.twilightforest.uncrafting_table": "Uncrafting Table",
   "container.uncrafting_table.disabled": "Uncrafting is disabled via config",
+  "container.uncrafting_table.disabled_item": "Uncrafting this item is disabled.",
   "block.twilightforest.smoker": "Smoker",
   "block.twilightforest.encased_smoker": "Encased Smoker",
   "block.twilightforest.fire_jet": "Fire Jet",
@@ -1122,6 +1131,7 @@
   "subtitles.twilightforest.entity.carminitegolem.death": "Carminite Golem dies",
   "subtitles.twilightforest.entity.carminitegolem.hurt": "Carminite Golem hurts",
   "subtitles.twilightforest.entity.cicada": "Cicada screams",
+  "subtitles.twilightforest.entity.cicada_flying": "Cicada zooms away",
   "subtitles.twilightforest.entity.deer.death": "Deer dies",
   "subtitles.twilightforest.entity.deer.hurt": "Deer hurts",
   "subtitles.twilightforest.entity.deer.ambient": "Deer moos",
@@ -1488,6 +1498,8 @@
 
   "text.autoconfig.twilightforest.option.tfConfigCommon.progression_default": "Progression Rule Default",
   "text.autoconfig.twilightforest.option.tfConfigCommon.progression_default.@Tooltip": "Sets the default value of the game rule controlling enforced progression.",
+  "twilightforest.config.uncrafting_recipes": "Disable Uncrafting Recipes in Uncrafting Table",
+  "twilightforest.config.uncrafting_recipes.tooltip": "If you don't want to disable uncrafting altogether, and would rather disable certain recipes, this is for you.\nTo add a recipe, add the mod id followed by the name of the recipe. You can check this in things like JEI.\nExample: \"twilightforest:moonworm_queen\" will disable uncrafting the moonworm queen into itself and 3 torchberries.\nIf an item has multiple crafting recipes and you wish to disable them all, add the item to the \"twilightforest:banned_uncraftables\" item tag.\nIf you have a problematic ingredient, like infested towerwood for example, add the item to the \"twilightforest:banned_uncrafting_ingredients\" item tag.",
 
   "text.autoconfig.twilightforest.option.tfConfigCommon.disableUncrafting": "Disable Uncrafting in Uncrafting Table",
   "text.autoconfig.twilightforest.option.tfConfigCommon.disableUncrafting.@Tooltip": "Disable the uncrafting function of the uncrafting table. Provided as an option when interaction with other mods produces exploitable recipes.",
@@ -1654,5 +1666,8 @@
   // Optifine
   "twilightforest.gui.optifine.title": "WARNING: OPTIFINE DETECTED",
   "twilightforest.gui.optifine.message": "Before proceeding, please note that Optifine is known to cause crashes, multipart entity visual bugs and many other issues.\n\nBefore reporting a bug, please remove Optifine first and check again to see if the bug is still present.\n\nOptifine-related issues are not solvable on Twilight Forest's end!\n\nThis screen may be disabled in the Client Config.",
-  "twilightforest.gui.optifine.suggestions": "Here's a selection of mods that we recommend using instead."
+  "twilightforest.gui.optifine.suggestions": "Here's a selection of mods that we recommend using instead.",
+
+  // JEI
+  "gui.uncrafting_jei": "Uncrafting"
 }
