@@ -34,7 +34,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
@@ -45,7 +50,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.AbstractSkullBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.WallSkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,7 +66,14 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.BlockHitResult;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.api.mixin.MobAccessor;
-import twilightforest.block.*;
+import twilightforest.block.AbstractLightableBlock;
+import twilightforest.block.AbstractSkullCandleBlock;
+import twilightforest.block.GiantBlock;
+import twilightforest.block.KeepsakeCasketBlock;
+import twilightforest.block.SkullCandleBlock;
+import twilightforest.block.TFBlocks;
+import twilightforest.block.TFPortalBlock;
+import twilightforest.block.WallSkullCandleBlock;
 import twilightforest.block.entity.KeepsakeCasketBlockEntity;
 import twilightforest.block.entity.SkullCandleBlockEntity;
 import twilightforest.capabilities.CapabilityList;
@@ -88,7 +104,12 @@ import twilightforest.world.registration.TFFeature;
 import twilightforest.world.registration.TFGenerationSettings;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -694,14 +715,19 @@ public class TFEventListener {
 		}*/
 	}
 
-	public static void livingUpdate(LivingEntity living) {
-		CapabilityList.SHIELD_CAPABILITY_COMPONENT_KEY.maybeGet(living).ifPresent(IShieldCapability::update);
+	@SubscribeEvent
+	public static void livingUpdate(LivingUpdateEvent event) {
+		event.getEntityLiving().getCapability(CapabilityList.SHIELDS).ifPresent(IShieldCapability::update);
+		if (event.getEntityLiving() instanceof IHostileMount)
+			event.getEntityLiving().getPassengers().forEach(e -> e.setShiftKeyDown(false));
+	}
 
-		// Stop the player from sneaking while riding an unfriendly creature
-		//FIXME keep an eye on https://github.com/MinecraftForge/MinecraftForge/pull/8114, switch to the MountEvent to properly fix dismounting
-		if (living instanceof Player && living.isShiftKeyDown() && isRidingUnfriendly(living)) {
-			living.setShiftKeyDown(false);
-		}
+	public static volatile boolean allowDismount = false;
+
+	@SubscribeEvent
+	public static void preventMountDismount(EntityMountEvent event) {
+		if (!event.getEntityBeingMounted().level.isClientSide() && !event.isMounting() && event.getEntityBeingMounted().isAlive() && event.getEntityMounting() instanceof LivingEntity living && isRidingUnfriendly(living) && !allowDismount)
+			event.setCanceled(true);
 	}
 
 	public static boolean isRidingUnfriendly(LivingEntity entity) {

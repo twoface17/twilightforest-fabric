@@ -32,16 +32,14 @@ import twilightforest.advancements.TFAdvancements;
 import twilightforest.api.TFInternalApi;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
+import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.data.DataGenerators;
-import twilightforest.dispenser.CrumbleDispenseBehavior;
-import twilightforest.dispenser.FeatherFanDispenseBehavior;
-import twilightforest.dispenser.MoonwormDispenseBehavior;
-import twilightforest.dispenser.TransformationDispenseBehavior;
+import twilightforest.dispenser.TFDispenserBehaviors;
 import twilightforest.enchantment.TFEnchantments;
 import twilightforest.entity.TFEntities;
 import twilightforest.entity.projectile.MoonwormShot;
@@ -53,8 +51,13 @@ import twilightforest.potions.TFMobEffects;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.potions.TFPotions;
 import twilightforest.util.TFStats;
+import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
+import twilightforest.world.registration.TFBiomeFeatures;
+import twilightforest.world.registration.TFDimensions;
+import twilightforest.world.registration.TFStructures;
+import twilightforest.world.registration.TwilightFeatures;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
 import java.util.Locale;
@@ -239,9 +242,10 @@ public class TwilightForestMod implements ModInitializer {
 
 		{
 			TFBlocks.tfCompostables();
-			TFBlocks.TFBurnables();
-			TFBlocks.TFPots();
+			TFBlocks.tfBurnables();
+			TFBlocks.tfPots();
 			TFSounds.registerParrotSounds();
+			TFDispenserBehaviors.init();
 
 			//TODO: PORT????
 			/*
@@ -261,81 +265,19 @@ public class TwilightForestMod implements ModInitializer {
 			AxeItem.STRIPPABLES.put(TFBlocks.MINING_LOG, TFBlocks.STRIPPED_MINING_LOG);
 			AxeItem.STRIPPABLES.put(TFBlocks.SORTING_LOG, TFBlocks.STRIPPED_SORTING_LOG);
 
-			AxeItem.STRIPPABLES.put(TFBlocks.TWILIGHT_OAK_WOOD, TFBlocks.STRIPPED_TWILIGHT_OAK_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.CANOPY_WOOD, TFBlocks.STRIPPED_CANOPY_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.MANGROVE_WOOD, TFBlocks.STRIPPED_MANGROVE_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.DARK_WOOD, TFBlocks.STRIPPED_DARK_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.TIME_WOOD, TFBlocks.STRIPPED_TIME_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.TRANSFORMATION_WOOD, TFBlocks.STRIPPED_TRANSFORMATION_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.MINING_WOOD, TFBlocks.STRIPPED_MINING_WOOD);
-			AxeItem.STRIPPABLES.put(TFBlocks.SORTING_WOOD, TFBlocks.STRIPPED_SORTING_WOOD);
+			AxeItem.STRIPPABLES.put(TFBlocks.TWILIGHT_OAK_WOOD.get(), TFBlocks.STRIPPED_TWILIGHT_OAK_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.CANOPY_WOOD.get(), TFBlocks.STRIPPED_CANOPY_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.MANGROVE_WOOD.get(), TFBlocks.STRIPPED_MANGROVE_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.DARK_WOOD.get(), TFBlocks.STRIPPED_DARK_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.TIME_WOOD.get(), TFBlocks.STRIPPED_TIME_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.TRANSFORMATION_WOOD.get(), TFBlocks.STRIPPED_TRANSFORMATION_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.MINING_WOOD.get(), TFBlocks.STRIPPED_MINING_WOOD.get());
+			AxeItem.STRIPPABLES.put(TFBlocks.SORTING_WOOD.get(), TFBlocks.STRIPPED_SORTING_WOOD.get());
+		});
+	}
 
-			DispenserBlock.registerBehavior(TFItems.MOONWORM_QUEEN, new MoonwormDispenseBehavior() {
-				@Override
-				protected Projectile getProjectileEntity(Level worldIn, Position position, ItemStack stackIn) {
-					return new MoonwormShot(worldIn, position.x(), position.y(), position.z());
-				}
-			});
-
-			DispenseItemBehavior idispenseitembehavior = new OptionalDispenseItemBehavior() {
-				/**
-				 * Dispense the specified stack, play the dispense sound and spawn particles.
-				 */
-				protected ItemStack execute(BlockSource source, ItemStack stack) {
-					this.setSuccess(ArmorItem.dispenseArmor(source, stack));
-					return stack;
-				}
-			};
-			DispenserBlock.registerBehavior(TFBlocks.NAGA_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.LICH_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.MINOSHROOM_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.HYDRA_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.KNIGHT_PHANTOM_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.UR_GHAST_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.ALPHA_YETI_TROPHY.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.SNOW_QUEEN_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.QUEST_RAM_TROPHY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.CREEPER_SKULL_CANDLE.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.PLAYER_SKULL_CANDLE.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.SKELETON_SKULL_CANDLE.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.WITHER_SKELE_SKULL_CANDLE.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.ZOMBIE_SKULL_CANDLE.get().asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.CICADA.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.FIREFLY.asItem(), idispenseitembehavior);
-			DispenserBlock.registerBehavior(TFBlocks.MOONWORM.asItem(), idispenseitembehavior);
-
-			DispenseItemBehavior pushmobsbehavior = new FeatherFanDispenseBehavior();
-			DispenserBlock.registerBehavior(TFItems.PEACOCK_FEATHER_FAN.asItem(), pushmobsbehavior);
-
-			DispenseItemBehavior crumblebehavior = new CrumbleDispenseBehavior();
-			DispenserBlock.registerBehavior(TFItems.CRUMBLE_HORN.asItem(), crumblebehavior);
-
-			DispenseItemBehavior transformbehavior = new TransformationDispenseBehavior();
-			DispenserBlock.registerBehavior(TFItems.TRANSFORMATION_POWDER.asItem(), transformbehavior);
-
-			DispenserBlock.registerBehavior(TFItems.TWILIGHT_SCEPTER, new MoonwormDispenseBehavior() {
-				@Override
-				protected Projectile getProjectileEntity(Level worldIn, Position position, ItemStack stackIn) {
-					return new TwilightWandBolt(worldIn, position.x(), position.y(), position.z());
-				}
-
-				@Override
-				protected void playSound(BlockSource source) {
-					BlockPos pos = source.getPos();
-					source.getLevel().playSound(null, pos, TFSounds.SCEPTER_PEARL, SoundSource.BLOCKS, 1, 1);
-				}
-			});
-			WoodType.register(TFBlocks.TWILIGHT_OAK);
-			WoodType.register(TFBlocks.CANOPY);
-			WoodType.register(TFBlocks.MANGROVE);
-			WoodType.register(TFBlocks.DARKWOOD);
-			WoodType.register(TFBlocks.TIMEWOOD);
-			WoodType.register(TFBlocks.TRANSFORMATION);
-			WoodType.register(TFBlocks.MINING);
-			WoodType.register(TFBlocks.SORTING);
-		}
-		TFInternalApi.init();
-		//DataGenerators.gatherData();
+	public void registerCommands(RegisterCommandsEvent event) {
+		TFCommand.register(event.getDispatcher());
 	}
 
 	public static ResourceLocation prefix(String name) {

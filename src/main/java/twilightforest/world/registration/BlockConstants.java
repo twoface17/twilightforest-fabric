@@ -71,6 +71,8 @@ public final class BlockConstants {
     public static final BlockState FIRE_JET = TFBlocks.FIRE_JET.defaultBlockState();
     public static final BlockState SMOKER = TFBlocks.SMOKER.defaultBlockState();
     public static final BlockState AIR = Blocks.AIR.defaultBlockState();
+    public static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
+    public static final BlockState WATER = Blocks.WATER.defaultBlockState();
     public static final BlockState MYCELIUM = Blocks.MYCELIUM.defaultBlockState();
     public static final BlockState UBEROUS_SOIL = TFBlocks.UBEROUS_SOIL.defaultBlockState();
     public static final BlockState DIRT = Blocks.DIRT.defaultBlockState();

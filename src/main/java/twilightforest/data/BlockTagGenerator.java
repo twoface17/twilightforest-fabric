@@ -55,6 +55,7 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> PORTAL_EDGE = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/edge"));
     public static final Tag.Named<Block> PORTAL_POOL = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/fluid"));
     public static final Tag.Named<Block> PORTAL_DECO = TagFactory.BLOCK.create(TwilightForestMod.prefix("portal/decoration"));
+    public static final Tag.Named<Block> ICE_BOMB_REPLACEABLES = BlockTags.bind(TwilightForestMod.prefix("ice_bomb_replaceables").toString());
 
     public static final Tag.Named<Block> COMMON_PROTECTIONS = BlockTags.bind(TwilightForestMod.prefix("common_protections").toString());
     public static final Tag.Named<Block> ANNIHILATION_INCLUSIONS = BlockTags.bind(TwilightForestMod.prefix("annihilation_inclusions").toString());
@@ -344,6 +345,10 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 .add(TFBlocks.QUEST_RAM_TROPHY, TFBlocks.QUEST_RAM_WALL_TROPHY);
 
         tag(FIRE_JET_FUEL).add(Blocks.LAVA);
+
+        tag(ICE_BOMB_REPLACEABLES)
+                .add(TFBlocks.MAYAPPLE.get(), TFBlocks.FIDDLEHEAD.get(), Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN)
+                .addTag(BlockTags.FLOWERS);
 
         tag(COMMON_PROTECTIONS).add( // For any blocks that absolutely should not be meddled with
                 TFBlocks.NAGA_BOSS_SPAWNER,
