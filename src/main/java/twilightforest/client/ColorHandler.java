@@ -1,12 +1,11 @@
 package twilightforest.client;
 
-import blusunrize.immersiveengineering.api.shader.ShaderRegistry;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
@@ -14,11 +13,11 @@ import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.AuroraBrickBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.TFBlocks;
-import twilightforest.compat.ie.TFShaderItem;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.item.ArcticArmorItem;
 import twilightforest.item.TFItems;
@@ -401,19 +400,19 @@ public final class ColorHandler {
 				tintIndex > 0 ? -1 : PotionUtils.getColor(stack),
 				TFItems.BRITTLE_FLASK, TFItems.GREATER_FLASK);
 
-		if (ModList.isLoaded("immersiveengineering")) {
-			itemColors.register(TFShaderItem::getShaderColors, Registry.ITEM.get(TwilightForestMod.prefix("shader")));
-			for(Rarity r: ShaderRegistry.rarityWeightMap.keySet()) {
-				itemColors.register((stack, tintIndex) -> {
-					int c = r.color.getColor();
-
-					float d = tintIndex + 1;
-
-					return (int) ((c >> 16 & 0xFF) / d) << 16
-							| (int) ((c >> 8 & 0xFF) / d) << 8
-							| (int) ((c & 0xFF) / d);
-				}, Registry.ITEM.get(TwilightForestMod.prefix("shader_bag_" + r.name().toLowerCase(Locale.US).replace(':', '_'))));
-			}
+		if (FabricLoader.getInstance().isModLoaded("immersiveengineering")) {
+//			itemColors.register(TFShaderItem::getShaderColors, Registry.ITEM.get(TwilightForestMod.prefix("shader")));
+//			for(Rarity r: ShaderRegistry.rarityWeightMap.keySet()) {
+//				itemColors.register((stack, tintIndex) -> {
+//					int c = r.color.getColor();
+//
+//					float d = tintIndex + 1;
+//
+//					return (int) ((c >> 16 & 0xFF) / d) << 16
+//							| (int) ((c >> 8 & 0xFF) / d) << 8
+//							| (int) ((c & 0xFF) / d);
+//				}, Registry.ITEM.get(TwilightForestMod.prefix("shader_bag_" + r.name().toLowerCase(Locale.US).replace(':', '_'))));
+//			}
 		}
 	}
 

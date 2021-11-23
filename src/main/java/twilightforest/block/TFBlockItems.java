@@ -411,22 +411,8 @@ public class TFBlockItems {
 
 	private static final Map<Item, ResourceLocation> UNMAPPED = new HashMap<>();
 
-	private static <B extends Block> Item fireImmuneBlock(RegistryObject<B> block) {
-		return makeBlockItem(new BlockItem(block.get(), TFItems.defaultBuilder().fireResistant()), block);
-	}
-
-	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(RegistryObject<B> floor, RegistryObject<B> wall) {
-		return makeBlockItem(new SkullCandleItem(floor.get(), wall.get(), TFItems.defaultBuilder().rarity(Rarity.UNCOMMON)) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(Registry.BLOCK_ENTITY_TYPE.getKey(TFBlockEntities.SKULL_CANDLE));
-//					}
-//				});
-//			}
-		}, floor);
+	private static <B extends Block> Item fireImmuneBlock(B block) {
+		return makeBlockItem(new BlockItem(block, TFItems.defaultBuilder().fireResistant()), block);
 	}
 
 	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(B floor, B wall) {

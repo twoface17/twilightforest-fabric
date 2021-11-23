@@ -74,27 +74,27 @@ public class CraftingGenerator extends CraftingDataHelper {
 				.pattern("mmm")
 				.pattern("mtm")
 				.pattern("mmm")
-				.define('m', Ingredient.of(TFBlocks.MOSS_PATCH.get()))
-				.define('t', Ingredient.of(TFItems.TRANSFORMATION_POWDER.get()))
-				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER.get()))
+				.define('m', Ingredient.of(TFBlocks.MOSS_PATCH))
+				.define('t', Ingredient.of(TFItems.TRANSFORMATION_POWDER))
+				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER))
 				.save(consumer, TwilightForestMod.prefix("tf_moss_to_vanilla"));
 
-		ShapelessRecipeBuilder.shapeless(TFBlocks.MOSS_PATCH.get(), 8)
+		ShapelessRecipeBuilder.shapeless(TFBlocks.MOSS_PATCH, 8)
 				.requires(Ingredient.of(Items.MOSS_BLOCK))
-				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER.get()))
-				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER.get()))
+				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER))
+				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER))
 				.save(consumer, TwilightForestMod.prefix("vanilla_to_tf_moss"));
 
-		ShapelessRecipeBuilder.shapeless(TFBlocks.HUGE_LILY_PAD.get())
+		ShapelessRecipeBuilder.shapeless(TFBlocks.HUGE_LILY_PAD)
 				.requires(Ingredient.of(Blocks.LILY_PAD), 4)
-				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER.get()))
-				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER.get()))
+				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER))
+				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER))
 				.save(consumer, TwilightForestMod.prefix("vanilla_to_tf_lilypad"));
 
 		ShapelessRecipeBuilder.shapeless(Blocks.LILY_PAD, 4)
-				.requires(Ingredient.of(TFBlocks.HUGE_LILY_PAD.get()))
-				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER.get()))
-				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER.get()))
+				.requires(Ingredient.of(TFBlocks.HUGE_LILY_PAD))
+				.requires(Ingredient.of(TFItems.TRANSFORMATION_POWDER))
+				.unlockedBy("has_item", has(TFItems.TRANSFORMATION_POWDER))
 				.save(consumer, TwilightForestMod.prefix("tf_to_vanilla_lilypad"));
 
 		slabBlock(consumer, "aurora_slab", TFBlocks.AURORA_SLAB, TFBlocks.AURORA_BLOCK);

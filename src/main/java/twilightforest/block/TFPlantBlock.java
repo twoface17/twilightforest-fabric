@@ -2,8 +2,6 @@ package twilightforest.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -13,28 +11,16 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import twilightforest.client.particle.data.LeafParticleData;
-import twilightforest.enums.PlantVariant;
 import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.api.extensions.IBlockStateEx;
-import twilightforest.network.SpawnFallenLeafFromPacket;
 
 import java.util.Random;
 
 public abstract class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlockMethods, IPlantable {
 
-	public final PlantVariant plantVariant;
+	protected Random RANDOM = new Random();
 
-	private Random RANDOM = new Random();
-
-	protected TFPlantBlock(PlantVariant plant, BlockBehaviour.Properties props) {
 	protected TFPlantBlock(BlockBehaviour.Properties props) {
 		super(props);
 	}

@@ -74,11 +74,11 @@ public class ItemTagGenerator extends ItemTagsProvider {
 	public static final Tag.Named<Item> WIP = TagFactory.ITEM.create(TwilightForestMod.prefix("wip"));
 	public static final Tag.Named<Item> NYI = TagFactory.ITEM.create(TwilightForestMod.prefix("nyi"));
 
-	public static final Tag.Named<Item> BANNED_UNCRAFTING_INGREDIENTS = ItemTags.bind(TwilightForestMod.prefix("banned_uncrafting_ingredients").toString());
-	public static final Tag.Named<Item> BANNED_UNCRAFTABLES = ItemTags.bind(TwilightForestMod.prefix("banned_uncraftables").toString());
+	public static final Tag.Named<Item> BANNED_UNCRAFTING_INGREDIENTS = TagFactory.ITEM.create(TwilightForestMod.prefix("banned_uncrafting_ingredients"));
+	public static final Tag.Named<Item> BANNED_UNCRAFTABLES = TagFactory.ITEM.create(TwilightForestMod.prefix("banned_uncraftables"));
 
 	public ItemTagGenerator(DataGenerator generator, BlockTagsProvider blockprovider) {
-		super(generator, blockprovider;
+		super(generator, blockprovider);
 	}
 
 	@Override
@@ -240,15 +240,15 @@ public class ItemTagGenerator extends ItemTagsProvider {
 		tag(ItemTags.MUSIC_DISCS).addTag(TF_MUSIC_DISCS);
 
 		tag(BANNED_UNCRAFTING_INGREDIENTS).add(
-				TFBlocks.INFESTED_TOWERWOOD.get().asItem(),
-				TFBlocks.HOLLOW_OAK_SAPLING.get().asItem(),
-				TFBlocks.TIME_SAPLING.get().asItem(),
-				TFBlocks.TRANSFORMATION_SAPLING.get().asItem(),
-				TFBlocks.MINING_SAPLING.get().asItem(),
-				TFBlocks.SORTING_SAPLING.get().asItem());
+				TFBlocks.INFESTED_TOWERWOOD.asItem(),
+				TFBlocks.HOLLOW_OAK_SAPLING.asItem(),
+				TFBlocks.TIME_SAPLING.asItem(),
+				TFBlocks.TRANSFORMATION_SAPLING.asItem(),
+				TFBlocks.MINING_SAPLING.asItem(),
+				TFBlocks.SORTING_SAPLING.asItem());
 
-		tag(BANNED_UNCRAFTABLES).add(TFItems.MOONWORM_QUEEN.get());
+		tag(BANNED_UNCRAFTABLES).add(TFItems.MOONWORM_QUEEN);
 
-		tag(ItemTags.PIGLIN_LOVED).add(TFItems.GOLDEN_MINOTAUR_AXE.get(), TFItems.CHARM_OF_KEEPING_3.get(), TFItems.CHARM_OF_LIFE_2.get(), TFItems.LAMP_OF_CINDERS.get());
+		tag(ItemTags.PIGLIN_LOVED).add(TFItems.GOLDEN_MINOTAUR_AXE, TFItems.CHARM_OF_KEEPING_3, TFItems.CHARM_OF_LIFE_2, TFItems.LAMP_OF_CINDERS);
 	}
 }

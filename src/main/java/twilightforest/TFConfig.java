@@ -234,7 +234,7 @@ public class TFConfig {
 //		public ForgeConfigSpec.ConfigValue<String> portalAdvancementLock;
 //		public ForgeConfigSpec.BooleanValue disableUncrafting;
 //		public ForgeConfigSpec.ConfigValue<List<? extends String>> disableUncraftingRecipes;
-		public ForgeConfigSpec.BooleanValue casketUUIDLocking;
+//		public ForgeConfigSpec.BooleanValue casketUUIDLocking;
 //		public ForgeConfigSpec.BooleanValue disableSkullCandles;
 //
 //		public ShieldInteractions SHIELD_INTERACTIONS = new ShieldInteractions();

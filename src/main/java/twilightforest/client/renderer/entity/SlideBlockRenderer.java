@@ -57,12 +57,11 @@ public class SlideBlockRenderer extends EntityRenderer<SlideBlock> {
 
 					BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 
-					//TODO: PORT (This seems fine for now no change is probably needed)
 					for (RenderType type : RenderType.chunkBufferLayers()) {
-						//if (ItemBlockRenderTypes.canRenderInLayer(blockstate, type)) {
+						if (ItemBlockRenderTypes.getChunkRenderType(blockstate) != type) {
 							//ForgeHooksClient.setRenderLayer(type);
 							blockrendererdispatcher.getModelRenderer().tesselateBlock(world, blockrendererdispatcher.getBlockModel(blockstate), blockstate, blockpos, stack, buffer.getBuffer(type), false, new Random(), blockstate.getSeed(blockpos), OverlayTexture.NO_OVERLAY);
-						//}
+						}
 					}
 					//ForgeHooksClient.setRenderLayer(null);
 

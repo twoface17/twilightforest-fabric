@@ -34,12 +34,12 @@ public class SnowQueenIceShieldLayer<T extends SnowQueenIceShield> extends Entit
 				BlockPos blockpos = new BlockPos(entityIn.getX(), entityIn.getBoundingBox().maxY, entityIn.getZ());
 				matrixStackIn.translate(-0.5D, 0.0D, -0.5D);
 				BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
-				//TODO: PORT (This seems fine for now no change is probably needed)
+
 				for (net.minecraft.client.renderer.RenderType type : net.minecraft.client.renderer.RenderType.chunkBufferLayers()) {
-//					if (ItemBlockRenderTypes.canRenderInLayer(blockstate, type)) {
+					if (ItemBlockRenderTypes.getChunkRenderType(blockstate) != type) {
 						//net.minecraftforge.client.ForgeHooksClient.setRenderLayer(type);
 						blockrendererdispatcher.getModelRenderer().tesselateBlock(world, blockrendererdispatcher.getBlockModel(blockstate), blockstate, blockpos, matrixStackIn, bufferIn.getBuffer(type), false, new Random(), blockstate.getSeed(new BlockPos(entityIn.position())), OverlayTexture.NO_OVERLAY);
-//					}
+					}
 				}
 				//net.minecraftforge.client.ForgeHooksClient.setRenderLayer(null);
 				matrixStackIn.popPose();

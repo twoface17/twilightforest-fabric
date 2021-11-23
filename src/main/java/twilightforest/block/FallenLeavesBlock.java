@@ -15,9 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import twilightforest.client.particle.data.LeafParticleData;
 import twilightforest.network.SpawnFallenLeafFromPacket;
 import twilightforest.network.TFPacketHandler;
@@ -44,7 +45,7 @@ public class FallenLeavesBlock extends TFPlantBlock {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		super.animateTick(state, world, pos, random);
 		if (random.nextInt(50) == 0) {
@@ -87,7 +88,7 @@ public class FallenLeavesBlock extends TFPlantBlock {
 						(world.random.nextFloat() * -0.5F) * entityIn.getDeltaMovement().z()
 				);
 			} else if (world instanceof ServerLevel)
-				TFPacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entityIn), new SpawnFallenLeafFromPacket(pos, entityIn.getDeltaMovement()));
+				PlayerLookup.tracking(entityIn).forEach(serverPlayer -> TFPacketHandler.CHANNEL.send(serverPlayer, new SpawnFallenLeafFromPacket(pos, entityIn.getDeltaMovement())));
 		}
 	}
 }

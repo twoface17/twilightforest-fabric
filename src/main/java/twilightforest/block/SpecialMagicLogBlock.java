@@ -1,7 +1,6 @@
 package twilightforest.block;
 
 import twilightforest.TFSounds;
-import twilightforest.enums.MagicWoodVariant;
 import twilightforest.item.OreMagnetItem;
 import twilightforest.network.ChangeBiomePacket;
 import twilightforest.network.TFPacketHandler;

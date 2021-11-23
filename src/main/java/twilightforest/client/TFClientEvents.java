@@ -5,11 +5,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.TitleScreen;
-
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.minecraft.world.level.block.Block;
+import net.fabricmc.loader.api.FabricLoader;
 import twilightforest.TFConfig;
 import twilightforest.TFEventListener;
 import twilightforest.TwilightForestMod;
@@ -26,11 +23,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
 
-import blusunrize.immersiveengineering.api.shader.ShaderRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -45,42 +43,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.StaticTagHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IWeatherRenderHandler;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
-import twilightforest.TFConfig;
-import twilightforest.TFEventListener;
-import twilightforest.TwilightForestMod;
-import twilightforest.block.TFBlocks;
-import twilightforest.client.model.item.FullbrightBakedModel;
-import twilightforest.client.model.item.ShaderBagItemModel;
-import twilightforest.client.model.item.TintIndexAwareFullbrightBakedModel;
-import twilightforest.client.renderer.TFWeatherRenderer;
-import twilightforest.client.renderer.entity.ShieldLayer;
-import twilightforest.client.renderer.tileentity.TwilightChestRenderer;
-import twilightforest.compat.ie.TFShaderGrabbagItem;
-import twilightforest.data.ItemTagGenerator;
-import twilightforest.item.TFItems;
 
 @Environment(EnvType.CLIENT)
 public class TFClientEvents {
@@ -116,12 +81,12 @@ public class TFClientEvents {
 		tintedFullbrightBlock(event, TFBlocks.BLUE_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
 		tintedFullbrightBlock(event, TFBlocks.YELLOW_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
 		tintedFullbrightBlock(event, TFBlocks.VIOLET_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
-if(ModList.get().isLoaded("immersiveengineering")) {
-				for (Rarity rarity : ShaderRegistry.rarityWeightMap.keySet()) {
-					ResourceLocation itemRL = TwilightForestMod.prefix("shader_bag_" + rarity.name().toLowerCase(Locale.US).replace(':', '_'));
-					ModelResourceLocation mrl = new ModelResourceLocation(itemRL, "inventory");
-					event.getModelRegistry().put(mrl, new ShaderBagItemModel(event.getModelRegistry().get(mrl), new ItemStack(ForgeRegistries.ITEMS.getValue(itemRL))));
-				}
+if(FabricLoader.getInstance().isModLoaded("immersiveengineering")) {
+//				for (Rarity rarity : ShaderRegistry.rarityWeightMap.keySet()) {
+//					ResourceLocation itemRL = TwilightForestMod.prefix("shader_bag_" + rarity.name().toLowerCase(Locale.US).replace(':', '_'));
+//					ModelResourceLocation mrl = new ModelResourceLocation(itemRL, "inventory");
+//					event.getModelRegistry().put(mrl, new ShaderBagItemModel(event.getModelRegistry().get(mrl), new ItemStack(ForgeRegistries.ITEMS.getValue(itemRL))));
+//				}
 			}
 		}
 
