@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFEntities;
-import twilightforest.potions.TFPotions;
 
 /**
  * @author Ben

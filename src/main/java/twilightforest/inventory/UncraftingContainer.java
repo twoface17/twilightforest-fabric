@@ -59,7 +59,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 	}
 
 	public UncraftingContainer(int id, Inventory inventory, Level world, ContainerLevelAccess positionData) {
-		super(TFContainers.UNCRAFTING, id);
+		super(TFContainers.UNCRAFTING.get(), id);
 
 		this.positionData = positionData;
 		this.world = world;

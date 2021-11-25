@@ -4,6 +4,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import twilightforest.TwilightForestMod;
+import twilightforest.api.RegistryObject;
+import twilightforest.api.TFRegistry;
 import twilightforest.client.UncraftingGui;
 
 import net.minecraft.core.Registry;
@@ -11,13 +13,13 @@ import net.minecraft.world.inventory.MenuType;
 
 public class TFContainers {
 
-	//public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, TwilightForestMod.ID);
+	public static final TFRegistry<MenuType<?>> CONTAINERS = TFRegistry.create(Registry.MENU, TwilightForestMod.ID);
 
-	public static final MenuType<UncraftingContainer> UNCRAFTING = Registry.register(Registry.MENU, TwilightForestMod.ID+ ":uncrafting",
-			new MenuType<>(UncraftingContainer::fromNetwork));
+	public static final RegistryObject<MenuType<UncraftingContainer>> UNCRAFTING = CONTAINERS.register("uncrafting",
+			() -> new MenuType<>(UncraftingContainer::fromNetwork));
 
 	@Environment(EnvType.CLIENT)
 	public static void renderScreens() {
-		ScreenRegistry.register(UNCRAFTING, UncraftingGui::new);
+		ScreenRegistry.register(UNCRAFTING.get(), UncraftingGui::new);
 	}
 }

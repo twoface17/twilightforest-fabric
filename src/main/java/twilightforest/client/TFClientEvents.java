@@ -62,26 +62,27 @@ public class TFClientEvents {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> clientTick());
 		ItemTooltipCallback.EVENT.register(((stack, context, lines) -> tooltipEvent(stack, lines)));
 		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> showOptifineWarning(screen));
+
 	}
 
 	@Deprecated // tterrag said this would become deprecated soon in favor of above method
 //	@SubscribeEvent
 	public static void modelBake(Map<ResourceLocation, BakedModel> event) {
 		// TODO Unhardcode, into using Model Deserializers and load from JSON instead
-		fullbrightItem(event, TFItems.FIERY_INGOT);
-		fullbrightItem(event, TFItems.FIERY_BOOTS);
-		fullbrightItem(event, TFItems.FIERY_CHESTPLATE);
-		fullbrightItem(event, TFItems.FIERY_HELMET);
-		fullbrightItem(event, TFItems.FIERY_LEGGINGS);
-		fullbrightItem(event, TFItems.FIERY_PICKAXE);
-		fullbrightItem(event, TFItems.FIERY_SWORD);
-		fullbrightBlock(event, TFBlocks.FIERY_BLOCK);
+		fullbrightItem(event, TFItems.FIERY_INGOT.get());
+		fullbrightItem(event, TFItems.FIERY_BOOTS.get());
+		fullbrightItem(event, TFItems.FIERY_CHESTPLATE.get());
+		fullbrightItem(event, TFItems.FIERY_HELMET.get());
+		fullbrightItem(event, TFItems.FIERY_LEGGINGS.get());
+		fullbrightItem(event, TFItems.FIERY_PICKAXE.get());
+		fullbrightItem(event, TFItems.FIERY_SWORD.get());
+		fullbrightBlock(event, TFBlocks.FIERY_BLOCK.get());
 
-		tintedFullbrightBlock(event, TFBlocks.PINK_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
-		tintedFullbrightBlock(event, TFBlocks.BLUE_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
-		tintedFullbrightBlock(event, TFBlocks.YELLOW_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
-		tintedFullbrightBlock(event, TFBlocks.VIOLET_CASTLE_RUNE_BRICK, FullbrightBakedModel::disableCache);
-if(FabricLoader.getInstance().isModLoaded("immersiveengineering")) {
+		tintedFullbrightBlock(event, TFBlocks.PINK_CASTLE_RUNE_BRICK.get(), FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.BLUE_CASTLE_RUNE_BRICK.get(), FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.YELLOW_CASTLE_RUNE_BRICK.get(), FullbrightBakedModel::disableCache);
+		tintedFullbrightBlock(event, TFBlocks.VIOLET_CASTLE_RUNE_BRICK.get(), FullbrightBakedModel::disableCache);
+		if(FabricLoader.getInstance().isModLoaded("immersiveengineering")) {
 //				for (Rarity rarity : ShaderRegistry.rarityWeightMap.keySet()) {
 //					ResourceLocation itemRL = TwilightForestMod.prefix("shader_bag_" + rarity.name().toLowerCase(Locale.US).replace(':', '_'));
 //					ModelResourceLocation mrl = new ModelResourceLocation(itemRL, "inventory");

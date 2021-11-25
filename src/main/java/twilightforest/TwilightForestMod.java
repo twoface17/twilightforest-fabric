@@ -10,48 +10,31 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import shadow.cloth.autoconfig.serializer.Toml4jConfigSerializerExtended;
 import twilightforest.advancements.TFAdvancements;
-import twilightforest.api.TFInternalApi;
 import twilightforest.block.TFBlocks;
-import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.compat.clothConfig.configFiles.TFConfigCommon;
-import twilightforest.data.BlockTagGenerator;
-import twilightforest.data.DataGenerators;
 import twilightforest.dispenser.TFDispenserBehaviors;
 import twilightforest.enchantment.TFEnchantments;
 import twilightforest.entity.TFEntities;
-import twilightforest.entity.projectile.MoonwormShot;
-import twilightforest.entity.projectile.TwilightWandBolt;
+import twilightforest.inventory.TFContainers;
 import twilightforest.item.TFItems;
 import twilightforest.loot.TFTreasure;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.potions.TFMobEffects;
 import twilightforest.world.components.BiomeGrassColors;
-import twilightforest.potions.TFPotions;
 import twilightforest.util.TFStats;
-import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.TFBiomeFeatures;
@@ -106,17 +89,16 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFBlocks.registerItemblocks();
 		TFItems.init();
-		TFPotions.init();  //TFPotions.POTIONS.register(modbus);
+		TFMobEffects.init();  //TFPotions.POTIONS.register(modbus);
 		BiomeKeys.init();
 		//modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
 		TFBlockEntities.init();
 		TFParticleType.init();
-		TFEnchantments.init();
 		TFStructures.registerFabricEvents();
 		TFBiomeFeatures.init();
-		TFMobEffects.MOB_EFFECTS.register(modbus);
-		//TFContainers.CONTAINERS.register(modbus);
-		//TFEnchantments.ENCHANTMENTS.register(modbus);
+		TFMobEffects.MOB_EFFECTS.register();
+		TFContainers.CONTAINERS.register();
+		TFEnchantments.ENCHANTMENTS.register();
 
 		TFStructureProcessors.init();
 		TreeConfigurations.init();
@@ -273,11 +255,7 @@ public class TwilightForestMod implements ModInitializer {
 			AxeItem.STRIPPABLES.put(TFBlocks.TRANSFORMATION_WOOD.get(), TFBlocks.STRIPPED_TRANSFORMATION_WOOD.get());
 			AxeItem.STRIPPABLES.put(TFBlocks.MINING_WOOD.get(), TFBlocks.STRIPPED_MINING_WOOD.get());
 			AxeItem.STRIPPABLES.put(TFBlocks.SORTING_WOOD.get(), TFBlocks.STRIPPED_SORTING_WOOD.get());
-		});
-	}
-
-	public void registerCommands(RegisterCommandsEvent event) {
-		TFCommand.register(event.getDispatcher());
+		};
 	}
 
 	public static ResourceLocation prefix(String name) {

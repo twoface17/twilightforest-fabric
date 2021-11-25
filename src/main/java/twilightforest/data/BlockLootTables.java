@@ -71,7 +71,7 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 
 	//@Override
 	protected void addTables() {
-		registerEmpty(TFBlocks.EXPERIMENT_115);
+		registerEmpty(TFBlocks.EXPERIMENT_115.get());
 		dropSelf(TFBlocks.TOWERWOOD);
 		dropSelf(TFBlocks.ENCASED_TOWERWOOD);
 		dropSelf(TFBlocks.CRACKED_TOWERWOOD);

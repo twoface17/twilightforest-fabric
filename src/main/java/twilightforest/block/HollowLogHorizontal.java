@@ -30,12 +30,14 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import twilightforest.api.extensions.IBlockMethods;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.util.AxisUtil;
 
 import javax.annotation.Nullable;
 
-public class HollowLogHorizontal extends Block implements WaterloggedBlock {
+public class HollowLogHorizontal extends Block implements WaterloggedBlock, IBlockMethods {
     public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final EnumProperty<HollowLogVariants.Horizontal> VARIANT = EnumProperty.create("variant", HollowLogVariants.Horizontal.class);
 
