@@ -19,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.advancements.*;
@@ -50,12 +49,12 @@ public class AdvancementGenerator extends AdvancementProvider {
 			TFBlocks.TWILIGHT_OAK_BANISTER.get(), TFBlocks.CANOPY_BANISTER.get(), TFBlocks.MANGROVE_BANISTER.get(), TFBlocks.DARKWOOD_BANISTER.get(), TFBlocks.TIME_BANISTER.get(), TFBlocks.TRANSFORMATION_BANISTER.get(), TFBlocks.MINING_BANISTER.get(), TFBlocks.SORTING_BANISTER.get()
 	};
 
-	public AdvancementGenerator(DataGenerator generatorIn, ExistingFileHelper fileHelperIn) {
-		super(generatorIn, fileHelperIn);
+	public AdvancementGenerator(DataGenerator generatorIn) {
+		super(generatorIn);
 	}
 
-	@Override
-	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
+	//@Override
+	protected void registerAdvancements(Consumer<Advancement> consumer) {
 		Advancement root = Advancement.Builder.advancement().display(
 				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get(),
 				new TranslatableComponent("itemGroup.twilightforest"),
