@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -815,7 +816,7 @@ public class Naga extends Monster implements IEntityEx {
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 
-		if (compound.contains("Home", CompoundTag.TAG_INT_ARRAY)) {
+		if (compound.contains("Home", Tag.TAG_INT_ARRAY)) {
 			int[] home = compound.getIntArray("Home");
 			this.restrictTo(new BlockPos(home[0], home[1], home[2]), 20);
 		} else {

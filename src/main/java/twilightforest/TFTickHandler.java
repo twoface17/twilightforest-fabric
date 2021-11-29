@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.TFPortalBlock;
+import twilightforest.data.BlockTagGenerator;
 import twilightforest.data.ItemTagGenerator;
 import twilightforest.item.BrittleFlaskItem;
 import twilightforest.network.MissingAdvancementToastPacket;
@@ -32,6 +33,7 @@ import twilightforest.world.registration.TFFeature;
 import twilightforest.world.registration.TFGenerationSettings;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class TFTickHandler {
@@ -114,14 +116,17 @@ public class TFTickHandler {
 	private static final TranslatableComponent PORTAL_UNWORTHY = new TranslatableComponent(TwilightForestMod.ID + ".ui.portal.unworthy");
 	private static void checkForPortalCreation(ServerPlayer player, Level world, float rangeToCheck) {
 		if (world.dimension().location().equals(new ResourceLocation(TFConfig.COMMON_CONFIG.originDimension.get()))
-				|| world.dimension().location().toString().equals(TFConfig.COMMON_CONFIG.DIMENSION.portalDestinationID.get())
+				|| TFGenerationSettings.isTwilightPortalDestination(world)
 				|| TFConfig.COMMON_CONFIG.allowPortalsInOtherDimensions.get()) {
 
 			List<ItemEntity> itemList = world.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(rangeToCheck));
 			ItemEntity qualified = null;
 
 			for (ItemEntity entityItem : itemList) {
-				if (entityItem.getItem().is(ItemTagGenerator.PORTAL_ACTIVATOR)) {
+				if (entityItem.getItem().is(ItemTagGenerator.PORTAL_ACTIVATOR) &&
+						TFBlocks.TWILIGHT_PORTAL.get().canFormPortal(world.getBlockState(entityItem.blockPosition())) &&
+						Objects.equals(entityItem.getThrower(), player.getUUID())) {
+
 					qualified = entityItem;
 					break;
 				}
@@ -146,21 +151,18 @@ public class TFTickHandler {
 				}
 			}
 
-			BlockPos pos = new BlockPos(qualified.position().subtract(0, -0.1d, 0)); //TODO Quick fix, find if there's a more performant fix than this
-			BlockState state = world.getBlockState(pos);
-			if (TFBlocks.TWILIGHT_PORTAL.get().canFormPortal(state)) {
-				Random rand = new Random();
-				for (int i = 0; i < 2; i++) {
-					double vx = rand.nextGaussian() * 0.02D;
-					double vy = rand.nextGaussian() * 0.02D;
-					double vz = rand.nextGaussian() * 0.02D;
+			Random rand = new Random();
+			for (int i = 0; i < 2; i++) {
+				double vx = rand.nextGaussian() * 0.02D;
+				double vy = rand.nextGaussian() * 0.02D;
+				double vz = rand.nextGaussian() * 0.02D;
 
-					world.addParticle(ParticleTypes.EFFECT, qualified.getX(), qualified.getY() + 0.2, qualified.getZ(), vx, vy, vz);
-				}
-
-				if (TFBlocks.TWILIGHT_PORTAL.get().tryToCreatePortal(world, pos, qualified, player))
-					TFAdvancements.MADE_TF_PORTAL.trigger(player);
+				world.addParticle(ParticleTypes.EFFECT, qualified.getX(), qualified.getY() + 0.2, qualified.getZ(), vx, vy, vz);
 			}
+
+			if (TFBlocks.TWILIGHT_PORTAL.get().tryToCreatePortal(world, qualified.blockPosition(), qualified, player))
+				TFAdvancements.MADE_TF_PORTAL.trigger(player);
+
 		}
 	}
 

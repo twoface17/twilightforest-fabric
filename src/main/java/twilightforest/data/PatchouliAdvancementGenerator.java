@@ -4,6 +4,8 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.Registry;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -22,9 +24,13 @@ import twilightforest.world.registration.biomes.BiomeKeys;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class PatchouliAdvancementGenerator implements Consumer<Consumer<Advancement>> {
-	@Override
-	public void accept(Consumer<Advancement> consumer) {
+public class PatchouliAdvancementGenerator extends AdvancementProvider {
+	public PatchouliAdvancementGenerator(DataGenerator generatorIn) {
+		super(generatorIn);
+	}
+
+	//@Override
+	protected void registerAdvancements(Consumer<Advancement> consumer) {
 		Advancement root = Advancement.Builder.advancement()
 				.addCriterion("hidden", new ImpossibleTrigger.TriggerInstance())
 				.save(consumer, "twilightforest:alt/root");

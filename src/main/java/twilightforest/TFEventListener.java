@@ -899,13 +899,13 @@ public class TFEventListener {
 	/**
 	 * When player changes dimensions, send the rule status if they're moving to the Twilight Forest
 	 */
-	public static void playerPortals(Player player, ResourceKey<Level> fromDim, ResourceKey<Level> toDim) {
-		if (!player.level.isClientSide && player instanceof ServerPlayer) {
-			if (toDim.location().toString().equals(TFConfig.COMMON_CONFIG.DIMENSION.portalDestinationID.get())) {
-				sendEnforcedProgressionStatus((ServerPlayer) player, TFGenerationSettings.isProgressionEnforced(player.level));
+	public static void playerPortals(Player playerEntity, ResourceKey<Level> fromDim, ResourceKey<Level> toDim) {
+		if (!playerEntity.level.isClientSide && playerEntity instanceof ServerPlayer player) {
+			if (TFGenerationSettings.usesTwilightChunkGenerator(player.getLevel())) {
+				sendEnforcedProgressionStatus((ServerPlayer) playerEntity, TFGenerationSettings.isProgressionEnforced(player.getLevel()));
 			}
 
-			updateCapabilities((ServerPlayer) player, player);
+			updateCapabilities(player, player);
 		}
 	}
 
@@ -914,10 +914,10 @@ public class TFEventListener {
 	}
 
 	// send any capabilities that are needed client-side
-	private static void updateCapabilities(ServerPlayer player, Entity entity) {
-		CapabilityList.SHIELDS.maybeGet(entity).ifPresent(cap -> {
+	private static void updateCapabilities(ServerPlayer clientTarget, Entity shielded) {
+		CapabilityList.SHIELDS.maybeGet(shielded).ifPresent(cap -> {
 			if (cap.shieldsLeft() > 0) {
-				TFPacketHandler.CHANNEL.sendToClient(new UpdateShieldPacket(entity, cap), player);
+				TFPacketHandler.CHANNEL.sendToClient(new UpdateShieldPacket(shielded, cap), clientTarget);
 			}
 		});
 	}

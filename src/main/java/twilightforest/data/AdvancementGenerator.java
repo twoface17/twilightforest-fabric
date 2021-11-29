@@ -6,6 +6,8 @@ import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.Registry;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.advancements.*;
@@ -29,7 +32,7 @@ import twilightforest.world.registration.TFStructures;
 
 import java.util.function.Consumer;
 
-public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
+public class AdvancementGenerator extends AdvancementProvider {
 
 	private static final EntityType<?>[] TF_KILLABLE = new EntityType<?>[]{TFEntities.ADHERENT, TFEntities.ARMORED_GIANT, TFEntities.BIGHORN_SHEEP, TFEntities.BLOCKCHAIN_GOBLIN, TFEntities.DWARF_RABBIT, TFEntities.DEATH_TOME, TFEntities.DEER, TFEntities.FIRE_BEETLE, TFEntities.GIANT_MINER, TFEntities.LOWER_GOBLIN_KNIGHT, TFEntities.UPPER_GOBLIN_KNIGHT, TFEntities.HARBINGER_CUBE, TFEntities.HEDGE_SPIDER, TFEntities.HELMET_CRAB, TFEntities.HOSTILE_WOLF, TFEntities.HYDRA, TFEntities.KING_SPIDER, TFEntities.KNIGHT_PHANTOM, TFEntities.KOBOLD, TFEntities.LICH, TFEntities.LICH_MINION, TFEntities.MAZE_SLIME, TFEntities.CARMINITE_GHASTLING, TFEntities.MINOSHROOM, TFEntities.MINOTAUR, TFEntities.MIST_WOLF, TFEntities.MOSQUITO_SWARM, TFEntities.NAGA, TFEntities.PENGUIN, TFEntities.PINCH_BEETLE, TFEntities.PLATEAU_BOSS, TFEntities.QUEST_RAM, TFEntities.RAVEN, TFEntities.REDCAP, TFEntities.REDCAP_SAPPER, TFEntities.SKELETON_DRUID, TFEntities.SLIME_BEETLE, TFEntities.SNOW_GUARDIAN, TFEntities.SNOW_QUEEN, TFEntities.SQUIRREL, TFEntities.STABLE_ICE_CORE, TFEntities.SWARM_SPIDER, TFEntities.TINY_BIRD, TFEntities.CARMINITE_BROODLING, TFEntities.CARMINITE_GHASTGUARD, TFEntities.CARMINITE_GOLEM, TFEntities.TOWERWOOD_BORER, TFEntities.TROLL, TFEntities.UNSTABLE_ICE_CORE, TFEntities.UR_GHAST, TFEntities.BOAR, TFEntities.WINTER_WOLF, TFEntities.WRAITH, TFEntities.YETI, TFEntities.ALPHA_YETI};
 	//man this is a pain
@@ -47,8 +50,12 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 			TFBlocks.TWILIGHT_OAK_BANISTER.get(), TFBlocks.CANOPY_BANISTER.get(), TFBlocks.MANGROVE_BANISTER.get(), TFBlocks.DARKWOOD_BANISTER.get(), TFBlocks.TIME_BANISTER.get(), TFBlocks.TRANSFORMATION_BANISTER.get(), TFBlocks.MINING_BANISTER.get(), TFBlocks.SORTING_BANISTER.get()
 	};
 
+	public AdvancementGenerator(DataGenerator generatorIn, ExistingFileHelper fileHelperIn) {
+		super(generatorIn, fileHelperIn);
+	}
+
 	@Override
-	public void accept(Consumer<Advancement> consumer) {
+	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
 		Advancement root = Advancement.Builder.advancement().display(
 				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get(),
 				new TranslatableComponent("itemGroup.twilightforest"),
@@ -81,6 +88,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent(TFItems.NAGA_SCALE.get().getDescriptionId())),
 				null, FrameType.GOAL, true, true, false)
 				.addCriterion("naga", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.NAGA)))
+				.addCriterion("trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TFBlocks.NAGA_TROPHY.get()))
 				.addCriterion("scale", InventoryChangeTrigger.TriggerInstance.hasItems(TFItems.NAGA_SCALE.get()))
 				.addCriterion("was_in_fight", HurtBossTrigger.Instance.hurtBoss(EntityPredicate.Builder.entity().of(TFEntities.NAGA)))
 				.requirements(RequirementsStrategy.OR)
@@ -344,7 +352,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.hill1"),
 						new TranslatableComponent("advancement.twilightforest.hill1.desc",
 								new TranslatableComponent(TFEntities.REDCAP.getDescriptionId()),
-								new TranslatableComponent("structure.hollow_hill")),
+								new TranslatableComponent("structure.small_hollow_hill")),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("redcap", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.REDCAP).located(LocationPredicate.inFeature(TFStructures.HOLLOW_HILL_SMALL))))
 				.save(consumer, "twilightforest:hill1");
@@ -354,7 +362,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.hill2"),
 						new TranslatableComponent("advancement.twilightforest.hill2.desc",
 								new TranslatableComponent(TFEntities.REDCAP_SAPPER.getDescriptionId()),
-								new TranslatableComponent("structure.hollow_hill")),
+								new TranslatableComponent("structure.medium_hollow_hill")),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("redcap", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.REDCAP_SAPPER).located(LocationPredicate.inFeature(TFStructures.HOLLOW_HILL_MEDIUM))))
 				.save(consumer, "twilightforest:hill2");
@@ -364,7 +372,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 						new TranslatableComponent("advancement.twilightforest.hill3"),
 						new TranslatableComponent("advancement.twilightforest.hill3.desc",
 								new TranslatableComponent(TFEntities.WRAITH.getDescriptionId()),
-								new TranslatableComponent("structure.hollow_hill")),
+								new TranslatableComponent("structure.large_hollow_hill")),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("redcap", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(TFEntities.WRAITH).located(LocationPredicate.inFeature(TFStructures.HOLLOW_HILL_LARGE))))
 				.save(consumer, "twilightforest:hill3");
