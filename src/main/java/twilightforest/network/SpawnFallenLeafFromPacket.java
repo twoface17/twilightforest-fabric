@@ -7,13 +7,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import twilightforest.client.particle.data.LeafParticleData;
+import twilightforest.lib.BasePacket;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class SpawnFallenLeafFromPacket {
+public class SpawnFallenLeafFromPacket implements BasePacket<SpawnFallenLeafFromPacket> {
 
 	private final BlockPos pos;
 	private final Vec3 motion;
@@ -28,6 +28,7 @@ public class SpawnFallenLeafFromPacket {
 		this.motion = motion;
 	}
 
+	@Override
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeBlockPos(pos);
 		buf.writeDouble(motion.x);
@@ -35,8 +36,13 @@ public class SpawnFallenLeafFromPacket {
 		buf.writeDouble(motion.z);
 	}
 
+	@Override
+	public void handle(SpawnFallenLeafFromPacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
-		public static boolean onMessage(SpawnFallenLeafFromPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(SpawnFallenLeafFromPacket message, Supplier<BasePacket.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

@@ -3,6 +3,7 @@ package twilightforest.world.components.chunkgenerators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.util.Mth;
 import net.minecraft.util.random.WeightedRandomList;
@@ -18,8 +19,8 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.synth.SurfaceNoise;
-import net.minecraftforge.common.world.StructureSpawnManager;
 import twilightforest.block.TFBlocks;
+import twilightforest.lib.util.StructureSpawnManager;
 import twilightforest.util.IntPair;
 import twilightforest.world.components.structures.start.TFStructureStart;
 import twilightforest.world.registration.TFDimensions;
@@ -343,7 +344,7 @@ public class ChunkGeneratorTwilight extends ChunkGeneratorWrapper {
 					for (int bz = -1; bz <= 1; bz++) {
 						BlockPos p = blockpos.offset((dX + bx) << 2, 0, (dZ + bz) << 2);
 						Biome biome = biomeSource.getNoiseBiome(p.getX() >> 2, 0, p.getZ() >> 2);
-						if (BiomeKeys.DARK_FOREST.location().equals(biome.getRegistryName()) || BiomeKeys.DARK_FOREST_CENTER.location().equals(biome.getRegistryName())) {
+						if (BiomeKeys.DARK_FOREST.location().equals(primer.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(biome)) || BiomeKeys.DARK_FOREST_CENTER.location().equals(primer.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(biome))) {
 							thicks[dX + dZ * 5]++;
 							biomeFound = true;
 						}

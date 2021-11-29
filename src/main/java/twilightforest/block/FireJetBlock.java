@@ -21,11 +21,12 @@ import twilightforest.data.FluidTagGenerator;
 import twilightforest.enums.FireJetVariant;
 import twilightforest.block.entity.FireJetBlockEntity;
 import twilightforest.block.entity.TFBlockEntities;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class FireJetBlock extends BaseEntityBlock {
+public class FireJetBlock extends BaseEntityBlock implements IBlockMethods {
 
 	public static final EnumProperty<FireJetVariant> STATE = EnumProperty.create("state", FireJetVariant.class);
 

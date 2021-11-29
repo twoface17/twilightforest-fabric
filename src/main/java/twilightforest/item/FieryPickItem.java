@@ -17,11 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import twilightforest.lib.loot.GlobalLootModifierSerializer;
+import twilightforest.lib.loot.LootModifier;
+import twilightforest.lib.util.ItemUtil;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class FieryPickItem extends PickaxeItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flags) {
 		super.appendHoverText(stack, world, tooltip, flags);
 		tooltip.add(new TranslatableComponent(getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
@@ -72,7 +72,7 @@ public class FieryPickItem extends PickaxeItem {
 							.getRecipeFor(RecipeType.SMELTING, new SimpleContainer(stack), context.getLevel())
 							.map(SmeltingRecipe::getResultItem)
 							.filter(itemStack -> !itemStack.isEmpty())
-							.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack, stack.getCount() * itemStack.getCount()))
+							.map(itemStack -> ItemUtil.copyStackWithSize(itemStack, stack.getCount() * itemStack.getCount()))
 							.orElse(stack)));
 			return newLoot;
 		}

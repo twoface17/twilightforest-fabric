@@ -6,8 +6,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import twilightforest.entity.projectile.IceArrow;
+import twilightforest.lib.extensions.IBowItemEx;
 
-public class IceBowItem extends BowItem {
+public class IceBowItem extends BowItem implements IBowItemEx {
 
 	public IceBowItem(Properties props) {
 		super(props);

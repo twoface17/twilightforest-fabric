@@ -26,10 +26,11 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import twilightforest.TFSounds;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.block.entity.TomeSpawnerBlockEntity;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 
-public class TomeSpawnerBlock extends BaseEntityBlock {
+public class TomeSpawnerBlock extends BaseEntityBlock implements IBlockMethods {
 
 	public static IntegerProperty BOOK_STAGES = IntegerProperty.create("book_stages", 1, 10);
 	public static BooleanProperty SPAWNER = BooleanProperty.create("spawner");
@@ -52,7 +53,7 @@ public class TomeSpawnerBlock extends BaseEntityBlock {
 			}
 			world.destroyBlock(pos, false);
 		}
-		super.catchFire(state, world, pos, face, igniter);
+		((IBlockMethods)this).catchFire(state, world, pos, face, igniter);
 	}
 
 	@Override

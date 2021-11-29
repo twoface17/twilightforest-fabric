@@ -30,15 +30,16 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.item.HollowLogItem;
+import twilightforest.lib.RegistryObject;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.DirectionUtil;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class HollowLogVertical extends Block implements SimpleWaterloggedBlock {
+public class HollowLogVertical extends Block implements SimpleWaterloggedBlock, IBlockMethods {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final VoxelShape HOLLOW_SHAPE = Shapes.join(Shapes.block(), Block.box(2, 0, 2, 14, 16, 14), BooleanOp.ONLY_FIRST);

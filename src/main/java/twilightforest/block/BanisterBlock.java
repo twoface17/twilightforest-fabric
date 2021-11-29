@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -31,14 +32,16 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
+
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.enums.BanisterShape;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BanisterBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class BanisterBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, IBlockMethods {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<BanisterShape> SHAPE = EnumProperty.create("shape", BanisterShape.class);
     public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
@@ -112,7 +115,7 @@ public class BanisterBlock extends HorizontalDirectionalBlock implements SimpleW
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack held = player.getItemInHand(hand);
 
-        if (held.canPerformAction(ToolActions.AXE_WAX_OFF)) {
+        if (FabricToolTags.AXES.contains(held.getItem())) {
             BlockState newState = state.cycle(SHAPE);
 
             // If we reach BanisterShape.TALL it means we went a full cycle, so we'll also cycle the extension

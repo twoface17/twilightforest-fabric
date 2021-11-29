@@ -7,8 +7,9 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import twilightforest.TFConfig;
+import twilightforest.lib.extensions.IBlockMethods;
 
-public class TFLeavesBlock extends LeavesBlock {
+public class TFLeavesBlock extends LeavesBlock implements IBlockMethods {
 	protected TFLeavesBlock(BlockBehaviour.Properties props) {
 		super(props);
 	}

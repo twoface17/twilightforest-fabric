@@ -11,11 +11,17 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.PlantType;
+
+import twilightforest.lib.block.IPlantable;
+import twilightforest.lib.block.IPlantable.PlantType;
+import twilightforest.lib.extensions.IBlockMethods;
+import twilightforest.lib.extensions.IBlockStateEx;
 
 import java.util.Random;
 
-public abstract class TFPlantBlock extends BushBlock implements BonemealableBlock {
+public abstract class TFPlantBlock extends BushBlock implements BonemealableBlock, IBlockMethods, IPlantable {
+
+	protected Random RANDOM = new Random();
 
 	protected TFPlantBlock(BlockBehaviour.Properties props) {
 		super(props);
@@ -24,7 +30,7 @@ public abstract class TFPlantBlock extends BushBlock implements BonemealableBloc
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		BlockState soil = world.getBlockState(pos.below());
-		return (world.getMaxLocalRawBrightness(pos) >= 3 || world.canSeeSkyFromBelowWater(pos)) && soil.canSustainPlant(world, pos.below(), Direction.UP, this);
+		return (world.getMaxLocalRawBrightness(pos) >= 3 || world.canSeeSkyFromBelowWater(pos)) && IBlockStateEx.cast(soil).canSustainPlant(world, pos.below(), Direction.UP, this);
 	}
 
 	public static boolean canPlaceRootAt(LevelReader world, BlockPos pos) {

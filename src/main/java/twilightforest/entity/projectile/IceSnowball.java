@@ -12,12 +12,12 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.entity.TFEntities;
 import twilightforest.util.TFDamageSources;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+@Environment(value = EnvType.CLIENT)
 public class IceSnowball extends TFThrowable implements ItemSupplier {
 
 	private static final int DAMAGE = 2;
@@ -57,7 +57,7 @@ public class IceSnowball extends TFThrowable implements ItemSupplier {
 		return true;
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@Override
 	public void handleEntityEvent(byte id) {
 		if (id == 3) {
@@ -77,8 +77,9 @@ public class IceSnowball extends TFThrowable implements ItemSupplier {
 				target.hurt(TFDamageSources.snowballFight(this, (LivingEntity) this.getOwner()), DAMAGE);
 				//damage armor pieces
 				if(target instanceof Player) {
-					for(ItemStack stack : target.getArmorSlots())
-					stack.hurtAndBreak(random.nextInt(1), ((Player)target), (user) -> user.broadcastBreakEvent(stack.getEquipmentSlot()));
+					// TODO: PORT
+//					for(ItemStack stack : target.getArmorSlots())
+//					stack.hurtAndBreak(random.nextInt(1), ((Player)target), (user) -> user.broadcastBreakEvent(stack.getEquipmentSlot()));
 				}
 			}
 		}

@@ -21,10 +21,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import twilightforest.TFSounds;
 import twilightforest.block.TFBlocks;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nonnull;
 
-public class LampOfCindersItem extends Item {
+public class LampOfCindersItem extends Item implements IItemEx {
 	private static final int FIRING_TIME = 12;
 
 	LampOfCindersItem(Properties props) {
@@ -95,7 +96,7 @@ public class LampOfCindersItem extends Item {
 	public void releaseUsing(ItemStack stack, Level world, LivingEntity living, int useRemaining) {
 		int useTime = this.getUseDuration(stack) - useRemaining;
 
-		if (useTime > FIRING_TIME && (stack.getDamageValue() + 1) < this.getMaxDamage(stack)) {
+		if (useTime > FIRING_TIME && (stack.getDamageValue() + 1) < this.getMaxDamage(/*stack*/)) {
 			doBurnEffect(world, living);
 		}
 	}

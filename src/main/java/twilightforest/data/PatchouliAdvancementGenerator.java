@@ -3,6 +3,7 @@ package twilightforest.data;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -691,13 +692,13 @@ public class PatchouliAdvancementGenerator implements Consumer<Consumer<Advancem
 				.addCriterion("summon", SummonedEntityTrigger.TriggerInstance.summonedEntity(EntityPredicate.Builder.entity().of(entity)))
 				.addCriterion("tame", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(entity).build()))
 				.requirements(RequirementsStrategy.OR)
-				.save(consumer, "twilightforest:alt/entities/" + entity.getRegistryName().getPath());
+				.save(consumer, "twilightforest:alt/entities/" + Registry.ENTITY_TYPE.getKey(entity).getPath());
 	}
 
 	private void landmarkAdvancement(StructureFeature<?> structure, Consumer<Advancement> consumer, Advancement root) {
 		Advancement.Builder.advancement().parent(root)
 				.addCriterion("found_structure", LocationTrigger.TriggerInstance.located(LocationPredicate.inFeature(structure)))
-				.save(consumer, "twilightforest:alt/major_landmarks/" + structure.getRegistryName().getPath());
+				.save(consumer, "twilightforest:alt/major_landmarks/" + Registry.STRUCTURE_FEATURE.getKey(structure).getPath());
 	}
 
 	private void minorKeyBiomes(Consumer<Advancement> consumer, Advancement root) {

@@ -8,6 +8,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
+
+import twilightforest.lib.extensions.IBlockMethods;
+import twilightforest.lib.util.WorldUtil;
 import twilightforest.util.FeatureLogic;
 import twilightforest.util.FeaturePlacers;
 import twilightforest.util.FeatureUtil;
@@ -49,7 +52,7 @@ public class TFGenCanopyTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 		}
 
 		BlockState state = world.getBlockState(pos.below());
-		if (!state.getBlock().canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
 			return false;
 		}
 
@@ -102,7 +105,7 @@ public class TFGenCanopyTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 		BlockPos dest = FeatureLogic.translate(src, length, angle, tilt);
 
 		// only actually draw the branch if it's not going to load new chunks
-		if (world.isAreaLoaded(dest, 5)) {
+		if (WorldUtil.isAreaLoaded(world, dest, 5)) {
 
 			if (trunk) {
 				FeaturePlacers.drawBresenhamTree(world, trunkPlacer, FeaturePlacers.VALID_TREE_POS, src, dest, config.trunkProvider, treeRNG);

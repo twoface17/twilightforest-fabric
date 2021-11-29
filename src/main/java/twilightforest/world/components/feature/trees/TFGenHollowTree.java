@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import twilightforest.entity.TFEntities;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.loot.TFTreasure;
 import twilightforest.block.TFBlocks;
 import twilightforest.util.FeatureLogic;
@@ -85,7 +86,7 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 
 		// check if we're on dirt or grass
 		BlockState state = world.getBlockState(pos.below());
-		if (!state.getBlock().canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
 			return false;
 		}
 

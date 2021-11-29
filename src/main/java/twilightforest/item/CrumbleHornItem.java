@@ -15,19 +15,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.world.BlockEvent;
+
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import org.apache.commons.lang3.tuple.Pair;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
+import twilightforest.lib.extensions.IBlockMethods;
+import twilightforest.lib.extensions.IItemEx;
 import twilightforest.util.TFStats;
 import twilightforest.util.WorldUtil;
 
@@ -37,7 +39,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-public class CrumbleHornItem extends Item {
+public class CrumbleHornItem extends Item implements IItemEx {
 
 	private static final int CHANCE_HARVEST = 20;
 	private static final int CHANCE_CRUMBLE = 5;
@@ -185,8 +187,8 @@ public class CrumbleHornItem extends Item {
 
 		if (state.isAir()) return false;
 
-		if(living instanceof Player) {
-			if (MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(world, pos, state, (Player)living))) return false;
+		if(living instanceof Player player) {
+			return PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(world, player, pos, state, null);
 		}
 
 		for (Pair<Predicate<BlockState>, UnaryOperator<BlockState>> transform : crumbleTransforms) {
@@ -203,7 +205,7 @@ public class CrumbleHornItem extends Item {
 		for (Predicate<BlockState> predicate : harvestedStates) {
 			if (predicate.test(state) && world.random.nextInt(CHANCE_HARVEST) == 0) {
 				if (living instanceof Player) {
-					if (block.canHarvestBlock(state, world, pos, (Player) living)) {
+					if (IBlockMethods.cast(block).canHarvestBlock(state, world, pos, (Player) living)) {
 						world.removeBlock(pos, false);
 						block.playerDestroy(world, (Player) living, pos, state, world.getBlockEntity(pos), ItemStack.EMPTY);
 						world.levelEvent(2001, pos, Block.getId(state));
@@ -212,7 +214,7 @@ public class CrumbleHornItem extends Item {
 
 						return true;
 					}
-				} else if (ForgeEventFactory.getMobGriefingEvent(world, living)) {
+				} else if (world.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 					world.destroyBlock(pos, true);
 
 					postTrigger(living);

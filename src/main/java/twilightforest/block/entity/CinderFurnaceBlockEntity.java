@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraftforge.common.Tags;
+import twilightforest.lib.data.Tags;
 import twilightforest.block.CinderFurnaceBlock;
 import twilightforest.block.TFBlocks;
 
@@ -58,10 +58,11 @@ public class CinderFurnaceBlockEntity extends FurnaceBlockEntity {
 							Item item = itemstack.getItem();
 							itemstack.shrink(1);
 
-							if (itemstack.isEmpty()) {
-								ItemStack item1 = item.getContainerItem(itemstack);
-								te.items.set(1, item1);
-							}
+							// TODO: PORT
+//							if (itemstack.isEmpty()) {
+//								ItemStack item1 = item.getContainerItem(itemstack);
+//								te.items.set(1, item1);
+//							}
 						}
 					}
 				}

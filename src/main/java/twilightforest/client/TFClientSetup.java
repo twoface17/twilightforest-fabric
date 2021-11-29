@@ -1,59 +1,89 @@
 package twilightforest.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.world.level.block.state.properties.WoodType;
+
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
+import twilightforest.client.model.TFLayerDefinitions;
+import twilightforest.client.model.TFModelLayers;
+import twilightforest.client.particle.TFParticleType;
 import twilightforest.client.renderer.entity.IceLayer;
 import twilightforest.client.renderer.entity.ShieldLayer;
+import twilightforest.entity.TFEntities;
 import twilightforest.inventory.TFContainers;
 import twilightforest.item.TFItems;
 import twilightforest.block.entity.TFBlockEntities;
+import twilightforest.lib.events.EntityAddedLayerCallback;
+import twilightforest.lib.events.EntityViewEvents;
+import twilightforest.lib.events.OnTextureStitchCallback;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = TwilightForestMod.ID)
-public class TFClientSetup {
+public class TFClientSetup implements ClientModInitializer {
 
 	public static boolean optifinePresent = false;
 
-	@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE, modid = TwilightForestMod.ID)
+	@Override
+	public void onInitializeClient() {
+		clientSetup();
+
+		TFClientEvents.ModBusEvents.registerModels();
+		TFParticleType.registerFactories();
+		TFLayerDefinitions.registerLayers();
+		TFModelLayers.init();
+		TFEntities.registerEntityRenderer();
+		//Fabric events
+		//EntityAddedLayerCallback.EVENT.register(this::attachRenderLayers);
+		ClientTickEvents.END_WORLD_TICK.register(LockedBiomeListener::clientTick);
+		OnTextureStitchCallback.PRE.register(TFClientEvents.ModBusEvents::texStitch);
+		WorldRenderEvents.END.register(TFClientEvents::renderWorldLast);
+		ClientTickEvents.END_CLIENT_TICK.register(TFClientEvents::clientTick);
+		ItemTooltipCallback.EVENT.register(TFClientEvents::tooltipEvent);
+		ScreenEvents.AFTER_INIT.register(ForgeEvents::showOptifineWarning);
+		EntityViewEvents.FOG_COLORS.register(FogHandler::fogColors);
+		EntityViewEvents.FOG_RENDER.register(FogHandler::fog);
+	}
+
 	public static class ForgeEvents {
 
 		private static boolean optifineWarningShown = false;
 
-		@SubscribeEvent
-		public static void showOptifineWarning(GuiScreenEvent.InitGuiEvent.Post event) {
-			if (optifinePresent && !optifineWarningShown && !TFConfig.CLIENT_CONFIG.disableOptifineNagScreen.get() && event.getGui() instanceof TitleScreen) {
+		public static void showOptifineWarning(Minecraft client, Screen screen, int scaledWidth, int scaledHeight) {
+			if (optifinePresent && !optifineWarningShown && !TFConfig.CLIENT_CONFIG.disableOptifineNagScreen.get() && screen instanceof TitleScreen) {
 				optifineWarningShown = true;
-				Minecraft.getInstance().setScreen(new OptifineWarningScreen(event.getGui()));
+				Minecraft.getInstance().setScreen(new OptifineWarningScreen(screen));
 			}
 		}
 
 	}
 
-    @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent evt) {
+	private static void registerWoodType(WoodType woodType) {
+		Sheets.SIGN_MATERIALS.put(woodType, Sheets.createSignMaterial(woodType));
+	}
+
+    public static void clientSetup() {
 		try {
 			Class.forName("net.optifine.Config");
 			optifinePresent = true;
@@ -62,7 +92,7 @@ public class TFClientSetup {
 		}
 		TFItems.addItemModelProperties();
 
-        MinecraftForge.EVENT_BUS.register(new LoadingScreenListener());
+		ScreenEvents.BEFORE_INIT.register(LoadingScreenListener::onOpenGui);
         RenderLayerRegistration.init();
         TFBlockEntities.registerTileEntityRenders();
         TFContainers.renderScreens();
@@ -70,43 +100,28 @@ public class TFClientSetup {
         TwilightForestRenderInfo renderInfo = new TwilightForestRenderInfo(128.0F, false, DimensionSpecialEffects.SkyType.NONE, false, false);
         DimensionSpecialEffects.EFFECTS.put(TwilightForestMod.prefix("renderer"), renderInfo);
 
-        evt.enqueueWork(() -> {
-            Sheets.addWoodType(TFBlocks.TWILIGHT_OAK);
-            Sheets.addWoodType(TFBlocks.CANOPY);
-            Sheets.addWoodType(TFBlocks.MANGROVE);
-            Sheets.addWoodType(TFBlocks.DARKWOOD);
-            Sheets.addWoodType(TFBlocks.TIMEWOOD);
-            Sheets.addWoodType(TFBlocks.TRANSFORMATION);
-            Sheets.addWoodType(TFBlocks.MINING);
-            Sheets.addWoodType(TFBlocks.SORTING);
-        });
-       
+//        evt.enqueueWork(() -> {
+            registerWoodType(TFBlocks.TWILIGHT_OAK);
+            registerWoodType(TFBlocks.CANOPY);
+            registerWoodType(TFBlocks.MANGROVE);
+            registerWoodType(TFBlocks.DARKWOOD);
+            registerWoodType(TFBlocks.TIMEWOOD);
+            registerWoodType(TFBlocks.TRANSFORMATION);
+            registerWoodType(TFBlocks.MINING);
+            registerWoodType(TFBlocks.SORTING);
+//        });
+
     }
 
-	private static Field field_EntityRenderersEvent$AddLayers_renderers;
-
-	@SubscribeEvent
 	@SuppressWarnings("unchecked")
-	public static void attachRenderLayers(EntityRenderersEvent.AddLayers event) {
-		if (field_EntityRenderersEvent$AddLayers_renderers == null) {
-			try {
-				field_EntityRenderersEvent$AddLayers_renderers = EntityRenderersEvent.AddLayers.class.getDeclaredField("renderers");
-				field_EntityRenderersEvent$AddLayers_renderers.setAccessible(true);
-			} catch (NoSuchFieldException e) {
-				e.printStackTrace();
-			}
-		}
-		if (field_EntityRenderersEvent$AddLayers_renderers != null) {
-			event.getSkins().forEach(renderer -> {
-				LivingEntityRenderer<Player, EntityModel<Player>> skin = event.getSkin(renderer);
+	public void attachRenderLayers(final Map<EntityType<?>, EntityRenderer<?>> renderers, final Map<String, EntityRenderer<? extends Player>> skinMap) {
+		if (renderers != null) {
+			skinMap.keySet().forEach(renderer -> {
+				LivingEntityRenderer<Player, EntityModel<Player>> skin = (LivingEntityRenderer<Player, EntityModel<Player>>) skinMap.get(renderer);
 				attachRenderLayers(Objects.requireNonNull(skin));
 			});
-			try {
-				((Map<EntityType<?>, EntityRenderer<?>>) field_EntityRenderersEvent$AddLayers_renderers.get(event)).values().stream().
-						filter(LivingEntityRenderer.class::isInstance).map(LivingEntityRenderer.class::cast).forEach(TFClientSetup::attachRenderLayers);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
+			skinMap.values().stream().
+					filter(LivingEntityRenderer.class::isInstance).map(LivingEntityRenderer.class::cast).forEach(TFClientSetup::attachRenderLayers);
 		}
 	}
 

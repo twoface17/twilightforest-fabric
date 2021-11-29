@@ -29,11 +29,12 @@ import twilightforest.TFSounds;
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFEntities;
 import twilightforest.entity.projectile.MoonwormShot;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class MoonwormQueenItem extends Item {
+public class MoonwormQueenItem extends Item implements IItemEx {
 
 	protected static final int FIRING_TIME = 12;
 
@@ -84,7 +85,7 @@ public class MoonwormQueenItem extends Item {
 
 		if (itemstack.getDamageValue() < itemstack.getMaxDamage() && player.mayUseItemAt(pos, context.getClickedFace(), itemstack) && worldIn.isUnobstructed(TFBlocks.MOONWORM.get().defaultBlockState(), pos, CollisionContext.empty())) {
 			if (this.tryPlace(blockItemUseContext).shouldSwing()) {
-				SoundType soundtype = worldIn.getBlockState(pos).getBlock().getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
+				SoundType soundtype = worldIn.getBlockState(pos).getBlock().getSoundType(worldIn.getBlockState(pos)/*, worldIn, pos, player*/);
 				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 				// TF - damage stack instead of shrinking
 				player.stopUsingItem();
@@ -154,7 +155,7 @@ public class MoonwormQueenItem extends Item {
 						}
 					}
 
-					SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
+					SoundType soundtype = blockstate1.getSoundType(/*world, blockpos, context.getPlayer()*/);
 					world.playSound(playerentity, blockpos, this.getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 					if (playerentity == null || !playerentity.getAbilities().instabuild) {
 						itemstack.hurtAndBreak(1, playerentity, (user) -> user.broadcastBreakEvent(playerentity.getUsedItemHand()));
@@ -167,7 +168,7 @@ public class MoonwormQueenItem extends Item {
 	}
 
 	protected SoundEvent getPlaceSound(BlockState state, Level world, BlockPos pos, Player entity) {
-		return state.getSoundType(world, pos, entity).getPlaceSound();
+		return state.getSoundType(/*world, pos, entity*/).getPlaceSound();
 	}
 
 	@Nullable

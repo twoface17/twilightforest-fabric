@@ -1,20 +1,21 @@
 package twilightforest.block;
 
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.core.Direction;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.compat.TFCompat;
 import twilightforest.enums.*;
 import twilightforest.item.TFItems;
+import twilightforest.lib.Register;
+import twilightforest.lib.RegistryObject;
+import twilightforest.lib.TFRegistry;
 import twilightforest.world.components.feature.trees.growers.*;
 
 import javax.annotation.Nonnull;
@@ -24,9 +25,8 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 @SuppressWarnings({"WeakerAccess", "unused", "deprecation"})
 @Nonnull
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TFBlocks {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TwilightForestMod.ID);
+	public static final TFRegistry<Block> BLOCKS = TFRegistry.create(Registry.BLOCK, TwilightForestMod.ID);
 
 	public static final RegistryObject<TFPortalBlock> TWILIGHT_PORTAL = BLOCKS.register("twilight_portal", () -> new TFPortalBlock(BlockBehaviour.Properties.of(Material.PORTAL).strength(-1.0F).sound(SoundType.GLASS).lightLevel((state) -> 11).noCollission().noOcclusion().noDrops()));
 
@@ -265,14 +265,14 @@ public class TFBlocks {
 	public static final RegistryObject<BanisterBlock> CRIMSON_BANISTER = BLOCKS.register("crimson_banister", () -> new BanisterBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS)));
 	public static final RegistryObject<BanisterBlock> WARPED_BANISTER = BLOCKS.register("warped_banister", () -> new BanisterBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_PLANKS)));
 
-	public static final WoodType TWILIGHT_OAK = WoodType.create("twilight_oak");
-	public static final WoodType CANOPY = WoodType.create("canopy");
-	public static final WoodType MANGROVE = WoodType.create("mangrove");
-	public static final WoodType DARKWOOD = WoodType.create("darkwood");
-	public static final WoodType TIMEWOOD = WoodType.create("timewood");
-	public static final WoodType TRANSFORMATION = WoodType.create("transformation");
-	public static final WoodType MINING = WoodType.create("mining");
-	public static final WoodType SORTING = WoodType.create("sorting");
+	public static final WoodType TWILIGHT_OAK = WoodType.register(new WoodType("twilight_oak"));
+	public static final WoodType CANOPY = WoodType.register(new WoodType("canopy"));
+	public static final WoodType MANGROVE = WoodType.register(new WoodType("mangrove"));
+	public static final WoodType DARKWOOD = WoodType.register(new WoodType("darkwood"));
+	public static final WoodType TIMEWOOD = WoodType.register(new WoodType("timewood"));
+	public static final WoodType TRANSFORMATION = WoodType.register(new WoodType("transformation"));
+	public static final WoodType MINING = WoodType.register(new WoodType("mining"));
+	public static final WoodType SORTING = WoodType.register(new WoodType("sorting"));
 
 	public static final BlockBehaviour.Properties TWILIGHT_OAK_LOG_PROPS = logProperties(MaterialColor.WOOD, MaterialColor.PODZOL).strength(2.0F).sound(SoundType.WOOD);
 	public static final BlockBehaviour.Properties CANOPY_LOG_PROPS = logProperties(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN).strength(2.0F).sound(SoundType.WOOD);
@@ -529,25 +529,24 @@ public class TFBlocks {
 	public static final RegistryObject<TwilightChest> SORTING_CHEST = BLOCKS.register("sorting_chest", () -> new TwilightChest(BlockBehaviour.Properties.copy(SORTING_PLANKS.get()).strength(2.5F)));
 
 	//Flower Pots
-	public static final RegistryObject<FlowerPotBlock> POTTED_TWILIGHT_OAK_SAPLING = BLOCKS.register("potted_twilight_oak_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, TWILIGHT_OAK_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_CANOPY_SAPLING = BLOCKS.register("potted_canopy_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CANOPY_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_MANGROVE_SAPLING = BLOCKS.register("potted_mangrove_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MANGROVE_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_DARKWOOD_SAPLING = BLOCKS.register("potted_darkwood_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DARKWOOD_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_HOLLOW_OAK_SAPLING = BLOCKS.register("potted_hollow_oak_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HOLLOW_OAK_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_RAINBOW_OAK_SAPLING = BLOCKS.register("potted_rainbow_oak_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, RAINBOW_OAK_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_TIME_SAPLING = BLOCKS.register("potted_time_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, TIME_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_TRANSFORMATION_SAPLING = BLOCKS.register("potted_transformation_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, TRANSFORMATION_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_MINING_SAPLING = BLOCKS.register("potted_mining_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MINING_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_SORTING_SAPLING = BLOCKS.register("potted_sorting_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SORTING_SAPLING, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_MAYAPPLE = BLOCKS.register("potted_mayapple", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MAYAPPLE, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_FIDDLEHEAD = BLOCKS.register("potted_fiddlehead", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, FIDDLEHEAD, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_MUSHGLOOM = BLOCKS.register("potted_mushgloom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MUSHGLOOM, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_THORN = BLOCKS.register("potted_thorn", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BROWN_THORNS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_GREEN_THORN = BLOCKS.register("potted_green_thorn", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, GREEN_THORNS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_DEAD_THORN = BLOCKS.register("potted_dead_thorn", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BURNT_THORNS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-
-	@SubscribeEvent
-	public static void registerItemblocks(RegistryEvent.Register<Item> evt) {
+	public static final RegistryObject<FlowerPotBlock> POTTED_TWILIGHT_OAK_SAPLING = BLOCKS.register("potted_twilight_oak_sapling", () -> new FlowerPotBlock(TWILIGHT_OAK_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_CANOPY_SAPLING = BLOCKS.register("potted_canopy_sapling", () -> new FlowerPotBlock(CANOPY_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_MANGROVE_SAPLING = BLOCKS.register("potted_mangrove_sapling", () -> new FlowerPotBlock(MANGROVE_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_DARKWOOD_SAPLING = BLOCKS.register("potted_darkwood_sapling", () -> new FlowerPotBlock(DARKWOOD_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_HOLLOW_OAK_SAPLING = BLOCKS.register("potted_hollow_oak_sapling", () -> new FlowerPotBlock(HOLLOW_OAK_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_RAINBOW_OAK_SAPLING = BLOCKS.register("potted_rainbow_oak_sapling", () -> new FlowerPotBlock(RAINBOW_OAK_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_TIME_SAPLING = BLOCKS.register("potted_time_sapling", () -> new FlowerPotBlock(TIME_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_TRANSFORMATION_SAPLING = BLOCKS.register("potted_transformation_sapling", () -> new FlowerPotBlock(TRANSFORMATION_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_MINING_SAPLING = BLOCKS.register("potted_mining_sapling", () -> new FlowerPotBlock(MINING_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_SORTING_SAPLING = BLOCKS.register("potted_sorting_sapling", () -> new FlowerPotBlock(SORTING_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_MAYAPPLE = BLOCKS.register("potted_mayapple", () -> new FlowerPotBlock(MAYAPPLE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_FIDDLEHEAD = BLOCKS.register("potted_fiddlehead", () -> new FlowerPotBlock(FIDDLEHEAD.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_MUSHGLOOM = BLOCKS.register("potted_mushgloom", () -> new FlowerPotBlock(MUSHGLOOM.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_THORN = BLOCKS.register("potted_thorn", () -> new FlowerPotBlock(BROWN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_GREEN_THORN = BLOCKS.register("potted_green_thorn", () -> new FlowerPotBlock(GREEN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_DEAD_THORN = BLOCKS.register("potted_dead_thorn", () -> new FlowerPotBlock(BURNT_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	
+	public static void registerItemblocks(Register<Item> evt) {
 		TFBlockItems.registerBlockItems(evt);
 		TFCompat.initCompatItems(evt);
 	}
@@ -559,57 +558,61 @@ public class TFBlocks {
 	private static BlockBehaviour.Properties logProperties(MaterialColor top, MaterialColor side) {
 		return BlockBehaviour.Properties.of(Material.WOOD, (state) -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? top : side);
 	}
+	
+	private static void registerCompostable(float chance, ItemLike item) {
+		CompostingChanceRegistry.INSTANCE.add(item, chance);
+	}
 
 	public static void tfCompostables() {
-		ComposterBlock.add(0.1F, FALLEN_LEAVES.get());
-		ComposterBlock.add(0.3F, CANOPY_LEAVES.get());
-		ComposterBlock.add(0.3F, CLOVER_PATCH.get());
-		ComposterBlock.add(0.3F, DARK_LEAVES.get());
-		ComposterBlock.add(0.3F, FIDDLEHEAD.get());
-		ComposterBlock.add(0.3F, HEDGE.get());
-		ComposterBlock.add(0.3F, MANGROVE_LEAVES.get());
-		ComposterBlock.add(0.3F, MAYAPPLE.get());
-		ComposterBlock.add(0.3F, MINING_LEAVES.get());
-		ComposterBlock.add(0.3F, TWILIGHT_OAK_LEAVES.get());
-		ComposterBlock.add(0.3F, RAINBOW_OAK_LEAVES.get());
-		ComposterBlock.add(0.3F, ROOT_STRAND.get());
-		ComposterBlock.add(0.3F, SORTING_LEAVES.get());
-		ComposterBlock.add(0.3F, THORN_LEAVES.get());
-		ComposterBlock.add(0.3F, TIME_LEAVES.get());
-		ComposterBlock.add(0.3F, TRANSFORMATION_LEAVES.get());
-		ComposterBlock.add(0.3F, TWILIGHT_OAK_SAPLING.get());
-		ComposterBlock.add(0.3F, CANOPY_SAPLING.get());
-		ComposterBlock.add(0.3F, MANGROVE_SAPLING.get());
-		ComposterBlock.add(0.3F, DARKWOOD_SAPLING.get());
-		ComposterBlock.add(0.3F, RAINBOW_OAK_SAPLING.get());
-		ComposterBlock.add(0.5F, BEANSTALK_LEAVES.get());
-		ComposterBlock.add(0.5F, MOSS_PATCH.get());
-		ComposterBlock.add(0.5F, ROOT_BLOCK.get());
-		ComposterBlock.add(0.5F, THORN_ROSE.get());
-		ComposterBlock.add(0.5F, TROLLVIDR.get());
-		ComposterBlock.add(0.5F, HOLLOW_OAK_SAPLING.get());
-		ComposterBlock.add(0.5F, TIME_SAPLING.get());
-		ComposterBlock.add(0.5F, TRANSFORMATION_SAPLING.get());
-		ComposterBlock.add(0.5F, MINING_SAPLING.get());
-		ComposterBlock.add(0.5F, SORTING_SAPLING.get());
-		ComposterBlock.add(0.5F, TORCHBERRY_PLANT.get());
-		ComposterBlock.add(0.65F, HUGE_MUSHGLOOM_STEM.get());
-		ComposterBlock.add(0.65F, HUGE_WATER_LILY.get());
-		ComposterBlock.add(0.65F, LIVEROOT_BLOCK.get());
-		ComposterBlock.add(0.65F, MUSHGLOOM.get());
-		ComposterBlock.add(0.65F, UBEROUS_SOIL.get());
-		ComposterBlock.add(0.65F, HUGE_STALK.get());
-		ComposterBlock.add(0.65F, UNRIPE_TROLLBER.get());
-		ComposterBlock.add(0.65F, TROLLBER.get());
-		ComposterBlock.add(0.85F, HUGE_LILY_PAD.get());
-		ComposterBlock.add(0.85F, HUGE_MUSHGLOOM.get());
+		registerCompostable(0.1F, FALLEN_LEAVES.get());
+		registerCompostable(0.3F, CANOPY_LEAVES.get());
+		registerCompostable(0.3F, CLOVER_PATCH.get());
+		registerCompostable(0.3F, DARK_LEAVES.get());
+		registerCompostable(0.3F, FIDDLEHEAD.get());
+		registerCompostable(0.3F, HEDGE.get());
+		registerCompostable(0.3F, MANGROVE_LEAVES.get());
+		registerCompostable(0.3F, MAYAPPLE.get());
+		registerCompostable(0.3F, MINING_LEAVES.get());
+		registerCompostable(0.3F, TWILIGHT_OAK_LEAVES.get());
+		registerCompostable(0.3F, RAINBOW_OAK_LEAVES.get());
+		registerCompostable(0.3F, ROOT_STRAND.get());
+		registerCompostable(0.3F, SORTING_LEAVES.get());
+		registerCompostable(0.3F, THORN_LEAVES.get());
+		registerCompostable(0.3F, TIME_LEAVES.get());
+		registerCompostable(0.3F, TRANSFORMATION_LEAVES.get());
+		registerCompostable(0.3F, TWILIGHT_OAK_SAPLING.get());
+		registerCompostable(0.3F, CANOPY_SAPLING.get());
+		registerCompostable(0.3F, MANGROVE_SAPLING.get());
+		registerCompostable(0.3F, DARKWOOD_SAPLING.get());
+		registerCompostable(0.3F, RAINBOW_OAK_SAPLING.get());
+		registerCompostable(0.5F, BEANSTALK_LEAVES.get());
+		registerCompostable(0.5F, MOSS_PATCH.get());
+		registerCompostable(0.5F, ROOT_BLOCK.get());
+		registerCompostable(0.5F, THORN_ROSE.get());
+		registerCompostable(0.5F, TROLLVIDR.get());
+		registerCompostable(0.5F, HOLLOW_OAK_SAPLING.get());
+		registerCompostable(0.5F, TIME_SAPLING.get());
+		registerCompostable(0.5F, TRANSFORMATION_SAPLING.get());
+		registerCompostable(0.5F, MINING_SAPLING.get());
+		registerCompostable(0.5F, SORTING_SAPLING.get());
+		registerCompostable(0.5F, TORCHBERRY_PLANT.get());
+		registerCompostable(0.65F, HUGE_MUSHGLOOM_STEM.get());
+		registerCompostable(0.65F, HUGE_WATER_LILY.get());
+		registerCompostable(0.65F, LIVEROOT_BLOCK.get());
+		registerCompostable(0.65F, MUSHGLOOM.get());
+		registerCompostable(0.65F, UBEROUS_SOIL.get());
+		registerCompostable(0.65F, HUGE_STALK.get());
+		registerCompostable(0.65F, UNRIPE_TROLLBER.get());
+		registerCompostable(0.65F, TROLLBER.get());
+		registerCompostable(0.85F, HUGE_LILY_PAD.get());
+		registerCompostable(0.85F, HUGE_MUSHGLOOM.get());
 
 		//eh, we'll do items here too
-		ComposterBlock.add(0.3F, TFItems.TORCHBERRIES.get());
-		ComposterBlock.add(0.5F, TFItems.LIVEROOT.get());
-		ComposterBlock.add(0.65F, TFItems.MAZE_WAFER.get());
-		ComposterBlock.add(0.85F, TFItems.EXPERIMENT_115.get());
-		ComposterBlock.add(0.85F, TFItems.MAGIC_BEANS.get());
+		registerCompostable(0.3F, TFItems.TORCHBERRIES.get());
+		registerCompostable(0.5F, TFItems.LIVEROOT.get());
+		registerCompostable(0.65F, TFItems.MAZE_WAFER.get());
+		registerCompostable(0.85F, TFItems.EXPERIMENT_115.get());
+		registerCompostable(0.85F, TFItems.MAGIC_BEANS.get());
 	}
 
 	public static void tfBurnables() {
@@ -674,21 +677,21 @@ public class TFBlocks {
 	public static void tfPots() {
 		FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
 
-		pot.addPlant(TWILIGHT_OAK_SAPLING.getId(), POTTED_TWILIGHT_OAK_SAPLING);
-		pot.addPlant(CANOPY_SAPLING.getId(), POTTED_CANOPY_SAPLING);
-		pot.addPlant(MANGROVE_SAPLING.getId(), POTTED_MANGROVE_SAPLING);
-		pot.addPlant(DARKWOOD_SAPLING.getId(), POTTED_DARKWOOD_SAPLING);
-		pot.addPlant(HOLLOW_OAK_SAPLING.getId(), POTTED_HOLLOW_OAK_SAPLING);
-		pot.addPlant(RAINBOW_OAK_SAPLING.getId(), POTTED_RAINBOW_OAK_SAPLING);
-		pot.addPlant(TIME_SAPLING.getId(), POTTED_TIME_SAPLING);
-		pot.addPlant(TRANSFORMATION_SAPLING.getId(), POTTED_TRANSFORMATION_SAPLING);
-		pot.addPlant(MINING_SAPLING.getId(), POTTED_MINING_SAPLING);
-		pot.addPlant(SORTING_SAPLING.getId(), POTTED_SORTING_SAPLING);
-		pot.addPlant(MAYAPPLE.getId(), POTTED_MAYAPPLE);
-		pot.addPlant(FIDDLEHEAD.getId(), POTTED_FIDDLEHEAD);
-		pot.addPlant(MUSHGLOOM.getId(), POTTED_MUSHGLOOM);
-		pot.addPlant(BROWN_THORNS.getId(), POTTED_THORN);
-		pot.addPlant(GREEN_THORNS.getId(), POTTED_GREEN_THORN);
-		pot.addPlant(BURNT_THORNS.getId(), POTTED_DEAD_THORN);
+//		pot.addPlant(TWILIGHT_OAK_SAPLING.getId(), POTTED_TWILIGHT_OAK_SAPLING);
+//		pot.addPlant(CANOPY_SAPLING.getId(), POTTED_CANOPY_SAPLING);
+//		pot.addPlant(MANGROVE_SAPLING.getId(), POTTED_MANGROVE_SAPLING);
+//		pot.addPlant(DARKWOOD_SAPLING.getId(), POTTED_DARKWOOD_SAPLING);
+//		pot.addPlant(HOLLOW_OAK_SAPLING.getId(), POTTED_HOLLOW_OAK_SAPLING);
+//		pot.addPlant(RAINBOW_OAK_SAPLING.getId(), POTTED_RAINBOW_OAK_SAPLING);
+//		pot.addPlant(TIME_SAPLING.getId(), POTTED_TIME_SAPLING);
+//		pot.addPlant(TRANSFORMATION_SAPLING.getId(), POTTED_TRANSFORMATION_SAPLING);
+//		pot.addPlant(MINING_SAPLING.getId(), POTTED_MINING_SAPLING);
+//		pot.addPlant(SORTING_SAPLING.getId(), POTTED_SORTING_SAPLING);
+//		pot.addPlant(MAYAPPLE.getId(), POTTED_MAYAPPLE);
+//		pot.addPlant(FIDDLEHEAD.getId(), POTTED_FIDDLEHEAD);
+//		pot.addPlant(MUSHGLOOM.getId(), POTTED_MUSHGLOOM);
+//		pot.addPlant(BROWN_THORNS.getId(), POTTED_THORN);
+//		pot.addPlant(GREEN_THORNS.getId(), POTTED_GREEN_THORN);
+//		pot.addPlant(BURNT_THORNS.getId(), POTTED_DEAD_THORN);
 	}
 }

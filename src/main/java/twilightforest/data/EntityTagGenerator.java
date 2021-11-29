@@ -5,19 +5,20 @@ import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
+
+import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFEntities;
 
 import javax.annotation.Nullable;
 
 public class EntityTagGenerator extends EntityTypeTagsProvider {
-    public static final Tag.Named<EntityType<?>> BOSSES = EntityTypeTags.bind(TwilightForestMod.prefix("bosses").toString());
-    public static final Tag.Named<EntityType<?>> LICH_POPPABLES = EntityTypeTags.bind(TwilightForestMod.prefix("lich_poppables").toString());
-    public static final Tag.Named<EntityType<?>> RIDES_OBSTRUCT_SNATCHING = EntityTypeTags.bind(TwilightForestMod.prefix("rides_obstruct_snatching").toString());
+    public static final Tag.Named<EntityType<?>> BOSSES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("bosses"));
+    public static final Tag.Named<EntityType<?>> LICH_POPPABLES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("lich_poppables"));
+    public static final Tag.Named<EntityType<?>> RIDES_OBSTRUCT_SNATCHING = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("rides_obstruct_snatching"));
 
-    public EntityTagGenerator(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(dataGenerator, TwilightForestMod.ID, existingFileHelper);
+    public EntityTagGenerator(DataGenerator dataGenerator) {
+        super(dataGenerator);
     }
 
     @Override

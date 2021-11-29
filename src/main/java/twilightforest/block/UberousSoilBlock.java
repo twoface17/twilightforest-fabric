@@ -17,14 +17,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
+import twilightforest.lib.block.IPlantable;
+import twilightforest.lib.block.IPlantable.PlantType;
 import twilightforest.item.TFItems;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class UberousSoilBlock extends Block implements BonemealableBlock {
+public class UberousSoilBlock extends Block implements BonemealableBlock, IBlockMethods {
 
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 

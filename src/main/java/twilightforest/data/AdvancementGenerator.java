@@ -531,7 +531,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 		ItemStack itemstack = new ItemStack(TFItems.GREATER_FLASK.get());
 		CompoundTag compoundtag = itemstack.getOrCreateTag();
 		compoundtag.putInt("Uses", 4);
-		compoundtag.putString("Potion", Potions.STRONG_HARMING.getRegistryName().toString());
+		compoundtag.putString("Potion", Registry.POTION.getKey(Potions.STRONG_HARMING).toString());
 		return itemstack;
 	}
 
@@ -558,7 +558,7 @@ public class AdvancementGenerator implements Consumer<Consumer<Advancement>> {
 
 	private Advancement.Builder addDendrologistBlock(Advancement.Builder builder) {
 		for (Block dendrologistBlock : DENDROLOGIST_BLOCKS) {
-			builder.addCriterion(dendrologistBlock.getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(dendrologistBlock));
+			builder.addCriterion(Registry.BLOCK.getKey(dendrologistBlock).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(dendrologistBlock));
 		}
 		return builder;
 	}

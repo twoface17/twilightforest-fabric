@@ -4,13 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import twilightforest.capabilities.CapabilityList;
 import twilightforest.capabilities.shield.IShieldCapability;
+import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
-public class UpdateShieldPacket {
+public class UpdateShieldPacket implements BasePacket<UpdateShieldPacket> {
 
 	private final int entityID;
 	private final int temporaryShields;
@@ -32,21 +32,27 @@ public class UpdateShieldPacket {
 		permanentShields = buf.readInt();
 	}
 
+	@Override
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeInt(entityID);
 		buf.writeInt(temporaryShields);
 		buf.writeInt(permanentShields);
 	}
 
+	@Override
+	public void handle(UpdateShieldPacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
 
-		public static boolean onMessage(UpdateShieldPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(UpdateShieldPacket message, Supplier<BasePacket.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {
 					Entity entity = Minecraft.getInstance().level.getEntity(message.entityID);
 					if (entity instanceof LivingEntity) {
-						entity.getCapability(CapabilityList.SHIELDS).ifPresent(cap -> {
+						CapabilityList.SHIELDS.maybeGet(entity).ifPresent(cap -> {
 							cap.setShields(message.temporaryShields, true);
 							cap.setShields(message.permanentShields, false);
 						});

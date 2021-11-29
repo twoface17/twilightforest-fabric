@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -25,14 +27,11 @@ import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.NaturalSpawner;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.client.model.TFModelLayers;
@@ -46,33 +45,28 @@ import twilightforest.entity.passive.*;
 import twilightforest.entity.projectile.*;
 import twilightforest.item.TransformPowderItem;
 import twilightforest.item.TFItems;
+import twilightforest.lib.Register;
+import twilightforest.lib.extensions.ICachedName;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
-
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TFEntities {
 
-	public static final SpawnPlacements.Type ON_ICE = SpawnPlacements.Type.create("TF_ON_ICE", (world, pos, entityType) -> {
+	public static final SpawnPlacements.Type ON_ICE = SpawnPlacements.Type.ON_GROUND;/*SpawnPlacements.Type.create("TF_ON_ICE", (world, pos, entityType) -> {
 		BlockState state = world.getBlockState(pos.below());
 		Block block = state.getBlock();
 		Material material = state.getMaterial();
 		BlockPos up = pos.above();
 		return (material == Material.ICE || material == Material.ICE_SOLID) && block != Blocks.BEDROCK && block != Blocks.BARRIER && NaturalSpawner.isValidEmptySpawnBlock(world, pos, world.getBlockState(pos), world.getFluidState(pos), entityType) && NaturalSpawner.isValidEmptySpawnBlock(world, up, world.getBlockState(up), world.getFluidState(up), entityType);
-	});
+	});*/
 
-	public static final SpawnPlacements.Type CLOUDS = SpawnPlacements.Type.create("CLOUD_DWELLERS", (world, pos, entityType) -> {
+	public static final SpawnPlacements.Type CLOUDS = SpawnPlacements.Type.ON_GROUND;/*SpawnPlacements.Type.create("CLOUD_DWELLERS", (world, pos, entityType) -> {
 		BlockState state = world.getBlockState(pos.below());
 		Block block = state.getBlock();
 		BlockPos up = pos.above();
 		return (block == TFBlocks.WISPY_CLOUD.get() || block == TFBlocks.FLUFFY_CLOUD.get()) && block != Blocks.BEDROCK && block != Blocks.BARRIER && NaturalSpawner.isValidEmptySpawnBlock(world, pos, world.getBlockState(pos), world.getFluidState(pos), entityType) && NaturalSpawner.isValidEmptySpawnBlock(world, up, world.getBlockState(up), world.getFluidState(up), entityType);
-	});
+	});*/
 
 	private static final List<EntityType<?>> ALL = new ArrayList<>();
 
@@ -157,7 +151,7 @@ public class TFEntities {
 	public static final EntityType<SlideBlock> SLIDER = build(TFEntityNames.SLIDER, makeCastedBuilder(SlideBlock.class, SlideBlock::new, 0.98F, 0.98F, 80, 1));
 	//public static final EntityType<Boggard> BOGGARD = make(TFEntityNames.BOGGARD, Boggard::new, MobCategory.MONSTER, 0.8F, 1.1F);
 	public static final EntityType<RisingZombie> RISING_ZOMBIE = make(TFEntityNames.RISING_ZOMBIE, RisingZombie::new, MobCategory.MONSTER, 0.6F, 1.95F);
-	public static final EntityType<ProtectionBox> PROTECTION_BOX = build(TFEntityNames.PROTECTION_BOX, makeCastedBuilder(ProtectionBox.class, ProtectionBox::new, 0, 0, 80, 3).noSave().noSummon());
+	public static final EntityType<ProtectionBox> PROTECTION_BOX = build(TFEntityNames.PROTECTION_BOX, makeCastedBuilder(ProtectionBox.class, ProtectionBox::new, 0, 0, 80, 3).disableSaving().disableSummon());
 
 	private static <E extends Entity> EntityType<E> make(ResourceLocation id, EntityType.EntityFactory<E> factory, MobCategory classification, float width, float height) {
 		return make(id, factory, classification, width, height, false);
@@ -167,42 +161,40 @@ public class TFEntities {
 		return build(id, makeBuilder(factory, classification, width, height, 80, 3), fireproof);
 	}
 
-	private static <E extends Entity> EntityType<E> build(ResourceLocation id, EntityType.Builder<E> builder) {
+	private static <E extends Entity> EntityType<E> build(ResourceLocation id, FabricEntityTypeBuilder<E> builder) {
 		return build(id, builder, false);
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <E extends Entity> EntityType<E> build(ResourceLocation id, EntityType.Builder<E> builder, boolean fireproof) {
+	private static <E extends Entity> EntityType<E> build(ResourceLocation id, FabricEntityTypeBuilder<E> builder, boolean fireproof) {
 		boolean cache = SharedConstants.CHECK_DATA_FIXER_SCHEMA;
 		SharedConstants.CHECK_DATA_FIXER_SCHEMA = false;
 		if(fireproof) builder.fireImmune();
-		EntityType<E> ret = (EntityType<E>) builder.build(id.toString()).setRegistryName(id);
+		EntityType<E> ret = Registry.register(Registry.ENTITY_TYPE, id, builder.build());
 		SharedConstants.CHECK_DATA_FIXER_SCHEMA = cache;
 		ALL.add(ret);
 		return ret;
 	}
 
-	private static <E extends Entity> EntityType.Builder<E> makeCastedBuilder(@SuppressWarnings("unused") Class<E> cast, EntityType.EntityFactory<E> factory, float width, float height, int range, int interval) {
+	private static <E extends Entity> FabricEntityTypeBuilder<E> makeCastedBuilder(@SuppressWarnings("unused") Class<E> cast,  EntityType.EntityFactory<E> factory, float width, float height, int range, int interval) {
 		return makeBuilder(factory, MobCategory.MISC, width, height, range, interval);
 	}
 
-	private static <E extends Entity> EntityType.Builder<E> makeBuilder(EntityType.EntityFactory<E> factory, MobCategory classification, float width, float height, int range, int interval) {
-		return EntityType.Builder.of(factory, classification).
-				sized(width, height).
-				setTrackingRange(range).
-				setUpdateInterval(interval).
-				setShouldReceiveVelocityUpdates(true);
+	private static <E extends Entity> FabricEntityTypeBuilder<E> makeBuilder(EntityType.EntityFactory<E> factory, MobCategory classification, float width, float height, int range, int interval) {
+		return FabricEntityTypeBuilder.create(classification, factory).
+				dimensions(EntityDimensions.scalable(width, height)).
+				trackRangeBlocks(range).
+				trackedUpdateRate(interval).
+				forceTrackedVelocityUpdates(true);
 	}
 
 	@SuppressWarnings("deprecation")
 	private static Item spawnEgg(EntityType<? extends Mob> type, int color, int color2) {
-		ResourceLocation eggId = new ResourceLocation(Objects.requireNonNull(type.getRegistryName()).getNamespace(), type.getRegistryName().getPath() + "_spawn_egg");
-		return new SpawnEggItem(type, color, color2, TFItems.defaultBuilder()).setRegistryName(eggId);
+		ResourceLocation eggId = new ResourceLocation(Objects.requireNonNull(Registry.ENTITY_TYPE.getKey(type)).getNamespace(), Registry.ENTITY_TYPE.getKey(type).getPath() + "_spawn_egg");
+		return ICachedName.cast(new SpawnEggItem(type, color, color2, TFItems.defaultBuilder())).setRegistryName(eggId);
 	}
 
-	@SubscribeEvent
-	public static void registerSpawnEggs(RegistryEvent.Register<Item> evt) {
-		IForgeRegistry<Item> r = evt.getRegistry();
+	public static void registerSpawnEggs(Register<Item> r) {
 		r.register(spawnEgg(ADHERENT, 0x0a0000, 0x00008b));
 		r.register(spawnEgg(ALPHA_YETI, 0xcdcdcd, 0x29486e));
 		r.register(spawnEgg(ARMORED_GIANT, 0x239391, 0x9a9a9a));
@@ -259,9 +251,8 @@ public class TFEntities {
 		r.register(spawnEgg(YETI, 0xdedede, 0x4675bb));
 	}
 
-	@SubscribeEvent
-	public static void registerEntities(RegistryEvent.Register<EntityType<?>> evt) {
-		evt.getRegistry().registerAll(ALL.toArray(new EntityType<?>[0]));
+	public static void registerEntities() {
+//		evt.getRegistry().registerAll(ALL.toArray(new EntityType<?>[0]));
 		((TransformPowderItem) TFItems.TRANSFORMATION_POWDER.get()).initTransformations();
 
 		SpawnPlacements.register(BOAR, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
@@ -325,162 +316,160 @@ public class TFEntities {
 		//EntitySpawnPlacementRegistry.register(CASTLE_GUARDIAN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::canSpawnOn);
 	}
 
-	@SubscribeEvent
-	public static void addEntityAttributes(EntityAttributeCreationEvent event) {
-		event.put(BOAR, Pig.createAttributes().build());
-		event.put(BIGHORN_SHEEP, Sheep.createAttributes().build());
-		event.put(DEER, Deer.registerAttributes().build());
-		event.put(REDCAP, Redcap.registerAttributes().build());
-		event.put(SWARM_SPIDER, SwarmSpider.registerAttributes().build());
-		event.put(NAGA, Naga.registerAttributes().build());
-		event.put(SKELETON_DRUID, AbstractSkeleton.createAttributes().build());
-		event.put(HOSTILE_WOLF, HostileWolf.registerAttributes().build());
-		event.put(WRAITH, Wraith.registerAttributes().build());
-		event.put(HEDGE_SPIDER, Spider.createAttributes().build());
-		event.put(HYDRA, Hydra.registerAttributes().build());
-		event.put(LICH, Lich.registerAttributes().build());
-		event.put(PENGUIN, Penguin.registerAttributes().build());
-		event.put(LICH_MINION, Zombie.createAttributes().build());
-		event.put(LOYAL_ZOMBIE, LoyalZombie.registerAttributes().build());
-		event.put(TINY_BIRD, TinyBird.registerAttributes().build());
-		event.put(SQUIRREL, Squirrel.registerAttributes().build());
-		event.put(DWARF_RABBIT, DwarfRabbit.registerAttributes().build());
-		event.put(RAVEN, Raven.registerAttributes().build());
-		event.put(QUEST_RAM, QuestRam.registerAttributes().build());
-		event.put(KOBOLD, Kobold.registerAttributes().build());
-		event.put(MOSQUITO_SWARM, MosquitoSwarm.registerAttributes().build());
-		event.put(DEATH_TOME, DeathTome.registerAttributes().build());
-		event.put(MINOTAUR, Minotaur.registerAttributes().build());
-		event.put(MINOSHROOM, Minoshroom.registerAttributes().build());
-		event.put(FIRE_BEETLE, FireBeetle.registerAttributes().build());
-		event.put(SLIME_BEETLE, SlimeBeetle.registerAttributes().build());
-		event.put(PINCH_BEETLE, PinchBeetle.registerAttributes().build());
-		event.put(MAZE_SLIME, MazeSlime.registerAttributes().build());
-		event.put(REDCAP_SAPPER, RedcapSapper.registerAttributes().build());
-		event.put(MIST_WOLF, MistWolf.registerAttributes().build());
-		event.put(KING_SPIDER, KingSpider.registerAttributes().build());
-		event.put(CARMINITE_GHASTLING, CarminiteGhastling.registerAttributes().build());
-		event.put(CARMINITE_GHASTGUARD, CarminiteGhastguard.registerAttributes().build());
-		event.put(CARMINITE_GOLEM, CarminiteGolem.registerAttributes().build());
-		event.put(TOWERWOOD_BORER, TowerwoodBorer.registerAttributes().build());
-		event.put(CARMINITE_BROODLING, TowerBroodling.registerAttributes().build());
-		event.put(UR_GHAST, UrGhast.registerAttributes().build());
-		event.put(BLOCKCHAIN_GOBLIN, BlockChainGoblin.registerAttributes().build());
-		event.put(UPPER_GOBLIN_KNIGHT, UpperGoblinKnight.registerAttributes().build());
-		event.put(LOWER_GOBLIN_KNIGHT, LowerGoblinKnight.registerAttributes().build());
-		event.put(HELMET_CRAB, HelmetCrab.registerAttributes().build());
-		event.put(KNIGHT_PHANTOM, KnightPhantom.registerAttributes().build());
-		event.put(YETI, Yeti.registerAttributes().build());
-		event.put(ALPHA_YETI, AlphaYeti.registerAttributes().build());
-		event.put(WINTER_WOLF, WinterWolf.registerAttributes().build());
-		event.put(SNOW_GUARDIAN, SnowGuardian.registerAttributes().build());
-		event.put(STABLE_ICE_CORE, StableIceCore.registerAttributes().build());
-		event.put(UNSTABLE_ICE_CORE, UnstableIceCore.registerAttributes().build());
-		event.put(SNOW_QUEEN, SnowQueen.registerAttributes().build());
-		event.put(TROLL, Troll.registerAttributes().build());
-		event.put(GIANT_MINER, GiantMiner.registerAttributes().build());
-		event.put(ARMORED_GIANT, GiantMiner.registerAttributes().build());
-		event.put(ICE_CRYSTAL, IceCrystal.registerAttributes().build());
-		event.put(HARBINGER_CUBE, HarbingerCube.registerAttributes().build());
-		event.put(ADHERENT, Adherent.registerAttributes().build());
-		event.put(ROVING_CUBE, RovingCube.registerAttributes().build());
-		//event.put(CASTLE_GUARDIAN, MobEntity.createMobAttributes().create());
-		event.put(PLATEAU_BOSS, PlateauBoss.registerAttributes().build());
+	public static void addEntityAttributes() {
+		FabricDefaultAttributeRegistry.register(BOAR, Pig.createAttributes());
+		FabricDefaultAttributeRegistry.register(BIGHORN_SHEEP, Sheep.createAttributes());
+		FabricDefaultAttributeRegistry.register(DEER, Deer.registerAttributes());
+		FabricDefaultAttributeRegistry.register(REDCAP, Redcap.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SWARM_SPIDER, SwarmSpider.registerAttributes());
+		FabricDefaultAttributeRegistry.register(NAGA, Naga.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SKELETON_DRUID, AbstractSkeleton.createAttributes());
+		FabricDefaultAttributeRegistry.register(HOSTILE_WOLF, HostileWolf.registerAttributes());
+		FabricDefaultAttributeRegistry.register(WRAITH, Wraith.registerAttributes());
+		FabricDefaultAttributeRegistry.register(HEDGE_SPIDER, Spider.createAttributes());
+		FabricDefaultAttributeRegistry.register(HYDRA, Hydra.registerAttributes());
+		FabricDefaultAttributeRegistry.register(LICH, Lich.registerAttributes());
+		FabricDefaultAttributeRegistry.register(PENGUIN, Penguin.registerAttributes());
+		FabricDefaultAttributeRegistry.register(LICH_MINION, Zombie.createAttributes());
+		FabricDefaultAttributeRegistry.register(LOYAL_ZOMBIE, LoyalZombie.registerAttributes());
+		FabricDefaultAttributeRegistry.register(TINY_BIRD, TinyBird.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SQUIRREL, Squirrel.registerAttributes());
+		FabricDefaultAttributeRegistry.register(DWARF_RABBIT, DwarfRabbit.registerAttributes());
+		FabricDefaultAttributeRegistry.register(RAVEN, Raven.registerAttributes());
+		FabricDefaultAttributeRegistry.register(QUEST_RAM, QuestRam.registerAttributes());
+		FabricDefaultAttributeRegistry.register(KOBOLD, Kobold.registerAttributes());
+		FabricDefaultAttributeRegistry.register(MOSQUITO_SWARM, MosquitoSwarm.registerAttributes());
+		FabricDefaultAttributeRegistry.register(DEATH_TOME, DeathTome.registerAttributes());
+		FabricDefaultAttributeRegistry.register(MINOTAUR, Minotaur.registerAttributes());
+		FabricDefaultAttributeRegistry.register(MINOSHROOM, Minoshroom.registerAttributes());
+		FabricDefaultAttributeRegistry.register(FIRE_BEETLE, FireBeetle.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SLIME_BEETLE, SlimeBeetle.registerAttributes());
+		FabricDefaultAttributeRegistry.register(PINCH_BEETLE, PinchBeetle.registerAttributes());
+		FabricDefaultAttributeRegistry.register(MAZE_SLIME, MazeSlime.registerAttributes());
+		FabricDefaultAttributeRegistry.register(REDCAP_SAPPER, RedcapSapper.registerAttributes());
+		FabricDefaultAttributeRegistry.register(MIST_WOLF, MistWolf.registerAttributes());
+		FabricDefaultAttributeRegistry.register(KING_SPIDER, KingSpider.registerAttributes());
+		FabricDefaultAttributeRegistry.register(CARMINITE_GHASTLING, CarminiteGhastling.registerAttributes());
+		FabricDefaultAttributeRegistry.register(CARMINITE_GHASTGUARD, CarminiteGhastguard.registerAttributes());
+		FabricDefaultAttributeRegistry.register(CARMINITE_GOLEM, CarminiteGolem.registerAttributes());
+		FabricDefaultAttributeRegistry.register(TOWERWOOD_BORER, TowerwoodBorer.registerAttributes());
+		FabricDefaultAttributeRegistry.register(CARMINITE_BROODLING, TowerBroodling.registerAttributes());
+		FabricDefaultAttributeRegistry.register(UR_GHAST, UrGhast.registerAttributes());
+		FabricDefaultAttributeRegistry.register(BLOCKCHAIN_GOBLIN, BlockChainGoblin.registerAttributes());
+		FabricDefaultAttributeRegistry.register(UPPER_GOBLIN_KNIGHT, UpperGoblinKnight.registerAttributes());
+		FabricDefaultAttributeRegistry.register(LOWER_GOBLIN_KNIGHT, LowerGoblinKnight.registerAttributes());
+		FabricDefaultAttributeRegistry.register(HELMET_CRAB, HelmetCrab.registerAttributes());
+		FabricDefaultAttributeRegistry.register(KNIGHT_PHANTOM, KnightPhantom.registerAttributes());
+		FabricDefaultAttributeRegistry.register(YETI, Yeti.registerAttributes());
+		FabricDefaultAttributeRegistry.register(ALPHA_YETI, AlphaYeti.registerAttributes());
+		FabricDefaultAttributeRegistry.register(WINTER_WOLF, WinterWolf.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SNOW_GUARDIAN, SnowGuardian.registerAttributes());
+		FabricDefaultAttributeRegistry.register(STABLE_ICE_CORE, StableIceCore.registerAttributes());
+		FabricDefaultAttributeRegistry.register(UNSTABLE_ICE_CORE, UnstableIceCore.registerAttributes());
+		FabricDefaultAttributeRegistry.register(SNOW_QUEEN, SnowQueen.registerAttributes());
+		FabricDefaultAttributeRegistry.register(TROLL, Troll.registerAttributes());
+		FabricDefaultAttributeRegistry.register(GIANT_MINER, GiantMiner.registerAttributes());
+		FabricDefaultAttributeRegistry.register(ARMORED_GIANT, GiantMiner.registerAttributes());
+		FabricDefaultAttributeRegistry.register(ICE_CRYSTAL, IceCrystal.registerAttributes());
+		FabricDefaultAttributeRegistry.register(HARBINGER_CUBE, HarbingerCube.registerAttributes());
+		FabricDefaultAttributeRegistry.register(ADHERENT, Adherent.registerAttributes());
+		FabricDefaultAttributeRegistry.register(ROVING_CUBE, RovingCube.registerAttributes());
+		//FabricDefaultAttributeRegistry.register(CASTLE_GUARDIAN, MobEntity.createMobAttributes().create());
+		FabricDefaultAttributeRegistry.register(PLATEAU_BOSS, PlateauBoss.registerAttributes());
 
-		//event.put(BOGGARD, EntityTFBoggard.registerAttributes().create());
-		event.put(RISING_ZOMBIE, Zombie.createAttributes().build());
+		//FabricDefaultAttributeRegistry.register(BOGGARD, EntityTFBoggard.registerAttributes().create());
+		FabricDefaultAttributeRegistry.register(RISING_ZOMBIE, Zombie.createAttributes());
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public static void registerEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
+	@Environment(EnvType.CLIENT)
+	public static void registerEntityRenderer() {
 		BooleanSupplier legacy = () -> Minecraft.getInstance().getResourcePackRepository().getSelectedIds().contains("builtin/twilight_forest_legacy_resources");
-		event.registerEntityRenderer(BOAR, m -> legacy.getAsBoolean() ? new LegacyBoarRenderer(m, new BoarLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_BOAR))) : new BoarRenderer(m, new BoarModel<>(m.bakeLayer(TFModelLayers.BOAR))));
-		event.registerEntityRenderer(BIGHORN_SHEEP, m -> new BighornRenderer(m, new BighornModel<>(m.bakeLayer(legacy.getAsBoolean() ? TFModelLayers.LEGACY_BIGHORN_SHEEP : TFModelLayers.BIGHORN_SHEEP)), new BighornFurLayer(m.bakeLayer(TFModelLayers.BIGHORN_SHEEP_FUR)), 0.7F));
-		event.registerEntityRenderer(DEER, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new DeerLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_DEER)) : new DeerModel(m.bakeLayer(TFModelLayers.DEER)), 0.7F, "wilddeer.png"));
-		event.registerEntityRenderer(REDCAP, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new RedcapLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_REDCAP)) : new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, "redcap.png"));
-		event.registerEntityRenderer(SKELETON_DRUID, m -> new TFBipedRenderer<>(m, new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID)), new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID_INNER_ARMOR)), new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID_OUTER_ARMOR)), 0.5F, "skeletondruid.png"));
-		event.registerEntityRenderer(HOSTILE_WOLF, WolfRenderer::new);
-		event.registerEntityRenderer(WRAITH, m -> new WraithRenderer(m, new WraithModel(m.bakeLayer(TFModelLayers.WRAITH)), 0.5F));
-		event.registerEntityRenderer(HYDRA, m -> legacy.getAsBoolean() ? new LegacyHydraRenderer(m, new HydraLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_HYDRA)), 4.0F) : new HydraRenderer(m, new HydraModel(m.bakeLayer(TFModelLayers.HYDRA)), 4.0F));
-		event.registerEntityRenderer(LICH, m -> new LichRenderer(m, new LichModel(m.bakeLayer(TFModelLayers.LICH)), 0.6F));
-		event.registerEntityRenderer(PENGUIN, m -> new BirdRenderer<>(m, new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN)), 0.375F, "penguin.png"));
-		event.registerEntityRenderer(LICH_MINION, m -> new TFBipedRenderer<>(m, new LichMinionModel(m.bakeLayer(TFModelLayers.LICH_MINION)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
-		event.registerEntityRenderer(LOYAL_ZOMBIE, m -> new TFBipedRenderer<>(m, new LoyalZombieModel(m.bakeLayer(TFModelLayers.LOYAL_ZOMBIE)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
-		event.registerEntityRenderer(TINY_BIRD, m -> legacy.getAsBoolean() ? new LegacyTinyBirdRenderer(m, new TinyBirdLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_TINY_BIRD)), 0.3F) :  new TinyBirdRenderer(m, new TinyBirdModel(m.bakeLayer(TFModelLayers.TINY_BIRD)), 0.3F));
-		event.registerEntityRenderer(SQUIRREL, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new SquirrelLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SQUIRREL)) : new SquirrelModel(m.bakeLayer(TFModelLayers.SQUIRREL)), 0.3F, "squirrel2.png"));
-		event.registerEntityRenderer(DWARF_RABBIT, m -> new BunnyRenderer(m, new BunnyModel(m.bakeLayer(TFModelLayers.BUNNY)), 0.3F));
-		event.registerEntityRenderer(RAVEN, m -> new BirdRenderer<>(m, legacy.getAsBoolean() ? new RavenLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_RAVEN)) : new RavenModel(m.bakeLayer(TFModelLayers.RAVEN)), 0.3F, "raven.png"));
-		event.registerEntityRenderer(QUEST_RAM, m -> legacy.getAsBoolean() ? new LegacyQuestRamRenderer(m, new QuestRamLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_QUEST_RAM))) : new QuestRamRenderer(m, new QuestRamModel(m.bakeLayer(TFModelLayers.QUEST_RAM))));
-		event.registerEntityRenderer(KOBOLD, m -> legacy.getAsBoolean() ? new LegacyKoboldRenderer(m, new KoboldLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_KOBOLD)), 0.4F, "kobold.png") : new KoboldRenderer(m, new KoboldModel(m.bakeLayer(TFModelLayers.KOBOLD)), 0.4F, "kobold.png"));
-		//event.registerEntityRenderer(BOGGARD, m -> new RenderTFBiped<>(m, new BipedModel<>(0), 0.625F, "kobold.png"));
-		event.registerEntityRenderer(MOSQUITO_SWARM, m -> new TFGenericMobRenderer<>(m, new MosquitoSwarmModel(m.bakeLayer(TFModelLayers.MOSQUITO_SWARM)), 0.0F, "mosquitoswarm.png"));
-		event.registerEntityRenderer(DEATH_TOME, m -> new TFGenericMobRenderer<>(m, new DeathTomeModel(m.bakeLayer(TFModelLayers.DEATH_TOME)), 0.3F, "textures/entity/enchanting_table_book.png"));
-		event.registerEntityRenderer(MINOTAUR, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new MinotaurLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_MINOTAUR)) : new MinotaurModel(m.bakeLayer(TFModelLayers.MINOTAUR)), 0.625F, "minotaur.png"));
-		event.registerEntityRenderer(MINOSHROOM, m -> legacy.getAsBoolean() ? new LegacyMinoshroomRenderer(m, new MinoshroomLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_MINOSHROOM)), 0.625F) : new MinoshroomRenderer(m, new MinoshroomModel(m.bakeLayer(TFModelLayers.MINOSHROOM)), 0.625F));
-		event.registerEntityRenderer(FIRE_BEETLE, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new FireBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_FIRE_BEETLE)) : new FireBeetleModel(m.bakeLayer(TFModelLayers.FIRE_BEETLE)), 0.8F, "firebeetle.png"));
-		event.registerEntityRenderer(SLIME_BEETLE, m -> legacy.getAsBoolean() ? new LegacySlimeBeetleRenderer(m, new SlimeBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SLIME_BEETLE)), 0.6F) : new SlimeBeetleRenderer(m, new SlimeBeetleModel(m.bakeLayer(TFModelLayers.SLIME_BEETLE)), 0.6F));
-		event.registerEntityRenderer(PINCH_BEETLE, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new PinchBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_PINCH_BEETLE)) : new PinchBeetleModel(m.bakeLayer(TFModelLayers.PINCH_BEETLE)), 0.6F, "pinchbeetle.png"));
-		event.registerEntityRenderer(MIST_WOLF, MistWolfRenderer::new);
-		event.registerEntityRenderer(CARMINITE_GHASTLING, m -> new TFGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTLING)), 0.625F));
-		event.registerEntityRenderer(CARMINITE_GOLEM, m -> new CarminiteGolemRenderer<>(m, new CarminiteGolemModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GOLEM)), 0.75F));
-		event.registerEntityRenderer(TOWERWOOD_BORER, m -> new TFGenericMobRenderer<>(m, new SilverfishModel<>(m.bakeLayer(ModelLayers.SILVERFISH)), 0.3F, "towertermite.png"));
-		event.registerEntityRenderer(CARMINITE_GHASTGUARD, m -> new CarminiteGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTGUARD)), 3.0F));
-		event.registerEntityRenderer(UR_GHAST, m -> legacy.getAsBoolean() ? new LegacyUrGhastRenderer(m, new UrGhastLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_UR_GHAST)), 8.0F, 24F) : new UrGhastRenderer(m, new UrGhastModel(m.bakeLayer(TFModelLayers.UR_GHAST)), 8.0F, 24F));
-		event.registerEntityRenderer(BLOCKCHAIN_GOBLIN, m -> legacy.getAsBoolean() ? new LegacyBlockChainGoblinRenderer<>(m, new BlockChainGoblinLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_BLOCKCHAIN_GOBLIN)), 0.4F) : new BlockChainGoblinRenderer<>(m, new BlockChainGoblinModel<>(m.bakeLayer(TFModelLayers.BLOCKCHAIN_GOBLIN)), 0.4F));
-		event.registerEntityRenderer(UPPER_GOBLIN_KNIGHT, m -> legacy.getAsBoolean() ? new LegacyUpperGoblinKnightRenderer(m, new UpperGoblinKnightLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_UPPER_GOBLIN_KNIGHT)), 0.625F) : new UpperGoblinKnightRenderer(m, new UpperGoblinKnightModel(m.bakeLayer(TFModelLayers.UPPER_GOBLIN_KNIGHT)), 0.625F));
-		event.registerEntityRenderer(LOWER_GOBLIN_KNIGHT, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new LowerGoblinKnightLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_LOWER_GOBLIN_KNIGHT)) : new LowerGoblinKnightModel(m.bakeLayer(TFModelLayers.LOWER_GOBLIN_KNIGHT)), 0.625F, "doublegoblin.png"));
-		event.registerEntityRenderer(HELMET_CRAB, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new HelmetCrabLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_HELMET_CRAB)) : new HelmetCrabModel(m.bakeLayer(TFModelLayers.HELMET_CRAB)), 0.625F, "helmetcrab.png"));
-		event.registerEntityRenderer(KNIGHT_PHANTOM, m -> new KnightPhantomRenderer(m, new KnightPhantomModel(m.bakeLayer(TFModelLayers.KNIGHT_PHANTOM)), 0.625F));
-		event.registerEntityRenderer(NAGA, m -> legacy.getAsBoolean() ? new LegacyNagaRenderer<>(m, new NagaLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_NAGA)), 1.45F) : new NagaRenderer<>(m, new NagaModel<>(m.bakeLayer(TFModelLayers.NAGA)), 1.45F));
-		event.registerEntityRenderer(SWARM_SPIDER, SwarmSpiderRenderer::new);
-		event.registerEntityRenderer(KING_SPIDER, KingSpiderRenderer::new);
-		event.registerEntityRenderer(CARMINITE_BROODLING, CarminiteBroodlingRenderer::new);
-		event.registerEntityRenderer(HEDGE_SPIDER, HedgeSpiderRenderer::new);
-		event.registerEntityRenderer(REDCAP_SAPPER, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new RedcapLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_REDCAP)) : new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, "redcapsapper.png"));
-		event.registerEntityRenderer(MAZE_SLIME, m -> new MazeSlimeRenderer(m, 0.625F));
-		event.registerEntityRenderer(YETI, m -> new TFBipedRenderer<>(m, new YetiModel<>(m.bakeLayer(TFModelLayers.YETI)), 0.625F, "yeti2.png"));
-		event.registerEntityRenderer(PROTECTION_BOX, ProtectionBoxRenderer::new);
-		event.registerEntityRenderer(ALPHA_YETI, m -> new TFBipedRenderer<>(m, new AlphaYetiModel(m.bakeLayer(TFModelLayers.ALPHA_YETI)), 1.75F, "yetialpha.png"));
-		event.registerEntityRenderer(WINTER_WOLF, WinterWolfRenderer::new);
-		event.registerEntityRenderer(SNOW_GUARDIAN, m -> new SnowGuardianRenderer(m, new NoopModel<>(m.bakeLayer(TFModelLayers.NOOP))));
-		event.registerEntityRenderer(STABLE_ICE_CORE, m -> new StableIceCoreRenderer(m, new StableIceCoreModel(m.bakeLayer(TFModelLayers.STABLE_ICE_CORE))));
-		event.registerEntityRenderer(UNSTABLE_ICE_CORE, m -> new UnstableIceCoreRenderer<>(m, new UnstableIceCoreModel<>(m.bakeLayer(TFModelLayers.UNSTABLE_ICE_CORE))));
-		event.registerEntityRenderer(SNOW_QUEEN, m -> legacy.getAsBoolean() ? new LegacySnowQueenRenderer(m, new SnowQueenLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SNOW_QUEEN))) : new SnowQueenRenderer(m, new SnowQueenModel(m.bakeLayer(TFModelLayers.SNOW_QUEEN))));
-		event.registerEntityRenderer(TROLL, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new TrollLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_TROLL)) : new TrollModel(m.bakeLayer(TFModelLayers.TROLL)), 0.625F, "troll.png"));
-		event.registerEntityRenderer(GIANT_MINER, TFGiantRenderer::new);
-		event.registerEntityRenderer(ARMORED_GIANT, TFGiantRenderer::new);
-		event.registerEntityRenderer(ICE_CRYSTAL, IceCrystalRenderer::new);
-		event.registerEntityRenderer(CHAIN_BLOCK, BlockChainRenderer::new);
-		event.registerEntityRenderer(CUBE_OF_ANNIHILATION, CubeOfAnnihilationRenderer::new);
-		event.registerEntityRenderer(HARBINGER_CUBE, HarbingerCubeRenderer::new);
-		event.registerEntityRenderer(ADHERENT, AdherentRenderer::new);
-		event.registerEntityRenderer(ROVING_CUBE, RovingCubeRenderer::new);
-		event.registerEntityRenderer(RISING_ZOMBIE, m -> new TFBipedRenderer<>(m, new RisingZombieModel(m.bakeLayer(TFModelLayers.RISING_ZOMBIE)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
-		//event.registerEntityRenderer(CASTLE_GUARDIAN, m -> new RenderTFCastleGuardian(m, new ModelTFCastleGuardian(), 2.0F, "finalcastle/castle_guardian.png"));
-		event.registerEntityRenderer(PLATEAU_BOSS, NoopRenderer::new);
+		EntityRendererRegistry.register(BOAR, m -> legacy.getAsBoolean() ? new LegacyBoarRenderer(m, new BoarLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_BOAR))) : new BoarRenderer(m, new BoarModel<>(m.bakeLayer(TFModelLayers.BOAR))));
+		EntityRendererRegistry.register(BIGHORN_SHEEP, m -> new BighornRenderer(m, new BighornModel<>(m.bakeLayer(legacy.getAsBoolean() ? TFModelLayers.LEGACY_BIGHORN_SHEEP : TFModelLayers.BIGHORN_SHEEP)), new BighornFurLayer(m.bakeLayer(TFModelLayers.BIGHORN_SHEEP_FUR)), 0.7F));
+		EntityRendererRegistry.register(DEER, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new DeerLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_DEER)) : new DeerModel(m.bakeLayer(TFModelLayers.DEER)), 0.7F, "wilddeer.png"));
+		EntityRendererRegistry.register(REDCAP, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new RedcapLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_REDCAP)) : new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, "redcap.png"));
+		EntityRendererRegistry.register(SKELETON_DRUID, m -> new TFBipedRenderer<>(m, new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID)), new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID_INNER_ARMOR)), new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID_OUTER_ARMOR)), 0.5F, "skeletondruid.png"));
+		EntityRendererRegistry.register(HOSTILE_WOLF, WolfRenderer::new);
+		EntityRendererRegistry.register(WRAITH, m -> new WraithRenderer(m, new WraithModel(m.bakeLayer(TFModelLayers.WRAITH)), 0.5F));
+		EntityRendererRegistry.register(HYDRA, m -> legacy.getAsBoolean() ? new LegacyHydraRenderer(m, new HydraLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_HYDRA)), 4.0F) : new HydraRenderer(m, new HydraModel(m.bakeLayer(TFModelLayers.HYDRA)), 4.0F));
+		EntityRendererRegistry.register(LICH, m -> new LichRenderer(m, new LichModel(m.bakeLayer(TFModelLayers.LICH)), 0.6F));
+		EntityRendererRegistry.register(PENGUIN, m -> new BirdRenderer<>(m, new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN)), 0.375F, "penguin.png"));
+		EntityRendererRegistry.register(LICH_MINION, m -> new TFBipedRenderer<>(m, new LichMinionModel(m.bakeLayer(TFModelLayers.LICH_MINION)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
+		EntityRendererRegistry.register(LOYAL_ZOMBIE, m -> new TFBipedRenderer<>(m, new LoyalZombieModel(m.bakeLayer(TFModelLayers.LOYAL_ZOMBIE)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
+		EntityRendererRegistry.register(TINY_BIRD, m -> legacy.getAsBoolean() ? new LegacyTinyBirdRenderer(m, new TinyBirdLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_TINY_BIRD)), 0.3F) :  new TinyBirdRenderer(m, new TinyBirdModel(m.bakeLayer(TFModelLayers.TINY_BIRD)), 0.3F));
+		EntityRendererRegistry.register(SQUIRREL, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new SquirrelLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SQUIRREL)) : new SquirrelModel(m.bakeLayer(TFModelLayers.SQUIRREL)), 0.3F, "squirrel2.png"));
+		EntityRendererRegistry.register(DWARF_RABBIT, m -> new BunnyRenderer(m, new BunnyModel(m.bakeLayer(TFModelLayers.BUNNY)), 0.3F));
+		EntityRendererRegistry.register(RAVEN, m -> new BirdRenderer<>(m, legacy.getAsBoolean() ? new RavenLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_RAVEN)) : new RavenModel(m.bakeLayer(TFModelLayers.RAVEN)), 0.3F, "raven.png"));
+		EntityRendererRegistry.register(QUEST_RAM, m -> legacy.getAsBoolean() ? new LegacyQuestRamRenderer(m, new QuestRamLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_QUEST_RAM))) : new QuestRamRenderer(m, new QuestRamModel(m.bakeLayer(TFModelLayers.QUEST_RAM))));
+		EntityRendererRegistry.register(KOBOLD, m -> legacy.getAsBoolean() ? new LegacyKoboldRenderer(m, new KoboldLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_KOBOLD)), 0.4F, "kobold.png") : new KoboldRenderer(m, new KoboldModel(m.bakeLayer(TFModelLayers.KOBOLD)), 0.4F, "kobold.png"));
+		//EntityRendererRegistry.register(BOGGARD, m -> new RenderTFBiped<>(m, new BipedModel<>(0), 0.625F, "kobold.png"));
+		EntityRendererRegistry.register(MOSQUITO_SWARM, m -> new TFGenericMobRenderer<>(m, new MosquitoSwarmModel(m.bakeLayer(TFModelLayers.MOSQUITO_SWARM)), 0.0F, "mosquitoswarm.png"));
+		EntityRendererRegistry.register(DEATH_TOME, m -> new TFGenericMobRenderer<>(m, new DeathTomeModel(m.bakeLayer(TFModelLayers.DEATH_TOME)), 0.3F, "textures/entity/enchanting_table_book.png"));
+		EntityRendererRegistry.register(MINOTAUR, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new MinotaurLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_MINOTAUR)) : new MinotaurModel(m.bakeLayer(TFModelLayers.MINOTAUR)), 0.625F, "minotaur.png"));
+		EntityRendererRegistry.register(MINOSHROOM, m -> legacy.getAsBoolean() ? new LegacyMinoshroomRenderer(m, new MinoshroomLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_MINOSHROOM)), 0.625F) : new MinoshroomRenderer(m, new MinoshroomModel(m.bakeLayer(TFModelLayers.MINOSHROOM)), 0.625F));
+		EntityRendererRegistry.register(FIRE_BEETLE, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new FireBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_FIRE_BEETLE)) : new FireBeetleModel(m.bakeLayer(TFModelLayers.FIRE_BEETLE)), 0.8F, "firebeetle.png"));
+		EntityRendererRegistry.register(SLIME_BEETLE, m -> legacy.getAsBoolean() ? new LegacySlimeBeetleRenderer(m, new SlimeBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SLIME_BEETLE)), 0.6F) : new SlimeBeetleRenderer(m, new SlimeBeetleModel(m.bakeLayer(TFModelLayers.SLIME_BEETLE)), 0.6F));
+		EntityRendererRegistry.register(PINCH_BEETLE, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new PinchBeetleLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_PINCH_BEETLE)) : new PinchBeetleModel(m.bakeLayer(TFModelLayers.PINCH_BEETLE)), 0.6F, "pinchbeetle.png"));
+		EntityRendererRegistry.register(MIST_WOLF, MistWolfRenderer::new);
+		EntityRendererRegistry.register(CARMINITE_GHASTLING, m -> new TFGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTLING)), 0.625F));
+		EntityRendererRegistry.register(CARMINITE_GOLEM, m -> new CarminiteGolemRenderer<>(m, new CarminiteGolemModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GOLEM)), 0.75F));
+		EntityRendererRegistry.register(TOWERWOOD_BORER, m -> new TFGenericMobRenderer<>(m, new SilverfishModel<>(m.bakeLayer(ModelLayers.SILVERFISH)), 0.3F, "towertermite.png"));
+		EntityRendererRegistry.register(CARMINITE_GHASTGUARD, m -> new CarminiteGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTGUARD)), 3.0F));
+		EntityRendererRegistry.register(UR_GHAST, m -> legacy.getAsBoolean() ? new LegacyUrGhastRenderer(m, new UrGhastLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_UR_GHAST)), 8.0F, 24F) : new UrGhastRenderer(m, new UrGhastModel(m.bakeLayer(TFModelLayers.UR_GHAST)), 8.0F, 24F));
+		EntityRendererRegistry.register(BLOCKCHAIN_GOBLIN, m -> legacy.getAsBoolean() ? new LegacyBlockChainGoblinRenderer<>(m, new BlockChainGoblinLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_BLOCKCHAIN_GOBLIN)), 0.4F) : new BlockChainGoblinRenderer<>(m, new BlockChainGoblinModel<>(m.bakeLayer(TFModelLayers.BLOCKCHAIN_GOBLIN)), 0.4F));
+		EntityRendererRegistry.register(UPPER_GOBLIN_KNIGHT, m -> legacy.getAsBoolean() ? new LegacyUpperGoblinKnightRenderer(m, new UpperGoblinKnightLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_UPPER_GOBLIN_KNIGHT)), 0.625F) : new UpperGoblinKnightRenderer(m, new UpperGoblinKnightModel(m.bakeLayer(TFModelLayers.UPPER_GOBLIN_KNIGHT)), 0.625F));
+		EntityRendererRegistry.register(LOWER_GOBLIN_KNIGHT, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new LowerGoblinKnightLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_LOWER_GOBLIN_KNIGHT)) : new LowerGoblinKnightModel(m.bakeLayer(TFModelLayers.LOWER_GOBLIN_KNIGHT)), 0.625F, "doublegoblin.png"));
+		EntityRendererRegistry.register(HELMET_CRAB, m -> new TFGenericMobRenderer<>(m, legacy.getAsBoolean() ? new HelmetCrabLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_HELMET_CRAB)) : new HelmetCrabModel(m.bakeLayer(TFModelLayers.HELMET_CRAB)), 0.625F, "helmetcrab.png"));
+		EntityRendererRegistry.register(KNIGHT_PHANTOM, m -> new KnightPhantomRenderer(m, new KnightPhantomModel(m.bakeLayer(TFModelLayers.KNIGHT_PHANTOM)), 0.625F));
+		EntityRendererRegistry.register(NAGA, m -> legacy.getAsBoolean() ? new LegacyNagaRenderer<>(m, new NagaLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_NAGA)), 1.45F) : new NagaRenderer<>(m, new NagaModel<>(m.bakeLayer(TFModelLayers.NAGA)), 1.45F));
+		EntityRendererRegistry.register(SWARM_SPIDER, SwarmSpiderRenderer::new);
+		EntityRendererRegistry.register(KING_SPIDER, KingSpiderRenderer::new);
+		EntityRendererRegistry.register(CARMINITE_BROODLING, CarminiteBroodlingRenderer::new);
+		EntityRendererRegistry.register(HEDGE_SPIDER, HedgeSpiderRenderer::new);
+		EntityRendererRegistry.register(REDCAP_SAPPER, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new RedcapLegacyModel<>(m.bakeLayer(TFModelLayers.LEGACY_REDCAP)) : new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new RedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, "redcapsapper.png"));
+		EntityRendererRegistry.register(MAZE_SLIME, m -> new MazeSlimeRenderer(m, 0.625F));
+		EntityRendererRegistry.register(YETI, m -> new TFBipedRenderer<>(m, new YetiModel<>(m.bakeLayer(TFModelLayers.YETI)), 0.625F, "yeti2.png"));
+		EntityRendererRegistry.register(PROTECTION_BOX, ProtectionBoxRenderer::new);
+		EntityRendererRegistry.register(ALPHA_YETI, m -> new TFBipedRenderer<>(m, new AlphaYetiModel(m.bakeLayer(TFModelLayers.ALPHA_YETI)), 1.75F, "yetialpha.png"));
+		EntityRendererRegistry.register(WINTER_WOLF, WinterWolfRenderer::new);
+		EntityRendererRegistry.register(SNOW_GUARDIAN, m -> new SnowGuardianRenderer(m, new NoopModel<>(m.bakeLayer(TFModelLayers.NOOP))));
+		EntityRendererRegistry.register(STABLE_ICE_CORE, m -> new StableIceCoreRenderer(m, new StableIceCoreModel(m.bakeLayer(TFModelLayers.STABLE_ICE_CORE))));
+		EntityRendererRegistry.register(UNSTABLE_ICE_CORE, m -> new UnstableIceCoreRenderer<>(m, new UnstableIceCoreModel<>(m.bakeLayer(TFModelLayers.UNSTABLE_ICE_CORE))));
+		EntityRendererRegistry.register(SNOW_QUEEN, m -> legacy.getAsBoolean() ? new LegacySnowQueenRenderer(m, new SnowQueenLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_SNOW_QUEEN))) : new SnowQueenRenderer(m, new SnowQueenModel(m.bakeLayer(TFModelLayers.SNOW_QUEEN))));
+		EntityRendererRegistry.register(TROLL, m -> new TFBipedRenderer<>(m, legacy.getAsBoolean() ? new TrollLegacyModel(m.bakeLayer(TFModelLayers.LEGACY_TROLL)) : new TrollModel(m.bakeLayer(TFModelLayers.TROLL)), 0.625F, "troll.png"));
+		EntityRendererRegistry.register(GIANT_MINER, TFGiantRenderer::new);
+		EntityRendererRegistry.register(ARMORED_GIANT, TFGiantRenderer::new);
+		EntityRendererRegistry.register(ICE_CRYSTAL, IceCrystalRenderer::new);
+		EntityRendererRegistry.register(CHAIN_BLOCK, BlockChainRenderer::new);
+		EntityRendererRegistry.register(CUBE_OF_ANNIHILATION, CubeOfAnnihilationRenderer::new);
+		EntityRendererRegistry.register(HARBINGER_CUBE, HarbingerCubeRenderer::new);
+		EntityRendererRegistry.register(ADHERENT, AdherentRenderer::new);
+		EntityRendererRegistry.register(ROVING_CUBE, RovingCubeRenderer::new);
+		EntityRendererRegistry.register(RISING_ZOMBIE, m -> new TFBipedRenderer<>(m, new RisingZombieModel(m.bakeLayer(TFModelLayers.RISING_ZOMBIE)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, "textures/entity/zombie/zombie.png"));
+		//EntityRendererRegistry.register(CASTLE_GUARDIAN, m -> new RenderTFCastleGuardian(m, new ModelTFCastleGuardian(), 2.0F, "finalcastle/castle_guardian.png"));
+		EntityRendererRegistry.register(PLATEAU_BOSS, NoopRenderer::new);
 
 		// projectiles
-		event.registerEntityRenderer(NATURE_BOLT, ThrownItemRenderer::new);
-		event.registerEntityRenderer(LICH_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
-		event.registerEntityRenderer(WAND_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
-		event.registerEntityRenderer(TOME_BOLT, ThrownItemRenderer::new);
-		event.registerEntityRenderer(HYDRA_MORTAR, HydraMortarRenderer::new);
-		event.registerEntityRenderer(SLIME_BLOB, ThrownItemRenderer::new);
-		event.registerEntityRenderer(CICADA_SHOT, CicadaShotRenderer::new);
-		event.registerEntityRenderer(MOONWORM_SHOT, MoonwormShotRenderer::new);
-		event.registerEntityRenderer(CHARM_EFFECT, ThrownItemRenderer::new);
-		event.registerEntityRenderer(LICH_BOMB, ThrownItemRenderer::new);
-		event.registerEntityRenderer(THROWN_WEP, ThrownWepRenderer::new);
-		event.registerEntityRenderer(FALLING_ICE, FallingIceRenderer::new);
-		event.registerEntityRenderer(THROWN_ICE, ThrownIceRenderer::new);
-		event.registerEntityRenderer(ICE_SNOWBALL, ThrownItemRenderer::new);
-		event.registerEntityRenderer(SLIDER, SlideBlockRenderer::new);
-		event.registerEntityRenderer(SEEKER_ARROW, DefaultArrowRenderer::new);
-		event.registerEntityRenderer(ICE_ARROW, DefaultArrowRenderer::new);
+		EntityRendererRegistry.register(NATURE_BOLT, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(LICH_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
+		EntityRendererRegistry.register(WAND_BOLT, c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix("textures/items/twilight_orb.png")));
+		EntityRendererRegistry.register(TOME_BOLT, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(HYDRA_MORTAR, HydraMortarRenderer::new);
+		EntityRendererRegistry.register(SLIME_BLOB, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(CICADA_SHOT, CicadaShotRenderer::new);
+		EntityRendererRegistry.register(MOONWORM_SHOT, MoonwormShotRenderer::new);
+		EntityRendererRegistry.register(CHARM_EFFECT, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(LICH_BOMB, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(THROWN_WEP, ThrownWepRenderer::new);
+		EntityRendererRegistry.register(FALLING_ICE, FallingIceRenderer::new);
+		EntityRendererRegistry.register(THROWN_ICE, ThrownIceRenderer::new);
+		EntityRendererRegistry.register(ICE_SNOWBALL, ThrownItemRenderer::new);
+		EntityRendererRegistry.register(SLIDER, SlideBlockRenderer::new);
+		EntityRendererRegistry.register(SEEKER_ARROW, DefaultArrowRenderer::new);
+		EntityRendererRegistry.register(ICE_ARROW, DefaultArrowRenderer::new);
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static class BakedMultiPartRenderers {
 
 		private static final Map<ResourceLocation, EntityRenderer<?>> renderers = new HashMap<>();

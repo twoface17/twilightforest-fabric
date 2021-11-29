@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
+
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import twilightforest.TFSounds;
 import twilightforest.util.WorldUtil;
 
@@ -154,7 +154,7 @@ public class PeacockFanItem extends Item {
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof FlowerBlock) {
 			if (world.random.nextInt(3) == 0) {
-				if (!MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(world, pos, state, player))) {
+				if (PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(world, player, pos, state, null)) {
 					world.destroyBlock(pos, true);
 					cost++;
 				}

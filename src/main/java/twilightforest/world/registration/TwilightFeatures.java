@@ -14,9 +14,6 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.feature.trees.treeplacers.*;
 
@@ -32,7 +29,6 @@ import twilightforest.world.components.placements.ChunkCenterDecorator;
 import twilightforest.world.components.placements.OutOfStructureFilter;
 import twilightforest.world.components.placements.StructureClearingConfig;
 
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class TwilightFeatures {
     private static final List<FoliagePlacerType<?>> FOLIAGE_PLACER_TYPES = new ArrayList<>();
     private static final List<TreeDecoratorType<?>> TREE_DECORATOR_TYPES = new ArrayList<>();
@@ -62,9 +58,8 @@ public final class TwilightFeatures {
 
     private static <P extends FoliagePlacer> FoliagePlacerType<P> registerFoliage(ResourceLocation name, Codec<P> codec) {
         FoliagePlacerType<P> type = new FoliagePlacerType<>(codec);
-        type.setRegistryName(name);
         FOLIAGE_PLACER_TYPES.add(type);
-        return type;
+        return Registry.register(Registry.FOLIAGE_PLACER_TYPES, name, type);
     }
 
     private static <P extends TrunkPlacer> TrunkPlacerType<P> registerTrunk(ResourceLocation name, Codec<P> codec) {
@@ -75,29 +70,27 @@ public final class TwilightFeatures {
     private static <P extends TreeDecorator> TreeDecoratorType<P> registerTreeFeature(ResourceLocation name, Codec<P> codec) {
         // TRUNK_REPLACER is wrong, it only places, not replacing
         TreeDecoratorType<P> type = new TreeDecoratorType<>(codec);
-        type.setRegistryName(name);
         TREE_DECORATOR_TYPES.add(type);
-        return type;
+        return Registry.register(Registry.TREE_DECORATOR_TYPES, name, type);
     }
 
     protected static <FC extends FeatureConfiguration, F extends Feature<FC>> ConfiguredFeature<FC, F> registerWorldFeature(ResourceLocation rl, ConfiguredFeature<FC, F> feature) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, rl, feature);
     }
 
-    @SubscribeEvent
-    public static void registerFoliagePlacers(RegistryEvent.Register<FoliagePlacerType<?>> evt) {
-        evt.getRegistry().registerAll(FOLIAGE_PLACER_TYPES.toArray(new FoliagePlacerType<?>[0]));
-    }
-    
-    @SubscribeEvent
-    public static void registerTreeDecorators(RegistryEvent.Register<TreeDecoratorType<?>> evt) {
-        evt.getRegistry().registerAll(TREE_DECORATOR_TYPES.toArray(new TreeDecoratorType<?>[0]));
-    }
+//    @SubscribeEvent
+//    public static void registerFoliagePlacers(RegistryEvent.Register<FoliagePlacerType<?>> evt) {
+//        evt.getRegistry().registerAll(FOLIAGE_PLACER_TYPES.toArray(new FoliagePlacerType<?>[0]));
+//    }
+//
+//    @SubscribeEvent
+//    public static void registerTreeDecorators(RegistryEvent.Register<TreeDecoratorType<?>> evt) {
+//        evt.getRegistry().registerAll(TREE_DECORATOR_TYPES.toArray(new TreeDecoratorType<?>[0]));
+//    }
 
-    @SubscribeEvent
-    public static void registerPlacementConfigs(RegistryEvent.Register<FeatureDecorator<?>> evt) {
-        evt.getRegistry().register(PLACEMENT_NO_STRUCTURE.setRegistryName(TwilightForestMod.prefix("no_structure")));
-        evt.getRegistry().register(CHUNK_CENTERER.setRegistryName(TwilightForestMod.prefix("chunk_centerer")));
-        evt.getRegistry().register(PLACEMENT_CHUNK_BLANKETING.setRegistryName(TwilightForestMod.prefix("chunk_blanketing")));
+    public static void registerPlacementConfigs() {
+        Registry.register(Registry.DECORATOR, TwilightForestMod.prefix("no_structure"), PLACEMENT_NO_STRUCTURE);
+        Registry.register(Registry.DECORATOR, TwilightForestMod.prefix("chunk_centerer"), CHUNK_CENTERER);
+        Registry.register(Registry.DECORATOR, TwilightForestMod.prefix("chunk_blanketing"), PLACEMENT_CHUNK_BLANKETING);
     }
 }

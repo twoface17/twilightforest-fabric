@@ -38,8 +38,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TFSounds;
 import twilightforest.enums.BlockLoggingEnum;
 import twilightforest.item.TFItems;
@@ -56,8 +56,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import twilightforest.block.entity.TFBlockEntities;
+import twilightforest.lib.extensions.IBlockMethods;
 
-public class KeepsakeCasketBlock extends BaseEntityBlock implements BlockLoggingEnum.IMultiLoggable {
+public class KeepsakeCasketBlock extends BaseEntityBlock implements BlockLoggingEnum.IMultiLoggable, IBlockMethods {
 
 	public static final DirectionProperty FACING = TFHorizontalBlock.FACING;
 	public static final IntegerProperty BREAKAGE = IntegerProperty.create("damage", 0, 2);
@@ -274,7 +275,7 @@ public class KeepsakeCasketBlock extends BaseEntityBlock implements BlockLogging
 	}
 
 	//[VanillCopy] of ChestBlock.getLidRotationCallback, uses TileEntityKeepsakeCasket instead
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static DoubleBlockCombiner.Combiner<KeepsakeCasketBlockEntity, Float2FloatFunction> getLidRotationCallback(final LidBlockEntity lid) {
 		return new DoubleBlockCombiner.Combiner<KeepsakeCasketBlockEntity, Float2FloatFunction>() {
 			public Float2FloatFunction acceptDouble(KeepsakeCasketBlockEntity p_225539_1_, KeepsakeCasketBlockEntity p_225539_2_) {

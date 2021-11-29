@@ -15,8 +15,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import twilightforest.lib.extensions.IMapDecorationEx;
 import twilightforest.world.registration.TFFeature;
 
 import javax.annotation.Nullable;
@@ -135,7 +136,7 @@ public class TFMagicMapData extends MapItemSavedData {
 		}
 	}
 
-	public static class TFMapDecoration extends MapDecoration {
+	public static class TFMapDecoration extends MapDecoration implements IMapDecorationEx {
 
 		private static final Int2ObjectArrayMap<TFFeature> ICONS = new Int2ObjectArrayMap<>(){{
 			defaultReturnValue(TFFeature.NOTHING);
@@ -160,7 +161,7 @@ public class TFMagicMapData extends MapItemSavedData {
 			ICONS.forEach((k, v) -> put(v, k.intValue()));
 		}};
 
-		@OnlyIn(Dist.CLIENT)
+		@Environment(EnvType.CLIENT)
 		public static class RenderContext {
 			private static final RenderType MAP_ICONS = RenderType.text(TwilightForestMod.prefix("textures/gui/mapicons.png"));
 			public static PoseStack stack;
@@ -180,7 +181,7 @@ public class TFMagicMapData extends MapItemSavedData {
 		}
 
 		@Override
-		@OnlyIn(Dist.CLIENT)
+		@Environment(EnvType.CLIENT)
 		public boolean render(int idx) {
 			// TODO: Forge needs to pass in the ms and buffers, but for now this works
 			if (ICONS.get(featureId).isStructureEnabled) {

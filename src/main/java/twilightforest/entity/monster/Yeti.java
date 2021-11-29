@@ -32,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import twilightforest.TFSounds;
 import twilightforest.entity.IHostileMount;
 import twilightforest.entity.ai.ThrowRiderGoal;
+import twilightforest.lib.extensions.IEntityEx;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
 import javax.annotation.Nullable;
@@ -39,7 +40,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
-public class Yeti extends Monster implements IHostileMount {
+public class Yeti extends Monster implements IHostileMount, IEntityEx {
 
 	private static final EntityDataAccessor<Boolean> ANGER_FLAG = SynchedEntityData.defineId(Yeti.class, EntityDataSerializers.BOOLEAN);
 	private static final AttributeModifier ANGRY_MODIFIER = new AttributeModifier("Angry follow range boost", 24, AttributeModifier.Operation.ADDITION);

@@ -2,12 +2,12 @@ package twilightforest.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import twilightforest.TwilightForestMod;
+import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
-public class EnforceProgressionStatusPacket {
+public class EnforceProgressionStatusPacket implements BasePacket<EnforceProgressionStatusPacket> {
 
 	private final boolean enforce;
 
@@ -19,13 +19,19 @@ public class EnforceProgressionStatusPacket {
 		this.enforce = enforce;
 	}
 
+	@Override
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeBoolean(enforce);
 	}
 
+	@Override
+	public void handle(EnforceProgressionStatusPacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
 
-		public static boolean onMessage(EnforceProgressionStatusPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(EnforceProgressionStatusPacket message, Supplier<BasePacket.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

@@ -1,6 +1,7 @@
 package twilightforest.entity.boss;
 
 import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,11 +28,11 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerBossEvent;
-import net.minecraftforge.entity.PartEntity;
-import net.minecraftforge.event.ForgeEventFactory;
+import twilightforest.lib.entity.PartEntity;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.entity.TFPart;
 import twilightforest.entity.monster.IceCrystal;
+import twilightforest.lib.extensions.IEntityEx;
 import twilightforest.loot.TFTreasure;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TFSounds;
@@ -55,7 +56,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
-public class SnowQueen extends Monster implements IBreathAttacker {
+public class SnowQueen extends Monster implements IBreathAttacker, IEntityEx {
 
 	private static final int MAX_SUMMONS = 6;
 	private static final EntityDataAccessor<Boolean> BEAM_FLAG = SynchedEntityData.defineId(SnowQueen.class, EntityDataSerializers.BOOLEAN);
@@ -347,7 +348,7 @@ public class SnowQueen extends Monster implements IBreathAttacker {
 	}
 
 	public void destroyBlocksInAABB(AABB box) {
-		if (ForgeEventFactory.getMobGriefingEvent(level, this)) {
+		if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 			for (BlockPos pos : WorldUtil.getAllInBB(box)) {
 				BlockState state = level.getBlockState(pos);
 				if (state.getBlock() == Blocks.ICE || state.getBlock() == Blocks.PACKED_ICE) {

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "twilightforest",
+  "version": "${version}",
+  "name": "The Twilight Forest",
+  "description": "An enchanted forest dimension.",
+  "authors": [
+    "Benimatic",
+    "AtomicBlom",
+    "Drullkus",
+    "Killer_Demon",
+    "quadraxis",
+    "Tamaized",
+    "williewillus",
+    "GizmoTheMoonPig",
+    "AlphaMode"
+  ],
+  "contact": {},
+  "license": "GNU LESSER GENERAL PUBLIC LICENSE Version 2.1",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "twilightforest.TwilightForestMod"
+    ],
+    "client": [
+      "twilightforest.client.TFClientSetup"
+    ],
+    "cardinal-components": [
+      "twilightforest.capabilities.CapabilityList"
+    ],
+    "rei": [
+      "twilightforest.compat.REI",
+      "twilightforest.compat.REICommon"
+    ]
+  },
+  "mixins": [
+    "twilightforest.mixins.json"
+  ],
+  "accessWidener": "twilight.aw",
+  "breaks": {
+    "boats-and-beeps": "*"
+  },
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16",
+    "cloth-config2": ">=5.0.37",
+    "cloth-api": ">=2.0.54"
+  },
+  "suggests": {
+    "modmenu": ">=2.0.2"
+  },
+  "custom": {
+    "cardinal-components": [
+      "twilightforest:shield"
+    ],
+    "banner": "twilightforest_logo.png"
+  }
+}

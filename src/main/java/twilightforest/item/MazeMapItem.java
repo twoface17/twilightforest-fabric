@@ -21,9 +21,9 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
 import twilightforest.TFMazeMapData;
+import twilightforest.lib.data.Tags;
+import twilightforest.lib.extensions.IMapItemEx;
 import twilightforest.network.MazeMapPacket;
 import twilightforest.network.TFPacketHandler;
 
@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 
 // [VanillaCopy] super everything, but with appropriate redirections to our own datastructures. finer details noted
 
-public class MazeMapItem extends MapItem {
+public class MazeMapItem extends MapItem implements IMapItemEx {
 
 	public static final String STR_ID = "mazemap";
 	private static final int YSEARCH = 3;
@@ -57,7 +57,7 @@ public class MazeMapItem extends MapItem {
 
 	@Nullable
 	@Override
-	protected TFMazeMapData getCustomMapData(ItemStack stack, Level world) {
+	public TFMazeMapData getCustomMapData(ItemStack stack, Level world) {
 		TFMazeMapData mapdata = getData(stack, world);
 		if (mapdata == null && !world.isClientSide) {
 			mapdata = MazeMapItem.createMapData(stack, world, world.getLevelData().getXSpawn(), world.getLevelData().getZSpawn(), 0, false, false, world.dimension(), world.getLevelData().getYSpawn());
@@ -243,6 +243,6 @@ public class MazeMapItem extends MapItem {
 		Integer id = getMapId(stack);
 		TFMazeMapData mapdata = getCustomMapData(stack, worldIn);
 		Packet<?> p = id == null || mapdata == null ? null : mapdata.getUpdatePacket(id, player);
-		return p instanceof ClientboundMapItemDataPacket ? TFPacketHandler.CHANNEL.toVanillaPacket(new MazeMapPacket((ClientboundMapItemDataPacket) p), NetworkDirection.PLAY_TO_CLIENT) : p;
+		return p instanceof ClientboundMapItemDataPacket ? TFPacketHandler.CHANNEL.toVanillaPacket(new MazeMapPacket((ClientboundMapItemDataPacket) p)) : p;
 	}
 }

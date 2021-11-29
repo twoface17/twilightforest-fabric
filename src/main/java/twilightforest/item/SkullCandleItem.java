@@ -12,20 +12,24 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import twilightforest.block.AbstractSkullCandleBlock;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.SkullCandleBlockEntity;
+import twilightforest.lib.extensions.IBlockMethods;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class SkullCandleItem extends StandingAndWallBlockItem {
+public class SkullCandleItem extends StandingAndWallBlockItem implements IItemEx {
 
-	public SkullCandleItem(AbstractSkullCandleBlock floor, AbstractSkullCandleBlock wall, Properties properties) {
-		super(floor, wall, properties);
+	public SkullCandleItem(AbstractSkullCandleBlock floor, AbstractSkullCandleBlock wall, FabricItemSettings properties) {
+		super(floor, wall, properties.equipmentSlot(SkullCandleItem::getEquipmentSlot));
 	}
 
 	@Override
@@ -86,9 +90,8 @@ public class SkullCandleItem extends StandingAndWallBlockItem {
 		return armorType == EquipmentSlot.HEAD;
 	}
 
-	@Override
 	@Nullable
-	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+	public static EquipmentSlot getEquipmentSlot(ItemStack stack) {
 		return EquipmentSlot.HEAD;
 	}
 

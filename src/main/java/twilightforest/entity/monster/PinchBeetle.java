@@ -21,9 +21,10 @@ import twilightforest.TFSounds;
 import twilightforest.data.EntityTagGenerator;
 import twilightforest.entity.IHostileMount;
 import twilightforest.entity.ai.ChargeAttackGoal;
+import twilightforest.lib.extensions.IEntityEx;
 import twilightforest.util.TFDamageSources;
 
-public class PinchBeetle extends Monster implements IHostileMount {
+public class PinchBeetle extends Monster implements IHostileMount, IEntityEx {
 
 	public PinchBeetle(EntityType<? extends PinchBeetle> type, Level world) {
 		super(type, world);

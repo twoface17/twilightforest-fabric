@@ -5,10 +5,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.HollowLogVertical;
+import twilightforest.lib.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -42,9 +42,10 @@ public class HollowLogItem extends BlockItem {
         pBlockToItemMap.put(this.climbable, pItem);
     }
 
-    @Override
+    // TODO: PORT
+    //@Override
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
-        super.removeFromBlockToItemMap(blockToItemMap, itemIn);
+       // super.removeFromBlockToItemMap(blockToItemMap, itemIn);
         blockToItemMap.remove(this.horizontalLog);
         blockToItemMap.remove(this.verticalLog);
         blockToItemMap.remove(this.climbable);

@@ -2,7 +2,10 @@ package twilightforest.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.ServerResources;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.Mth;
@@ -23,14 +26,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
 import twilightforest.data.CustomTagGenerator;
+import twilightforest.lib.data.Tags;
+import twilightforest.lib.extensions.IItemEx;
 import twilightforest.util.FeatureLogic;
 import twilightforest.util.VoxelBresenhamIterator;
 
@@ -38,8 +39,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
-public class OreMagnetItem extends Item {
+public class OreMagnetItem extends Item implements IItemEx {
 
 	private static final float WIGGLE = 10F;
 
@@ -57,8 +57,8 @@ public class OreMagnetItem extends Item {
 		Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(book);
 
 		for (Enchantment ench : enchants.keySet()) {
-			if (Objects.equals(ench.getRegistryName(), Enchantments.UNBREAKING.getRegistryName())) {
-				return super.isBookEnchantable(stack, book);
+			if (Objects.equals(Registry.ENCHANTMENT.getKey(ench), Registry.ENCHANTMENT.getKey(Enchantments.UNBREAKING))) {
+				return IItemEx.super.isBookEnchantable(stack, book);
 			}
 		}
 		return false;
@@ -262,7 +262,7 @@ public class OreMagnetItem extends Item {
 		TwilightForestMod.LOGGER.info("GENERATING ORE TO BLOCK MAPPING");
 
 		for (Block blockReplaceOre : BlockTagGenerator.ORE_MAGNET_BLOCK_REPLACE_ORE.getValues()) {
-			ResourceLocation rl = blockReplaceOre.getRegistryName();
+			ResourceLocation rl = Registry.BLOCK.getKey(blockReplaceOre);
 			Tag<Block> tag = BlockTags.getAllTags().getTagOrEmpty(TwilightForestMod.prefix("ore_magnet/" + rl.getNamespace() + "/" + rl.getPath()));
 
 			for (Block oreBlock : tag.getValues()) {
@@ -272,12 +272,12 @@ public class OreMagnetItem extends Item {
 
 		Set<Block> remainingOres = new HashSet<>(Tags.Blocks.ORES.getValues());
 		remainingOres.removeAll(ORE_TO_BLOCK_REPLACEMENTS.keySet());
-		remainingOres.removeIf(b -> "minecraft".equals(b.getRegistryName().getNamespace()));
+		remainingOres.removeIf(b -> "minecraft".equals(Registry.BLOCK.getKey(b).getNamespace()));
 		if (!remainingOres.isEmpty()) {
 			TwilightForestMod.LOGGER.warn(remainingOres
 					.stream()
 					.peek(ore -> ORE_TO_BLOCK_REPLACEMENTS.put(ore, Blocks.STONE))
-					.map(Block::getRegistryName)
+					.map(Registry.BLOCK::getKey)
 					.map(ResourceLocation::toString)
 					.collect(Collectors.joining(", ", "Partially supported ores with Ore Magnet, [", "], will relate these to `minecraft:stone`. Mod packers/Mod devs are encouraged to add support for their ores to our ore magnet through block tag jsons"))
 			);
@@ -289,9 +289,8 @@ public class OreMagnetItem extends Item {
 		cacheNeedsBuild = false;
 	}
 
-	@SubscribeEvent
-	public static void buildOreMagnetCache(AddReloadListenerEvent event) {
-		event.addListener((stage, resourceManager, preparationsProfiler, reloadProfiler, backgroundExecutor, gameExecutor) -> {
+	public static List<PreparableReloadListener> buildOreMagnetCache(ServerResources serverResources) {
+		return List.of((stage, resourceManager, preparationsProfiler, reloadProfiler, backgroundExecutor, gameExecutor) -> {
 			if (!cacheNeedsBuild) {
 				ORE_TO_BLOCK_REPLACEMENTS.clear();
 				cacheNeedsBuild = true;

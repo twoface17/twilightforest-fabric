@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import twilightforest.block.TFBlocks;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.FeaturePlacers;
 import twilightforest.util.FeatureUtil;
 import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
@@ -29,7 +30,7 @@ public class TFGenMinersTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 
 		// check soil
 		BlockState state = world.getBlockState(pos.below());
-		if (!state.getBlock().canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
 			return false;
 		}
 

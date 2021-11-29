@@ -2,20 +2,21 @@ package twilightforest.block.entity;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.client.renderer.tileentity.*;
 import twilightforest.block.entity.spawner.*;
+import twilightforest.lib.RegistryObject;
+import twilightforest.lib.TFRegistry;
 
 public class TFBlockEntities {
 
-	public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, TwilightForestMod.ID);
+	public static final TFRegistry<BlockEntityType<?>> TILE_ENTITIES = TFRegistry.create(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID);
 
 	public static final RegistryObject<BlockEntityType<AntibuilderBlockEntity>> ANTIBUILDER = TILE_ENTITIES.register("antibuilder", () ->
 			BlockEntityType.Builder.of(AntibuilderBlockEntity::new, TFBlocks.ANTIBUILDER.get()).build(null));
@@ -94,16 +95,16 @@ public class TFBlockEntities {
 	public static final RegistryObject<BlockEntityType<TomeSpawnerBlockEntity>> TOME_SPAWNER = TILE_ENTITIES.register("tome_spawner", () ->
 			BlockEntityType.Builder.of(TomeSpawnerBlockEntity::new, TFBlocks.DEATH_TOME_SPAWNER.get()).build(null));
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void registerTileEntityRenders() {
 		// tile entities
-		BlockEntityRenderers.register(FIREFLY.get(), FireflyTileEntityRenderer::new);
-		BlockEntityRenderers.register(CICADA.get(), CicadaTileEntityRenderer::new);
-		BlockEntityRenderers.register(MOONWORM.get(), MoonwormTileEntityRenderer::new);
-		BlockEntityRenderers.register(TROPHY.get(), TrophyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(FIREFLY.get(), FireflyTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(CICADA.get(), CicadaTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(MOONWORM.get(), MoonwormTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(TROPHY.get(), TrophyTileEntityRenderer::new);
 		BlockEntityRenderers.register(TF_SIGN.get(), SignRenderer::new);
-		BlockEntityRenderers.register(TF_CHEST.get(), TwilightChestRenderer::new);
-		BlockEntityRenderers.register(KEEPSAKE_CASKET.get(), CasketTileEntityRenderer::new);
-		BlockEntityRenderers.register(SKULL_CANDLE.get(), SkullCandleTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(TF_CHEST.get(), TwilightChestRenderer::new);
+		BlockEntityRendererRegistry.register(KEEPSAKE_CASKET.get(), CasketTileEntityRenderer::new);
+		BlockEntityRendererRegistry.register(SKULL_CANDLE.get(), SkullCandleTileEntityRenderer::new);
 	}
 }

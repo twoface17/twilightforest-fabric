@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import twilightforest.TwilightForestMod;
 
 import javax.annotation.Nullable;
@@ -31,7 +30,7 @@ public class KillBugTrigger extends SimpleCriterionTrigger<KillBugTrigger.Instan
 	private static Block deserializeBug(JsonObject object) {
 		if (object.has("bug")) {
 			ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(object, "bug"));
-			return ForgeRegistries.BLOCKS.getValue(resourcelocation);
+			return Registry.BLOCK.get(resourcelocation);
 		} else {
 			return null;
 		}

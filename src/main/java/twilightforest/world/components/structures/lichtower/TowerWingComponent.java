@@ -1,6 +1,8 @@
 package twilightforest.world.components.structures.lichtower;
 
 import com.google.common.collect.Lists;
+
+import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,8 +33,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.CastleBlock;
@@ -54,18 +54,6 @@ import java.util.Random;
 public class TowerWingComponent extends TFStructureComponentOld {
 
 	private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
-	private static final Method HangingEntity_updateFacingWithBoundingBox = ObfuscationReflectionHelper.findMethod(HangingEntity.class, "m_6022_", Direction.class);
-	private static final MethodHandle handle_HangingEntity_updateFacingWithBoundingBox;
-
-	static {
-		MethodHandle tmp_handle_HangingEntity_updateFacingWithBoundingBox = null;
-		try {
-			tmp_handle_HangingEntity_updateFacingWithBoundingBox = LOOKUP.unreflect(HangingEntity_updateFacingWithBoundingBox);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		handle_HangingEntity_updateFacingWithBoundingBox = tmp_handle_HangingEntity_updateFacingWithBoundingBox;
-	}
 
 	public TowerWingComponent(ServerLevel level, CompoundTag nbt) {
 		this(LichTowerPieces.TFLTWin, nbt);
@@ -1824,11 +1812,7 @@ public class TowerWingComponent extends TFStructureComponentOld {
 			// initialize a painting object
 			Motive art = getPaintingOfSize(rand, minSize);
 			Painting painting = new Painting(EntityType.PAINTING, world.getLevel());
-			try {
-				handle_HangingEntity_updateFacingWithBoundingBox.invoke(painting, direction);
-			} catch (Throwable throwable) {
-				throwable.printStackTrace();
-			}
+			painting.setDirection(direction);
 			painting.motive = art;
 			painting.setPos(pCoords.getX(), pCoords.getY(), pCoords.getZ()); // this is done to refresh the bounding box after changing the art
 
@@ -1846,7 +1830,7 @@ public class TowerWingComponent extends TFStructureComponentOld {
 	protected Motive getPaintingOfSize(Random rand, int minSize) {
 		ArrayList<Motive> valid = new ArrayList<>();
 
-		for (Motive art : ForgeRegistries.PAINTING_TYPES) {
+		for (Motive art : Registry.MOTIVE) {
 			if (art.getWidth() >= minSize || art.getHeight() >= minSize) {
 				valid.add(art);
 			}

@@ -13,28 +13,24 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
+import twilightforest.lib.events.LivingHurtCallback;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
 public class KnightmetalSwordItem extends SwordItem {
 
 	private static final int BONUS_DAMAGE = 2;
 
 	public KnightmetalSwordItem(Tier material, Properties props) {
 		super(material, 3, -2.4F, props);
+		LivingHurtCallback.EVENT.register(KnightmetalSwordItem::onDamage);
 	}
 
-	@SubscribeEvent
-	public static void onDamage(LivingHurtEvent evt) {
+	public static float onDamage(LivingHurtCallback.LivingHurtEvent evt) {
 		LivingEntity target = evt.getEntityLiving();
 
 		if (!target.level.isClientSide && evt.getSource().getDirectEntity() instanceof LivingEntity living) {
@@ -57,10 +53,11 @@ public class KnightmetalSwordItem extends SwordItem {
 				}
 			}
 		}
+		return evt.getAmount();
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flags) {
 		super.appendHoverText(stack, world, list, flags);
 		list.add(new TranslatableComponent(getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));

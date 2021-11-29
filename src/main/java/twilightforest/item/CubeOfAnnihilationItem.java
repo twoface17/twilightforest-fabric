@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import twilightforest.entity.CubeOfAnnihilation;
 import twilightforest.entity.TFEntities;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 
-public class CubeOfAnnihilationItem extends Item {
+public class CubeOfAnnihilationItem extends Item implements IItemEx {
 
 	private static final String THROWN_UUID_KEY = "cubeEntity";
 

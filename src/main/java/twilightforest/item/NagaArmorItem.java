@@ -15,14 +15,15 @@ public class NagaArmorItem extends ArmorItem {
 		super(materialIn, equipmentSlotIn, props);
 	}
 
-	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
-		if (slot == EquipmentSlot.LEGS) {
-			return TwilightForestMod.ARMOR_DIR + "naga_scale_2.png";
-		} else {
-			return TwilightForestMod.ARMOR_DIR + "naga_scale_1.png";
-		}
-	}
+	// TODO: PORT
+//	@Override
+//	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
+//		if (slot == EquipmentSlot.LEGS) {
+//			return TwilightForestMod.ARMOR_DIR + "naga_scale_2.png";
+//		} else {
+//			return TwilightForestMod.ARMOR_DIR + "naga_scale_1.png";
+//		}
+//	}
 
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {

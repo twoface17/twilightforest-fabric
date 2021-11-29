@@ -3,7 +3,7 @@ package twilightforest.client.model.item;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
-import net.minecraftforge.client.model.pipeline.LightUtil;
+import twilightforest.lib.client.model.LightUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -7,27 +7,26 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import twilightforest.TwilightForestMod;
+import net.minecraft.world.phys.HitResult;
 
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
-public class EnderBowItem extends BowItem {
+import twilightforest.lib.events.ProjectileHitEvent;
+import twilightforest.lib.extensions.IBowItemEx;
+import twilightforest.lib.extensions.IEntityEx;
+
+public class EnderBowItem extends BowItem implements IBowItemEx {
 	private static final String KEY = "twilightforest:ender";
 
 	public EnderBowItem(Properties props) {
 		super(props);
+		ProjectileHitEvent.PROJECTILE_HIT_EVENT.register(EnderBowItem::onHit);
 	}
 
-	@SubscribeEvent
-	public static void onHit(ProjectileImpactEvent evt) {
-		Projectile arrow = evt.getProjectile();
+	public static boolean onHit(Projectile arrow, HitResult result) {
 		if (arrow.getOwner() instanceof Player player
-						&& evt.getRayTraceResult() instanceof EntityHitResult
-						&& ((EntityHitResult) evt.getRayTraceResult()).getEntity() instanceof LivingEntity living) {
+						&& result instanceof EntityHitResult
+						&& ((EntityHitResult) result).getEntity() instanceof LivingEntity living) {
 
-			if (arrow.getPersistentData().contains(KEY) && player.getVehicle() == null) {
+			if (IEntityEx.cast(arrow).getPersistentData().contains(KEY) && player.getVehicle() == null) {
 				double sourceX = player.getX(), sourceY = player.getY(), sourceZ = player.getZ();
 				float sourceYaw = player.getYRot(), sourcePitch = player.getXRot();
 
@@ -42,11 +41,12 @@ public class EnderBowItem extends BowItem {
 				living.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
 			}
 		}
+		return false;
 	}
 
 	@Override
 	public AbstractArrow customArrow(AbstractArrow arrow) {
-		arrow.getPersistentData().putBoolean(KEY, true);
+		IEntityEx.cast(arrow).getPersistentData().putBoolean(KEY, true);
 		return arrow;
 	}
 }

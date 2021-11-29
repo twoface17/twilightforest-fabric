@@ -1,5 +1,7 @@
 package twilightforest.block;
 
+import twilightforest.lib.extensions.IBlockMethods;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.Direction;
@@ -8,7 +10,7 @@ import net.minecraft.world.level.BlockGetter;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class FlammableBlock extends Block {
+public class FlammableBlock extends Block implements IBlockMethods {
 	private final int flammability;
 	private final int spreadSpeed;
 

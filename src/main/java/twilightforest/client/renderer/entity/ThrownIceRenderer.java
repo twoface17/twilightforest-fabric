@@ -39,12 +39,12 @@ public class ThrownIceRenderer extends EntityRenderer<IceBomb> {
 				ms.translate(-0.5D, 0.0D, -0.5D);
 				BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 				for (net.minecraft.client.renderer.RenderType type : net.minecraft.client.renderer.RenderType.chunkBufferLayers()) {
-					if (ItemBlockRenderTypes.canRenderInLayer(blockstate, type)) {
-						net.minecraftforge.client.ForgeHooksClient.setRenderLayer(type);
+					if (ItemBlockRenderTypes.getChunkRenderType(blockstate) == type) {
+//						net.minecraftforge.client.ForgeHooksClient.setRenderLayer(type);
 						blockrendererdispatcher.getModelRenderer().tesselateBlock(world, blockrendererdispatcher.getBlockModel(blockstate), blockstate, blockpos, ms, buffers.getBuffer(type), false, new Random(), blockstate.getSeed(BlockPos.ZERO), OverlayTexture.NO_OVERLAY);
 					}
 				}
-				net.minecraftforge.client.ForgeHooksClient.setRenderLayer(null);
+//				net.minecraftforge.client.ForgeHooksClient.setRenderLayer(null);
 				ms.popPose();
 				super.render(entity, yaw, partialTicks, ms, buffers, light);
 			}

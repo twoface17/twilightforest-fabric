@@ -7,6 +7,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import twilightforest.block.TFBlocks;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.world.components.feature.config.TFTreeFeatureConfig;
 
 import java.util.Random;
@@ -29,7 +30,7 @@ public class TFGenTreeOfTime extends TFGenHollowTree {
 
 		// check if we're on dirt or grass
 		BlockState state = world.getBlockState(pos.below());
-		if (!state.getBlock().canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, config.getSapling(random, pos))) {
 			return false;
 		}
 

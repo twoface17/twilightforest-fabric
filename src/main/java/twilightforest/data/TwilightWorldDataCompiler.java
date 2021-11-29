@@ -7,6 +7,7 @@ import com.mojang.serialization.Lifecycle;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceKey;
@@ -180,7 +181,7 @@ public class TwilightWorldDataCompiler extends WorldDataCompilerAndOps<JsonEleme
 				.BIOMES
 				.entrySet()
 				.stream()
-				.peek(registryKeyBiomeEntry -> registryKeyBiomeEntry.getValue().setRegistryName(registryKeyBiomeEntry.getKey().location()))
+				.peek(registryKeyBiomeEntry -> BuiltinRegistries.BIOME.get(registryKeyBiomeEntry.getKey().location()))
 				.collect(Collectors.toMap(entry -> entry.getKey().location(), Map.Entry::getValue));
 	}
 }

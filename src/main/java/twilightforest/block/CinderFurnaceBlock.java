@@ -24,15 +24,16 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.block.entity.CinderFurnaceBlockEntity;
 import twilightforest.block.entity.TFBlockEntities;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class CinderFurnaceBlock extends BaseEntityBlock {
+public class CinderFurnaceBlock extends BaseEntityBlock implements IBlockMethods {
 
 	public static final BooleanProperty LIT = BooleanProperty.create("lit");
 	private static final DirectionProperty FACING = TFHorizontalBlock.FACING;
@@ -95,7 +96,7 @@ public class CinderFurnaceBlock extends BaseEntityBlock {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		if (state.getValue(LIT)) {

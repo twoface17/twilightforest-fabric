@@ -15,9 +15,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;
 import twilightforest.client.model.armor.TFArmorModel;
@@ -33,14 +32,15 @@ public class ArcticArmorItem extends ArmorItem implements DyeableLeatherItem {
 		super(armorMaterial, armorType, props);
 	}
 
-	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, @Nullable String layer) {
-		if (slot == EquipmentSlot.LEGS) {
-			return TwilightForestMod.ARMOR_DIR + "arcticarmor_2" + (layer == null ? "_dyed" : "_overlay") + ".png";
-		} else {
-			return TwilightForestMod.ARMOR_DIR + "arcticarmor_1" + (layer == null ? "_dyed" : "_overlay") + ".png";
-		}
-	}
+	// TODO: PORT
+//	@Override
+//	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, @Nullable String layer) {
+//		if (slot == EquipmentSlot.LEGS) {
+//			return TwilightForestMod.ARMOR_DIR + "arcticarmor_2" + (layer == null ? "_dyed" : "_overlay") + ".png";
+//		} else {
+//			return TwilightForestMod.ARMOR_DIR + "arcticarmor_1" + (layer == null ? "_dyed" : "_overlay") + ".png";
+//		}
+//	}
 
 	@Override
 	public boolean hasCustomColor(ItemStack stack) {
@@ -116,26 +116,27 @@ public class ArcticArmorItem extends ArmorItem implements DyeableLeatherItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 		tooltip.add(TOOLTIP);
 	}
 
-	@Override
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(ArmorRender.INSTANCE);
-	}
-
-	private static final class ArmorRender implements IItemRenderProperties {
-		private static final ArmorRender INSTANCE = new ArmorRender();
-
-		@Override
-		@SuppressWarnings("unchecked")
-		public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A defModel) {
-			EntityModelSet models = Minecraft.getInstance().getEntityModels();
-			ModelPart root = models.bakeLayer(armorSlot == EquipmentSlot.LEGS ? TFModelLayers.ARCTIC_ARMOR_INNER : TFModelLayers.ARCTIC_ARMOR_OUTER);
-			return (A) new TFArmorModel(root);
-		}
-	}
+	// TODO: PORT
+//	@Override
+//	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+//		consumer.accept(ArmorRender.INSTANCE);
+//	}
+//
+//	private static final class ArmorRender implements IItemRenderProperties {
+//		private static final ArmorRender INSTANCE = new ArmorRender();
+//
+//		@Override
+//		@SuppressWarnings("unchecked")
+//		public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A defModel) {
+//			EntityModelSet models = Minecraft.getInstance().getEntityModels();
+//			ModelPart root = models.bakeLayer(armorSlot == EquipmentSlot.LEGS ? TFModelLayers.ARCTIC_ARMOR_INNER : TFModelLayers.ARCTIC_ARMOR_OUTER);
+//			return (A) new TFArmorModel(root);
+//		}
+//	}
 }

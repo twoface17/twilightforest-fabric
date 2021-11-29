@@ -12,9 +12,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.capabilities.CapabilityList;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import net.minecraft.world.item.Item.Properties;
 
-public class FortificationWandItem extends Item {
+public class FortificationWandItem extends Item implements IItemEx {
 
 	protected FortificationWandItem(Properties props) {
 		super(props);
@@ -38,7 +39,7 @@ public class FortificationWandItem extends Item {
 		}
 
 		if (!world.isClientSide) {
-			player.getCapability(CapabilityList.SHIELDS).ifPresent(cap -> {
+			CapabilityList.SHIELDS.maybeGet(player).ifPresent(cap -> {
 				cap.replenishShields();
 				stack.hurt(1, world.random, (ServerPlayer) null);
 			});
@@ -66,7 +67,7 @@ public class FortificationWandItem extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flags) {
 		super.appendHoverText(stack, world, tooltip, flags);
 		tooltip.add(new TranslatableComponent("twilightforest.scepter_charges", stack.getMaxDamage() - stack.getDamageValue()).withStyle(ChatFormatting.GRAY));

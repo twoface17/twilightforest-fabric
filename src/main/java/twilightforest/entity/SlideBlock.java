@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -20,10 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import twilightforest.lib.util.IEntityAdditionalSpawnData;
 import twilightforest.TFSounds;
 import twilightforest.util.TFDamageSources;
 
@@ -179,7 +179,7 @@ public class SlideBlock extends Entity implements IEntityAdditionalSpawnData {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public boolean displayFireAnimation() {
 		return false;
 	}
@@ -223,7 +223,7 @@ public class SlideBlock extends Entity implements IEntityAdditionalSpawnData {
 
 	@Override
 	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return new ClientboundAddEntityPacket(this);
 	}
 
 	public BlockState getBlockState() {

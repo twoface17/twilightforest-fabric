@@ -16,14 +16,15 @@ public class SteeleafArmorItem extends ArmorItem {
 		super(material, slot, props);
 	}
 
-	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
-		if (slot == EquipmentSlot.LEGS) {
-			return TwilightForestMod.ARMOR_DIR + "steeleaf_2.png";
-		} else {
-			return TwilightForestMod.ARMOR_DIR + "steeleaf_1.png";
-		}
-	}
+	// TODO: PORT
+//	@Override
+//	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
+//		if (slot == EquipmentSlot.LEGS) {
+//			return TwilightForestMod.ARMOR_DIR + "steeleaf_2.png";
+//		} else {
+//			return TwilightForestMod.ARMOR_DIR + "steeleaf_1.png";
+//		}
+//	}
 
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {

@@ -3,8 +3,9 @@ package twilightforest.item;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import twilightforest.entity.projectile.SeekerArrow;
+import twilightforest.lib.extensions.IBowItemEx;
 
-public class SeekerBowItem extends BowItem {
+public class SeekerBowItem extends BowItem implements IBowItemEx {
 
 	public SeekerBowItem(Properties props) {
 		super(props);

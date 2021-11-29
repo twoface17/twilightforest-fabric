@@ -22,11 +22,12 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import twilightforest.TFSounds;
 import twilightforest.advancements.TFAdvancements;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BrittleFlaskItem extends Item {
+public class BrittleFlaskItem extends Item implements IItemEx {
 
 	private static Potion lastUsedPotion;
 	private static int timesUsed;

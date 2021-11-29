@@ -28,16 +28,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TwilightForestMod;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.TFDamageSources;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class KnightmetalBlock extends Block implements SimpleWaterloggedBlock {
+public class KnightmetalBlock extends Block implements SimpleWaterloggedBlock, IBlockMethods {
 	private static final MutableComponent TOOLTIP = new TranslatableComponent("block.knightmetal.tooltip").withStyle(ChatFormatting.GRAY);
 
 	private static final VoxelShape SHAPE = Shapes.create(new AABB(1 / 16F, 1 / 16F, 1 / 16F, 15 / 16F, 15 / 16F, 15 / 16F));
@@ -95,7 +96,7 @@ public class KnightmetalBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		tooltip.add(TOOLTIP);
 	}

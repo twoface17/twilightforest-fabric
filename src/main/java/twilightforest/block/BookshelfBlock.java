@@ -1,5 +1,7 @@
 package twilightforest.block;
 
+import twilightforest.lib.extensions.IBlockMethods;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -7,7 +9,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BookshelfBlock extends Block {
+public class BookshelfBlock extends Block implements IBlockMethods {
 
 	public BookshelfBlock(Properties properties) {
 		super(properties);

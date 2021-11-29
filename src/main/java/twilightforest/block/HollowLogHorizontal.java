@@ -29,13 +29,15 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
+
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import twilightforest.enums.HollowLogVariants;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.AxisUtil;
 
 import javax.annotation.Nullable;
 
-public class HollowLogHorizontal extends Block implements WaterloggedBlock {
+public class HollowLogHorizontal extends Block implements WaterloggedBlock, IBlockMethods {
     public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final EnumProperty<HollowLogVariants.Horizontal> VARIANT = EnumProperty.create("variant", HollowLogVariants.Horizontal.class);
 
@@ -152,7 +154,7 @@ public class HollowLogHorizontal extends Block implements WaterloggedBlock {
 
                 return InteractionResult.CONSUME;
             }
-        } else if (stack.canPerformAction(ToolActions.SHOVEL_DIG)) {
+        } else if (FabricToolTags.SHOVELS.contains(stack.getItem())) {
             if (variant == HollowLogVariants.Horizontal.SNOW) {
                 level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), 3);
                 level.playSound(null, pos, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -165,7 +167,7 @@ public class HollowLogHorizontal extends Block implements WaterloggedBlock {
 
                 return InteractionResult.CONSUME;
             }
-        } else if (stack.canPerformAction(ToolActions.SHEARS_HARVEST)) {
+        } else if (FabricToolTags.SHEARS.contains(stack.getItem())) {
             if (variant == HollowLogVariants.Horizontal.MOSS || variant == HollowLogVariants.Horizontal.MOSS_AND_GRASS) {
                 level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), 3);
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);

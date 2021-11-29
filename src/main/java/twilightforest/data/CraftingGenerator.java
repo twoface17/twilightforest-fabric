@@ -1,40 +1,61 @@
 package twilightforest.data;
 
+import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
+
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.critereon.ImpossibleTrigger;
+import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.ConditionalRecipe;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;
-import twilightforest.item.recipe.UncraftingEnabledCondition;
+import twilightforest.lib.data.Tags;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Consumer;
-
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 
 public class CraftingGenerator extends CraftingDataHelper {
 	public CraftingGenerator(DataGenerator generator) {
 		super(generator);
 	}
 
-	@Override
-	protected void saveAdvancement(HashCache p_208310_1_, JsonObject p_208310_2_, Path p_208310_3_) {
-		//Silence. This just makes it so that we don't gen advancements
-		//TODO Recipe advancements control the unlock of a recipe, so if we ever consider actually making them, recipes should unlock based on also possible prerequisite conditions, instead of ONLY obtaining the item itself
-	}
+//	@Override
+//	protected void saveAdvancement(HashCache p_208310_1_, JsonObject p_208310_2_, Path p_208310_3_) {
+//		//Silence. This just makes it so that we don't gen advancements
+//		//TODO Recipe advancements control the unlock of a recipe, so if we ever consider actually making them, recipes should unlock based on also possible prerequisite conditions, instead of ONLY obtaining the item itself
+//	}
+
 
 	@Override
+	public void run(HashCache pCache) {
+		Path path = this.generator.getOutputFolder();
+		Set<ResourceLocation> set = Sets.newHashSet();
+		buildCraftingRecipes((p_125991_) -> {
+			if (!set.add(p_125991_.getId())) {
+				throw new IllegalStateException("Duplicate recipe " + p_125991_.getId());
+			} else {
+				saveRecipe(pCache, p_125991_.serializeRecipe(), path.resolve("data/" + p_125991_.getId().getNamespace() + "/recipes/" + p_125991_.getId().getPath() + ".json"));
+				JsonObject jsonobject = p_125991_.serializeAdvancement();
+				if (jsonobject != null) {
+					saveAdvancement(pCache, jsonobject, path.resolve("data/" + p_125991_.getId().getNamespace() + "/advancements/" + p_125991_.getAdvancementId().getPath() + ".json"));
+				}
+
+			}
+		});
+		//if (this.getClass() == RecipeProvider.class) //Forge: Subclasses don't need this.
+			saveAdvancement(pCache, Advancement.Builder.advancement().addCriterion("impossible", new ImpossibleTrigger.TriggerInstance()).serializeToJson(), path.resolve("data/minecraft/advancements/recipes/root.json"));
+	}
+
+	//@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 		// The Recipe Builder currently doesn't support enchantment-resulting recipes, those must be manually created.
 		blockCompressionRecipes(consumer);
@@ -142,17 +163,17 @@ public class CraftingGenerator extends CraftingDataHelper {
 				.unlockedBy("has_item", has(TFItems.TORCHBERRIES.get()))
 				.save(consumer, TwilightForestMod.prefix("berry_torch"));
 
-		ConditionalRecipe.builder()
-				.addCondition(new UncraftingEnabledCondition())
-				.addRecipe(ShapedRecipeBuilder.shaped(TFBlocks.UNCRAFTING_TABLE.get())
-						.pattern("###")
-						.pattern("#X#")
-						.pattern("###")
-						.define('#', Blocks.CRAFTING_TABLE)
-						.define('X', TFItems.MAZE_MAP_FOCUS.get())
-						.unlockedBy("has_uncrafting_table", has(TFBlocks.UNCRAFTING_TABLE.get()))
-						::save)
-				.build(consumer, TwilightForestMod.prefix("uncrafting_table"));
+//		ConditionalRecipe.builder()
+//				.addCondition(new UncraftingEnabledCondition())
+//				.addRecipe(ShapedRecipeBuilder.shaped(TFBlocks.UNCRAFTING_TABLE.get())
+//						.pattern("###")
+//						.pattern("#X#")
+//						.pattern("###")
+//						.define('#', Blocks.CRAFTING_TABLE)
+//						.define('X', TFItems.MAZE_MAP_FOCUS.get())
+//						.unlockedBy("has_uncrafting_table", has(TFBlocks.UNCRAFTING_TABLE.get()))
+//						::save)
+//				.build(consumer, TwilightForestMod.prefix("uncrafting_table"));
 
 		// Patchouli books would also go here, except they also must craft-result with NBT data.
 
@@ -350,17 +371,17 @@ public class CraftingGenerator extends CraftingDataHelper {
 		ShapelessRecipeBuilder.shapeless(Blocks.COBBLESTONE, 64)
 				.requires(TFBlocks.GIANT_COBBLESTONE.get())
 				.unlockedBy("has_item", has(TFBlocks.GIANT_COBBLESTONE.get()))
-				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_COBBLESTONE.getId().getPath() + "_to_" + Blocks.COBBLESTONE.asItem().getRegistryName().getPath()));
+				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_COBBLESTONE.getId().getPath() + "_to_" + Registry.ITEM.getKey(Blocks.COBBLESTONE.asItem()).getPath()));
 
 		ShapelessRecipeBuilder.shapeless(Blocks.OAK_PLANKS, 64)
 				.requires(TFBlocks.GIANT_LOG.get())
 				.unlockedBy("has_item", has(TFBlocks.GIANT_LOG.get()))
-				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_LOG.getId().getPath() + "_to_" + Blocks.OAK_PLANKS.asItem().getRegistryName().getPath()));
+				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_LOG.getId().getPath() + "_to_" + Registry.ITEM.getKey(Blocks.OAK_PLANKS.asItem()).getPath()));
 
 		ShapelessRecipeBuilder.shapeless(Blocks.OAK_LEAVES, 64)
 				.requires(TFBlocks.GIANT_LEAVES.get())
 				.unlockedBy("has_item", has(TFBlocks.GIANT_LOG.get()))
-				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_LEAVES.getId().getPath() + "_to_" + Blocks.OAK_LEAVES.asItem().getRegistryName().getPath()));
+				.save(consumer, TwilightForestMod.prefix(TFBlocks.GIANT_LEAVES.getId().getPath() + "_to_" + Registry.ITEM.getKey(Blocks.OAK_LEAVES.asItem()).getPath()));
 
 		ShapelessRecipeBuilder.shapeless(TFItems.BLOCK_AND_CHAIN.get())
 				.requires(ItemTagGenerator.STORAGE_BLOCKS_KNIGHTMETAL)
@@ -731,14 +752,14 @@ public class CraftingGenerator extends CraftingDataHelper {
 				.requires(Ingredient.of(ItemTagGenerator.FIERY_VIAL), 2)
 				.requires(Ingredient.of(Tags.Items.RODS_BLAZE))
 				.unlockedBy("has_item", has(ItemTagGenerator.FIERY_VIAL))
-				.save(consumer, locEquip("fiery_" + Items.IRON_SWORD.getRegistryName().getPath()));
+				.save(consumer, locEquip("fiery_" + Registry.ITEM.getKey(Items.IRON_SWORD).getPath()));
 
 		ShapelessRecipeBuilder.shapeless(TFItems.FIERY_PICKAXE.get())
 				.requires(Items.IRON_PICKAXE)
 				.requires(Ingredient.of(ItemTagGenerator.FIERY_VIAL), 3)
 				.requires(Ingredient.of(Tags.Items.RODS_BLAZE), 2)
 				.unlockedBy("has_item", has(ItemTagGenerator.FIERY_VIAL))
-				.save(consumer, locEquip("fiery_" + Items.IRON_PICKAXE.getRegistryName().getPath()));
+				.save(consumer, locEquip("fiery_" + Registry.ITEM.getKey(Items.IRON_PICKAXE).getPath()));
 	}
 
 	private void cookingRecipes(Consumer<FinishedRecipe> consumer, String processName, SimpleCookingSerializer<?> process, int smeltingTime) {

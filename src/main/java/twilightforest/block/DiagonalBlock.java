@@ -1,5 +1,7 @@
 package twilightforest.block;
 
+import twilightforest.lib.extensions.IBlockMethods;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,7 +17,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public class DiagonalBlock extends Block {
+public class DiagonalBlock extends Block implements IBlockMethods {
 
     public static final BooleanProperty IS_ROTATED = BooleanProperty.create("is_rotated");
 

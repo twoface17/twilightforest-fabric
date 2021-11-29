@@ -12,7 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolActions;
+
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import twilightforest.item.TFItems;
 
 public class LiverootBlock extends Block {
@@ -23,7 +24,7 @@ public class LiverootBlock extends Block {
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		if(player.getItemInHand(hand).getItem().canPerformAction(player.getItemInHand(hand), ToolActions.AXE_STRIP)) {
+		if(FabricToolTags.AXES.contains(player.getItemInHand(hand).getItem())) {
 			level.setBlockAndUpdate(pos, TFBlocks.ROOT_BLOCK.get().defaultBlockState());
 			ItemEntity liveroot = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(TFItems.LIVEROOT.get()));
 			level.addFreshEntity(liveroot);

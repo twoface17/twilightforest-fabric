@@ -26,13 +26,13 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
 import twilightforest.TFSounds;
 import twilightforest.advancements.TFAdvancements;
 import twilightforest.block.TFBlocks;
@@ -46,6 +46,7 @@ import twilightforest.entity.ai.YetiTiredGoal;
 import twilightforest.entity.projectile.FallingIce;
 import twilightforest.entity.projectile.IceBomb;
 import twilightforest.entity.projectile.TwilightWandBolt;
+import twilightforest.lib.extensions.IEntityEx;
 import twilightforest.loot.TFTreasure;
 import twilightforest.util.EntityUtil;
 import twilightforest.util.WorldUtil;
@@ -56,7 +57,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount {
+public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount, IEntityEx {
 
 	private static final EntityDataAccessor<Byte> RAMPAGE_FLAG = SynchedEntityData.defineId(AlphaYeti.class, EntityDataSerializers.BYTE);
 	private static final EntityDataAccessor<Byte> TIRED_FLAG = SynchedEntityData.defineId(AlphaYeti.class, EntityDataSerializers.BYTE);
@@ -250,7 +251,7 @@ public class AlphaYeti extends Monster implements RangedAttackMob, IHostileMount
 	}
 
 	public void destroyBlocksInAABB(AABB box) {
-		if (ForgeEventFactory.getMobGriefingEvent(level, this)) {
+		if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 			for (BlockPos pos : WorldUtil.getAllInBB(box)) {
 				if (EntityUtil.canDestroyBlock(level, pos, this)) {
 					level.destroyBlock(pos, false);

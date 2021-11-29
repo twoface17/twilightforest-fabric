@@ -15,7 +15,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.IShapedRecipe;
 import twilightforest.TFConfig;
 import twilightforest.block.TFBlocks;
 import twilightforest.data.ItemTagGenerator;
@@ -114,10 +113,10 @@ public class UncraftingContainer extends AbstractContainerMenu {
 				CraftingRecipe recipe = recipes[Math.floorMod(this.unrecipeInCycle, size)];
 				ItemStack[] recipeItems = getIngredients(recipe);
 
-				if (recipe instanceof IShapedRecipe rec) {
+				if (true/*recipe instanceof IShapedRecipe rec*/) {
 
-					int recipeWidth = rec.getRecipeWidth();
-					int recipeHeight = rec.getRecipeHeight();
+					int recipeWidth = 3;//rec.getRecipeWidth();
+					int recipeHeight = 3;//rec.getRecipeHeight();
 
 					// set uncrafting grid
 					for (int invY = 0; invY < recipeHeight; invY++) {
@@ -275,7 +274,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 	}
 
 	private static boolean isIngredientProblematic(ItemStack ingredient) {
-		return !ingredient.isEmpty() && ingredient.getItem().hasContainerItem(ingredient);
+		return !ingredient.isEmpty()/* && ingredient.getItem().hasContainerItem(ingredient)*/;
 	}
 
 	private static ItemStack normalizeIngredient(ItemStack ingredient) {

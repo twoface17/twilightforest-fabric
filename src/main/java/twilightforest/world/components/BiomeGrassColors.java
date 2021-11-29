@@ -63,9 +63,16 @@ public class BiomeGrassColors {
 				| (((((a & mask2) * f1) + ((b & mask2) * f2)) >> 8) & mask2);
 	}
 
-	private static GrassColorModifier make(String name, GrassColorModifier.ColorModifier delegate) {
+
+	//todo wtf do I do here
+	private static GrassColorModifier make(String name, ColorModifier delegate) {
 		name = TwilightForestMod.prefix(name).toString();
 
-		return GrassColorModifier.create(name, name, delegate);
+		return GrassColorModifier.DARK_FOREST;/*.create(name, name, delegate);*/
 	}
+	@FunctionalInterface
+	public interface ColorModifier {
+		int modifyGrassColor(double x, double z, int color);
+	}
+
 }

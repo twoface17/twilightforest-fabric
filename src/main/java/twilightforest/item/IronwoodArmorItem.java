@@ -16,14 +16,15 @@ public class IronwoodArmorItem extends ArmorItem {
 		super(armorMaterial, armorType, props);
 	}
 
-	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
-		if (slot == EquipmentSlot.LEGS) {
-			return TwilightForestMod.ARMOR_DIR + "ironwood_2.png";
-		} else {
-			return TwilightForestMod.ARMOR_DIR + "ironwood_1.png";
-		}
-	}
+	// TODO: PORT
+//	@Override
+//	public String getArmorTexture(ItemStack itemstack, Entity entity, EquipmentSlot slot, String layer) {
+//		if (slot == EquipmentSlot.LEGS) {
+//			return TwilightForestMod.ARMOR_DIR + "ironwood_2.png";
+//		} else {
+//			return TwilightForestMod.ARMOR_DIR + "ironwood_1.png";
+//		}
+//	}
 
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {

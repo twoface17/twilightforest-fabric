@@ -26,8 +26,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TFSounds;
 
 import javax.annotation.Nullable;
@@ -35,8 +35,9 @@ import java.util.List;
 import java.util.Optional;
 
 import twilightforest.entity.boss.AlphaYeti;
+import twilightforest.lib.extensions.IItemEx;
 
-public class LifedrainScepterItem extends Item {
+public class LifedrainScepterItem extends Item implements IItemEx {
 
 	protected LifedrainScepterItem(Properties props) {
 		super(props);
@@ -130,7 +131,7 @@ public class LifedrainScepterItem extends Item {
 	public void onUsingTick(ItemStack stack, LivingEntity living, int count) {
 		Level world = living.level;
 
-		if (stack.getDamageValue() == this.getMaxDamage(stack)) {
+		if (stack.getDamageValue() == this.getMaxDamage(/*stack*/)) {
 			// do not use
 			living.stopUsingItem();
 			return;
@@ -247,7 +248,7 @@ public class LifedrainScepterItem extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flags) {
 		super.appendHoverText(stack, world, tooltip, flags);
 		tooltip.add(new TranslatableComponent("twilightforest.scepter_charges", stack.getMaxDamage() - stack.getDamageValue()).withStyle(ChatFormatting.GRAY));

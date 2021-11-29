@@ -15,16 +15,16 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.TierSortingRegistry;
 import twilightforest.TFSounds;
 import twilightforest.entity.ChainBlock;
 import twilightforest.entity.TFEntities;
-import twilightforest.util.TwilightItemTier;
+import twilightforest.enums.TwilightItemTier;
+import twilightforest.lib.extensions.IItemEx;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class ChainBlockItem extends DiggerItem {
+public class ChainBlockItem extends DiggerItem implements IItemEx {
 
 	private static final String THROWN_UUID_KEY = "chainEntity";
 
@@ -106,13 +106,14 @@ public class ChainBlockItem extends DiggerItem {
 		return true;
 	}
 
-	@Override
-	public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
-		if (state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_HOE)
-				|| state.is(BlockTags.MINEABLE_WITH_SHOVEL) || state.is(BlockTags.MINEABLE_WITH_AXE))
-			return TierSortingRegistry.isCorrectTierForDrops(Tiers.IRON, state);
-		return super.isCorrectToolForDrops(stack, state);
-	}
+	// TODO: PORT
+//	@Override
+//	public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+//		if (state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_HOE)
+//				|| state.is(BlockTags.MINEABLE_WITH_SHOVEL) || state.is(BlockTags.MINEABLE_WITH_AXE))
+//			return TierSortingRegistry.isCorrectTierForDrops(Tiers.IRON, state);
+//		return super.isCorrectToolForDrops(stack, state);
+//	}
 
 	/*@Override
 	public int getHarvestLevel(ItemStack stack, ToolType tool, @Nullable Player player, @Nullable BlockState blockState) {

@@ -18,9 +18,10 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import twilightforest.TFSounds;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import java.util.*;
 
@@ -41,7 +42,7 @@ import net.minecraft.world.InteractionResult;
  * @see ReappearingBlock , It is only separated from this class because vanilla does
  * not like having blockstate properties be conditionally registered.
  */
-public class VanishingBlock extends Block {
+public class VanishingBlock extends Block implements IBlockMethods {
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	public static final BooleanProperty VANISHED = BooleanProperty.create("vanished");
 	private static final VoxelShape VANISHED_SHAPE = box(6, 6, 6, 10, 10, 10);
@@ -88,12 +89,12 @@ public class VanishingBlock extends Block {
 
 	@Override
 	public float getExplosionResistance(BlockState state, BlockGetter world, BlockPos pos, Explosion explosion) {
-		return !state.getValue(ACTIVE) ? 6000F : super.getExplosionResistance(state, world, pos, explosion);
+		return !state.getValue(ACTIVE) ? 6000F : ((IBlockMethods)this).getExplosionResistance(state, world, pos, explosion);
 	}
 
 	@Override
 	public boolean canEntityDestroy(BlockState state, BlockGetter world, BlockPos pos, Entity entity) {
-		return !state.getValue(ACTIVE) ? !areBlocksLocked(world, pos) : super.canEntityDestroy(state, world, pos, entity);
+		return !state.getValue(ACTIVE) ? !areBlocksLocked(world, pos) : ((IBlockMethods)this).canEntityDestroy(state, world, pos, entity);
 	}
 
 	private static boolean areBlocksLocked(BlockGetter world, BlockPos start) {
@@ -170,7 +171,7 @@ public class VanishingBlock extends Block {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		if (state.getValue(ACTIVE)) {
 			this.sparkle(world, pos);

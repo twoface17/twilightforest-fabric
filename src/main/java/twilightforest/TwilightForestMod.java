@@ -2,6 +2,8 @@ package twilightforest;
 
 import com.google.common.collect.Maps;
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.Registry;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -9,9 +11,11 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionBrewing;
@@ -20,27 +24,24 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
+
+import com.mojang.brigadier.CommandDispatcher;
+import net.alphamode.enums.EnumUtil;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.api.ModLoadingContext;
+import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.resource.PathResourcePack;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import twilightforest.advancements.TFAdvancements;
+import twilightforest.block.TFBlockItems;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.capabilities.CapabilityList;
@@ -49,10 +50,16 @@ import twilightforest.command.TFCommand;
 import twilightforest.compat.TFCompat;
 import twilightforest.dispenser.TFDispenserBehaviors;
 import twilightforest.enchantment.TFEnchantments;
+import twilightforest.entity.TFEntities;
 import twilightforest.inventory.TFContainers;
 import twilightforest.item.FieryPickItem;
+import twilightforest.item.OreMagnetItem;
 import twilightforest.item.TFItems;
-import twilightforest.item.recipe.UncraftingEnabledCondition;
+import twilightforest.lib.Register;
+import twilightforest.lib.TFInternalApi;
+import twilightforest.lib.crafting.CraftingHelper;
+import twilightforest.lib.events.ResourceListenerCallback;
+import twilightforest.lib.loot.LootModifierManager;
 import twilightforest.loot.TFTreasure;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.potions.TFMobEffects;
@@ -60,18 +67,14 @@ import twilightforest.potions.TFPotions;
 import twilightforest.util.TFStats;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
-import twilightforest.world.registration.TFBiomeFeatures;
-import twilightforest.world.registration.TFDimensions;
-import twilightforest.world.registration.TFStructures;
-import twilightforest.world.registration.TwilightFeatures;
+import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.function.Consumer;
 
-@Mod(TwilightForestMod.ID)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class TwilightForestMod {
+public class TwilightForestMod implements ModInitializer {
 
 	// TODO: might be a good idea to find proper spots for all of these? also remove redundants
 	public static final String ID = "twilightforest";
@@ -82,43 +85,47 @@ public class TwilightForestMod {
 	// odd one out, as armor textures are a stringy mess at present
 	public static final String ARMOR_DIR = ID + ":textures/armor/";
 
-	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRules.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRules.BooleanValue.create(true)); //Putting it in UPDATES since other world stuff is here
+	public static final GameRules.Key<GameRules.BooleanValue> ENFORCED_PROGRESSION_RULE = GameRuleRegistry.register("tfEnforcedProgression", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true)); //Putting it in UPDATES since other world stuff is here
 
 	public static final Logger LOGGER = LogManager.getLogger(ID);
 
-	private static final Rarity rarity = Rarity.create("TWILIGHT", ChatFormatting.DARK_GREEN);
+	private static final Rarity rarity = EnumUtil.createRarity("TWILIGHT", ChatFormatting.DARK_GREEN);
 
 	public TwilightForestMod() {
 		{
 			final Pair<TFConfig.Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TFConfig.Common::new);
-			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, specPair.getRight());
+			ModLoadingContext.registerConfig(ID, ModConfig.Type.COMMON, specPair.getRight());
 			TFConfig.COMMON_CONFIG = specPair.getLeft();
 		}
 		{
 			final Pair<TFConfig.Client, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TFConfig.Client::new);
-			ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, specPair.getRight());
+			ModLoadingContext.registerConfig(ID, ModConfig.Type.CLIENT, specPair.getRight());
 			TFConfig.CLIENT_CONFIG = specPair.getLeft();
 		}
+		ModConfigEvent.RELOADING.register(TFConfig::onConfigChanged);
 
-		ASMHooks.registerMultipartEvents(MinecraftForge.EVENT_BUS);
-		MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
+		ASMHooks.registerMultipartEvents();
+		CommandRegistrationCallback.EVENT.register(this::registerCommands);
 
-		IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
-		modbus.addListener(CapabilityList::registerCapabilities);
-		MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityList::attachEntityCapability);
-		TFBlocks.BLOCKS.register(modbus);
-		TFItems.ITEMS.register(modbus);
-		TFMobEffects.MOB_EFFECTS.register(modbus);
+//		IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
+//		modbus.addListener(CapabilityList::registerCapabilities);
+//		MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityList::attachEntityCapability);
+		TFBlocks.BLOCKS.register();
+		Register<Item> register = new Register<>(TFItems.ITEMS);
+		TFEntities.registerSpawnEggs(register);
+		TFBlockItems.registerBlockItems(register);
+		TFItems.ITEMS.register();
+		TFMobEffects.MOB_EFFECTS.register();
 		//TFPotions.POTIONS.register(modbus);
-		BiomeKeys.BIOMES.register(modbus);
-		modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
-		TFBlockEntities.TILE_ENTITIES.register(modbus);
-		TFParticleType.PARTICLE_TYPES.register(modbus);
-		modbus.addGenericListener(StructureFeature.class, TFStructures::register);
-		MinecraftForge.EVENT_BUS.addListener(TFStructures::load);
-		TFBiomeFeatures.FEATURES.register(modbus);
-		TFContainers.CONTAINERS.register(modbus);
-		TFEnchantments.ENCHANTMENTS.register(modbus);
+		BiomeKeys.BIOMES.register();
+//		modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
+		TFBlockEntities.TILE_ENTITIES.register();
+		//TFParticleType.PARTICLE_TYPES.register();
+		TFStructures.register();
+		ServerWorldEvents.LOAD.register(TFStructures::load);
+		TFBiomeFeatures.FEATURES.register();
+		TFContainers.CONTAINERS.register();
+		TFEnchantments.ENCHANTMENTS.register();
 		// Poke these so they exist when we need them FIXME this is probably terrible design
 		new TwilightFeatures();
 		new BiomeGrassColors();
@@ -145,46 +152,42 @@ public class TwilightForestMod {
 		WoodType.register(TFBlocks.SORTING);
 	}
 
-	@SubscribeEvent
-	public static void addClassicPack(AddPackFindersEvent event) {
-		try {
-			if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-				var resourcePath = ModList.get().getModFileById(TwilightForestMod.ID).getFile().findResource("classic");
-				var pack = new PathResourcePack(ModList.get().getModFileById(TwilightForestMod.ID).getFile().getFileName() + ":" + resourcePath, resourcePath);
-				var metadataSection = pack.getMetadataSection(PackMetadataSection.SERIALIZER);
-				if (metadataSection != null) {
-					event.addRepositorySource((packConsumer, packConstructor) ->
-							packConsumer.accept(packConstructor.create(
-									"builtin/twilight_forest_legacy_resources", new TextComponent("Twilight Classic"), false,
-									() -> pack, metadataSection, Pack.Position.TOP, PackSource.BUILT_IN, false)));
-				}
-			}
-		}
-		catch(IOException ex) {
-			throw new RuntimeException(ex);
-		}
+	public static void addClassicPack(PackType packType, Consumer<RepositorySource> sources) {
+//		try {
+//			if (packType == PackType.CLIENT_RESOURCES) {
+//				var resourcePath = FabricLoader.getInstance().getModContainer(TwilightForestMod.ID).get().getRootPath().resolve("classic");
+//				var pack = new PathResourcePack(ModList.get().getModFileById(TwilightForestMod.ID).getFile().getFileName() + ":" + resourcePath, resourcePath);
+//				var metadataSection = pack.getMetadataSection(PackMetadataSection.SERIALIZER);
+//				if (metadataSection != null) {
+//					sources.accept((packConsumer, packConstructor) ->
+//							packConsumer.accept(packConstructor.create(
+//									"builtin/twilight_forest_legacy_resources", new TextComponent("Twilight Classic"), false,
+//									() -> pack, metadataSection, Pack.Position.TOP, PackSource.BUILT_IN, false)));
+//				}
+//			}
+//		}
+//		catch(IOException ex) {
+//			throw new RuntimeException(ex);
+//		}
 	}
 
-	@SubscribeEvent
-	public static void registerSerializers(RegistryEvent.Register<RecipeSerializer<?>> evt) {
+
+	public static void registerSerializers() {
 		//How do I add a condition serializer as fast as possible? An event that fires really early
-		CraftingHelper.register(new UncraftingEnabledCondition.Serializer());
+		//CraftingHelper.register(new UncraftingEnabledCondition.Serializer());
 		TFTreasure.init();
 	}
 
-	@SubscribeEvent
-	public static void registerLootModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> evt) {
-		evt.getRegistry().register(new FieryPickItem.Serializer().setRegistryName(ID + ":fiery_pick_smelting"));
-		evt.getRegistry().register(new TFEventListener.Serializer().setRegistryName(ID + ":giant_block_grouping"));
+	public static void registerLootModifiers() {
+		Registry.register(LootModifierManager.SERIALIZER, new ResourceLocation(ID + ":fiery_pick_smelting"), new FieryPickItem.Serializer());
+		Registry.register(LootModifierManager.SERIALIZER, new ResourceLocation(ID + ":giant_block_grouping"), new TFEventListener.Serializer());
 	}
 
-	@SubscribeEvent
-	public void sendIMCs(InterModEnqueueEvent evt) {
+	public void sendIMCs() {
 		TFCompat.IMCSender();
 	}
 
-	@SubscribeEvent
-	public static void init(FMLCommonSetupEvent evt) {
+	public static void init() {
 		TFPacketHandler.init();
 		TFAdvancements.init();
 		BiomeKeys.addBiomeTypes();
@@ -214,7 +217,7 @@ public class TwilightForestMod {
 		TFConfig.build();
 		BlockSpikeFeature.loadStalactites();
 
-		evt.enqueueWork(() -> {
+		//evt.enqueueWork(() -> {
 			TFBlocks.tfCompostables();
 			TFBlocks.tfBurnables();
 			TFBlocks.tfPots();
@@ -244,11 +247,11 @@ public class TwilightForestMod {
 			AxeItem.STRIPPABLES.put(TFBlocks.TRANSFORMATION_WOOD.get(), TFBlocks.STRIPPED_TRANSFORMATION_WOOD.get());
 			AxeItem.STRIPPABLES.put(TFBlocks.MINING_WOOD.get(), TFBlocks.STRIPPED_MINING_WOOD.get());
 			AxeItem.STRIPPABLES.put(TFBlocks.SORTING_WOOD.get(), TFBlocks.STRIPPED_SORTING_WOOD.get());
-		});
+		//});
 	}
 
-	public void registerCommands(RegisterCommandsEvent event) {
-		TFCommand.register(event.getDispatcher());
+	public void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, boolean dedicated) {
+		TFCommand.register(dispatcher);
 	}
 
 	public static ResourceLocation prefix(String name) {
@@ -269,5 +272,21 @@ public class TwilightForestMod {
 
 	public static Rarity getRarity() {
 		return rarity != null ? rarity : Rarity.EPIC;
+	}
+
+	@Override
+	public void onInitialize() {
+		TFInternalApi.init();
+		registerSerializers();
+		init();
+
+		TFEntities.registerEntities();
+		TFEntities.addEntityAttributes();
+		TwilightSurfaceBuilders.register();
+		ConfiguredWorldCarvers.register();
+		TwilightFeatures.registerPlacementConfigs();
+		//Fabric events
+		ResourceListenerCallback.EVENT.register(OreMagnetItem::buildOreMagnetCache);
+		TFEventListener.registerEvents();
 	}
 }

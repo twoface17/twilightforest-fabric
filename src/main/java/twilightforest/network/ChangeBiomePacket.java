@@ -2,6 +2,7 @@ package twilightforest.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -9,11 +10,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+
+import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
-public class ChangeBiomePacket {
+public class ChangeBiomePacket implements BasePacket<ChangeBiomePacket> {
 	private final BlockPos pos;
 	private final ResourceLocation biomeId;
 
@@ -27,15 +29,21 @@ public class ChangeBiomePacket {
 		biomeId = buf.readResourceLocation();
 	}
 
+	@Override
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeInt(pos.getX());
 		buf.writeInt(pos.getZ());
 		buf.writeResourceLocation(biomeId);
 	}
 
+	@Override
+	public void handle(ChangeBiomePacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
 
-		public static boolean onMessage(ChangeBiomePacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(ChangeBiomePacket message, Supplier<BasePacket.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

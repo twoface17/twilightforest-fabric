@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 import twilightforest.block.TFBlocks;
 import twilightforest.data.BlockTagGenerator;
+import twilightforest.lib.util.WorldUtil;
 
 import java.util.Random;
 
@@ -49,7 +50,7 @@ public class AntibuilderBlockEntity extends BlockEntity {
 			} else {
 
 				// new plan, take a snapshot of the world when we are first activated, and then rapidly revert changes
-				if (te.blockData == null && level.isAreaLoaded(pos, AntibuilderBlockEntity.RADIUS)) {
+				if (te.blockData == null && WorldUtil.isAreaLoaded(level, pos, AntibuilderBlockEntity.RADIUS)) {
 					te.captureBlockData();
 					te.slowScan = true;
 				}

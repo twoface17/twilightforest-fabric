@@ -16,10 +16,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import twilightforest.enums.BossVariant;
 import twilightforest.block.entity.spawner.BossSpawnerBlockEntity;
+import twilightforest.lib.extensions.IBlockMethods;
 
 import javax.annotation.Nullable;
 
-public class BossSpawnerBlock extends BaseEntityBlock {
+public class BossSpawnerBlock extends BaseEntityBlock implements IBlockMethods {
 	private static final VoxelShape CHUNGUS = Block.box(-4, -4, -4, 20, 20, 20);
 	private final BossVariant boss;
 

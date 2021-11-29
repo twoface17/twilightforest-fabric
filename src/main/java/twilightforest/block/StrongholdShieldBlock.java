@@ -13,11 +13,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.EntityUtil;
 
 import javax.annotation.Nullable;
 
-public class StrongholdShieldBlock extends DirectionalBlock {
+public class StrongholdShieldBlock extends DirectionalBlock implements IBlockMethods {
 
 	public StrongholdShieldBlock(BlockBehaviour.Properties props) {
 		super(props);
@@ -47,7 +49,7 @@ public class StrongholdShieldBlock extends DirectionalBlock {
 		Direction upFace = state.getValue(DirectionalBlock.FACING);
 
 		if (hitFace == (upOrDown ? upFace : sideFace)) {
-			return player.getDigSpeed(Blocks.STONE.defaultBlockState(), pos) / 1.5F / 100F;
+			return player.getDestroySpeed(Blocks.STONE.defaultBlockState()) / 1.5F / 100F;
 		} else {
 			return super.getDestroyProgress(state, player, world, pos);
 		}

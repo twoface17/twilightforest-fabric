@@ -20,13 +20,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.TFDamageSources;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public class ThornsBlock extends ConnectableRotatedPillarBlock implements SimpleWaterloggedBlock {
+public class ThornsBlock extends ConnectableRotatedPillarBlock implements SimpleWaterloggedBlock, IBlockMethods {
 
 	private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -77,7 +79,7 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 			}
 			return false;
 		} else {
-			return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
+			return ((IBlockMethods) this).removedByPlayer(state, world, pos, player, willHarvest, fluid);
 		}
 	}
 
