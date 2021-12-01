@@ -1,8 +1,6 @@
 package twilightforest.network;
 
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import me.pepperbell.simplenetworking.SimpleChannel;
 import twilightforest.TwilightForestMod;
 
 import java.util.function.Supplier;
@@ -10,12 +8,7 @@ import java.util.function.Supplier;
 public class TFPacketHandler {
 	// Bump this number every time theres a breaking change, to ensure people dont mess things up when joining on the wrong version
 	private static final String PROTOCOL_VERSION = "2";
-	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-			TwilightForestMod.prefix("channel"),
-			() -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals
-	);
+	public static final SimpleChannel CHANNEL = new SimpleChannel(TwilightForestMod.prefix("channel"));
 
 	@SuppressWarnings("UnusedAssignment")
 	public static void init() {

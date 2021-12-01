@@ -2,20 +2,21 @@ package twilightforest.block.entity;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import twilightforest.lib.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.entity.spawner.*;
 import twilightforest.client.renderer.tileentity.*;
+import twilightforest.lib.TFRegistry;
 
 public class TFBlockEntities {
 
-	public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, TwilightForestMod.ID);
+	public static final TFRegistry<BlockEntityType<?>> TILE_ENTITIES = TFRegistry.create(Registry.BLOCK_ENTITY_TYPE, TwilightForestMod.ID);
 
 	public static final RegistryObject<BlockEntityType<AntibuilderBlockEntity>> ANTIBUILDER = TILE_ENTITIES.register("antibuilder", () ->
 			BlockEntityType.Builder.of(AntibuilderBlockEntity::new, TFBlocks.ANTIBUILDER.get()).build(null));
@@ -94,7 +95,7 @@ public class TFBlockEntities {
 	public static final RegistryObject<BlockEntityType<TomeSpawnerBlockEntity>> TOME_SPAWNER = TILE_ENTITIES.register("tome_spawner", () ->
 			BlockEntityType.Builder.of(TomeSpawnerBlockEntity::new, TFBlocks.DEATH_TOME_SPAWNER.get()).build(null));
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void registerTileEntityRenders() {
 		// tile entities
 		BlockEntityRenderers.register(FIREFLY.get(), FireflyTileEntityRenderer::new);

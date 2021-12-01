@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import twilightforest.lib.RegistryObject;
 import org.apache.commons.lang3.StringUtils;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;

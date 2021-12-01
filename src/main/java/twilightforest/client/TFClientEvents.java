@@ -33,7 +33,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
+import twilightforest.lib.RegistryObject;
 import twilightforest.TFConfig;
 import twilightforest.TFEventListener;
 import twilightforest.TwilightForestMod;

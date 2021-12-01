@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import twilightforest.lib.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.TFBlocks;

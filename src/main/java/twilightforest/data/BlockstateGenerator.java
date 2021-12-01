@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import twilightforest.lib.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.*;
 import twilightforest.enums.*;
