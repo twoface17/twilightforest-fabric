@@ -17,8 +17,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.IShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import twilightforest.TwilightForestMod;
 
 import javax.annotation.Nullable;
@@ -26,8 +24,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: PORT
 @SuppressWarnings("NullableProblems")
-public class UncraftingRecipe implements IUncraftingRecipe, IShapedRecipe<CraftingContainer> {
+public class UncraftingRecipe implements IUncraftingRecipe/*, IShapedRecipe<CraftingContainer>*/ {
     private final ResourceLocation recipeID;
     private final int cost;
     private final int width;
@@ -90,15 +89,15 @@ public class UncraftingRecipe implements IUncraftingRecipe, IShapedRecipe<Crafti
         return this.cost;
     }
 
-    @Override
-    public int getRecipeWidth() {
-        return this.width;
-    }
-
-    @Override
-    public int getRecipeHeight() {
-        return this.height;
-    }
+//    @Override
+//    public int getRecipeWidth() {
+//        return this.width;
+//    }
+//
+//    @Override
+//    public int getRecipeHeight() {
+//        return this.height;
+//    }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -114,7 +113,7 @@ public class UncraftingRecipe implements IUncraftingRecipe, IShapedRecipe<Crafti
         return this.count;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<UncraftingRecipe> {
+    public static class Serializer implements RecipeSerializer<UncraftingRecipe> {
         /**
          * This is mostly vanilla's shaped recipe serializer, with some changes made to make it work with the slightly different recipe type.
          * The recipe json has inputs for "cost", which determines how many levels the recipe will cost.

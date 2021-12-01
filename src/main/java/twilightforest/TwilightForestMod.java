@@ -118,16 +118,16 @@ public class TwilightForestMod implements ModInitializer {
 		TFItems.ITEMS.register();
 		TFMobEffects.MOB_EFFECTS.register();
 		//TFPotions.POTIONS.register(modbus);
-		BiomeKeys.BIOMES.register(modbus);
-		modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
-		TFBlockEntities.TILE_ENTITIES.register(modbus);
-		TFRecipes.RECIPE_SERIALIZERS.register(modbus);
-		TFParticleType.PARTICLE_TYPES.register(modbus);
+		BiomeKeys.BIOMES.register();
+		//modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
+		TFBlockEntities.TILE_ENTITIES.register();
+		TFRecipes.RECIPE_SERIALIZERS.register();
+		TFParticleType.PARTICLE_TYPES.register();
 		TFStructures.register();
 		ServerWorldEvents.LOAD.register(TFStructures::load);
-		TFBiomeFeatures.FEATURES.register(modbus);
-		TFContainers.CONTAINERS.register(modbus);
-		TFEnchantments.ENCHANTMENTS.register(modbus);
+		TFBiomeFeatures.FEATURES.register();
+		TFContainers.CONTAINERS.register();
+		TFEnchantments.ENCHANTMENTS.register();
 		// Poke these so they exist when we need them FIXME this is probably terrible design
 		new TwilightFeatures();
 		new BiomeGrassColors();
