@@ -130,10 +130,10 @@ public class TFStructures {
 	}
 
 	public static void load(MinecraftServer server, ServerLevel serverWorld) {
-		if(serverWorld.getChunkSource().generator instanceof ChunkGeneratorTwilight) {
-			Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+		if(serverWorld.getChunkSource().getGenerator() instanceof ChunkGeneratorTwilight) {
+			Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(serverWorld.getChunkSource().getGenerator().getSettings().structureConfig());
 			tempMap.putAll(SEPARATION_SETTINGS);
-			serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+			serverWorld.getChunkSource().getGenerator().getSettings().structureConfig = tempMap;
 		}
 	}
 }

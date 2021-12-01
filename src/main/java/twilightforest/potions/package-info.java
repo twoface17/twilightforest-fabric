@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package twilightforest.world.components.surfacebuilders;
+package twilightforest.potions;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

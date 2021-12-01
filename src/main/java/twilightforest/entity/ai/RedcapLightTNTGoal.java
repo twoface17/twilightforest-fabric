@@ -70,7 +70,7 @@ public class RedcapLightTNTGoal extends RedcapBaseGoal {
 		if (this.redcap.distanceToSqr(Vec3.atLowerCornerOf(tntPos)) < 2.4D * 2.4D) {
 			redcap.playAmbientSound();
 
-			IBlockMethods.cast(Blocks.TNT).catchFire(Blocks.TNT.defaultBlockState(), redcap.level, tntPos, Direction.UP, redcap);
+			IBlockMethods.cast(Blocks.TNT).onCaughtFire(Blocks.TNT.defaultBlockState(), redcap.level, tntPos, Direction.UP, redcap);
 			redcap.swing(InteractionHand.MAIN_HAND);
 			redcap.level.setBlock(tntPos, Blocks.AIR.defaultBlockState(), 2);
 			this.redcap.getNavigation().stop();

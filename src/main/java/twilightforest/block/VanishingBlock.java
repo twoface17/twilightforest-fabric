@@ -1,36 +1,32 @@
 package twilightforest.block;
 
 import com.mojang.math.Vector3f;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.util.*;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import twilightforest.TFSounds;
 import twilightforest.lib.extensions.IBlockMethods;
 
 import java.util.*;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 
 /**
  * Block that disappears then reappears after a short delay.
@@ -149,14 +145,14 @@ public class VanishingBlock extends Block implements IBlockMethods {
 				world.setBlockAndUpdate(pos, state.setValue(VANISHED, false).setValue(ACTIVE, false));
 			} else {
 				world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
-				world.getBlockTicks().scheduleTick(pos, this, 15);
+				world.scheduleTick(pos, this, 15);
 			}
 			world.playSound(null, pos, TFSounds.REAPPEAR_BLOCK, SoundSource.BLOCKS, 0.3F, 0.6F);
 		} else {
 			if (state.getValue(ACTIVE)) {
 				if (state.hasProperty(VANISHED)) {
 					world.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(VANISHED, true));
-					world.getBlockTicks().scheduleTick(pos, this, 80);
+					world.scheduleTick(pos, this, 80);
 				} else {
 					world.removeBlock(pos, false);
 				}
@@ -225,7 +221,7 @@ public class VanishingBlock extends Block implements IBlockMethods {
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof VanishingBlock && !isVanished(state) && !state.getValue(ACTIVE)) {
 			world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
-			world.getBlockTicks().scheduleTick(pos, state.getBlock(), 2 + world.random.nextInt(5));
+			world.scheduleTick(pos, state.getBlock(), 2 + world.random.nextInt(5));
 		}
 	}
 }

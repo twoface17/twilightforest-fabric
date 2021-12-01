@@ -15,11 +15,7 @@ import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -64,12 +60,12 @@ import twilightforest.lib.loot.LootModifierManager;
 import twilightforest.loot.TFTreasure;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.potions.TFMobEffects;
-import twilightforest.potions.TFPotions;
 import twilightforest.util.TFStats;
 import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
+import twilightforest.world.registration.features.TFNoiseRules;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -218,6 +214,7 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFConfig.build();
 		BlockSpikeFeature.loadStalactites();
+		TFNoiseRules.init();
 
 		//evt.enqueueWork(() -> {
 			TFBlocks.tfCompostables();

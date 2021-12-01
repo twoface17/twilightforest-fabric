@@ -48,7 +48,7 @@ public class FogHandler {
 		boolean flag = isSpooky();
 		if (flag || spoopFog < 1F) {
 			float f = 48F;
-			f = f >= distance ? distance : Mth.clampedLerp(f, distance, spoopFog);
+			f = f >= event.getFarPlaneDistance() ? event.getFarPlaneDistance() : Mth.clampedLerp(f, event.getFarPlaneDistance(), spoopFog);
 			float shift = (float) (0.001F * partialTicks);
 			if (flag)
 				spoopFog -= shift;
@@ -59,7 +59,7 @@ public class FogHandler {
 			//FIXME: These two are commented out as they do not exist in the main game. While this might mean they aren't needed, look at this if there is a problem
 //			RenderSystem.fogMode(GlStateManager.FogMode.LINEAR);
 
-			if (type == FogRenderer.FogMode.FOG_SKY) {
+			if (event.getMode() == FogRenderer.FogMode.FOG_SKY) {
 				RenderSystem.setShaderFogStart(0.0F);
 				RenderSystem.setShaderFogEnd(f);
 			} else {
