@@ -202,7 +202,7 @@ public class LifedrainScepterItem extends Item implements IItemEx {
 				}
 
 				if (!world.isClientSide && living instanceof Player && !((Player)living).isCreative()) {
-					stack.hurt(1, world.random, (ServerPlayer) null);
+					stack.hurt(1, world.random, null);
 				}
 			}
 		}

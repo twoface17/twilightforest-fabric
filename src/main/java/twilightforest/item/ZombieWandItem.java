@@ -57,7 +57,7 @@ public class ZombieWandItem extends Item implements IItemEx {
 				zombie.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 1));
 				world.addFreshEntity(zombie);
 
-				stack.hurt(1, world.random, (ServerPlayer) null);
+				stack.hurt(1, world.random, null);
 			}
 		}
 

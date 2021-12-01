@@ -41,7 +41,7 @@ public class FortificationWandItem extends Item implements IItemEx {
 		if (!world.isClientSide) {
 			CapabilityList.SHIELDS.maybeGet(player).ifPresent(cap -> {
 				cap.replenishShields();
-				stack.hurt(1, world.random, (ServerPlayer) null);
+				stack.hurt(1, world.random, null);
 			});
 		}
 
