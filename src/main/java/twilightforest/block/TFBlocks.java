@@ -542,10 +542,10 @@ public class TFBlocks {
 	public static final RegistryObject<FlowerPotBlock> POTTED_MAYAPPLE = BLOCKS.register("potted_mayapple", () -> new FlowerPotBlock(MAYAPPLE.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
 	public static final RegistryObject<FlowerPotBlock> POTTED_FIDDLEHEAD = BLOCKS.register("potted_fiddlehead", () -> new FlowerPotBlock(FIDDLEHEAD.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
 	public static final RegistryObject<FlowerPotBlock> POTTED_MUSHGLOOM = BLOCKS.register("potted_mushgloom", () -> new FlowerPotBlock(MUSHGLOOM.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_THORN = BLOCKS.register("potted_thorn", () -> new FlowerPotBlock(BROWN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_GREEN_THORN = BLOCKS.register("potted_green_thorn", () -> new FlowerPotBlock(GREEN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	public static final RegistryObject<FlowerPotBlock> POTTED_DEAD_THORN = BLOCKS.register("potted_dead_thorn", () -> new FlowerPotBlock(BURNT_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
-	
+	public static final RegistryObject<FlowerPotBlock> POTTED_THORN = BLOCKS.register("potted_thorn", () -> new SpecialFlowerPotBlock(BROWN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_GREEN_THORN = BLOCKS.register("potted_green_thorn", () -> new SpecialFlowerPotBlock(GREEN_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+	public static final RegistryObject<FlowerPotBlock> POTTED_DEAD_THORN = BLOCKS.register("potted_dead_thorn", () -> new SpecialFlowerPotBlock(BURNT_THORNS.get(), BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
+
 	public static void registerItemblocks(Register<Item> evt) {
 		TFBlockItems.registerBlockItems(evt);
 		TFCompat.initCompatItems(evt);
@@ -558,7 +558,7 @@ public class TFBlocks {
 	private static BlockBehaviour.Properties logProperties(MaterialColor top, MaterialColor side) {
 		return BlockBehaviour.Properties.of(Material.WOOD, (state) -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? top : side);
 	}
-	
+
 	private static void registerCompostable(float chance, ItemLike item) {
 		CompostingChanceRegistry.INSTANCE.add(item, chance);
 	}

@@ -21,6 +21,8 @@ import twilightforest.data.ItemTagGenerator;
 import twilightforest.inventory.slot.AssemblySlot;
 import twilightforest.inventory.slot.UncraftingResultSlot;
 import twilightforest.inventory.slot.UncraftingSlot;
+import twilightforest.item.recipe.TFRecipes;
+import twilightforest.item.recipe.UncraftingRecipe;
 import twilightforest.util.TFItemStackUtils;
 
 import java.util.ArrayList;
@@ -52,6 +54,9 @@ public class UncraftingContainer extends AbstractContainerMenu {
 	public int unrecipeInCycle = 0;
 	public int ingredientsInCycle = 0;
 	public int recipeInCycle = 0;
+
+	// Need to store potential custom cost. If set to -1, will calculate uncrafting cost normally.
+	private static int customCost;
 
 	public static UncraftingContainer fromNetwork(int id, Inventory inventory) {
 		return new UncraftingContainer(id, inventory, inventory.player.level, ContainerLevelAccess.NULL);
@@ -111,6 +116,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 			if (size > 0 && !inputStack.is(ItemTagGenerator.BANNED_UNCRAFTABLES)) {
 
 				CraftingRecipe recipe = recipes[Math.floorMod(this.unrecipeInCycle, size)];
+				customCost = recipe instanceof UncraftingRecipe ? ((UncraftingRecipe) recipe).getCost() : -1;
 				ItemStack[] recipeItems = getIngredients(recipe);
 
 				if (true/*recipe instanceof IShapedRecipe rec*/) {
@@ -162,10 +168,12 @@ public class UncraftingContainer extends AbstractContainerMenu {
 
 				// store number of items this recipe produces (and thus how many input items are required for uncrafting)
 				this.uncraftingMatrix.numberOfInputItems = recipe.getResultItem().getCount();
+				if (recipe instanceof UncraftingRecipe) this.uncraftingMatrix.numberOfInputItems = ((UncraftingRecipe)recipe).getCount();//Uncrafting recipes need this method call
 				this.uncraftingMatrix.uncraftingCost = calculateUncraftingCost();
 				this.uncraftingMatrix.recraftingCost = 0;
 
 			} else {
+				customCost = -1;
 				this.uncraftingMatrix.numberOfInputItems = 0;
 				this.uncraftingMatrix.uncraftingCost = 0;
 			}
@@ -294,9 +302,14 @@ public class UncraftingContainer extends AbstractContainerMenu {
 						recipe.canCraftInDimensions(3, 3) &&
 						!recipe.getIngredients().isEmpty() &&
 						matches(inputStack, recipe.getResultItem()) &&
-						!TFConfig.COMMON_CONFIG.disableUncraftingRecipes.get().contains(recipe.getId().toString())) {
-					recipes.add(rec);
+						!TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.disableUncraftingRecipes.get().contains(recipe.getId().toString())) {
+					if(TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.flipUncraftingModIdList.get() == TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.blacklistedUncraftingModIds.get().contains(recipe.getId().getNamespace())) {
+						recipes.add(rec);
+					}
 				}
+			}
+			for (UncraftingRecipe uncraftingRecipe : world.getRecipeManager().getAllRecipesFor(TFRecipes.UNCRAFTING_RECIPE)) {
+				if (uncraftingRecipe.isItemStackAnIngredient(inputStack)) recipes.add(uncraftingRecipe);
 			}
 		}
 
@@ -375,7 +388,9 @@ public class UncraftingContainer extends AbstractContainerMenu {
 	 */
 	private int calculateUncraftingCost() {
 		// we don't want to display anything if there is anything in the assembly grid
-		return !this.assemblyMatrix.isEmpty() ? 0 : countDamageableParts(this.uncraftingMatrix);
+		if (this.assemblyMatrix.isEmpty()) {
+			return customCost >= 0 ? customCost : countDamageableParts(this.uncraftingMatrix);
+		} else return 0;
 	}
 
 	/**
@@ -469,7 +484,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 			}
 
 			// don't allow uncrafting if the server option is turned off
-			if (TFConfig.COMMON_CONFIG.disableUncrafting.get()) {
+			if (TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.disableUncrafting.get()) {
 				return;
 			}
 
@@ -545,17 +560,18 @@ public class UncraftingContainer extends AbstractContainerMenu {
 				}
 				slot.onQuickCraft(itemstack1, itemstack);
 			} else if (slotNum >= 20 && slotNum < 56) {
-				if (!this.moveItemStackTo(itemstack1, 2, 11, false)) {
-					if (slotNum < 47) {
-						if (!this.moveItemStackTo(itemstack1, 47, 56, false)) {
-							return ItemStack.EMPTY;
-						}
-					} else if (!this.moveItemStackTo(itemstack1, 20, 47, false)) {
-						return ItemStack.EMPTY;
-					}
+				if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
+					return ItemStack.EMPTY;
 				}
-			} else if (!this.moveItemStackTo(itemstack1, 20, 56, false)) {
-				return ItemStack.EMPTY;
+			} else if (slot.container == this.assemblyMatrix) {
+				if (!this.moveItemStackTo(itemstack1, 20, 56, false)) {
+					return ItemStack.EMPTY;
+				}
+			} else {
+				if (this.moveItemStackTo(itemstack1, 20, 56, false)) {
+					slot.onTake(player, itemstack1);
+					return ItemStack.EMPTY;
+				}
 			}
 			if (itemstack1.isEmpty()) {
 				slot.set(ItemStack.EMPTY);

@@ -13,9 +13,11 @@ package twilightforest.compat;
 //import net.minecraft.world.item.ItemStack;
 //import net.minecraft.world.item.crafting.CraftingRecipe;
 //import net.minecraft.world.item.crafting.ShapelessRecipe;
+//import twilightforest.TFConfig;
 //import twilightforest.TwilightForestMod;
 //import twilightforest.block.TFBlocks;
 //import twilightforest.data.ItemTagGenerator;
+//import twilightforest.item.recipe.UncraftingRecipe;
 //
 //import java.util.ArrayList;
 //import java.util.Arrays;
@@ -66,7 +68,14 @@ package twilightforest.compat;
 //    @Override
 //    public void setIngredients(CraftingRecipe craftingRecipe, IIngredients iIngredients) {
 //        ImmutableList.Builder<ItemStack> inputBuilder = ImmutableList.builder();
-//        inputBuilder.add(craftingRecipe.getResultItem()); //Setting the result item as the input, since the recipe will appear in reverse
+//
+//        if (craftingRecipe instanceof UncraftingRecipe) { //Uncrafting recipes have an ingredient as an input, so we iterate through all the options
+//            for (ItemStack i : ((UncraftingRecipe) craftingRecipe).getIngredient().getItems()) {
+//                inputBuilder.add(new ItemStack(i.getItem(), ((UncraftingRecipe) craftingRecipe).getCount()));
+//            }
+//        } else {
+//            inputBuilder.add(craftingRecipe.getResultItem()); //Setting the result item as the input on normal recipes, since the recipe will appear in reverse
+//        }
 //
 //        List<List<ItemStack>> outputList = new ArrayList<>();
 //        craftingRecipe.getIngredients().forEach(i -> outputList.add(Arrays.asList(i.getItems()))); //Collect each ingredient
@@ -75,6 +84,8 @@ package twilightforest.compat;
 //            outputList.set(i, newList.stream()
 //                    .filter(o -> !(o.is(ItemTagGenerator.BANNED_UNCRAFTING_INGREDIENTS)))
 //                    .filter(o -> !(o.getItem().hasContainerItem(o)))
+//                    .filter(o -> !TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.disableUncraftingRecipes.get().contains(craftingRecipe.getId().toString()))
+//                    .filter(o -> TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.flipUncraftingModIdList.get() == TFConfig.COMMON_CONFIG.UNCRAFTING_STUFFS.blacklistedUncraftingModIds.get().contains(craftingRecipe.getId().getNamespace()))
 //                    .collect(Collectors.toList()));//Remove any banned items
 //        }
 //
