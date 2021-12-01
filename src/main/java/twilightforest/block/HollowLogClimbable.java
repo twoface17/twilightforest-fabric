@@ -27,13 +27,11 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.registries.RegistryObject;
 import twilightforest.enums.HollowLogVariants;
-import twilightforest.lib.RegistryObject;
-import twilightforest.lib.extensions.IBlockMethods;
 
-public class HollowLogClimbable extends HorizontalDirectionalBlock implements WaterloggedBlock, IBlockMethods {
+public class HollowLogClimbable extends HorizontalDirectionalBlock implements WaterloggedBlock {
     public static final EnumProperty<HollowLogVariants.Climbable> VARIANT = EnumProperty.create("variant", HollowLogVariants.Climbable.class);
 
     private static final VoxelShape LADDER_EAST = Block.box(0, 0, 0, 3, 16, 16);
@@ -109,7 +107,7 @@ public class HollowLogClimbable extends HorizontalDirectionalBlock implements Wa
     @Override
     public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (this.isStateWaterlogged(state)) {
-            level.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         return super.updateShape(state, facing, neighborState, level, pos, neighborPos);
@@ -121,7 +119,7 @@ public class HollowLogClimbable extends HorizontalDirectionalBlock implements Wa
 
         ItemStack stack = player.getItemInHand(hand);
 
-        if (FabricToolTags.SHEARS.contains(stack.getItem())) {
+        if (stack.canPerformAction(ToolActions.SHEARS_HARVEST)) {
             HollowLogVariants.Climbable variant = state.getValue(VARIANT);
             level.setBlock(pos, this.vertical.get().defaultBlockState().setValue(HollowLogVertical.WATERLOGGED, variant == HollowLogVariants.Climbable.LADDER_WATERLOGGED), 3);
             level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);

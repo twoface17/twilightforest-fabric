@@ -1,8 +1,6 @@
 package twilightforest.data;
 
 import com.google.common.collect.ImmutableList;
-
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -16,14 +14,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.minecraftforge.common.crafting.NBTIngredient;
+import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.block.TwilightChest;
-import twilightforest.lib.RegistryObject;
-import twilightforest.lib.crafting.CompoundIngredient;
-import twilightforest.lib.crafting.CraftingHelper;
-import twilightforest.lib.crafting.NBTIngredient;
-import twilightforest.lib.data.Tags;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
@@ -76,7 +73,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 
 		// This will just defer to the regular Ingredient method instead of some overridden thing, but whatever.
 		// Forge PRs are too slow to even feel motivated about fixing it on the Forge end.
-		return CraftingHelper.merge(ingredientList);
+		return Ingredient.merge(ingredientList);
 	}
 
 	protected final void charmRecipe(Consumer<FinishedRecipe> consumer, String name, Supplier<? extends Item> result, Supplier<? extends Item> item) {
@@ -92,7 +89,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.pattern("##")
 				.define('#', Ingredient.of(ingredients))
 				.unlockedBy("has_castle_brick", has(TFBlocks.CASTLE_BRICK.get()))
-				.save(consumer, locCastle(Registry.BLOCK.getKey(result.get()).getPath()));
+				.save(consumer, locCastle(result.get().getRegistryName().getPath()));
 	}
 
 	protected final void stairsBlock(Consumer<FinishedRecipe> consumer, ResourceLocation loc, Supplier<? extends Block> result, Supplier<? extends Block> criteria, ItemLike... ingredients) {
@@ -339,7 +336,7 @@ public abstract class CraftingDataHelper extends RecipeProvider {
 				.requires(armor)
 				.requires(Ingredient.of(ItemTagGenerator.FIERY_VIAL), vials)
 				.unlockedBy("has_item", has(ItemTagGenerator.FIERY_VIAL))
-				.save(consumer, locEquip("fiery_" + Registry.ITEM.getKey(armor).getPath()));
+				.save(consumer, locEquip("fiery_" + armor.getRegistryName().getPath()));
 	}
 
 	protected final ResourceLocation locCastle(String name) {

@@ -36,14 +36,15 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.network.PacketDistributor;
 import org.apache.commons.lang3.mutable.MutableInt;
 import twilightforest.TFConfig;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
-import twilightforest.lib.extensions.IEntityEx;
 import twilightforest.network.MissingAdvancementToastPacket;
 import twilightforest.network.TFPacketHandler;
 import twilightforest.util.PlayerHelper;
@@ -150,9 +151,9 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 			List<Entity> list = world.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(range));
 
 			for (Entity victim : list) {
-//				if (!ForgeEventFactory.onEntityStruckByLightning(victim, bolt)) {
+				if (!ForgeEventFactory.onEntityStruckByLightning(victim, bolt)) {
 					victim.thunderHit((ServerLevel) world, bolt);
-//				}
+				}
 			}
 		}
 	}
@@ -224,7 +225,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 					if (!TFPortalBlock.isPlayerNotifiedOfRequirement(player)) {
 						// .doesPlayerHaveRequiredAdvancement null-checks already, so we can skip null-checking the `requirement`
 						DisplayInfo info = requirement.getDisplay();
-						TFPacketHandler.CHANNEL.sendToClient(info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()), player);
+						TFPacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()));
 
 						TFPortalBlock.playerNotifiedOfRequirement(player);
 					}
@@ -274,7 +275,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 		if(serverWorld == null)
 			return;
 
-		IEntityEx.cast(entity).changeDimension(serverWorld, makeReturnPortal ? new TFTeleporter(forcedEntry) : new NoReturnTeleporter());
+		entity.changeDimension(serverWorld, makeReturnPortal ? new TFTeleporter(forcedEntry) : new NoReturnTeleporter());
 
 		if (destination ==  ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(TFConfig.COMMON_CONFIG.DIMENSION.portalDestinationID.get())) && entity instanceof ServerPlayer && forcedEntry) {
 			ServerPlayer playerMP = (ServerPlayer) entity;
@@ -287,7 +288,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 	// Full [VanillaCopy] of BlockPortal.randomDisplayTick
 	// TODO Eeeh... Let's look at changing this too alongside a new model.
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
 		int random = rand.nextInt(100);
 		if (stateIn.getValue(DISALLOW_RETURN) && random < 80) return;

@@ -6,20 +6,23 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.entity.TFBlockEntities;
 import twilightforest.client.ISTER;
 import twilightforest.item.*;
-import twilightforest.block.entity.TFBlockEntities;
-import twilightforest.lib.Register;
-import twilightforest.lib.RegistryObject;
-import twilightforest.lib.extensions.ICachedName;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TFBlockItems {
 
-	public static void registerBlockItems(Register<Item> r) {
+	public static void registerBlockItems(RegistryEvent.Register<Item> event) {
+		IForgeRegistry<Item> r = event.getRegistry();
+
 		r.register(trophyBlock(TFBlocks.NAGA_TROPHY, TFBlocks.NAGA_WALL_TROPHY));
 		r.register(trophyBlock(TFBlocks.LICH_TROPHY, TFBlocks.LICH_WALL_TROPHY));
 		r.register(trophyBlock(TFBlocks.MINOSHROOM_TROPHY, TFBlocks.MINOSHROOM_WALL_TROPHY));
@@ -77,15 +80,15 @@ public class TFBlockItems {
 		r.register(blockItem(TFBlocks.TWISTED_STONE));
 		r.register(blockItem(TFBlocks.TWISTED_STONE_PILLAR));
 		r.register(makeBlockItem(new BlockItem(TFBlocks.KEEPSAKE_CASKET.get(), TFItems.defaultBuilder().fireResistant()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.KEEPSAKE_CASKET.getId());
-//					}
-//				});
-//			}
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return new ISTER(TFBlockEntities.KEEPSAKE_CASKET.getId());
+					}
+				});
+			}
 		}, TFBlocks.KEEPSAKE_CASKET));
 		r.register(blockItem(TFBlocks.CANDELABRA));
 		r.register(blockItem(TFBlocks.BOLD_STONE_PILLAR));
@@ -403,7 +406,7 @@ public class TFBlockItems {
 	}
 
 	private static <B extends Block> Item hollowLog(RegistryObject<HollowLogHorizontal> horizontalLog, RegistryObject<HollowLogVertical> verticalLog, RegistryObject<HollowLogClimbable> climbable, String name) {
-		return ICachedName.cast(new HollowLogItem(horizontalLog, verticalLog, climbable, TFItems.defaultBuilder())).setRegistryName(TwilightForestMod.ID, name);
+		return new HollowLogItem(horizontalLog, verticalLog, climbable, TFItems.defaultBuilder()).setRegistryName(TwilightForestMod.ID, name);
 	}
 
 	private static <B extends Block> Item blockItem(RegistryObject<B> block) {
@@ -416,15 +419,15 @@ public class TFBlockItems {
 
 	private static <B extends AbstractSkullCandleBlock> Item skullCandleItem(RegistryObject<B> floor, RegistryObject<B> wall) {
 		return makeBlockItem(new SkullCandleItem(floor.get(), wall.get(), TFItems.defaultBuilder().rarity(Rarity.UNCOMMON)) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId());
-//					}
-//				});
-//			}
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return new ISTER(TFBlockEntities.SKULL_CANDLE.getId());
+					}
+				});
+			}
 		}, floor);
 	}
 
@@ -434,29 +437,29 @@ public class TFBlockItems {
 
 	private static <B extends Block, W extends Block> Item trophyBlock(RegistryObject<B> block, RegistryObject<W> wallblock) {
 		return makeBlockItem(new TrophyItem(block.get(), wallblock.get(), TFItems.defaultBuilder().rarity(TwilightForestMod.getRarity())) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(TFBlockEntities.TROPHY.getId());
-//					}
-//				});
-//			}
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return new ISTER(TFBlockEntities.TROPHY.getId());
+					}
+				});
+			}
 		}, block);
 	}
 
 	private static <T extends Block, E extends BlockEntity> Item wearableBlock(RegistryObject<T> block, RegistryObject<BlockEntityType<E>> tileentity) {
 		return makeBlockItem(new WearableItem(block.get(), TFItems.defaultBuilder()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(tileentity.getId());
-//					}
-//				});
-//			}
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return new ISTER(tileentity.getId());
+					}
+				});
+			}
 		}, block);
 	}
 
@@ -469,20 +472,20 @@ public class TFBlockItems {
 	}
 
 	private static Item makeBlockItem(Item blockitem, RegistryObject<? extends Block> block) {
-		return ICachedName.cast(blockitem).setRegistryName(Objects.requireNonNull(block.getId()));
+		return blockitem.setRegistryName(Objects.requireNonNull(block.getId()));
 	}
 
-	private static void makeBEWLRItem(Register<Item> r, RegistryObject<? extends Block> block, ResourceLocation rl) {
+	private static void makeBEWLRItem(IForgeRegistry<Item> r, RegistryObject<? extends Block> block, ResourceLocation rl) {
 		r.register(makeBlockItem(new BlockItem(block.get(), TFItems.defaultBuilder()) {
-//			@Override
-//			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//				consumer.accept(new IItemRenderProperties() {
-//					@Override
-//					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-//						return new ISTER(rl);
-//					}
-//				});
-//			}
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return new ISTER(rl);
+					}
+				});
+			}
 		}, block));
 	}
 }

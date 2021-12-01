@@ -2,17 +2,17 @@ package twilightforest.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraftforge.network.NetworkEvent;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.entity.ProtectionBox;
-import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
-public class AreaProtectionPacket implements BasePacket<AreaProtectionPacket> {
+public class AreaProtectionPacket {
 
 	private final BoundingBox sbb;
 	private final BlockPos pos;
@@ -30,7 +30,6 @@ public class AreaProtectionPacket implements BasePacket<AreaProtectionPacket> {
 		pos = buf.readBlockPos();
 	}
 
-	@Override
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeInt(sbb.minX());
 		buf.writeInt(sbb.minY());
@@ -41,14 +40,9 @@ public class AreaProtectionPacket implements BasePacket<AreaProtectionPacket> {
 		buf.writeLong(pos.asLong());
 	}
 
-	@Override
-	public void handle(AreaProtectionPacket packet, Context context) {
-		Handler.onMessage(packet, context);
-	}
-
 	public static class Handler {
 
-		public static boolean onMessage(AreaProtectionPacket message, Supplier<BasePacket.Context> ctx) {
+		public static boolean onMessage(AreaProtectionPacket message, Supplier<NetworkEvent.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

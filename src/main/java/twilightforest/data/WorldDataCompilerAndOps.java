@@ -3,19 +3,23 @@ package twilightforest.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.serialization.*;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
+import net.minecraft.resources.RegistryWriteOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.RegistryWriteOps;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.biome.BiomeZoomer;
-import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.NoiseSamplingSettings;
+import net.minecraft.world.level.levelgen.NoiseSettings;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import twilightforest.TwilightForestMod;
@@ -23,13 +27,11 @@ import twilightforest.TwilightForestMod;
 import javax.annotation.Nullable;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.OptionalLong;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -85,7 +87,7 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
                 .withEncoder(encoder)
                 .apply(resource)
                 .setLifecycle(Lifecycle.experimental())
-                .resultOrPartial(error -> LOGGER.error("Object [" + resourceType.location() + "] " + resourceLocation + " not serialized within recursive serialization: " + error));
+                .resultOrPartial(error -> LOGGER.error("Object [" + resourceType.getRegistryName() + "] " + resourceLocation + " not serialized within recursive serialization: " + error));
 
         if (output.isPresent()) {
             try {
@@ -132,31 +134,31 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
         return (T) registry.get(key);
     }
 
-//    @SuppressWarnings({"unchecked", "rawtypes"})
-//    private static <Resource> Optional<ResourceLocation> getFromForgeRegistryIllegally(ResourceKey<? extends Registry<Resource>> registryKey, Resource resource) {
-//        if (resource instanceof IForgeRegistryEntry) {
-//            IForgeRegistryEntry<Resource> entry = (IForgeRegistryEntry<Resource>) resource;
-//            ResourceLocation location = entry.getRegistryName();
-//
-//            if (location != null) {
-//                return Optional.of(location);
-//            }
-//
-//            // This is safe because we've tested IForgeRegistry, but the type-checker is too stupid to recognize it as such
-//            IForgeRegistry forgeRegistry = RegistryManager.ACTIVE.getRegistry(registryKey.location());
-//            return Optional.ofNullable(forgeRegistry.getKey((IForgeRegistryEntry) resource));
-//        }
-//
-//        return Optional.empty();
-//    }
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static <Resource> Optional<ResourceLocation> getFromForgeRegistryIllegally(ResourceKey<? extends Registry<Resource>> registryKey, Resource resource) {
+        if (resource instanceof IForgeRegistryEntry) {
+            IForgeRegistryEntry<Resource> entry = (IForgeRegistryEntry<Resource>) resource;
+            ResourceLocation location = entry.getRegistryName();
+
+            if (location != null) {
+                return Optional.of(location);
+            }
+
+            // This is safe because we've tested IForgeRegistry, but the type-checker is too stupid to recognize it as such
+            IForgeRegistry forgeRegistry = RegistryManager.ACTIVE.getRegistry(registryKey.location());
+            return Optional.ofNullable(forgeRegistry.getKey((IForgeRegistryEntry) resource));
+        }
+
+        return Optional.empty();
+    }
 
     private <Resource> Optional<ResourceLocation> rummageForResourceLocation(Resource resource, ResourceKey<? extends Registry<Resource>> registryKey) {
         Optional<ResourceLocation> instanceKey = Optional.empty();
 
         // Ask the object itself if it has a key first
-//        if (resource instanceof IForgeRegistryEntry) {
-//            instanceKey = Optional.ofNullable(((IForgeRegistryEntry<?>) resource).getRegistryName());
-//        }
+        if (resource instanceof IForgeRegistryEntry) {
+            instanceKey = Optional.ofNullable(((IForgeRegistryEntry<?>) resource).getRegistryName());
+        }
 
         // Check "Local" Registry
         if (instanceKey.isEmpty()) {
@@ -189,9 +191,9 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
         }
 
         // Check Forge Registries
-//        if (instanceKey.isEmpty()) {
-//            instanceKey = getFromForgeRegistryIllegally(registryKey, resource);
-//        }
+        if (instanceKey.isEmpty()) {
+            instanceKey = getFromForgeRegistryIllegally(registryKey, resource);
+        }
 
         return instanceKey;
     }

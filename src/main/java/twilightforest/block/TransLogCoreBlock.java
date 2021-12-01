@@ -2,13 +2,13 @@ package twilightforest.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.network.PacketDistributor;
 import twilightforest.TFSounds;
 import twilightforest.network.ChangeBiomePacket;
 import twilightforest.network.TFPacketHandler;
@@ -45,6 +45,7 @@ public class TransLogCoreBlock extends SpecialMagicLogBlock {
 			if (biomeAt == targetBiome)
 				continue;
 
+			//FIXME
 			LevelChunk chunkAt = world.getChunk(dPos.getX() >> 4, dPos.getZ() >> 4);
 			int x = (dPos.getX() >> 2) & HORIZONTAL_MASK;
 			int z = (dPos.getZ() >> 2) & HORIZONTAL_MASK;
@@ -66,8 +67,8 @@ public class TransLogCoreBlock extends SpecialMagicLogBlock {
 	 * Send a tiny update packet to the client to inform it of the changed biome
 	 */
 	private void sendChangedBiome(LevelChunk chunk, BlockPos pos, Biome biome) {
-		ChangeBiomePacket message = new ChangeBiomePacket(pos, BuiltinRegistries.BIOME.getKey(biome));
-		TFPacketHandler.CHANNEL.sentToTrackingChunk(message, chunk);
+		ChangeBiomePacket message = new ChangeBiomePacket(pos, biome.getRegistryName());
+		TFPacketHandler.CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), message);
 	}
 
 	@Override

@@ -4,19 +4,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.MapRenderer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraftforge.network.NetworkEvent;
 import twilightforest.TFMagicMapData;
 import twilightforest.item.MagicMapItem;
-import twilightforest.lib.BasePacket;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 // Rewraps vanilla SPacketMaps to properly expose our custom decorations
-public class MagicMapPacket implements BasePacket<MagicMapPacket> {
+public class MagicMapPacket {
 	private final byte[] featureData;
 	private final ClientboundMapItemDataPacket inner;
 
@@ -35,13 +33,8 @@ public class MagicMapPacket implements BasePacket<MagicMapPacket> {
 		inner.write(buf);
 	}
 
-	@Override
-	public void handle(MagicMapPacket packet, Context context) {
-		Handler.onMessage(packet, context);
-	}
-
 	public static class Handler {
-		public static boolean onMessage(MagicMapPacket message, Supplier<BasePacket.Context> ctx) {
+		public static boolean onMessage(MagicMapPacket message, Supplier<NetworkEvent.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

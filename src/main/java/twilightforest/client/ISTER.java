@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -26,8 +25,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
-
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.StringUtils;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
@@ -38,12 +38,11 @@ import twilightforest.client.model.tileentity.GenericTrophyModel;
 import twilightforest.client.renderer.tileentity.SkullCandleTileEntityRenderer;
 import twilightforest.client.renderer.tileentity.TrophyTileEntityRenderer;
 import twilightforest.enums.BossVariant;
-import twilightforest.lib.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ISTER extends BlockEntityWithoutLevelRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
+public class ISTER extends BlockEntityWithoutLevelRenderer {
 	private final ResourceLocation typeId;
 	private BlockEntity dummy;
 	private final KeepsakeCasketBlockEntity keepsakeCasketBlockEntity = new KeepsakeCasketBlockEntity(BlockPos.ZERO, TFBlocks.KEEPSAKE_CASKET.get().defaultBlockState());
@@ -68,7 +67,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer implements BuiltinIte
 	public void renderByItem(ItemStack stack, ItemTransforms.TransformType camera, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
 
 		if (dummy == null) {
-			dummy = Registry.BLOCK_ENTITY_TYPE.get(typeId).create(BlockPos.ZERO, Blocks.AIR.defaultBlockState());
+			dummy = ForgeRegistries.BLOCK_ENTITIES.getValue(typeId).create(BlockPos.ZERO, Blocks.AIR.defaultBlockState());
 		}
 		Item item = stack.getItem();
 		if (item instanceof BlockItem) {
@@ -88,7 +87,7 @@ public class ISTER extends BlockEntityWithoutLevelRenderer implements BuiltinIte
 					ms.pushPose();
 					Lighting.setupForFlatItems();
 					ms.translate(0.5F, 0.5F, -1.5F);
-					Minecraft.getInstance().getItemRenderer().render(TrophyTileEntityRenderer.stack, ItemTransforms.TransformType.GUI, false, ms, bufferSource, 15728880, OverlayTexture.NO_OVERLAY, modelBack);
+					Minecraft.getInstance().getItemRenderer().render(TrophyTileEntityRenderer.stack, ItemTransforms.TransformType.GUI, false, ms, bufferSource, 15728880, OverlayTexture.NO_OVERLAY, ForgeHooksClient.handleCameraTransforms(ms, modelBack, camera, false));
 					ms.popPose();
 					bufferSource.endBatch();
 					Lighting.setupFor3DItems();
@@ -152,10 +151,5 @@ public class ISTER extends BlockEntityWithoutLevelRenderer implements BuiltinIte
 		ChestBlock block = registryObject.get();
 
 		map.put(block, new TwilightChestEntity(BlockPos.ZERO, block.defaultBlockState()));
-	}
-
-	@Override
-	public void render(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
-		renderByItem(itemStack, transformType, poseStack, multiBufferSource, i, i1);
 	}
 }

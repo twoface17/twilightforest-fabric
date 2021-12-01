@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
 import twilightforest.TFEventListener;
 import twilightforest.data.EntityTagGenerator;
 import twilightforest.network.TFPacketHandler;
@@ -82,7 +83,7 @@ public class ThrowRiderGoal extends MeleeAttackGoal {
 				ServerPlayer player = (ServerPlayer) rider;
 
 				ThrowPlayerPacket message = new ThrowPlayerPacket((float) throwVec.x, (float) throwVec.y, (float) throwVec.z);
-				TFPacketHandler.CHANNEL.sendToClient(message, player);
+				TFPacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
 			}
 		}
 		super.stop();

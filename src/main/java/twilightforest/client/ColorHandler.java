@@ -4,16 +4,15 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.AuroraBrickBlock;
 import twilightforest.block.HollowLogClimbable;
@@ -23,11 +22,14 @@ import twilightforest.item.ArcticArmorItem;
 import twilightforest.item.TFItems;
 
 import java.awt.*;
-import java.util.Locale;
 
+@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ColorHandler {
 
-	public static void registerBlockColors(BlockColors blockColors) {
+	@SubscribeEvent
+	public static void registerBlockColors(ColorHandlerEvent.Block event) {
+
+		BlockColors blockColors = event.getBlockColors();
 
 		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : Color.HSBtoRGB(worldIn == null ? 0.45F : AuroraBrickBlock.rippleFractialNoise(2, 128.0f, pos != null ? pos.above(128) : new BlockPos(0, 0, 0), 0.37f, 0.67f, 1.5f), 1.0f, 1.0f), TFBlocks.AURORA_BLOCK.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
@@ -380,7 +382,11 @@ public final class ColorHandler {
 		}, TFBlocks.BLUE_FORCE_FIELD.get());
 	}
 
-	public static void registerItemColors(ItemColors itemColors, BlockColors blockColors) {
+	@SubscribeEvent
+	public static void registerItemColors(ColorHandlerEvent.Item event) {
+		ItemColors itemColors = event.getItemColors();
+		BlockColors blockColors = event.getBlockColors();
+
 		itemColors.register((stack, tintIndex) -> blockColors.getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
 				TFBlocks.AURORA_BLOCK.get(), TFBlocks.AURORA_PILLAR.get(), TFBlocks.AURORA_SLAB.get(), TFBlocks.AURORALIZED_GLASS.get(), TFBlocks.DARK_LEAVES.get(), TFBlocks.GIANT_LEAVES.get(), TFBlocks.SMOKER.get(), TFBlocks.FIRE_JET.get(),
 				TFBlocks.TIME_LEAVES.get(), TFBlocks.TRANSFORMATION_LEAVES.get(), TFBlocks.MINING_LEAVES.get(), TFBlocks.SORTING_LEAVES.get(), TFBlocks.TWILIGHT_OAK_LEAVES.get(), TFBlocks.CANOPY_LEAVES.get(), TFBlocks.MANGROVE_LEAVES.get(), TFBlocks.RAINBOW_OAK_LEAVES.get(), TFBlocks.THORN_LEAVES.get(), TFBlocks.BEANSTALK_LEAVES.get(),
@@ -399,20 +405,21 @@ public final class ColorHandler {
 				tintIndex > 0 ? -1 : PotionUtils.getColor(stack),
 				TFItems.BRITTLE_FLASK.get(), TFItems.GREATER_FLASK.get());
 
-		if (FabricLoader.getInstance().isModLoaded("immersiveengineering")) {
-//			itemColors.register(TFShaderItem::getShaderColors, Registry.ITEM.get(TwilightForestMod.prefix("shader")));
-			/*for(Rarity r: ShaderRegistry.rarityWeightMap.keySet()) {
-				itemColors.register((stack, tintIndex) -> {
-					int c = r.color.getColor();
-
-					float d = tintIndex + 1;
-
-					return (int) ((c >> 16 & 0xFF) / d) << 16
-							| (int) ((c >> 8 & 0xFF) / d) << 8
-							| (int) ((c & 0xFF) / d);
-				}, Registry.ITEM.get(TwilightForestMod.prefix("shader_bag_" + r.name().toLowerCase(Locale.US).replace(':', '_'))));
-			}*/
-		}
+		//FIXME IE Compat
+//		if (ModList.get().isLoaded("immersiveengineering")) {
+//			itemColors.register(TFShaderItem::getShaderColors, ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader")));
+//			for(Rarity r: ShaderRegistry.rarityWeightMap.keySet()) {
+//				itemColors.register((stack, tintIndex) -> {
+//					int c = r.color.getColor();
+//
+//					float d = tintIndex + 1;
+//
+//					return (int) ((c >> 16 & 0xFF) / d) << 16
+//							| (int) ((c >> 8 & 0xFF) / d) << 8
+//							| (int) ((c & 0xFF) / d);
+//				}, ForgeRegistries.ITEMS.getValue(TwilightForestMod.prefix("shader_bag_" + r.name().toLowerCase(Locale.US).replace(':', '_'))));
+//			}
+//		}
 	}
 
 	private ColorHandler() {}

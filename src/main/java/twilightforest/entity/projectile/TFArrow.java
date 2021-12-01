@@ -1,16 +1,13 @@
 package twilightforest.entity.projectile;
 
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
+import net.minecraftforge.network.NetworkHooks;
 
 public abstract class TFArrow extends AbstractArrow implements ITFProjectile {
 
@@ -26,7 +23,7 @@ public abstract class TFArrow extends AbstractArrow implements ITFProjectile {
 
 	@Override
 	public Packet<?> getAddEntityPacket() {
-		return new ClientboundAddEntityPacket(this);
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override

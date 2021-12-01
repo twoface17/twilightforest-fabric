@@ -2,8 +2,6 @@ package twilightforest.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -23,8 +21,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-
-import twilightforest.lib.extensions.IMapItemEx;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.registries.ForgeRegistries;
 import twilightforest.world.registration.TFFeature;
 import twilightforest.TFMagicMapData;
 import twilightforest.network.MagicMapPacket;
@@ -39,7 +37,7 @@ import java.util.Map;
 
 // [VanillaCopy] super everything, but with appropriate redirections to our own datastructures. finer details noted
 
-public class MagicMapItem extends MapItem implements IMapItemEx {
+public class MagicMapItem extends MapItem {
 
 	public static final String STR_ID = "magicmap";
 	private static final Map<ResourceLocation, MapColorBrightness> BIOME_COLORS = new HashMap<>();
@@ -77,7 +75,7 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 
 	@Nullable
 	@Override
-	public TFMagicMapData getCustomMapData(ItemStack stack, Level world) {
+	protected TFMagicMapData getCustomMapData(ItemStack stack, Level world) {
 		TFMagicMapData mapdata = getData(stack, world);
 		if (mapdata == null && !world.isClientSide) {
 			mapdata = MagicMapItem.createMapData(stack, world, world.getLevelData().getXSpawn(), world.getLevelData().getZSpawn(), 3, false, false, world.dimension());
@@ -143,7 +141,7 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 						// make streams more visible
 						Biome overBiome = biomes[xPixel * biomesPerPixel + zPixel * biomesPerPixel * 128 * biomesPerPixel + 1];
 						Biome downBiome = biomes[xPixel * biomesPerPixel + (zPixel * biomesPerPixel + 1) * 128 * biomesPerPixel];
-						biome = overBiome != null && BiomeKeys.STREAM.location().equals(world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(overBiome)) ? overBiome : downBiome != null && BiomeKeys.STREAM.location().equals(world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(downBiome)) ? downBiome : biome;
+						biome = overBiome != null && BiomeKeys.STREAM.location().equals(overBiome.getRegistryName()) ? overBiome : downBiome != null && BiomeKeys.STREAM.location().equals(downBiome.getRegistryName()) ? downBiome : biome;
 
 						MapColorBrightness colorBrightness = this.getMapColorPerBiome(world, biome);
 
@@ -183,11 +181,12 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 		}
 		if(biome == null)
 			return new MapColorBrightness(MaterialColor.COLOR_BLACK);
-		ResourceLocation key = world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(biome);
+		ResourceLocation key = biome.getRegistryName();
 			MapColorBrightness color = BIOME_COLORS.get(key);
 			if (color != null) {
 				return color;
 			}
+			//FIXME surface builder where
 		return new MapColorBrightness(biome.getGenerationSettings().getSurfaceBuilderConfig().getTopMaterial().getMapColor(world, BlockPos.ZERO));
 	}
 
@@ -223,7 +222,7 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 			setupBiomeColors();
 		}
 
-		MapColorBrightness c = BIOME_COLORS.get(BuiltinRegistries.BIOME.getKey(biome));
+		MapColorBrightness c = BIOME_COLORS.get(ForgeRegistries.BIOMES.getKey(biome));
 
 		return c != null ? getMapColor(c) : 0xFF000000;
 	}
@@ -253,7 +252,7 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 		Integer id = getMapId(stack);
 		TFMagicMapData mapdata = getCustomMapData(stack, world);
 		Packet<?> p = id == null || mapdata == null ? null : mapdata.getUpdatePacket(id, player);
-		return p instanceof ClientboundMapItemDataPacket ? TFPacketHandler.CHANNEL.toVanillaPacket(new MagicMapPacket(mapdata, (ClientboundMapItemDataPacket) p)) : p;
+		return p instanceof ClientboundMapItemDataPacket ? TFPacketHandler.CHANNEL.toVanillaPacket(new MagicMapPacket(mapdata, (ClientboundMapItemDataPacket) p), NetworkDirection.PLAY_TO_CLIENT) : p;
 	}
 
 	@Override
