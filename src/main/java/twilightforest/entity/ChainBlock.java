@@ -3,6 +3,7 @@ package twilightforest.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,15 +22,14 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.network.NetworkHooks;
+
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import twilightforest.TFSounds;
 import twilightforest.enchantment.TFEnchantments;
 import twilightforest.entity.monster.BlockChainGoblin;
 import twilightforest.item.TFItems;
+import twilightforest.lib.extensions.IBlockMethods;
+import twilightforest.lib.util.IEntityAdditionalSpawnData;
 import twilightforest.util.TFDamageSources;
 import twilightforest.util.WorldUtil;
 
@@ -202,12 +202,12 @@ public class ChainBlock extends ThrowableProjectile implements IEntityAdditional
 			Block block = state.getBlock();
 
 			// TODO: The "explosion" parameter can't actually be null
-			if (!state.isAir() && block.getExplosionResistance(state, level, pos, null) < (15F + (EnchantmentHelper.getItemEnchantmentLevel(TFEnchantments.BLOCK_STRENGTH.get(), stack) * 20F))
-					&& state.getDestroySpeed(level, pos) >= 0 && block.canEntityDestroy(state, level, pos, this)) {
+			if (!state.isAir() && block.getExplosionResistance(/*state, level, pos, null*/) < (15F + (EnchantmentHelper.getItemEnchantmentLevel(TFEnchantments.BLOCK_STRENGTH.get(), stack) * 20F))
+					&& state.getDestroySpeed(level, pos) >= 0 && IBlockMethods.cast(block).canEntityDestroy(state, level, pos, this)) {
 
 				if (getOwner() instanceof Player player) {
-					if (!MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(level, pos, state, player))) {
-						if (ForgeEventFactory.doPlayerHarvestCheck(player, state, !state.requiresCorrectToolForDrops() || player.getItemInHand(getHand()).isCorrectToolForDrops(state))) {
+					if (PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(level, player, pos, state, null)) {
+						if (IBlockMethods.cast(block).canHarvestBlock(state, level, pos, player)) {
 							block.playerDestroy(level, player, pos, state, level.getBlockEntity(pos), player.getItemInHand(getHand()));
 
 							level.destroyBlock(pos, false);
@@ -314,6 +314,6 @@ public class ChainBlock extends ThrowableProjectile implements IEntityAdditional
 
 	@Override
 	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return new ClientboundAddEntityPacket(this);
 	}
 }

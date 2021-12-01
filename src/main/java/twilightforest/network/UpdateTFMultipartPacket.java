@@ -5,14 +5,15 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.entity.PartEntity;
-import net.minecraftforge.network.NetworkEvent;
 import twilightforest.entity.TFPart;
+import twilightforest.lib.BasePacket;
+import twilightforest.lib.entity.PartEntity;
+import twilightforest.lib.extensions.IEntityEx;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-public class UpdateTFMultipartPacket {
+public class UpdateTFMultipartPacket implements BasePacket<UpdateTFMultipartPacket> {
 
 	private int id;
 	private FriendlyByteBuf buffer;
@@ -29,7 +30,7 @@ public class UpdateTFMultipartPacket {
 
 	public void encode(FriendlyByteBuf buf) {
 		buf.writeInt(entity.getId());
-		PartEntity<?>[] parts = entity.getParts();
+		PartEntity<?>[] parts = IEntityEx.cast(entity).getParts();
 		// We assume the client and server part arrays are identical, else everything will crash and burn. Don't even bother handling it.
 		if (parts != null) {
 			for (PartEntity<?> part : parts) {
@@ -45,8 +46,13 @@ public class UpdateTFMultipartPacket {
 		}
 	}
 
+	@Override
+	public void handle(UpdateTFMultipartPacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
-		public static boolean onMessage(UpdateTFMultipartPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(UpdateTFMultipartPacket message, Supplier<Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {
@@ -54,8 +60,8 @@ public class UpdateTFMultipartPacket {
 					if (world == null)
 						return;
 					Entity ent = world.getEntity(message.id);
-					if (ent != null && ent.isMultipartEntity()) {
-						PartEntity<?>[] parts = ent.getParts();
+					if (ent != null && IEntityEx.cast(ent).isMultipartEntity()) {
+						PartEntity<?>[] parts = IEntityEx.cast(ent).getParts();
 						if (parts == null)
 							return;
 						for (PartEntity<?> part : parts) {

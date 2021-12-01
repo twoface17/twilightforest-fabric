@@ -9,10 +9,6 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.AuroraBrickBlock;
 import twilightforest.block.HollowLogClimbable;
@@ -23,14 +19,9 @@ import twilightforest.item.TFItems;
 
 import java.awt.*;
 
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ColorHandler {
 
-	@SubscribeEvent
-	public static void registerBlockColors(ColorHandlerEvent.Block event) {
-
-		BlockColors blockColors = event.getBlockColors();
-
+	public static void registerBlockColors(BlockColors blockColors) {
 		blockColors.register((state, worldIn, pos, tintIndex) -> tintIndex > 15 ? 0xFFFFFF : Color.HSBtoRGB(worldIn == null ? 0.45F : AuroraBrickBlock.rippleFractialNoise(2, 128.0f, pos != null ? pos.above(128) : new BlockPos(0, 0, 0), 0.37f, 0.67f, 1.5f), 1.0f, 1.0f), TFBlocks.AURORA_BLOCK.get());
 		blockColors.register((state, worldIn, pos, tintIndex) -> {
 			if (tintIndex > 15) return 0xFFFFFF;
@@ -382,11 +373,7 @@ public final class ColorHandler {
 		}, TFBlocks.BLUE_FORCE_FIELD.get());
 	}
 
-	@SubscribeEvent
-	public static void registerItemColors(ColorHandlerEvent.Item event) {
-		ItemColors itemColors = event.getItemColors();
-		BlockColors blockColors = event.getBlockColors();
-
+	public static void registerItemColors(ItemColors itemColors, BlockColors blockColors) {
 		itemColors.register((stack, tintIndex) -> blockColors.getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
 				TFBlocks.AURORA_BLOCK.get(), TFBlocks.AURORA_PILLAR.get(), TFBlocks.AURORA_SLAB.get(), TFBlocks.AURORALIZED_GLASS.get(), TFBlocks.DARK_LEAVES.get(), TFBlocks.GIANT_LEAVES.get(), TFBlocks.SMOKER.get(), TFBlocks.FIRE_JET.get(),
 				TFBlocks.TIME_LEAVES.get(), TFBlocks.TRANSFORMATION_LEAVES.get(), TFBlocks.MINING_LEAVES.get(), TFBlocks.SORTING_LEAVES.get(), TFBlocks.TWILIGHT_OAK_LEAVES.get(), TFBlocks.CANOPY_LEAVES.get(), TFBlocks.MANGROVE_LEAVES.get(), TFBlocks.RAINBOW_OAK_LEAVES.get(), TFBlocks.THORN_LEAVES.get(), TFBlocks.BEANSTALK_LEAVES.get(),

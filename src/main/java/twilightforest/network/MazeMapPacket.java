@@ -4,9 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.MapRenderer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
-import net.minecraftforge.network.NetworkEvent;
 import twilightforest.TFMazeMapData;
 import twilightforest.item.MazeMapItem;
+import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * Vanilla's SPacketMaps handler looks for and loads the vanilla MapData instances.
  * We rewrap the packet here in order to load our own MapData instances properly.
  */
-public class MazeMapPacket {
+public class MazeMapPacket implements BasePacket<MazeMapPacket> {
 
 	private final ClientboundMapItemDataPacket inner;
 
@@ -30,8 +30,13 @@ public class MazeMapPacket {
 		inner.write(buf);
 	}
 
+	@Override
+	public void handle(MazeMapPacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
-		public static boolean onMessage(MazeMapPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(MazeMapPacket message, Supplier<Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

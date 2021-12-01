@@ -9,11 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.network.NetworkEvent;
+import twilightforest.lib.BasePacket;
 
 import java.util.function.Supplier;
 
-public class ChangeBiomePacket {
+public class ChangeBiomePacket implements BasePacket<ChangeBiomePacket> {
 	private final BlockPos pos;
 	private final ResourceLocation biomeId;
 
@@ -33,9 +33,14 @@ public class ChangeBiomePacket {
 		buf.writeResourceLocation(biomeId);
 	}
 
+	@Override
+	public void handle(ChangeBiomePacket packet, Context context) {
+		Handler.onMessage(packet, context);
+	}
+
 	public static class Handler {
 
-		public static boolean onMessage(ChangeBiomePacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static boolean onMessage(ChangeBiomePacket message, Supplier<Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {

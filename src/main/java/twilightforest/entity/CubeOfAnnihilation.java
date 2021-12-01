@@ -2,6 +2,7 @@ package twilightforest.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -13,9 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.network.NetworkHooks;
+
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import twilightforest.TFSounds;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.data.BlockTagGenerator;
@@ -88,7 +88,7 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 			BlockState state = level.getBlockState(pos);
 			if (!state.isAir()) {
 				if (getOwner() instanceof Player player) {
-					if (!MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(level, pos, state, player))) {
+					if (PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(level, player, pos, state, null)) {
 						if (canAnnihilate(pos, state)) {
 							this.level.removeBlock(pos, false);
 							this.playSound(TFSounds.BLOCK_ANNIHILATED, 0.125f, this.random.nextFloat() * 0.25F + 0.75F);
@@ -198,6 +198,6 @@ public class CubeOfAnnihilation extends ThrowableProjectile {
 
 	@Override
 	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return new ClientboundAddEntityPacket(this);
 	}
 }
