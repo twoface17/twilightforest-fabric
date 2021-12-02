@@ -22,8 +22,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraftforge.client.IWeatherRenderHandler;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.ForgeIngameGui;
@@ -49,11 +49,11 @@ import twilightforest.item.TFItems;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = Dist.CLIENT)
+@Environment(EnvType.CLIENT)
+@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = EnvType.CLIENT)
 public class TFClientEvents {
 
-	@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = EnvType.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class ModBusEvents {
 		@SubscribeEvent
 		public static void registerLoaders(ModelRegistryEvent event) {
