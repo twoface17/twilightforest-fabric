@@ -176,3 +176,4 @@ transitive-accessible field net/minecraft/world/entity/Mob targetSelector Lnet/m
 transitive-accessible method net/minecraft/world/entity/decoration/HangingEntity setDirection (Lnet/minecraft/core/Direction;)V
 transitive-accessible field net/minecraft/world/level/levelgen/structure/templatesystem/BlockRotProcessor integrity F
 transitive-accessible method net/minecraft/world/level/block/FlowerPotBlock isEmpty ()Z
+transitive-accessible method net/minecraft/world/level/biome/Biome getTemperature (Lnet/minecraft/core/BlockPos;)F

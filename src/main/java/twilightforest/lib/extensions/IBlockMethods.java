@@ -192,5 +192,5 @@ public interface IBlockMethods {
         return state.rotate(direction);
     }
 
-    default void catchFire(BlockState state, Level world, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {}
+    default void onCaughtFire(BlockState state, Level world, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {}
 }

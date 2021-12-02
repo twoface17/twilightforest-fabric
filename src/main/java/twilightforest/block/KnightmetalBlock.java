@@ -30,6 +30,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.util.TFDamageSources;
 
 import javax.annotation.Nullable;

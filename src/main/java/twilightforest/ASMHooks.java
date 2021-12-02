@@ -240,7 +240,7 @@ public class ASMHooks {
 	 */
 	public static Entity updateMultiparts(Entity entity) {
 		if (IEntityEx.cast(entity).isMultipartEntity())
-			TFPacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new UpdateTFMultipartPacket(entity));
+			TFPacketHandler.CHANNEL.sendToClientsTracking(new UpdateTFMultipartPacket(entity), entity);
 		return entity;
 	}
 
