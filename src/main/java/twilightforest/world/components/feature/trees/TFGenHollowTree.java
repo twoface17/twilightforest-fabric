@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFEntities;
+import twilightforest.lib.block.IPlantable;
 import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.loot.TFTreasure;
 import twilightforest.util.FeatureLogic;
@@ -81,7 +82,7 @@ public class TFGenHollowTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 
 		// check if we're on dirt or grass
 		BlockState state = world.getBlockState(pos.below());
-		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, TFBlocks.HOLLOW_OAK_SAPLING.get())) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, (IPlantable) TFBlocks.HOLLOW_OAK_SAPLING.get())) {
 			return false;
 		}
 

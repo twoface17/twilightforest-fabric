@@ -143,7 +143,7 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 						// make streams more visible
 						Biome overBiome = biomes[xPixel * biomesPerPixel + zPixel * biomesPerPixel * 128 * biomesPerPixel + 1];
 						Biome downBiome = biomes[xPixel * biomesPerPixel + (zPixel * biomesPerPixel + 1) * 128 * biomesPerPixel];
-						biome = overBiome != null && BiomeKeys.STREAM.location().equals(world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(overBiome)) ? overBiome : downBiome != null && BiomeKeys.STREAM.location().equals(downBiome.getRegistryName()) ? downBiome : biome;
+						biome = overBiome != null && BiomeKeys.STREAM.location().equals(world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(overBiome)) ? overBiome : downBiome != null && BiomeKeys.STREAM.location().equals(world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(downBiome)) ? downBiome : biome;
 
 						MapColorBrightness colorBrightness = this.getMapColorPerBiome(world, biome);
 

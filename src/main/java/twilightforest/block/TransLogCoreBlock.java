@@ -2,6 +2,7 @@ package twilightforest.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -56,7 +57,7 @@ public class TransLogCoreBlock extends SpecialMagicLogBlock {
 			}
 
 			if (world instanceof ServerLevel) {
-				sendChangedBiome(chunkAt, dPos, targetBiome);
+				sendChangedBiome(chunkAt, dPos, world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(targetBiome));
 			}
 			break;
 		}
@@ -65,8 +66,8 @@ public class TransLogCoreBlock extends SpecialMagicLogBlock {
 	/**
 	 * Send a tiny update packet to the client to inform it of the changed biome
 	 */
-	private void sendChangedBiome(LevelChunk chunk, BlockPos pos, Biome biome) {
-		ChangeBiomePacket message = new ChangeBiomePacket(pos, biome.getRegistryName());
+	private void sendChangedBiome(LevelChunk chunk, BlockPos pos, ResourceLocation biome) {
+		ChangeBiomePacket message = new ChangeBiomePacket(pos, biome);
 		TFPacketHandler.CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), message);
 	}
 

@@ -177,3 +177,5 @@ transitive-accessible method net/minecraft/world/entity/decoration/HangingEntity
 transitive-accessible field net/minecraft/world/level/levelgen/structure/templatesystem/BlockRotProcessor integrity F
 transitive-accessible method net/minecraft/world/level/block/FlowerPotBlock isEmpty ()Z
 transitive-accessible method net/minecraft/world/level/biome/Biome getTemperature (Lnet/minecraft/core/BlockPos;)F
+transitive-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings <init> (Lnet/minecraft/world/level/levelgen/StructureSettings;Lnet/minecraft/world/level/levelgen/NoiseSettings;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/levelgen/SurfaceRules$RuleSource;IZZZZZZ)V
+transitive-accessible method net/minecraft/server/level/ChunkMap generator ()Lnet/minecraft/world/level/chunk/ChunkGenerator;

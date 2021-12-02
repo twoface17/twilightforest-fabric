@@ -29,7 +29,7 @@ public class ServerPlayerGameModeMixin {
     @Unique
     private boolean removeBlock(BlockPos pos, ThornsBlock block, boolean canHarvest) {
         BlockState state = this.level.getBlockState(pos);
-        boolean removed =  block.removedByPlayer(state, this.level, pos, this.player, canHarvest, this.level.getFluidState(pos));
+        boolean removed =  block.onDestroyedByPlayer(state, this.level, pos, this.player, canHarvest, this.level.getFluidState(pos));
         if (removed)
             block.destroy(this.level, pos, state);
         return removed;

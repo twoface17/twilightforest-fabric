@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import twilightforest.block.TFBlocks;
 
+import twilightforest.lib.block.IPlantable;
 import twilightforest.lib.extensions.IBlockMethods;
 import twilightforest.lib.util.WorldUtil;
 import twilightforest.util.FeatureLogic;
@@ -53,7 +54,7 @@ public class TFGenCanopyTree extends TFTreeGenerator<TFTreeFeatureConfig> {
 		}
 
 		BlockState state = world.getBlockState(pos.below());
-		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, TFBlocks.CANOPY_SAPLING.get())) {
+		if (!IBlockMethods.cast(state.getBlock()).canSustainPlant(state, world, pos.below(), Direction.UP, (IPlantable) TFBlocks.CANOPY_SAPLING.get())) {
 			return false;
 		}
 

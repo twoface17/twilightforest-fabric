@@ -26,6 +26,6 @@ public class MultiPlayerGameModeMixin {
     @Unique
     private boolean removeBlock(BlockPos pos, ThornsBlock block, boolean canHarvest) {
         BlockState state = this.minecraft.level.getBlockState(pos);
-        return block.removedByPlayer(state, this.minecraft.level, pos, this.minecraft.player, canHarvest, this.minecraft.level.getFluidState(pos));
+        return block.onDestroyedByPlayer(state, this.minecraft.level, pos, this.minecraft.player, canHarvest, this.minecraft.level.getFluidState(pos));
     }
 }

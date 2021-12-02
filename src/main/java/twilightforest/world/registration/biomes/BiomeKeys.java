@@ -7,10 +7,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.data.worldgen.SurfaceBuilders;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import twilightforest.TwilightForestMod;
 import twilightforest.lib.TFRegistry;
 

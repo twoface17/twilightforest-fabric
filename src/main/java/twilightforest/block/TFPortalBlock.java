@@ -226,7 +226,7 @@ public class TFPortalBlock extends HalfTransparentBlock implements LiquidBlockCo
 					if (!TFPortalBlock.isPlayerNotifiedOfRequirement(player)) {
 						// .doesPlayerHaveRequiredAdvancement null-checks already, so we can skip null-checking the `requirement`
 						DisplayInfo info = requirement.getDisplay();
-						TFPacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()));
+						TFPacketHandler.CHANNEL.sendToClient(info == null ? new MissingAdvancementToastPacket(new TranslatableComponent(".ui.advancement.no_title"), new ItemStack(TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get())) : new MissingAdvancementToastPacket(info.getTitle(), info.getIcon()), player);
 
 						TFPortalBlock.playerNotifiedOfRequirement(player);
 					}

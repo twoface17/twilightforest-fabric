@@ -84,7 +84,7 @@ public interface IBlockMethods {
         return false;
     };
 
-    default boolean canCreatureSpawn(BlockState state, BlockGetter world, BlockPos pos, SpawnPlacements.Type type, @Nullable EntityType<?> entityType) {
+    default boolean isValidSpawn(BlockState state, BlockGetter world, BlockPos pos, SpawnPlacements.Type type, @Nullable EntityType<?> entityType) {
         return true;
     }
     default float getExplosionResistance(BlockState state, BlockGetter world, BlockPos pos, Explosion explosion) {
@@ -151,22 +151,10 @@ public interface IBlockMethods {
      * @param fluid The current fluid state at current position
      * @return True if the block is actually destroyed.
      */
-    default boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    default boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
         ((Block) this).playerWillDestroy(world, pos, state, player);
         return world.setBlock(pos, fluid.createLegacyBlock(), world.isClientSide ? 11 : 3);
-    }
-
-    default ItemStack getPickBlock(BlockState state) {
-        return null;
-    }
-
-    default ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        return null;
-    }
-
-    default ItemStack getPickBlock(Level world, BlockPos pos) {
-        return null;
     }
 
     @Nullable

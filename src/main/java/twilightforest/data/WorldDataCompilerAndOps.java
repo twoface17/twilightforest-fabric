@@ -15,9 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.TerrainShaper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.*;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import twilightforest.TwilightForestMod;
@@ -85,7 +82,7 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
                 .withEncoder(encoder)
                 .apply(resource)
                 .setLifecycle(Lifecycle.experimental())
-                .resultOrPartial(error -> LOGGER.error("Object [" + resourceType.getRegistryName() + "] " + resourceLocation + " not serialized within recursive serialization: " + error));
+                .resultOrPartial(error -> LOGGER.error("Object [" + resourceType.location() + "] " + resourceLocation + " not serialized within recursive serialization: " + error));
 
         if (output.isPresent()) {
             try {
@@ -132,31 +129,31 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
         return (T) registry.get(key);
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private static <Resource> Optional<ResourceLocation> getFromForgeRegistryIllegally(ResourceKey<? extends Registry<Resource>> registryKey, Resource resource) {
-        if (resource instanceof IForgeRegistryEntry) {
-            IForgeRegistryEntry<Resource> entry = (IForgeRegistryEntry<Resource>) resource;
-            ResourceLocation location = entry.getRegistryName();
-
-            if (location != null) {
-                return Optional.of(location);
-            }
-
-            // This is safe because we've tested IForgeRegistry, but the type-checker is too stupid to recognize it as such
-            IForgeRegistry forgeRegistry = RegistryManager.ACTIVE.getRegistry(registryKey.location());
-            return Optional.ofNullable(forgeRegistry.getKey((IForgeRegistryEntry) resource));
-        }
-
-        return Optional.empty();
-    }
+//    @SuppressWarnings({"unchecked", "rawtypes"})
+//    private static <Resource> Optional<ResourceLocation> getFromForgeRegistryIllegally(ResourceKey<? extends Registry<Resource>> registryKey, Resource resource) {
+//        if (resource instanceof IForgeRegistryEntry) {
+//            IForgeRegistryEntry<Resource> entry = (IForgeRegistryEntry<Resource>) resource;
+//            ResourceLocation location = entry.getRegistryName();
+//
+//            if (location != null) {
+//                return Optional.of(location);
+//            }
+//
+//            // This is safe because we've tested IForgeRegistry, but the type-checker is too stupid to recognize it as such
+//            IForgeRegistry forgeRegistry = RegistryManager.ACTIVE.getRegistry(registryKey.location());
+//            return Optional.ofNullable(forgeRegistry.getKey((IForgeRegistryEntry) resource));
+//        }
+//
+//        return Optional.empty();
+//    }
 
     private <Resource> Optional<ResourceLocation> rummageForResourceLocation(Resource resource, ResourceKey<? extends Registry<Resource>> registryKey) {
         Optional<ResourceLocation> instanceKey = Optional.empty();
 
         // Ask the object itself if it has a key first
-        if (resource instanceof IForgeRegistryEntry) {
-            instanceKey = Optional.ofNullable(((IForgeRegistryEntry<?>) resource).getRegistryName());
-        }
+//        if (resource instanceof IForgeRegistryEntry) {
+//            instanceKey = Optional.ofNullable(((IForgeRegistryEntry<?>) resource).getRegistryName());
+//        }
 
         // Check "Local" Registry
         if (instanceKey.isEmpty()) {
@@ -189,9 +186,9 @@ public abstract class WorldDataCompilerAndOps<Format> extends RegistryWriteOps<F
         }
 
         // Check Forge Registries
-        if (instanceKey.isEmpty()) {
-            instanceKey = getFromForgeRegistryIllegally(registryKey, resource);
-        }
+//        if (instanceKey.isEmpty()) {
+//            instanceKey = getFromForgeRegistryIllegally(registryKey, resource);
+//        }
 
         return instanceKey;
     }

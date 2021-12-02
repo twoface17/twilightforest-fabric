@@ -15,6 +15,7 @@ import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.GameRules;
