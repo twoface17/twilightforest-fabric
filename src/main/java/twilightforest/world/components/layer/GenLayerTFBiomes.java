@@ -1,11 +1,13 @@
 package twilightforest.world.components.layer;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import twilightforest.world.components.biomesources.TFBiomeProvider;
+import twilightforest.world.components.layer.vanillalegacy.context.Context;
+import twilightforest.world.components.layer.vanillalegacy.traits.AreaTransformer0;
 import twilightforest.world.registration.biomes.BiomeKeys;
-import twilightforest.world.components.TFBiomeProvider;
 
 import java.util.List;
 
@@ -49,7 +51,7 @@ public enum GenLayerTFBiomes implements AreaTransformer0 {
 		//return 0; //getRandomBiome(iNoiseRandom, commonBiomes));
 
 		if (iNoiseRandom.nextRandom(RARE_BIOME_CHANCE) == 0) {
-			// make rare biome
+			// make specialBiomes biome
 			return getRandomBiome(iNoiseRandom, rareBiomes);
 		} else {
 			// make common biome

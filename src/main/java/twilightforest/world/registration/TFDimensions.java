@@ -2,8 +2,7 @@ package twilightforest.world.registration;
 
 import net.minecraft.core.Registry;
 import twilightforest.TwilightForestMod;
-import twilightforest.world.components.TFBiomeDistributor;
-import twilightforest.world.components.TFBiomeProvider;
+import twilightforest.world.components.biomesources.LandmarkBiomeSource;
 import twilightforest.world.components.chunkgenerators.ChunkGeneratorTwilight;
 
 public class TFDimensions {
@@ -12,9 +11,7 @@ public class TFDimensions {
 	public static long seed;
 
 	public static void init() {
-		Registry.register(Registry.BIOME_SOURCE, TwilightForestMod.prefix("smart_distribution"), TFBiomeDistributor.TF_CODEC);
-		// TODO legacy
-		Registry.register(Registry.BIOME_SOURCE, TwilightForestMod.prefix("grid"), TFBiomeProvider.TF_CODEC);
+		Registry.register(Registry.BIOME_SOURCE, TwilightForestMod.prefix("landmarks"), LandmarkBiomeSource.CODEC);
 
 		Registry.register(Registry.CHUNK_GENERATOR, TwilightForestMod.prefix("structure_locating_wrapper"), ChunkGeneratorTwilight.CODEC);
 	}

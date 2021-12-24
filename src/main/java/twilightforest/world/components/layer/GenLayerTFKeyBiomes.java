@@ -2,11 +2,11 @@ package twilightforest.world.components.layer;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.newbiome.context.BigContext;
-import net.minecraft.world.level.newbiome.area.Area;
-import net.minecraft.world.level.newbiome.layer.traits.AreaTransformer1;
+import twilightforest.world.components.biomesources.TFBiomeProvider;
+import twilightforest.world.components.layer.vanillalegacy.area.Area;
+import twilightforest.world.components.layer.vanillalegacy.context.BigContext;
+import twilightforest.world.components.layer.vanillalegacy.traits.AreaTransformer1;
 import twilightforest.world.registration.biomes.BiomeKeys;
-import twilightforest.world.components.TFBiomeProvider;
 
 import java.util.Random;
 
