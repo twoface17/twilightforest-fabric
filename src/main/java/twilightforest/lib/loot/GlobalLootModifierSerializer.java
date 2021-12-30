@@ -46,6 +46,9 @@ public abstract class GlobalLootModifierSerializer<T extends IGlobalLootModifier
         return json;
     }
 
+    public ResourceLocation getRegistryName() {
+        return registryName;
+    }
 
     @SuppressWarnings("unchecked") // Need this wrapper, because generics
     private static <G> Class<G> castClass(Class<?> cls)

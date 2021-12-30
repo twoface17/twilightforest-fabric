@@ -22,7 +22,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseSampler;
-import net.minecraftforge.common.world.StructureSpawnManager;
 import twilightforest.block.TFBlocks;
 import twilightforest.lib.util.StructureSpawnManager;
 import twilightforest.util.IntPair;
