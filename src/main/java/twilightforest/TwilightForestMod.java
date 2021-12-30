@@ -117,7 +117,7 @@ public class TwilightForestMod implements ModInitializer {
 		//modbus.addGenericListener(SoundEvent.class, TFSounds::registerSounds);
 		TFBlockEntities.TILE_ENTITIES.register();
 		TFRecipes.RECIPE_SERIALIZERS.register();
-		TFParticleType.PARTICLE_TYPES.register();
+//		TFParticleType.PARTICLE_TYPES.register();
 		TFStructures.register();
 		ServerWorldEvents.LOAD.register(TFStructures::load);
 		TFBiomeFeatures.FEATURES.register();
