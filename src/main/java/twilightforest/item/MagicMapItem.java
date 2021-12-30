@@ -184,12 +184,12 @@ public class MagicMapItem extends MapItem implements IMapItemEx {
 		if(biome == null)
 			return new MapColorBrightness(MaterialColor.COLOR_BLACK);
 		ResourceLocation key = world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(biome);
-			MapColorBrightness color = BIOME_COLORS.get(key);
-			if (color != null) {
-				return color;
-			}
-			//FIXME surface builder where
-		return new MapColorBrightness(biome.getGenerationSettings().getSurfaceBuilderConfig().getTopMaterial().getMapColor(world, BlockPos.ZERO));
+		MapColorBrightness color = BIOME_COLORS.get(key);
+		if (color != null) {
+			return color;
+		}
+		//FIXME surface builder where
+		return new MapColorBrightness(MaterialColor.COLOR_BLACK); //biome.getGenerationSettings().getSurfaceBuilderConfig().getTopMaterial().getMapColor(world, BlockPos.ZERO));
 	}
 
 	private static void setupBiomeColors() {

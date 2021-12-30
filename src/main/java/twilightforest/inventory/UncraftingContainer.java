@@ -119,7 +119,7 @@ public class UncraftingContainer extends AbstractContainerMenu {
 				customCost = recipe instanceof UncraftingRecipe ? ((UncraftingRecipe) recipe).getCost() : -1;
 				ItemStack[] recipeItems = getIngredients(recipe);
 
-				if (true/*recipe instanceof IShapedRecipe rec*/) {
+				if (true/*recipe instanceof IShapedRecipe<?> rec*/) {
 
 					int recipeWidth = 3;//rec.getRecipeWidth();
 					int recipeHeight = 3;//rec.getRecipeHeight();

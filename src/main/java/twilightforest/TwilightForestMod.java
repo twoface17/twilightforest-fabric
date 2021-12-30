@@ -66,7 +66,6 @@ import twilightforest.world.components.BiomeGrassColors;
 import twilightforest.world.components.feature.BlockSpikeFeature;
 import twilightforest.world.registration.*;
 import twilightforest.world.registration.biomes.BiomeKeys;
-import twilightforest.world.registration.features.TFNoiseRules;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -215,7 +214,6 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFConfig.build();
 		BlockSpikeFeature.loadStalactites();
-		TFNoiseRules.init();
 
 		//evt.enqueueWork(() -> {
 			TFBlocks.tfCompostables();

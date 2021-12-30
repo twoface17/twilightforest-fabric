@@ -68,7 +68,6 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> CARMINITE_REACTOR_ORES = TagFactory.BLOCK.create(TwilightForestMod.prefix("carminite_reactor_ores"));
     public static final Tag.Named<Block> STRUCTURE_BANNED_INTERACTIONS = TagFactory.BLOCK.create(TwilightForestMod.prefix("structure_banned_interactions"));
 
-    public static final Tag.Named<Block> WORLDGEN_SKIPPABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_skippables"));
     public static final Tag.Named<Block> WORLDGEN_REPLACEABLES = TagFactory.BLOCK.create(TwilightForestMod.prefix("worldgen_replaceables"));
 
     public static final Tag.Named<Block> ORE_MAGNET_SAFE_REPLACE_BLOCK = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/ore_safe_replace_block"));
@@ -454,10 +453,21 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
         tag(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(TFBlocks.ARCTIC_FUR_BLOCK.get());
 
-        // For anything that you consider okay for placer systems to pass through during Worldgen
-        DataUtil.addTags(tag(WORLDGEN_SKIPPABLES), BlockTags.LOGS, COMMON_PROTECTIONS).add(TFBlocks.LIVEROOT_BLOCK.get(), TFBlocks.MANGROVE_ROOT.get());
+        tag(BlockTags.SMALL_DRIPLEAF_PLACEABLE).add(TFBlocks.UBEROUS_SOIL.get());
+
+        tag(BlockTags.FEATURES_CANNOT_REPLACE).addTag(COMMON_PROTECTIONS).add(TFBlocks.LIVEROOT_BLOCK.get(), TFBlocks.MANGROVE_ROOT.get());
         // For anything that permits replacement during Worldgen
-        DataUtil.addTags(tag(WORLDGEN_REPLACEABLES), BlockTags.LUSH_GROUND_REPLACEABLE);
+        DataUtil.addTags(tag(WORLDGEN_REPLACEABLES), BlockTags.LUSH_GROUND_REPLACEABLE, BlockTags.REPLACEABLE_PLANTS);
+
+        tag(BlockTags.REPLACEABLE_PLANTS).add(
+                TFBlocks.MAYAPPLE.get(),
+                TFBlocks.FIDDLEHEAD.get(),
+                TFBlocks.MUSHGLOOM.get(),
+                TFBlocks.TORCHBERRY_PLANT.get(),
+                TFBlocks.ROOT_STRAND.get(),
+                TFBlocks.MOSS_PATCH.get(),
+                TFBlocks.CLOVER_PATCH.get(),
+                TFBlocks.FALLEN_LEAVES.get());
 
         DataUtil.addTags(tag(BlockTags.MINEABLE_WITH_AXE), BANISTERS, HOLLOW_LOGS).add(
                 TFBlocks.HEDGE.get(),
