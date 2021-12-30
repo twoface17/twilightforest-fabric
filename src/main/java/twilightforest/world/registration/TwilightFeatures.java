@@ -73,13 +73,13 @@ public final class TwilightFeatures {
         return Registry.register(BuiltinRegistries.PLACED_FEATURE, rl, feature);
     }
 
-    @SubscribeEvent
-    public static void registerFoliagePlacers(RegistryEvent.Register<FoliagePlacerType<?>> evt) {
-        evt.getRegistry().registerAll(FOLIAGE_PLACER_TYPES.toArray(new FoliagePlacerType<?>[0]));
-    }
-
-    @SubscribeEvent
-    public static void registerTreeDecorators(RegistryEvent.Register<TreeDecoratorType<?>> evt) {
-        evt.getRegistry().registerAll(TREE_DECORATOR_TYPES.toArray(new TreeDecoratorType<?>[0]));
-    }
+//    @SubscribeEvent
+//    public static void registerFoliagePlacers(RegistryEvent.Register<FoliagePlacerType<?>> evt) {
+//        evt.getRegistry().registerAll(FOLIAGE_PLACER_TYPES.toArray(new FoliagePlacerType<?>[0]));
+//    }
+//
+//    @SubscribeEvent
+//    public static void registerTreeDecorators(RegistryEvent.Register<TreeDecoratorType<?>> evt) {
+//        evt.getRegistry().registerAll(TREE_DECORATOR_TYPES.toArray(new TreeDecoratorType<?>[0]));
+//    }
 }

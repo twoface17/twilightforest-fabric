@@ -12,10 +12,10 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
 
+import me.alphamode.forgetags.Tags;
 import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
-import twilightforest.lib.data.Tags;
 import twilightforest.lib.data.DataUtil;
 
 import java.util.Set;

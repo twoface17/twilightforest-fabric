@@ -26,13 +26,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import me.alphamode.forgetags.Tags;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.BlockTagGenerator;
-import twilightforest.data.CustomTagGenerator;
-import twilightforest.lib.data.Tags;
 import twilightforest.lib.extensions.IItemEx;
-import twilightforest.util.FeatureLogic;
 import twilightforest.util.VoxelBresenhamIterator;
 
 import javax.annotation.Nonnull;

@@ -15,7 +15,7 @@ import net.minecraft.world.phys.HitResult;
 @Mixin(ThrowableProjectile.class)
 public class ThrowableProjectileMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/ThrowableProjectile;onHit(Lnet/minecraft/world/phys/HitResult;)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION, cancellable = true)
-    public void onHit(CallbackInfo ci, Entity entity, HitResult hitResult) {
+    public void onHit(CallbackInfo ci, HitResult hitResult) {
         if(ProjectileHitEvent.PROJECTILE_HIT_EVENT.invoker().onHit((Projectile) (Object) this, hitResult))
             ci.cancel();
     }

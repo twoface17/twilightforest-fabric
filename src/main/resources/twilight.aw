@@ -180,3 +180,5 @@ transitive-accessible method net/minecraft/world/level/biome/Biome getTemperatur
 transitive-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings <init> (Lnet/minecraft/world/level/levelgen/StructureSettings;Lnet/minecraft/world/level/levelgen/NoiseSettings;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/levelgen/SurfaceRules$RuleSource;IZZZZZZ)V
 transitive-accessible method net/minecraft/server/level/ChunkMap generator ()Lnet/minecraft/world/level/chunk/ChunkGenerator;
 transitive-accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator sampler Lnet/minecraft/world/level/levelgen/NoiseSampler;
+transitive-extendable class net/minecraft/world/level/levelgen/structure/StructureStart
+transitive-accessible field net/minecraft/world/level/biome/Biome TEMPERATURE_NOISE Lnet/minecraft/world/level/levelgen/synth/PerlinSimplexNoise;

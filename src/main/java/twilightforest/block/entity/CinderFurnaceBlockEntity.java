@@ -19,7 +19,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import twilightforest.lib.data.Tags;
+
+import me.alphamode.forgetags.Tags;
 import twilightforest.block.CinderFurnaceBlock;
 import twilightforest.block.TFBlocks;
 

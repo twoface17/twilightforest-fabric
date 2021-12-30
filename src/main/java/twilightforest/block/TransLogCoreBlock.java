@@ -68,7 +68,7 @@ public class TransLogCoreBlock extends SpecialMagicLogBlock {
 	 */
 	private void sendChangedBiome(LevelChunk chunk, BlockPos pos, ResourceLocation biome) {
 		ChangeBiomePacket message = new ChangeBiomePacket(pos, biome);
-		TFPacketHandler.CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), message);
+		TFPacketHandler.CHANNEL.sentToTrackingChunk(message, chunk);
 	}
 
 	@Override

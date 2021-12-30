@@ -8,25 +8,26 @@ import net.minecraft.advancements.critereon.ImpossibleTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.data.recipes.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
+
+import me.alphamode.forgetags.Tags;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;
 import twilightforest.item.recipe.TFRecipes;
-import twilightforest.lib.data.Tags;
 
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class CraftingGenerator extends CraftingDataHelper {
-	public CraftingGenerator(DataGenerator generator) {
+	public CraftingGenerator(FabricDataGenerator generator) {
 		super(generator);
 	}
 
@@ -57,8 +58,8 @@ public class CraftingGenerator extends CraftingDataHelper {
 			saveAdvancement(pCache, Advancement.Builder.advancement().addCriterion("impossible", new ImpossibleTrigger.TriggerInstance()).serializeToJson(), path.resolve("data/minecraft/advancements/recipes/root.json"));
 	}
 
-	//@Override
-	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+	@Override
+	protected void generateRecipes(Consumer<FinishedRecipe> consumer) {
 		// The Recipe Builder currently doesn't support enchantment-resulting recipes, those must be manually created.
 		blockCompressionRecipes(consumer);
 		equipmentRecipes(consumer);

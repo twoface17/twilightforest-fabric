@@ -568,10 +568,6 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		add(b, LootTable.lootTable());
 	}
 
-	protected void add(Block pBlock, Function<Block, LootTable.Builder> pFactory) {
-		this.add(pBlock, pFactory.apply(pBlock));
-	}
-
 	//@Override
 	protected Iterable<Block> getKnownBlocks() {
 		// todo 1.15 once all blockitems are ported, change this to all TF blocks, so an error will be thrown if we're missing any tables

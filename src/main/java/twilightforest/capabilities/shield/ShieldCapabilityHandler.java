@@ -17,6 +17,10 @@ public class ShieldCapabilityHandler implements IShieldCapability {
 	private int timer;
 	private int breakTimer;
 
+	public ShieldCapabilityHandler(LivingEntity living) {
+		this.host = living;
+	}
+
 	@Override
 	public void setEntity(LivingEntity entity) {
 		host = entity;

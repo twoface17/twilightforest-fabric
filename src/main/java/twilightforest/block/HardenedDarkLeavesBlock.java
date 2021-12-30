@@ -1,5 +1,7 @@
 package twilightforest.block;
 
+import net.fabricmc.fabric.api.block.BlockPickInteractionAware;
+import org.jetbrains.annotations.Nullable;
 import twilightforest.lib.extensions.IBlockMethods;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 
-public class HardenedDarkLeavesBlock extends Block implements IBlockMethods {
+public class HardenedDarkLeavesBlock extends Block implements IBlockMethods, BlockPickInteractionAware {
 
 	protected HardenedDarkLeavesBlock(Properties props) {
 		super(props);
@@ -28,7 +30,7 @@ public class HardenedDarkLeavesBlock extends Block implements IBlockMethods {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+	public ItemStack getPickedStack(BlockState state, BlockGetter view, BlockPos pos, @Nullable Player player, @Nullable HitResult result) {
 		return new ItemStack(TFBlocks.DARK_LEAVES.get());
 	}
 }

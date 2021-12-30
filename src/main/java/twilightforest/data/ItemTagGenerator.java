@@ -10,11 +10,11 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 
+import me.alphamode.forgetags.Tags;
 import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;
-import twilightforest.lib.data.Tags;
 
 public class ItemTagGenerator extends ItemTagsProvider {
 	public static final Tag.Named<Item> TWILIGHT_OAK_LOGS = TagFactory.ITEM.create(TwilightForestMod.prefix("twilight_oak_logs"));

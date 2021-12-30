@@ -15,16 +15,16 @@ public class TFPacketHandler {
 		int id = 0;
 		CHANNEL.registerS2CPacket(AreaProtectionPacket.class, id++);
 		CHANNEL.registerS2CPacket(ChangeBiomePacket.class, id++);
-		CHANNEL.messageBuilder(EnforceProgressionStatusPacket.class, id++).encoder(EnforceProgressionStatusPacket::encode).decoder(EnforceProgressionStatusPacket::new).consumer(EnforceProgressionStatusPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(StructureProtectionPacket.class, id++).encoder(StructureProtectionPacket::encode).decoder(StructureProtectionPacket::new).consumer(StructureProtectionPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(StructureProtectionClearPacket.class, id++).encoder(StructureProtectionClearPacket::encode).decoder(StructureProtectionClearPacket::new).consumer(StructureProtectionClearPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(ThrowPlayerPacket.class, id++).encoder(ThrowPlayerPacket::encode).decoder(ThrowPlayerPacket::new).consumer(ThrowPlayerPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(MagicMapPacket.class, id++).encoder(MagicMapPacket::encode).decoder(MagicMapPacket::new).consumer(MagicMapPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(MazeMapPacket.class, id++).encoder(MazeMapPacket::encode).decoder(MazeMapPacket::new).consumer(MazeMapPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(UpdateShieldPacket.class, id++).encoder(UpdateShieldPacket::encode).decoder(UpdateShieldPacket::new).consumer(UpdateShieldPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(UncraftingGuiPacket.class, id++).encoder(UncraftingGuiPacket::encode).decoder(UncraftingGuiPacket::new).consumer(UncraftingGuiPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(UpdateTFMultipartPacket.class, id++).encoder(UpdateTFMultipartPacket::encode).decoder(UpdateTFMultipartPacket::new).consumer(UpdateTFMultipartPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(SpawnFallenLeafFromPacket.class, id++).encoder(SpawnFallenLeafFromPacket::encode).decoder(SpawnFallenLeafFromPacket::new).consumer(SpawnFallenLeafFromPacket.Handler::onMessage).add();
-		CHANNEL.messageBuilder(MissingAdvancementToastPacket.class, id++).encoder(MissingAdvancementToastPacket::encode).decoder(MissingAdvancementToastPacket::new).consumer(MissingAdvancementToastPacket::handle).add();
+		CHANNEL.registerS2CPacket(EnforceProgressionStatusPacket.class, id++);
+		CHANNEL.registerS2CPacket(StructureProtectionPacket.class, id++);
+		CHANNEL.registerS2CPacket(StructureProtectionClearPacket.class, id++);
+		CHANNEL.registerS2CPacket(ThrowPlayerPacket.class, id++);
+		CHANNEL.registerS2CPacket(MagicMapPacket.class, id++);
+		CHANNEL.registerS2CPacket(MazeMapPacket.class, id++);
+		CHANNEL.registerS2CPacket(UpdateShieldPacket.class, id++);
+		CHANNEL.registerC2SPacket(UncraftingGuiPacket.class, id++);
+		CHANNEL.registerS2CPacket(UpdateTFMultipartPacket.class, id++);
+		CHANNEL.registerS2CPacket(SpawnFallenLeafFromPacket.class, id++);
+		CHANNEL.registerS2CPacket(MissingAdvancementToastPacket.class, id++);
 	}
 }

@@ -27,11 +27,10 @@ public class SkullCandleBlockEntity extends SkullBlockEntity {
 		return TFBlockEntities.SKULL_CANDLE.get();
 	}
 	@Override
-	public CompoundTag save(CompoundTag tag) {
-		super.save(tag);
+	public void saveAdditional(CompoundTag tag) {
+		super.saveAdditional(tag);
 		tag.putInt("CandleColor", candleColor);
 		if(candleAmount != 0) tag.putInt("CandleAmount", candleAmount);
-		return tag;
 	}
 
 	@Override

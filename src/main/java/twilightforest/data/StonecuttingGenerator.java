@@ -17,6 +17,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import twilightforest.block.TFBlocks;
 
 import javax.annotation.Nullable;
@@ -27,8 +30,8 @@ import java.util.function.Consumer;
 
 import static twilightforest.TwilightForestMod.prefix;
 
-public class StonecuttingGenerator extends RecipeProvider {
-	public StonecuttingGenerator(DataGenerator generator) {
+public class StonecuttingGenerator extends FabricRecipesProvider {
+	public StonecuttingGenerator(FabricDataGenerator generator) {
 		super(generator);
 	}
 
@@ -52,8 +55,8 @@ public class StonecuttingGenerator extends RecipeProvider {
 			saveAdvancement(pCache, Advancement.Builder.advancement().addCriterion("impossible", new ImpossibleTrigger.TriggerInstance()).serializeToJson(), path.resolve("data/minecraft/advancements/recipes/root.json"));
 	}
 
-	//@Override
-	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+	@Override
+	protected void generateRecipes(Consumer<FinishedRecipe> consumer) {
 		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
 		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
 		consumer.accept(stonecutting(TFBlocks.WORN_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));

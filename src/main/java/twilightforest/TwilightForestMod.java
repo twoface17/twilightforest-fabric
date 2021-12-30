@@ -29,7 +29,6 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -280,9 +279,7 @@ public class TwilightForestMod implements ModInitializer {
 
 		TFEntities.registerEntities();
 		TFEntities.addEntityAttributes();
-		TwilightSurfaceBuilders.register();
 		ConfiguredWorldCarvers.register();
-		TwilightFeatures.registerPlacementConfigs();
 		//Fabric events
 		ResourceListenerCallback.EVENT.register(OreMagnetItem::buildOreMagnetCache);
 		TFEventListener.registerEvents();

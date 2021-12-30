@@ -3,9 +3,7 @@ package twilightforest.data;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.core.Registry;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+
+import me.alphamode.forgetags.Tags;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import twilightforest.lib.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
@@ -23,15 +25,14 @@ import twilightforest.block.TwilightChest;
 import twilightforest.lib.crafting.CompoundIngredient;
 import twilightforest.lib.crafting.CraftingHelper;
 import twilightforest.lib.crafting.NBTIngredient;
-import twilightforest.lib.data.Tags;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public abstract class CraftingDataHelper extends RecipeProvider {
-	public CraftingDataHelper(DataGenerator generator) {
+public abstract class CraftingDataHelper extends FabricRecipesProvider {
+	public CraftingDataHelper(FabricDataGenerator generator) {
 		super(generator);
 	}
 
