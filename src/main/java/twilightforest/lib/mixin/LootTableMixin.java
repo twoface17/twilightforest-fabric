@@ -19,7 +19,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 
 @Mixin(LootTable.class)
 public class LootTableMixin {
-    @Inject(method = "getRandomItems(Lnet/minecraft/world/level/storage/loot/LootContext;)Ljava/util/List;", at = @At("TAIL"))
+    @Inject(method = "getRandomItems(Lnet/minecraft/world/level/storage/loot/LootContext;)Ljava/util/List;", at = @At("TAIL"), cancellable = true)
     public void modifyLoot(LootContext context, CallbackInfoReturnable<List<ItemStack>> cir) {
         cir.setReturnValue(modifyLoot(cir.getReturnValue(), context));
     }

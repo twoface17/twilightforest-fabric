@@ -111,6 +111,7 @@ dependencies {
     include 'com.github.Chocohead:Fabric-ASM:v2.3'
     modImplementation 'com.github.AlphaMode:FabricExtendibleEnum:1.18-SNAPSHOT'
     modImplementation(include("me.alphamode:ForgeTags:1.4"))
+//    modImplementation(include('com.github.alkyaly:js-coremods-fabric:1.0.0'))
 }
 
 processResources {

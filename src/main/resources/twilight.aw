@@ -11,7 +11,6 @@ accessible method net/minecraft/world/level/block/state/properties/WoodType regi
 accessible method net/minecraft/world/level/block/state/properties/WoodType <init> (Ljava/lang/String;)V
 accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V
 accessible field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
-accessible field net/minecraft/world/level/chunk/ChunkBiomeContainer biomes [Lnet/minecraft/world/level/biome/Biome;
 accessible method net/minecraft/core/particles/SimpleParticleType <init> (Z)V
 accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
 accessible method net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier create (Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/entity/BlockEntity;
@@ -22,7 +21,6 @@ accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEnti
 accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingProgress I
 accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingTotalTime I
 accessible method net/minecraft/client/renderer/blockentity/BlockEntityRenderers register (Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/client/renderer/blockentity/BlockEntityRendererProvider;)V
-accessible field net/minecraft/world/level/newbiome/layer/Layer area Lnet/minecraft/world/level/newbiome/area/LazyArea;
 accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/world/inventory/MenuType$MenuSupplier;)V
 mutable field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 accessible method net/minecraft/world/item/RecordItem <init> (ILnet/minecraft/sounds/SoundEvent;Lnet/minecraft/world/item/Item$Properties;)V
@@ -45,7 +43,6 @@ accessible method net/minecraft/client/renderer/Sheets createSignMaterial (Lnet/
 accessible field net/minecraft/server/packs/repository/PackRepository sources Ljava/util/Set;
 accessible method net/minecraft/client/renderer/entity/ItemRenderer renderQuadList (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Ljava/util/List;Lnet/minecraft/world/item/ItemStack;II)V
 mutable field net/minecraft/world/level/levelgen/StructureSettings DEFAULTS Lcom/google/common/collect/ImmutableMap;
-accessible field net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorSettings STRUCTURE_FEATURES Ljava/util/Map;
 accessible field net/minecraft/world/level/levelgen/StructureSettings structureConfig Ljava/util/Map;
 mutable field net/minecraft/world/level/levelgen/StructureSettings structureConfig Ljava/util/Map;
 mutable field net/minecraft/world/level/levelgen/feature/StructureFeature NOISE_AFFECTING_FEATURES Ljava/util/List;
@@ -82,35 +79,25 @@ accessible field net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPl
 accessible field net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacer heightRandA I
 accessible field net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacer heightRandB I
 accessible method net/minecraft/client/model/HumanoidModel getAttackArm (Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/entity/HumanoidArm;
-accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator surfaceNoise Lnet/minecraft/world/level/levelgen/synth/SurfaceNoise;
 accessible field net/minecraft/world/level/levelgen/structure/StructurePiece rotation Lnet/minecraft/world/level/block/Rotation;
 accessible field net/minecraft/world/level/levelgen/structure/StructurePiece orientation Lnet/minecraft/core/Direction;
 accessible field net/minecraft/world/level/levelgen/structure/StructurePiece mirror Lnet/minecraft/world/level/block/Mirror;
 accessible field net/minecraft/world/level/BaseSpawner spawnRange I
 accessible field net/minecraft/world/level/BaseSpawner maxNearbyEntities I
 accessible field net/minecraft/world/level/BaseSpawner spawnCount I
-accessible class net/minecraft/data/worldgen/Features$Decorators
 accessible method net/minecraft/world/level/levelgen/carver/WorldCarver getCarveState (Lnet/minecraft/world/level/levelgen/carver/CarvingContext;Lnet/minecraft/world/level/levelgen/carver/CarverConfiguration;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/levelgen/Aquifer;)Lnet/minecraft/world/level/block/state/BlockState;
 accessible method net/minecraft/world/level/levelgen/carver/WorldCarver isDebugEnabled (Lnet/minecraft/world/level/levelgen/carver/CarverConfiguration;)Z
 accessible method net/minecraft/world/level/levelgen/Heightmap setHeight (III)V
 accessible field net/minecraft/world/level/chunk/ChunkGenerator biomeSource Lnet/minecraft/world/level/biome/BiomeSource;
 accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator seed J
 accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator settings Ljava/util/function/Supplier;
-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings isNoiseCavesEnabled ()Z
-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings isAquifersEnabled ()Z
-accessible class net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator$NoodleCaveNoiseModifier
-accessible class net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator$OreVeinNoiseSource
-accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator$NoodleCaveNoiseModifier listInterpolators (Ljava/util/function/Consumer;)V
 accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings disableMobGeneration ()Z
 accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings isOreVeinsEnabled ()Z
-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings isNoodleCavesEnabled ()Z
 accessible method net/minecraft/world/level/levelgen/Beardifier <init> (Lnet/minecraft/world/level/StructureFeatureManager;Lnet/minecraft/world/level/chunk/ChunkAccess;)V
-accessible method net/minecraft/world/level/levelgen/Beardifier beardifyOrBury (III)D
 accessible field net/minecraft/world/level/levelgen/carver/CaveCarverConfiguration floorLevel Lnet/minecraft/util/valueproviders/FloatProvider;
 accessible method net/minecraft/world/entity/monster/AbstractSkeleton getStepSound ()Lnet/minecraft/sounds/SoundEvent;
 accessible field net/minecraft/world/level/block/state/BlockBehaviour material Lnet/minecraft/world/level/material/Material;
 accessible method net/minecraft/resources/RegistryWriteOps <init> (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/core/RegistryAccess;)V
-accessible method net/minecraft/world/level/levelgen/NoiseGeneratorSettings <init> (Lnet/minecraft/world/level/levelgen/StructureSettings;Lnet/minecraft/world/level/levelgen/NoiseSettings;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;IIIIZZZZZZ)V
 accessible class net/minecraft/server/level/ServerLevel$EntityCallbacks
 accessible class net/minecraft/client/gui/MapRenderer$MapInstance
 accessible field net/minecraft/client/gui/MapRenderer MAP_ICONS Lnet/minecraft/client/renderer/RenderType;
@@ -166,7 +153,6 @@ accessible class net/minecraft/world/item/crafting/Ingredient$Value
 accessible method net/minecraft/world/item/crafting/Ingredient$ItemValue <init> (Lnet/minecraft/world/item/ItemStack;)V
 accessible method net/minecraft/data/recipes/RecipeProvider has (Lnet/minecraft/tags/Tag;)Lnet/minecraft/advancements/critereon/InventoryChangeTrigger$TriggerInstance;
 accessible method net/minecraft/data/recipes/RecipeProvider has (Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/advancements/critereon/InventoryChangeTrigger$TriggerInstance;
-accessible field net/minecraft/server/level/ServerChunkCache generator Lnet/minecraft/world/level/chunk/ChunkGenerator;
 
 transitive-accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
 transitive-extendable class net/minecraft/data/tags/TagsProvider$TagAppender

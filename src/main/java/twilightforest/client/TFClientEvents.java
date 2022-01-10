@@ -48,11 +48,9 @@ import java.util.function.UnaryOperator;
 public class TFClientEvents {
 
 	public static class ModBusEvents {
-		// TODO: PORT
-//		@SubscribeEvent
-//		public static void registerLoaders(ModelRegistryEvent event) {
-//			ModelLoaderRegistry.registerLoader(TwilightForestMod.prefix("patch"), PatchModelLoader.INSTANCE);
-//		}
+		public static void registerLoaders() {
+			ModelLoadingRegistry.INSTANCE.registerResourceProvider(resourceManager -> PatchModelLoader.INSTANCE);
+		}
 
 		@Deprecated // tterrag said this would become deprecated soon in favor of above method
 		public static void modelBake(Map<ResourceLocation, BakedModel> bakedRegistry) {

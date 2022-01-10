@@ -10,7 +10,6 @@
     "BlockMixin",
     "BlockRotProcessorAccessor",
     "BlockStateMixin",
-    "BoundingBoxMixin",
     "BowItemMixin",
     "BushBlockMixin",
     "ChestRendererAccessor",
@@ -41,10 +40,10 @@
     "ServerPlayerGameModeMixin",
     "ServerPlayerMixin",
     "ServerResourcesMixin",
-    "SpawnPlacementsMixin",
     "ThrowableProjectileMixin",
     "TntBlockAccessor",
-    "WorldGenRegionMixin"
+    "WorldGenRegionMixin",
+    "client.BlockModelAccessor"
   ],
   "client": [
     "client.BlockColorsMixin",
@@ -56,10 +55,10 @@
     "client.ItemInHandRendererMixin",
     "client.LevelRendererMixin",
     "client.MapRendererMixin",
+    "client.MinecraftMixin",
     "client.ModelManagerMixin",
     "client.MultiPlayerGameModeMixin",
-    "client.TextureAtlasMixin",
-    "client.MinecraftMixin"
+    "client.TextureAtlasMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -38,9 +38,6 @@
     "twilightforest.mixins.json"
   ],
   "accessWidener": "twilight.aw",
-  "breaks": {
-    "boats-and-beeps": "*"
-  },
   "depends": {
     "fabricloader": ">=0.12.12",
     "fabric": "*",
