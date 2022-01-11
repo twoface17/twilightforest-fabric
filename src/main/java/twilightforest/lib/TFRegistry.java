@@ -23,9 +23,7 @@ public class TFRegistry<T> {
 //    }
 
     public <R extends T> RegistryObject<R> register(String id, Supplier<R> entry) {
-        RegistryObject<R> obj = new RegistryObject<R>(new ResourceLocation(mod_id, id), entry);
-        entires.add(obj);
-        return obj;
+        return register(new ResourceLocation(mod_id, id), entry);
     }
 
     public <R extends T> RegistryObject<R> register(ResourceLocation id, Supplier<R> entry) {

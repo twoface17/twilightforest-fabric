@@ -190,6 +190,7 @@ public class TwilightForestMod implements ModInitializer {
 		BiomeKeys.addBiomeTypes();
 		TFDimensions.init();
 		TFStats.init();
+		registerLootModifiers();
 
 		if (TFConfig.COMMON_CONFIG.doCompat.get()) {
 			try {
@@ -273,8 +274,10 @@ public class TwilightForestMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		TFParticleType.PARTICLE_TYPES.register();
 		TFInternalApi.init();
 		registerSerializers();
+
 		init();
 
 		TFEntities.registerEntities();
