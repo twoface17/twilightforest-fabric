@@ -33,7 +33,7 @@ public class TFRegistry<T> {
     }
 
     public void register() {
-        entires.forEach(entry -> Registry.register(registry, entry.id(), entry.get()));
+        entires.forEach(entry -> Registry.register(registry, entry.getId(), entry.get()));
     }
 
     public static <R> TFRegistry<R> create(Registry<R> registry, String id) {

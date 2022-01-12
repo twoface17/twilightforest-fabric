@@ -109,7 +109,7 @@ public class TwilightForestMod implements ModInitializer {
 		TFBlocks.BLOCKS.register();
 		Register<Item> register = new Register<>(TFItems.ITEMS);
 		TFEntities.registerSpawnEggs(register);
-		TFBlockItems.registerBlockItems(register);
+		TFBlocks.registerItemblocks(register);
 		TFItems.ITEMS.register();
 		TFMobEffects.MOB_EFFECTS.register();
 		//TFPotions.POTIONS.register(modbus);
