@@ -34,6 +34,7 @@ public class TFRegistry<T> {
 
     public void register() {
         entires.forEach(entry -> Registry.register(registry, entry.getId(), entry.get()));
+        entires.forEach(entry -> entry.setWrappedEntry(() -> registry.get(entry.getId())));
     }
 
     public static <R> TFRegistry<R> create(Registry<R> registry, String id) {

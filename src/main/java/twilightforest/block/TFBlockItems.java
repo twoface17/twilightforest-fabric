@@ -408,6 +408,7 @@ public class TFBlockItems {
 	}
 
 	private static <B extends Block> Item blockItem(RegistryObject<B> block) {
+		System.out.println(block.get());
 		return makeBlockItem(new BlockItem(block.get(), TFItems.defaultBuilder()), block);
 	}
 

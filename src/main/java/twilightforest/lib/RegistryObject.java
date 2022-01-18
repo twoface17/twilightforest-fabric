@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 public final class RegistryObject<T> implements Supplier<T> {
 
     private final ResourceLocation id;
-    private final Supplier<T> wrappedEntry;
+    private Supplier<T> wrappedEntry;
 
     public RegistryObject(ResourceLocation id, Supplier<T> wrappedEntry) {
         this.id = id;
@@ -18,6 +18,10 @@ public final class RegistryObject<T> implements Supplier<T> {
 
     public ResourceLocation getId() {
         return id;
+    }
+
+    public void setWrappedEntry(Supplier<?> wrappedEntry) {
+        this.wrappedEntry = (Supplier<T>) wrappedEntry;
     }
 
     @Override
