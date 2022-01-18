@@ -1,5 +1,7 @@
 package twilightforest.data;
 
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementsProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
@@ -31,7 +33,7 @@ import twilightforest.world.registration.TFStructures;
 
 import java.util.function.Consumer;
 
-public class AdvancementGenerator extends AdvancementProvider {
+public class AdvancementGenerator extends FabricAdvancementsProvider {
 
 	private static final EntityType<?>[] TF_KILLABLE = new EntityType<?>[]{TFEntities.ADHERENT, TFEntities.ARMORED_GIANT, TFEntities.BIGHORN_SHEEP, TFEntities.BLOCKCHAIN_GOBLIN, TFEntities.DWARF_RABBIT, TFEntities.DEATH_TOME, TFEntities.DEER, TFEntities.FIRE_BEETLE, TFEntities.GIANT_MINER, TFEntities.LOWER_GOBLIN_KNIGHT, TFEntities.UPPER_GOBLIN_KNIGHT, TFEntities.HARBINGER_CUBE, TFEntities.HEDGE_SPIDER, TFEntities.HELMET_CRAB, TFEntities.HOSTILE_WOLF, TFEntities.HYDRA, TFEntities.KING_SPIDER, TFEntities.KNIGHT_PHANTOM, TFEntities.KOBOLD, TFEntities.LICH, TFEntities.LICH_MINION, TFEntities.MAZE_SLIME, TFEntities.CARMINITE_GHASTLING, TFEntities.MINOSHROOM, TFEntities.MINOTAUR, TFEntities.MIST_WOLF, TFEntities.MOSQUITO_SWARM, TFEntities.NAGA, TFEntities.PENGUIN, TFEntities.PINCH_BEETLE, TFEntities.PLATEAU_BOSS, TFEntities.QUEST_RAM, TFEntities.RAVEN, TFEntities.REDCAP, TFEntities.REDCAP_SAPPER, TFEntities.SKELETON_DRUID, TFEntities.SLIME_BEETLE, TFEntities.SNOW_GUARDIAN, TFEntities.SNOW_QUEEN, TFEntities.SQUIRREL, TFEntities.STABLE_ICE_CORE, TFEntities.SWARM_SPIDER, TFEntities.TINY_BIRD, TFEntities.CARMINITE_BROODLING, TFEntities.CARMINITE_GHASTGUARD, TFEntities.CARMINITE_GOLEM, TFEntities.TOWERWOOD_BORER, TFEntities.TROLL, TFEntities.UNSTABLE_ICE_CORE, TFEntities.UR_GHAST, TFEntities.BOAR, TFEntities.WINTER_WOLF, TFEntities.WRAITH, TFEntities.YETI, TFEntities.ALPHA_YETI};
 	//man this is a pain
@@ -49,12 +51,12 @@ public class AdvancementGenerator extends AdvancementProvider {
 			TFBlocks.TWILIGHT_OAK_BANISTER.get(), TFBlocks.CANOPY_BANISTER.get(), TFBlocks.MANGROVE_BANISTER.get(), TFBlocks.DARKWOOD_BANISTER.get(), TFBlocks.TIME_BANISTER.get(), TFBlocks.TRANSFORMATION_BANISTER.get(), TFBlocks.MINING_BANISTER.get(), TFBlocks.SORTING_BANISTER.get()
 	};
 
-	public AdvancementGenerator(DataGenerator generatorIn) {
+	public AdvancementGenerator(FabricDataGenerator generatorIn) {
 		super(generatorIn);
 	}
 
-	//@Override
-	protected void registerAdvancements(Consumer<Advancement> consumer) {
+	@Override
+	public void generateAdvancement(Consumer<Advancement> consumer) {
 		Advancement root = Advancement.Builder.advancement().display(
 				TFBlocks.TWILIGHT_PORTAL_MINIATURE_STRUCTURE.get(),
 				new TranslatableComponent("itemGroup.twilightforest"),

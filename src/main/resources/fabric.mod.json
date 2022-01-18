@@ -26,6 +26,9 @@
     "client": [
       "twilightforest.client.TFClientSetup"
     ],
+    "fabric-datagen": [
+      "twilightforest.data.DataGenerators"
+    ],
     "cardinal-components": [
       "twilightforest.capabilities.CapabilityList"
     ],
@@ -37,7 +40,7 @@
   "mixins": [
     "twilightforest.mixins.json"
   ],
-  "accessWidener": "twilight.aw",
+  "accessWidener": "twilight.accesswidener",
   "depends": {
     "fabricloader": ">=0.12.12",
     "fabric": "*",

@@ -36,26 +36,6 @@ public class StonecuttingGenerator extends FabricRecipesProvider {
 	}
 
 	@Override
-	public void run(HashCache pCache) {
-		Path path = this.generator.getOutputFolder();
-		Set<ResourceLocation> set = Sets.newHashSet();
-		buildCraftingRecipes((p_125991_) -> {
-			if (!set.add(p_125991_.getId())) {
-				throw new IllegalStateException("Duplicate recipe " + p_125991_.getId());
-			} else {
-				saveRecipe(pCache, p_125991_.serializeRecipe(), path.resolve("data/" + p_125991_.getId().getNamespace() + "/recipes/" + p_125991_.getId().getPath() + ".json"));
-				JsonObject jsonobject = p_125991_.serializeAdvancement();
-				if (jsonobject != null) {
-					saveAdvancement(pCache, jsonobject, path.resolve("data/" + p_125991_.getId().getNamespace() + "/advancements/" + p_125991_.getAdvancementId().getPath() + ".json"));
-				}
-
-			}
-		});
-		//if (this.getClass() == RecipeProvider.class) //Forge: Subclasses don't need this.
-			saveAdvancement(pCache, Advancement.Builder.advancement().addCriterion("impossible", new ImpossibleTrigger.TriggerInstance()).serializeToJson(), path.resolve("data/minecraft/advancements/recipes/root.json"));
-	}
-
-	@Override
 	protected void generateRecipes(Consumer<FinishedRecipe> consumer) {
 		consumer.accept(stonecutting(TFBlocks.CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));
 		consumer.accept(stonecutting(TFBlocks.CRACKED_CASTLE_BRICK.get(), TFBlocks.THICK_CASTLE_BRICK.get()));

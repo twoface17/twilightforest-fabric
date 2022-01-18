@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:hollow_oak_sapling"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

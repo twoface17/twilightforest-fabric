@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:mayapple"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

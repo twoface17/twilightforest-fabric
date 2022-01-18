@@ -1,5 +1,7 @@
 package twilightforest.data;
 
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -16,7 +18,7 @@ import twilightforest.TwilightForestMod;
 import twilightforest.block.TFBlocks;
 import twilightforest.item.TFItems;
 
-public class ItemTagGenerator extends ItemTagsProvider {
+public class ItemTagGenerator extends FabricTagProvider.ItemTagProvider {
 	public static final Tag.Named<Item> TWILIGHT_OAK_LOGS = TagFactory.ITEM.create(TwilightForestMod.prefix("twilight_oak_logs"));
 	public static final Tag.Named<Item> CANOPY_LOGS = TagFactory.ITEM.create(TwilightForestMod.prefix("canopy_logs"));
 	public static final Tag.Named<Item> MANGROVE_LOGS = TagFactory.ITEM.create(TwilightForestMod.prefix("mangrove_logs"));
@@ -65,12 +67,12 @@ public class ItemTagGenerator extends ItemTagsProvider {
 	public static final Tag.Named<Item> BANNED_UNCRAFTING_INGREDIENTS = TagFactory.ITEM.create(TwilightForestMod.prefix("banned_uncrafting_ingredients"));
 	public static final Tag.Named<Item> BANNED_UNCRAFTABLES = TagFactory.ITEM.create(TwilightForestMod.prefix("banned_uncraftables"));
 
-	public ItemTagGenerator(DataGenerator generator, BlockTagsProvider blockprovider) {
+	public ItemTagGenerator(FabricDataGenerator generator, BlockTagProvider blockprovider) {
 		super(generator, blockprovider);
 	}
 
 	@Override
-	protected void addTags() {
+	protected void generateTags() {
 		this.copy(BlockTagGenerator.TWILIGHT_OAK_LOGS, TWILIGHT_OAK_LOGS);
 		this.copy(BlockTagGenerator.CANOPY_LOGS, CANOPY_LOGS);
 		this.copy(BlockTagGenerator.MANGROVE_LOGS, MANGROVE_LOGS);
@@ -156,6 +158,7 @@ public class ItemTagGenerator extends ItemTagsProvider {
 		tag(ORES_IRONWOOD).add(TFItems.RAW_IRONWOOD.get());
 		tag(ORES_KNIGHTMETAL).add(TFItems.ARMOR_SHARD_CLUSTER.get());
 
+		tag(Tags.Items.GEMS_DIAMOND);
 		tag(PORTAL_ACTIVATOR).addTag(Tags.Items.GEMS_DIAMOND);
 
 		tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(

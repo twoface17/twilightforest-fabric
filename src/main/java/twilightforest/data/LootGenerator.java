@@ -38,20 +38,10 @@ public class LootGenerator extends LootTableProvider {
 	);
 
 //	@Override
-//	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-//		// [VanillaCopy] super, but remove call that checks that all vanilla tables are accounted for, because we aren't vanilla.
-//		// Except validation issues occur when attempting to generate loot tables from other loot tables (see: EntityLootTables)
-//		//map.forEach((id, builder) -> LootTableManager.validate(validationtracker, id, builder));
-//	}
-
 	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-		for(ResourceLocation resourcelocation : Sets.difference(BuiltInLootTables.all(), map.keySet())) {
-			validationtracker.reportProblem("Missing built-in table: " + resourcelocation);
-		}
-
-		map.forEach((p_218436_2_, p_218436_3_) -> {
-			LootTables.validate(validationtracker, p_218436_2_, p_218436_3_);
-		});
+		// [VanillaCopy] super, but remove call that checks that all vanilla tables are accounted for, because we aren't vanilla.
+		// Except validation issues occur when attempting to generate loot tables from other loot tables (see: EntityLootTables)
+		//map.forEach((id, builder) -> LootTableManager.validate(validationtracker, id, builder));
 	}
 
 	@Override

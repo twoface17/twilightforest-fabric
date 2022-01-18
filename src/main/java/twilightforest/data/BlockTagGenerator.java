@@ -2,6 +2,8 @@ package twilightforest.data;
 
 import com.google.common.collect.ImmutableSet;
 
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,7 +23,7 @@ import twilightforest.lib.data.DataUtil;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class BlockTagGenerator extends BlockTagsProvider {
+public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
     public static final Tag.Named<Block> TOWERWOOD = TagFactory.BLOCK.create(TwilightForestMod.prefix("towerwood"));
 
     public static final Tag.Named<Block> TWILIGHT_OAK_LOGS = TagFactory.BLOCK.create(TwilightForestMod.prefix("twilight_oak_logs"));
@@ -78,13 +80,13 @@ public class BlockTagGenerator extends BlockTagsProvider {
     public static final Tag.Named<Block> ORE_MAGNET_ROOT = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/" + TwilightForestMod.ID + "/root"));
     public static final Tag.Named<Block> ORE_MAGNET_DEEPSLATE = TagFactory.BLOCK.create(TwilightForestMod.prefix("ore_magnet/minecraft/deepslate"));
 
-    public BlockTagGenerator(DataGenerator generator) {
+    public BlockTagGenerator(FabricDataGenerator generator) {
         super(generator);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags() {
+    protected void generateTags() {
         tag(TWILIGHT_OAK_LOGS)
                 .add(TFBlocks.TWILIGHT_OAK_LOG.get(), TFBlocks.STRIPPED_TWILIGHT_OAK_LOG.get(), TFBlocks.TWILIGHT_OAK_WOOD.get(), TFBlocks.STRIPPED_TWILIGHT_OAK_WOOD.get());
         tag(CANOPY_LOGS)
@@ -410,10 +412,14 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 TFBlocks.FAKE_GOLD.get()
         );
 
+        tag(Tags.Blocks.CHESTS);
         DataUtil.addTags(tag(STRUCTURE_BANNED_INTERACTIONS),
                 BlockTags.BUTTONS, Tags.Blocks.CHESTS).add(Blocks.LEVER)
                 .add(TFBlocks.ANTIBUILDER.get());
 
+        tag(Tags.Blocks.DIRT);
+        tag(Tags.Blocks.GRAVEL);
+        tag(Tags.Blocks.SAND);
         DataUtil.addTags(tag(ORE_MAGNET_SAFE_REPLACE_BLOCK),
                 ORE_MAGNET_BLOCK_REPLACE_ORE, Tags.Blocks.DIRT, Tags.Blocks.GRAVEL, Tags.Blocks.SAND)
                 .add(Blocks.GRANITE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.TUFF, Blocks.CALCITE);

@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:darkwood_sapling"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

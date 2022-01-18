@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ironwood_ingots",
+    "#c:fiery_ingots",
+    "#c:knightmetal_ingots",
+    "#c:steeleaf_ingots"
+  ]
+}

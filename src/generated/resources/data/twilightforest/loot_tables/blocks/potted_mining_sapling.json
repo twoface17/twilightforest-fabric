@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:mining_sapling"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

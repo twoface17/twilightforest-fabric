@@ -1,29 +1,33 @@
 package twilightforest.data;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
-import twilightforest.TwilightForestMod;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class DataGenerators {
-	//https://github.com/FabricMC/fabric/pull/1824 waiting on datagen pr
-//	@SubscribeEvent
-//	public static void gatherData(GatherDataEvent evt) {
-//		DataGenerator generator = evt.getGenerator();
-//		ExistingFileHelper helper = evt.getExistingFileHelper();
-//
-//		generator.addProvider(new AdvancementGenerator(generator, helper));
-//		generator.addProvider(new PatchouliAdvancementGenerator(generator, helper));
-//		generator.addProvider(new BlockstateGenerator(generator, helper));
-//		generator.addProvider(new ItemModelGenerator(generator, helper));
-//		BlockTagsProvider blocktags = new BlockTagGenerator(generator, helper);
-//		generator.addProvider(blocktags);
-//		generator.addProvider(new FluidTagGenerator(generator, helper));
-//		generator.addProvider(new ItemTagGenerator(generator, blocktags, helper));
-//		generator.addProvider(new EntityTagGenerator(generator, helper));
-//		generator.addProvider(new CustomTagGenerator.EnchantmentTagGenerator(generator, helper));
-//		generator.addProvider(new LootGenerator(generator));
-//		generator.addProvider(new StonecuttingGenerator(generator));
-//		generator.addProvider(new CraftingGenerator(generator));
-//		generator.addProvider(new TwilightWorldDataCompiler(generator));
-//	}
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class DataGenerators implements DataGeneratorEntrypoint {
+	public void onInitializeDataGenerator(FabricDataGenerator generator) {
+		var existingData = System.getProperty("twilightforest.data.existingData").split(";");
+		var helper = new ExistingFileHelper(Arrays.stream(existingData).map(Paths::get).toList(), Collections.emptySet(),
+				true, null, null);
+
+		generator.addProvider(new AdvancementGenerator(generator));
+		generator.addProvider(new PatchouliAdvancementGenerator(generator));
+		generator.addProvider(new BlockstateGenerator(generator, helper));
+		generator.addProvider(new ItemModelGenerator(generator, helper));
+		FabricTagProvider.BlockTagProvider blocktags = new BlockTagGenerator(generator);
+		generator.addProvider(blocktags);
+		generator.addProvider(new FluidTagGenerator(generator));
+		generator.addProvider(new ItemTagGenerator(generator, blocktags));
+		generator.addProvider(new EntityTagGenerator(generator));
+		generator.addProvider(new CustomTagGenerator.EnchantmentTagGenerator(generator));
+		generator.addProvider(new LootGenerator(generator));
+		generator.addProvider(new StonecuttingGenerator(generator));
+		generator.addProvider(new CraftingGenerator(generator));
+		generator.addProvider(new TwilightWorldDataCompiler(generator));
+	}
 }

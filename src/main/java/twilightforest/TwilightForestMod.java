@@ -1,6 +1,7 @@
 package twilightforest;
 
 import com.google.common.collect.Maps;
+import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Registry;
@@ -188,7 +189,8 @@ public class TwilightForestMod implements ModInitializer {
 		TFPacketHandler.init();
 		TFAdvancements.init();
 		BiomeKeys.addBiomeTypes();
-		TFDimensions.init();
+		if(System.getProperty("fabric-api.datagen") == null)
+			TFDimensions.init();
 		TFStats.init();
 		registerLootModifiers();
 

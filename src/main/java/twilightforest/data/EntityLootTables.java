@@ -80,7 +80,7 @@ public class EntityLootTables extends net.minecraft.data.loot.EntityLoot {
 			}
 		}
 
-		this.map.forEach(p_124377_::accept);
+		this.map.forEach(p_124377_);
 	}
 
 	//@Override

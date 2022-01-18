@@ -31,33 +31,6 @@ public class CraftingGenerator extends CraftingDataHelper {
 		super(generator);
 	}
 
-//	@Override
-//	protected void saveAdvancement(HashCache p_208310_1_, JsonObject p_208310_2_, Path p_208310_3_) {
-//		//Silence. This just makes it so that we don't gen advancements
-//		//TODO Recipe advancements control the unlock of a recipe, so if we ever consider actually making them, recipes should unlock based on also possible prerequisite conditions, instead of ONLY obtaining the item itself
-//	}
-
-
-	@Override
-	public void run(HashCache pCache) {
-		Path path = this.generator.getOutputFolder();
-		Set<ResourceLocation> set = Sets.newHashSet();
-		buildCraftingRecipes((p_125991_) -> {
-			if (!set.add(p_125991_.getId())) {
-				throw new IllegalStateException("Duplicate recipe " + p_125991_.getId());
-			} else {
-				saveRecipe(pCache, p_125991_.serializeRecipe(), path.resolve("data/" + p_125991_.getId().getNamespace() + "/recipes/" + p_125991_.getId().getPath() + ".json"));
-				JsonObject jsonobject = p_125991_.serializeAdvancement();
-				if (jsonobject != null) {
-					saveAdvancement(pCache, jsonobject, path.resolve("data/" + p_125991_.getId().getNamespace() + "/advancements/" + p_125991_.getAdvancementId().getPath() + ".json"));
-				}
-
-			}
-		});
-		//if (this.getClass() == RecipeProvider.class) //Forge: Subclasses don't need this.
-			saveAdvancement(pCache, Advancement.Builder.advancement().addCriterion("impossible", new ImpossibleTrigger.TriggerInstance()).serializeToJson(), path.resolve("data/minecraft/advancements/recipes/root.json"));
-	}
-
 	@Override
 	protected void generateRecipes(Consumer<FinishedRecipe> consumer) {
 		// The Recipe Builder currently doesn't support enchantment-resulting recipes, those must be manually created.

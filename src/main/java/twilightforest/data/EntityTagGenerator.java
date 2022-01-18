@@ -1,5 +1,7 @@
 package twilightforest.data;
 
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
@@ -10,19 +12,17 @@ import net.fabricmc.fabric.api.tag.TagFactory;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.TFEntities;
 
-import javax.annotation.Nullable;
-
-public class EntityTagGenerator extends EntityTypeTagsProvider {
+public class EntityTagGenerator extends FabricTagProvider.EntityTypeTagProvider {
     public static final Tag.Named<EntityType<?>> BOSSES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("bosses"));
     public static final Tag.Named<EntityType<?>> LICH_POPPABLES = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("lich_poppables"));
     public static final Tag.Named<EntityType<?>> RIDES_OBSTRUCT_SNATCHING = TagFactory.ENTITY_TYPE.create(TwilightForestMod.prefix("rides_obstruct_snatching"));
 
-    public EntityTagGenerator(DataGenerator dataGenerator) {
+    public EntityTagGenerator(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
 
     @Override
-    protected void addTags() {
+    protected void generateTags() {
         tag(EntityTypeTags.SKELETONS).add(TFEntities.SKELETON_DRUID);
         tag(EntityTypeTags.ARROWS).add(TFEntities.ICE_ARROW, TFEntities.SEEKER_ARROW);
         tag(EntityTypeTags.FREEZE_HURTS_EXTRA_TYPES).add(TFEntities.FIRE_BEETLE);

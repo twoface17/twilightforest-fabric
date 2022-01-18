@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:canopy_sapling"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

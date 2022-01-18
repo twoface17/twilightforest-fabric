@@ -43,7 +43,8 @@
     "ThrowableProjectileMixin",
     "TntBlockAccessor",
     "WorldGenRegionMixin",
-    "client.BlockModelAccessor"
+    "client.BlockModelAccessor",
+    "client.ModelStateMixin"
   ],
   "client": [
     "client.BlockColorsMixin",

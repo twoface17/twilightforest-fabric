@@ -33,7 +33,8 @@ public final class PatchModelLoader implements ModelResourceProvider {
             return null;
         JsonObject modelContents = BlockModelAccessor.getGSON().fromJson(getModelJson(resourceId), JsonObject.class);
         if(modelContents.has("loader")) {
-//            System.out.println(modelContents.get("loader").getAsString());
+            if(!modelContents.get("loader").getAsString().equals("twilightforest:patch"))
+                return null;
             if (!modelContents.has("texture"))
                 throw new RuntimeException("Patch model missing value for 'texture'.");
 

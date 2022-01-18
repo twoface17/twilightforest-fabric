@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "twilightforest:fiddlehead"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [
