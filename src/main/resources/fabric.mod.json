@@ -26,6 +26,9 @@
     "client": [
       "twilightforest.client.TFClientSetup"
     ],
+    "mm:early_risers": [
+      "twilightforest.lib.TFEarlyRiser"
+    ],
     "fabric-datagen": [
       "twilightforest.data.DataGenerators"
     ],

@@ -22,7 +22,6 @@
     "IngredientMixin",
     "ItemMixin",
     "ItemStackMixin",
-    "LevelMixinPatch",
     "LivingEntityMixin",
     "LootTableMixin",
     "MapDecorationMixin",
