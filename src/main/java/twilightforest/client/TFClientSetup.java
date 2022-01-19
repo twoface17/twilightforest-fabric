@@ -33,6 +33,7 @@ import twilightforest.item.TFItems;
 import twilightforest.lib.events.EntityAddedLayerCallback;
 import twilightforest.lib.events.EntityViewEvents;
 import twilightforest.lib.events.OnTextureStitchCallback;
+import twilightforest.network.TFPacketHandler;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class TFClientSetup implements ClientModInitializer {
 		TFModelLayers.init();
 		TFEntities.registerEntityRenderer();
 		TFClientEvents.ModBusEvents.registerLoaders();
+		TFPacketHandler.CHANNEL.initClientListener();
 		//Fabric events
 		EntityAddedLayerCallback.EVENT.register(this::attachRenderLayers);
 		ClientTickEvents.END_WORLD_TICK.register(LockedBiomeListener::clientTick);

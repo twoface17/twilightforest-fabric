@@ -87,6 +87,9 @@ dependencies {
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}"))
     modImplementation(include("curse.maven:forge-config-api-port-fabric-547434:${project.config_api_version}"))
 
+    modImplementation("curse.maven:irisshaders-fabric-455508:3605379")
+    modImplementation "org.anarres:jcpp:1.4.14"
+
     modApi ("com.terraformersmc:modmenu:3.0.0") {
         exclude(group: "net.fabricmc.fabric-api")
     }

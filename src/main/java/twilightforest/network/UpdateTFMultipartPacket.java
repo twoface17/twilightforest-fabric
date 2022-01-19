@@ -53,17 +53,17 @@ public class UpdateTFMultipartPacket implements BasePacket<UpdateTFMultipartPack
 
 	public static class Handler {
 		public static boolean onMessage(UpdateTFMultipartPacket message, Supplier<Context> ctx) {
-			ctx.get().enqueueWork(new Runnable() {
-				@Override
-				public void run() {
+//			ctx.get().enqueueWork(new Runnable() {
+//				@Override
+//				public void run() {
 					Level world = Minecraft.getInstance().level;
 					if (world == null)
-						return;
+						return false;
 					Entity ent = world.getEntity(message.id);
 					if (ent != null && IEntityEx.cast(ent).isMultipartEntity()) {
 						PartEntity<?>[] parts = IEntityEx.cast(ent).getParts();
 						if (parts == null)
-							return;
+							return false;
 						for (PartEntity<?> part : parts) {
 							if (part instanceof TFPart) {
 								TFPart<?> tfPart = (TFPart<?>) part;
@@ -76,8 +76,8 @@ public class UpdateTFMultipartPacket implements BasePacket<UpdateTFMultipartPack
 							}
 						}
 					}
-				}
-			});
+//				}
+//			});
 			return true;
 		}
 	}

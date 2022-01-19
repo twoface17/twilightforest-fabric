@@ -187,6 +187,7 @@ public class TwilightForestMod implements ModInitializer {
 
 	public static void init() {
 		TFPacketHandler.init();
+		TFPacketHandler.CHANNEL.initServerListener();
 		TFAdvancements.init();
 		BiomeKeys.addBiomeTypes();
 		if(System.getProperty("fabric-api.datagen") == null)
