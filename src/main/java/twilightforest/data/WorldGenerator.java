@@ -65,8 +65,8 @@ public record WorldGenerator(DataGenerator generator) implements DataProvider {
 				.filter(r -> registryaccess.ownedRegistry(r.key()).isPresent() && !r.key().equals(Registry.BIOME_REGISTRY))
 				.forEach((data) -> dumpRegistryCap(cache, path, registryaccess, dynamicops, data));
 
-		LOGGER.info("Dumping real BIOME_REGISTRY");
-		dumpRegistry(path, cache, dynamicops, Registry.BIOME_REGISTRY, biomeRegistry, Biome.DIRECT_CODEC);
+//		LOGGER.info("Dumping real BIOME_REGISTRY");
+//		dumpRegistry(path, cache, dynamicops, Registry.BIOME_REGISTRY, biomeRegistry, Biome.DIRECT_CODEC);
 
 		LOGGER.info("Dumping real LEVEL_STEM_REGISTRY");
 		dumpRegistry(path, cache, dynamicops, Registry.LEVEL_STEM_REGISTRY, twilight, LevelStem.CODEC);
@@ -188,7 +188,7 @@ public record WorldGenerator(DataGenerator generator) implements DataProvider {
 				.BIOMES
 				.entrySet()
 				.stream()
-				.peek(registryKeyBiomeEntry -> BuiltinRegistries.register(BuiltinRegistries.BIOME, registryKeyBiomeEntry.getKey().location(), registryKeyBiomeEntry.getValue()))
+				.peek(registryKeyBiomeEntry -> BuiltinRegistries.BIOME.get(registryKeyBiomeEntry.getKey().location()))
 				.collect(Collectors.toMap(entry -> entry.getKey().location(), Map.Entry::getValue));
 	}
 

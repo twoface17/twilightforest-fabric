@@ -25,7 +25,9 @@
     ],
     "main": [
       "twilightforest.TwilightForestMod"
-
+    ],
+    "fabric-datagen": [
+      "twilightforest.data.DataGenerators"
     ],
     "mm:early_risers": [
       "twilightforest.asm.TFASM"
@@ -39,6 +41,10 @@
   },
   "mixins": [
     "twilight.mixins.json"
+  ],
+  "provides": [
+    "com_electronwill_night-config_core",
+    "com_electronwill_night-config_toml"
   ],
   "accessWidener": "twilightforest.accesswidener",
   "breaks": {
@@ -57,6 +63,10 @@
     "cardinal-components": [
       "twilightforest:cap_shield"
     ],
-    "banner": "twilightforest_logo.png"
+    "banner": "twilightforest_logo.png",
+    "/* you need to enable this (and move it out of 'custom') if you want to run datagen because yes */ provides": [
+      "com_electronwill_night-config_core",
+      "com_electronwill_night-config_toml"
+    ]
   }
 }

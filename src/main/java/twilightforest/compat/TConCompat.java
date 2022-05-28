@@ -1,5 +1,6 @@
 //package twilightforest.compat;
 //
+//import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 //import net.minecraft.data.DataGenerator;
 //import net.minecraft.sounds.SoundEvents;
 //import net.minecraft.world.item.Item;
@@ -51,10 +52,7 @@
 //
 //	}
 //
-//	public static void tConDatagen(GatherDataEvent event) {
-//		DataGenerator generator = event.getGenerator();
-//		ExistingFileHelper helper = event.getExistingFileHelper();
-//
+//	public static void tConDatagen(FabricDataGenerator generator, ExistingFileHelper helper) {
 //		generator.addProvider(new TConDataGenerator.TConFluidTagGenerator(generator, helper));
 //
 //		generator.addProvider(new TConDataGenerator.TFMaterialRecipes(generator));

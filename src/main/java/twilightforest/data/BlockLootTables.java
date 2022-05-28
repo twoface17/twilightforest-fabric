@@ -1,7 +1,10 @@
 package twilightforest.data;
 
+import com.google.common.collect.Sets;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Registry;
 import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
@@ -10,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -30,6 +34,7 @@ import twilightforest.item.TFItems;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 	private final Set<Block> knownBlocks = new HashSet<>();
@@ -43,7 +48,6 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 		knownBlocks.add(block);
 	}
 
-//	@Override TODO: PORT
 	protected void addTables() {
 		registerEmpty(TFBlocks.EXPERIMENT_115.get());
 		dropSelf(TFBlocks.TOWERWOOD.get());
@@ -577,5 +581,27 @@ public class BlockLootTables extends net.minecraft.data.loot.BlockLoot {
 	protected Iterable<Block> getKnownBlocks() {
 		// todo 1.15 once all blockitems are ported, change this to all TF blocks, so an error will be thrown if we're missing any tables
 		return knownBlocks;
+	}
+
+	@Override
+	public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_124179_) {
+		this.addTables();
+		Set<ResourceLocation> set = Sets.newHashSet();
+
+		for(Block block : getKnownBlocks()) {
+			ResourceLocation resourcelocation = block.getLootTable();
+			if (resourcelocation != BuiltInLootTables.EMPTY && set.add(resourcelocation)) {
+				LootTable.Builder loottable$builder = this.map.remove(resourcelocation);
+				if (loottable$builder == null) {
+					throw new IllegalStateException(String.format("Missing loottable '%s' for '%s'", resourcelocation, Registry.BLOCK.getKey(block)));
+				}
+
+				p_124179_.accept(resourcelocation, loottable$builder);
+			}
+		}
+
+		if (!this.map.isEmpty()) {
+			throw new IllegalStateException("Created block loot tables for non-blocks: " + this.map.keySet());
+		}
 	}
 }
