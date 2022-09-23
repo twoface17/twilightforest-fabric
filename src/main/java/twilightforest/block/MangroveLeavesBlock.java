@@ -50,6 +50,6 @@ public class MangroveLeavesBlock extends TFLeavesBlock implements SimpleWaterlog
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
-		builder.add(WATERLOGGED);
+//		builder.add(WATERLOGGED);
 	}
 }
